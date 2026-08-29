@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CET-6 融词阅读 · 目录</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#222; --mut:#6b6b6b; --line:#e3ded3; --accent:#1e4b8f; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:32px 16px 80px; background:var(--bg); color:var(--ink);
+         font-family:Georgia,"Times New Roman","宋体",serif; line-height:1.7; }
+  .wrap { max-width:720px; margin:0 auto; }
+  header { text-align:center; margin-bottom:28px; }
+  header h1 { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:22px; margin:0 0 8px; color:var(--accent); }
+  header p { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:13px; color:var(--mut); margin:0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 20px;
+          margin-bottom:12px; display:flex; align-items:center; gap:16px; text-decoration:none; color:inherit;
+          transition:box-shadow .15s ease, transform .1s ease; }
+  .card:hover { box-shadow:0 4px 14px rgba(0,0,0,.07); transform:translateY(-1px); }
+  .day { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-weight:700; font-size:14px; color:var(--accent);
+         background:#eef3fa; border-radius:8px; padding:8px 12px; white-space:nowrap; }
+  .info { flex:1; min-width:0; }
+  .info h2 { font-size:15px; margin:0 0 4px; font-weight:600; }
+  .info .cov { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:12px; color:var(--mut); }
+  footer { color:var(--mut); font-size:12px; margin-top:24px; text-align:center;
+           font-family:"Segoe UI","Microsoft YaHei",sans-serif; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>📖 CET-6 融词阅读</h1>
+  <p>每日一篇，词汇自然融入地道英语文章 · 点击进入阅读</p>
+</header>
+<div id="list"></div>
+<footer>自动生成 · 每天 15:00 更新</footer>
+</div>
+<script>
+// 文章目录由 cet6_machine.py 生成时写入；此处为兜底静态数据
+var ARTICLES = [];
+fetch('manifest.json').then(r => r.json()).then(function(d){
+  ARTICLES = d;
+  render();
+}).catch(function(){ render(); });
+
+function render(){
+  var list = document.getElementById('list');
+  if(!ARTICLES.length){
+    list.innerHTML = '<div class="card"><div class="info"><h2>还没有文章</h2><div class="cov">等待首次生成</div></div></div>';
+    return;
+  }
+  ARTICLES.sort(function(a,b){ return b.day - a.day; });
+  list.innerHTML = ARTICLES.map(function(a){
+    return '<a class="card" href="cet6-day' + a.day + '.html">' +
+           '<span class="day">Day ' + a.day + '</span>' +
+           '<span class="info"><h2>' + a.title + '</h2>' +
+           '<span class="cov">词汇嵌入 ' + a.cover + ' · ' + a.date + '</span></span></a>';
+  }).join('');
+}
+</script>
+</body>
+</html>
