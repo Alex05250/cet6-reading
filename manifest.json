@@ -1,15 +1,15 @@
 [
   {
-    "day": "07",
-    "title": "The Silicon Dilemma: Humanity's Precarious Bargain with Machine Minds",
-    "cover": "105/185",
-    "date": "2026-08-25"
+    "day": "11",
+    "title": "The Architecture of Credibility: How Quantitative Faith Displaced Qualitative Judgment",
+    "cover": "9/185",
+    "date": "2026-09-01"
   },
   {
-    "day": "08",
-    "title": "The Geometry of Attention: How Urban Design Shapes Collective Memory",
-    "cover": "107/185",
-    "date": "2026-08-26"
+    "day": "10",
+    "title": "The Cartographer's Dilemma: Mapping the Ethics of Submerged Histories",
+    "cover": "94/185",
+    "date": "2026-08-29"
   },
   {
     "day": "09",
@@ -18,9 +18,15 @@
     "date": "2026-08-28"
   },
   {
-    "day": "10",
-    "title": "The Cartographer's Dilemma: Mapping the Ethics of Submerged Histories",
-    "cover": "94/185",
-    "date": "2026-08-29"
+    "day": "08",
+    "title": "The Geometry of Attention: How Urban Design Shapes Collective Memory",
+    "cover": "107/185",
+    "date": "2026-08-26"
+  },
+  {
+    "day": "07",
+    "title": "The Silicon Dilemma: Humanity's Precarious Bargain with Machine Minds",
+    "cover": "105/185",
+    "date": "2026-08-25"
   }
 ]
