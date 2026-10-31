@@ -46,6 +46,19 @@ body.scrolled .nav{border-bottom-color:var(--hair)}
 .nav .spacer{flex:1}
 .nav a.lnk{font-size:12.5px;color:var(--sub);text-decoration:none;transition:color .2s var(--ease)}
 .nav a.lnk:hover{color:var(--fg)}
+/* 导航返回键：36px 高、主色描边，作用一眼可见 */
+.nav .navbtn{
+  display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 16px 0 13px;
+  border-radius:99px;border:1px solid color-mix(in srgb,var(--accent) 24%,transparent);
+  background:color-mix(in srgb,var(--accent) 9%,transparent);
+  font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap;
+  transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease),transform .18s var(--ease);
+}
+.nav .navbtn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.nav .navbtn:active{transform:scale(.955)}
+.nav .navbtn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;margin-top:-1px}
+.nav .navtitle{font-size:12.5px;font-weight:500;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}
+
 
 /* 英雄区 */
 .hero{
@@ -57,7 +70,7 @@ body.scrolled .nav{border-bottom-color:var(--hair)}
   @keyframes heroOut{to{opacity:.1;transform:translateY(52px) scale(.975)}}
 }
 .eyebrow{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
-h1{font-size:clamp(38px,7.4vw,86px);line-height:1.1;font-weight:600;letter-spacing:-.045em;margin-bottom:26px}
+h1{font-size:clamp(38px,7vw,82px);line-height:1.12;font-weight:600;letter-spacing:-.03em;margin-bottom:26px}
 h1 .dim{color:var(--sub)}
 h1 .l{display:block;animation:lineUp 1s var(--ease) both}
 h1 .l:nth-child(1){animation-delay:.10s}
@@ -121,3 +134,12 @@ h1 .l:nth-child(2){animation-delay:.20s}
 .card .tick{position:absolute;top:17px;right:17px;font-size:11px;color:var(--ok);opacity:0;transform:scale(.6);transition:all .35s var(--ease)}
 .card.full .tick{opacity:1;transform:none}
 .card.full .rng{opacity:0}
+/* 进入按钮：卡片底部的主色胶囊，悬停实心 */
+.card .go{margin-top:16px;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 15px;
+  border-radius:99px;background:color-mix(in srgb,var(--accent) 9%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);
+  font-size:13px;font-weight:600;color:var(--accent);
+  transition:background .28s var(--ease),color .28s var(--ease),border-color .28s var(--ease)}
+.card .go .arw{transition:transform .3s var(--ease)}
+.card:hover .go{background:var(--accent);border-color:var(--accent);color:#fff}
+.card:hover .go .arw{transform:translateX(3px)}

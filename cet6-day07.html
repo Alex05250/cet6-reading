@@ -1,70 +1,406 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CET-6 Day 7 · 中英句对照 · The Silicon Dilemma: Humanity&#x27;s Precarious Bargain with Machine Minds</title>
-<style>
-  :root { --bg:#f7f5f0; --card:#fff; --ink:#222; --mut:#6b6b6b; --line:#e3ded3; --accent:#1e4b8f; --zh:#4a4a4a; }
-  * { box-sizing:border-box; }
-  body { margin:0; padding:28px 16px 80px; background:var(--bg); color:var(--ink);
-          font-family:Georgia,"Times New Roman","宋体",serif; line-height:1.85; }
-  .wrap { max-width:720px; margin:0 auto; }
-  header { text-align:center; margin-bottom:26px; }
-  header h1 { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:17px; margin:0 0 8px; color:var(--accent); }
-  .meta { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:13px; color:var(--mut); }
-  .badge { display:inline-block; margin-top:10px; padding:4px 14px; border-radius:20px; font-size:13px;
-            background:#e8f0e8; color:#2f6f4f; font-family:"Segoe UI","Microsoft YaHei",sans-serif; }
-  .btn { margin-top:12px; padding:6px 16px; border:1px solid var(--accent); color:var(--accent);
-          background:#fff; border-radius:8px; cursor:pointer; font-size:13px;
-          font-family:"Segoe UI","Microsoft YaHei",sans-serif; }
-  .btn:hover { background:#eef3fa; }
-  .passage { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:26px 30px; font-size:17px; }
-  .pt { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:19px; margin:0 0 18px; text-align:center; }
-  .para { margin:0 0 24px; }
-  .para:last-child { margin-bottom:0; }
-  .sent { margin:0 0 14px; }
-  .sent:last-child { margin-bottom:0; }
-  .en { margin:0; text-align:justify; }
-  .zh { margin:4px 0 0; padding-left:12px; border-left:3px solid var(--line); color:var(--zh);
-         font-size:15px; line-height:1.75; text-align:justify;
-         font-family:"KaiTi","楷体","STKaiti","宋体",serif; }
-  .zh-empty { color:#b08d57; font-size:13px; }
-  body.no-zh .zh { display:none; }
-  mark { background:#ffe58a; padding:0 2px; border-radius:3px; }
-  body.no-mark mark { background:transparent; padding:0; }
-  section { background:var(--card); border:1px solid var(--line); border-radius:12px;
-             margin-top:18px; padding:16px 20px; }
-  section h2 { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:14px; margin:0 0 10px; }
-  .chips { line-height:2.1; }
-  .chip { display:inline-block; font-size:12px; font-family:"Segoe UI","Microsoft YaHei",sans-serif;
-           padding:1px 8px; margin:2px 3px; border-radius:10px; }
-  .chip.on { background:#e8f0e8; color:#2f6f4f; border:1px solid #c3dcc3; }
-  .chip.off { background:#f0efea; color:#aaa; border:1px dashed var(--line); }
-  .legend { font-size:12px; color:var(--mut); margin-bottom:6px; }
-  footer { color:var(--mut); font-size:12px; margin-top:20px; text-align:center;
-            font-family:"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.9; }
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Day 07 · The Silicon Dilemma: Humanity&#x27;s Precarious Bargain with Machine Minds · CET-6</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230071e3'/%3E%3Ctext x='32' y='45' font-size='36' font-weight='700' font-family='Segoe UI,Arial,sans-serif' text-anchor='middle' fill='%23fff'%3E6%3C/text%3E%3C/svg%3E">
+<style>/* CET-6 词汇站 · 基础层：变量 / 布局骨架 / 导航 / 英雄区 / 工具栏 / 卡片网格 */
+:root{
+  --bg:#ffffff; --fg:#1d1d1f; --sub:#6e6e73; --faint:#a1a1a6;
+  --line:rgba(0,0,0,.09); --hair:rgba(0,0,0,.055); --fill:rgba(0,0,0,.04); --card:#ffffff;
+  --accent:#0071e3; --ok:#1d9a6c; --warn:#b25000;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.03),0 4px 14px rgba(0,0,0,.035);
+  --shadow-lg:0 16px 48px rgba(0,0,0,.10);
+  --ease:cubic-bezier(.32,.72,0,1);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#000000; --fg:#f5f5f7; --sub:#a1a1a6; --faint:#6e6e73;
+    --line:rgba(255,255,255,.14); --hair:rgba(255,255,255,.075); --fill:rgba(255,255,255,.06); --card:#1c1c1e;
+    --accent:#2997ff; --ok:#30d158; --warn:#ff9f0a;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.5); --shadow-lg:0 16px 48px rgba(0,0,0,.75);
+  }
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--fg);line-height:1.5;font-synthesis:none;overflow-x:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI Variable Text","Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  transition:background .5s var(--ease),color .5s var(--ease);
+}
+::selection{background:var(--accent);color:#fff}
+button{font:inherit;color:inherit}
+a{color:inherit}
+
+/* 入场 */
+@keyframes lineUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes softIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.anim{animation:softIn .7s var(--ease) both}
+
+/* 导航 */
+.nav{
+  position:sticky;top:0;z-index:120;height:48px;display:flex;align-items:center;gap:16px;
+  padding:0 max(22px,env(safe-area-inset-left)) 0 max(22px,env(safe-area-inset-right));
+  background:color-mix(in srgb,var(--bg) 74%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid transparent;transition:border-color .3s var(--ease);
+}
+body.scrolled .nav{border-bottom-color:var(--hair)}
+.nav .brand{font-size:13px;font-weight:600;letter-spacing:-.005em;white-space:nowrap;text-decoration:none}
+.nav .brand i{font-style:normal;color:var(--faint);font-weight:400}
+.nav .spacer{flex:1}
+.nav a.lnk{font-size:12.5px;color:var(--sub);text-decoration:none;transition:color .2s var(--ease)}
+.nav a.lnk:hover{color:var(--fg)}
+/* 导航返回键：36px 高、主色描边，作用一眼可见 */
+.nav .navbtn{
+  display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 16px 0 13px;
+  border-radius:99px;border:1px solid color-mix(in srgb,var(--accent) 24%,transparent);
+  background:color-mix(in srgb,var(--accent) 9%,transparent);
+  font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap;
+  transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease),transform .18s var(--ease);
+}
+.nav .navbtn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.nav .navbtn:active{transform:scale(.955)}
+.nav .navbtn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;margin-top:-1px}
+.nav .navtitle{font-size:12.5px;font-weight:500;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}
+
+
+/* 英雄区 */
+.hero{
+  max-width:920px;margin:0 auto;padding:clamp(60px,10vh,120px) 24px clamp(36px,6vh,56px);
+  text-align:center;will-change:opacity,transform;
+}
+@supports (animation-timeline:scroll()){
+  .hero{animation:heroOut linear both;animation-timeline:scroll(root block);animation-range:0 520px}
+  @keyframes heroOut{to{opacity:.1;transform:translateY(52px) scale(.975)}}
+}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+h1{font-size:clamp(38px,7vw,82px);line-height:1.12;font-weight:600;letter-spacing:-.03em;margin-bottom:26px}
+h1 .dim{color:var(--sub)}
+h1 .l{display:block;animation:lineUp 1s var(--ease) both}
+h1 .l:nth-child(1){animation-delay:.10s}
+h1 .l:nth-child(2){animation-delay:.20s}
+.eyebrow{animation:softIn .85s var(--ease) .04s both}
+.lede{animation:softIn .95s var(--ease) .30s both;font-size:clamp(15px,1.9vw,19px);color:var(--sub);line-height:1.6;letter-spacing:-.008em;max-width:min(520px,88vw);margin:0 auto;text-wrap:pretty;word-break:normal;line-break:strict}
+.meter{animation:softIn .95s var(--ease) .42s both;display:inline-flex;align-items:center;gap:12px;margin-top:44px;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums;padding:9px 18px;border-radius:99px;background:var(--fill)}
+.meter .track{width:130px;height:3px;border-radius:99px;background:var(--hair);overflow:hidden}
+.meter .track i{display:block;height:100%;width:0;background:var(--ok);border-radius:99px;transition:width .8s var(--ease)}
+.meter b{color:var(--fg);font-weight:600}
+
+/* 工具栏 */
+.toolbar{
+  position:sticky;top:48px;z-index:110;padding:12px 24px;
+  background:color-mix(in srgb,var(--bg) 84%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid var(--hair);
+}
+.toolbar .inner{max-width:1120px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
+.search{
+  flex:0 1 380px;min-width:180px;height:38px;padding:0 14px 0 36px;font:inherit;font-size:13.5px;color:var(--fg);
+  background:var(--fill) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23a1a1a6' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") no-repeat 13px center;
+  border:0;border-radius:9px;outline:none;transition:box-shadow .25s var(--ease),background .25s var(--ease);
+}
+.search::placeholder{color:var(--faint)}
+.search:focus{box-shadow:0 0 0 3.5px color-mix(in srgb,var(--accent) 20%,transparent);background:var(--card)}
+.seg{display:flex;gap:2px;background:var(--fill);border-radius:9px;padding:2px}
+.seg button{font-size:12.5px;color:var(--sub);background:none;border:0;cursor:pointer;padding:6px 14px;border-radius:7px;transition:all .25s var(--ease);white-space:nowrap}
+.seg button[aria-selected="true"]{background:var(--card);color:var(--fg);box-shadow:var(--shadow-sm);font-weight:500}
+
+/* 网格与卡片 */
+.stage{max-width:1168px;margin:0 auto;padding:36px 24px 140px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:14px}
+.card{
+  position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:20px 20px 18px;cursor:pointer;text-align:left;display:flex;flex-direction:column;
+  text-decoration:none;overflow:hidden;opacity:0;transform:translateY(18px);
+  transition:opacity .6s var(--ease),transform .55s var(--ease),box-shadow .4s var(--ease),border-color .3s var(--ease);
+}
+.card.in{opacity:1;transform:none}
+.card:hover{box-shadow:var(--shadow-lg);border-color:transparent}
+.card.in:hover{transform:translateY(-3px)}
+.card::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;
+  background:radial-gradient(240px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.7),transparent 62%);
+  transition:opacity .45s var(--ease);
+}
+.card:hover::after{opacity:1}
+@media (prefers-color-scheme:dark){
+  .card::after{background:radial-gradient(240px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.07),transparent 62%)}
+}
+.card .top{display:flex;align-items:baseline;justify-content:space-between;gap:9px;margin-bottom:18px}
+.card .dn{font-size:13.5px;font-weight:600;letter-spacing:.005em}
+.card .rng{font-size:11px;color:var(--faint);font-variant-numeric:tabular-nums;letter-spacing:.01em;transition:opacity .3s}
+.card .num{display:flex;align-items:baseline;gap:4px;margin-bottom:11px}
+.card .num b{font-size:27px;font-weight:600;letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums}
+.card .num s{font-size:12.5px;color:var(--faint);text-decoration:none;font-variant-numeric:tabular-nums}
+.card .bar{height:2.5px;border-radius:99px;background:var(--fill);overflow:hidden}
+.card .bar i{display:block;height:100%;width:0;background:var(--ok);border-radius:99px;transition:width .7s var(--ease)}
+.card.full .num b{color:var(--ok)}
+.card .tick{position:absolute;top:17px;right:17px;font-size:11px;color:var(--ok);opacity:0;transform:scale(.6);transition:all .35s var(--ease)}
+.card.full .tick{opacity:1;transform:none}
+.card.full .rng{opacity:0}
+/* 进入按钮：卡片底部的主色胶囊，悬停实心 */
+.card .go{margin-top:16px;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 15px;
+  border-radius:99px;background:color-mix(in srgb,var(--accent) 9%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);
+  font-size:13px;font-weight:600;color:var(--accent);
+  transition:background .28s var(--ease),color .28s var(--ease),border-color .28s var(--ease)}
+.card .go .arw{transition:transform .3s var(--ease)}
+.card:hover .go{background:var(--accent);border-color:var(--accent);color:#fff}
+.card:hover .go .arw{transform:translateX(3px)}
 </style>
+<style>/* CET-6 · 阅读层：真题精读 + 每日融词阅读（与 base.css 的变量、导航共用）
+   依赖 base.css 中的 :root 变量与 .nav 骨架。 */
+
+/* 顶部阅读进度 */
+.rdbar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:transparent;pointer-events:none}
+.rdbar i{display:block;height:100%;width:0;background:var(--accent);opacity:.85;transition:width .12s linear}
+
+/* 文章头 */
+.rhead{
+  max-width:760px;margin:0 auto;padding:clamp(40px,7vh,72px) 24px clamp(20px,3vh,30px);
+}
+.rhead .kick{
+  font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:18px;
+}
+.rhead h1{
+  font-size:clamp(31px,4.6vw,50px);line-height:1.1;font-weight:600;letter-spacing:-.038em;
+  margin-bottom:18px;text-wrap:balance;animation:softIn .8s var(--ease) .08s both;
+}
+.rhead .rlede{
+  font-size:clamp(14px,1.6vw,16px);color:var(--sub);line-height:1.66;letter-spacing:-.005em;
+  max-width:56ch;text-wrap:pretty;animation:softIn .8s var(--ease) .16s both;
+}
+.rhead .rfact{
+  margin-top:22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums;
+  animation:softIn .8s var(--ease) .24s both;
+}
+.rhead .rfact span{padding:6px 12px;border-radius:99px;background:var(--fill);white-space:nowrap}
+.rhead .rfact b{font-weight:600;color:var(--fg)}
+.rhead .rfact .ok{background:color-mix(in srgb,var(--ok) 12%,transparent);color:var(--ok)}
+
+/* 控制条 */
+.ctrls{
+  position:sticky;top:48px;z-index:110;
+  padding:12px max(24px,env(safe-area-inset-left));
+  background:color-mix(in srgb,var(--bg) 82%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid var(--hair);
+}
+.ctrls .inner{max-width:712px;margin:0 auto;display:flex;gap:8px;align-items:center;justify-content:flex-start;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;height:33px;padding:0 15px;
+  border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--fg);
+  font-size:12.5px;font-weight:500;cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:background .24s var(--ease),border-color .24s var(--ease),color .24s var(--ease),transform .18s var(--ease);
+}
+.btn:hover{border-color:transparent;background:var(--fill)}
+.btn:active{transform:scale(.96)}
+.btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn .k{font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.btn[aria-pressed="true"] .k{color:rgba(255,255,255,.7)}
+
+/* 正文 */
+.passage{max-width:760px;margin:0 auto;padding:clamp(26px,5vh,44px) 24px 40px}
+.passage .pt{
+  font-size:clamp(17px,2.2vw,21px);font-weight:600;letter-spacing:-.02em;line-height:1.4;
+  margin:0 0 clamp(22px,3.4vh,32px);color:var(--sub);
+}
+.para{margin:0 0 clamp(26px,4vh,38px)}
+.para:last-child{margin-bottom:0}
+.sent{margin:0 0 15px}
+.sent:last-child{margin-bottom:0}
+.en{
+  margin:0;font-size:clamp(16.5px,1.72vw,18.5px);line-height:1.78;letter-spacing:-.006em;
+  text-align:left;text-wrap:pretty;
+}
+.zh{
+  margin:7px 0 0;font-size:15px;line-height:1.74;color:var(--sub);letter-spacing:.002em;
+  padding-left:13px;border-left:1.5px solid var(--hair);
+  transition:opacity .3s var(--ease);text-wrap:pretty;
+}
+.zh-empty{color:var(--warn);font-size:12.5px;padding-left:0;border-left-color:transparent}
+body.no-zh .zh{display:none}
+mark{
+  background:color-mix(in srgb,var(--accent) 15%,transparent);color:inherit;
+  border-radius:2px;padding:0 1.5px;transition:background .3s var(--ease);
+}
+body.no-mark mark{background:transparent;padding:0}
+.fill{color:var(--warn);border-bottom:2px dotted color-mix(in srgb,var(--warn) 55%,transparent);padding:0 1px}
+
+/* 词库 / 词表 */
+.bank,.wordbank{max-width:760px;margin:0 auto;padding:0 24px 40px}
+.bank .legend,.wordbank .legend{font-size:12px;color:var(--faint);margin-bottom:12px;line-height:1.7}
+.bank .bchips,.bank .chips,.wordbank .chips{
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+.bchip,.chips .chip{
+  display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;
+  font-size:12px;font-variant-numeric:tabular-nums;
+  border:1px solid transparent;transition:transform .2s var(--ease);
+}
+.bchip.on,.chips .chip.on{background:color-mix(in srgb,var(--ok) 11%,transparent);color:var(--ok);border-color:color-mix(in srgb,var(--ok) 22%,transparent)}
+.bchip.off,.chips .chip.off{background:var(--fill);color:var(--faint);border-color:transparent;text-decoration:line-through;text-decoration-thickness:1px}
+.bchip:hover{transform:translateY(-1px)}
+
+/* ───────── 真题页：考期 / 套题 / 文章 ───────── */
+.toc{
+  max-width:760px;margin:0 auto;padding:18px 24px 0;
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+}
+.toc a{
+  display:inline-flex;align-items:center;height:30px;padding:0 13px;border-radius:99px;
+  border:1px solid var(--line);background:transparent;color:var(--sub);font-size:12.5px;text-decoration:none;
+  font-variant-numeric:tabular-nums;transition:background .24s var(--ease),color .24s var(--ease),border-color .24s var(--ease);
+}
+.toc a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.year{
+  max-width:760px;margin:clamp(34px,5vh,52px) auto 14px;padding:0 24px;
+  font-size:clamp(19px,2.4vw,24px);font-weight:600;letter-spacing:-.03em;
+  display:flex;align-items:center;gap:14px;
+}
+.year::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.sets{max-width:760px;margin:0 auto;padding:0 24px 40px}
+details.setblk{
+  border:1px solid var(--line);border-radius:16px;background:var(--card);
+  margin:10px 0;overflow:hidden;transition:box-shadow .35s var(--ease),border-color .3s var(--ease);
+}
+details.setblk:hover{box-shadow:var(--shadow-sm)}
+details.setblk[open]{box-shadow:var(--shadow-sm);border-color:transparent}
+details.setblk > summary{
+  list-style:none;cursor:pointer;padding:17px 24px;display:flex;align-items:center;gap:12px;
+  font-size:14px;font-weight:500;letter-spacing:-.012em;
+}
+details.setblk > summary::-webkit-details-marker{display:none}
+details.setblk > summary::before{
+  content:"";width:6px;height:6px;flex:0 0 auto;margin-top:-3px;
+  border-right:1.5px solid var(--faint);border-bottom:1.5px solid var(--faint);
+  transform:rotate(-45deg);transition:transform .3s var(--ease);
+}
+details.setblk[open] > summary::before{transform:rotate(45deg);margin-top:2px}
+details.setblk > summary .smeta{margin-left:auto;font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums;font-weight:400}
+details.setblk[open] > summary{position:sticky;top:105px;z-index:5;background:color-mix(in srgb,var(--card) 92%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
+
+.art{padding:clamp(22px,3vw,32px) 24px;border-top:1px solid var(--hair)}
+.art:first-of-type{border-top:none}
+.art h3{
+  font-size:13px;font-weight:600;letter-spacing:-.005em;color:var(--sub);
+  margin:0 0 18px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+}
+.art h3 .wc{font-weight:400;font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.plabel{
+  display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;
+  border-radius:6px;background:var(--fill);color:var(--sub);font-size:11px;font-weight:600;
+  margin-right:9px;vertical-align:1px;letter-spacing:.02em;
+}
+
+/* 回到顶部 / 底部导航 */
+#topBtn{
+  position:fixed;right:20px;bottom:20px;z-index:90;width:38px;height:38px;border-radius:50%;
+  display:grid;place-items:center;border:1px solid var(--line);background:var(--card);color:var(--sub);
+  font-size:13px;text-decoration:none;cursor:pointer;box-shadow:var(--shadow-sm);
+  opacity:0;pointer-events:none;transform:translateY(6px);
+  transition:opacity .3s var(--ease),transform .3s var(--ease),color .2s var(--ease),border-color .2s var(--ease);
+}
+#topBtn.on{opacity:1;pointer-events:auto;transform:none}
+#topBtn:hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+.foot{
+  max-width:760px;margin:0 auto;padding:30px 24px 70px;
+  border-top:1px solid var(--hair);font-size:11.5px;color:var(--faint);line-height:1.9;text-align:center;
+}
+.foot a{color:var(--sub);text-decoration:none}
+.foot a:hover{color:var(--accent)}
+.foot .big{
+  display:inline-flex;align-items:center;gap:8px;margin-top:16px;height:38px;padding:0 20px;
+  border-radius:99px;border:1px solid var(--line);color:var(--fg);font-size:13px;font-weight:500;
+  transition:background .24s var(--ease),border-color .24s var(--ease),color .24s var(--ease);
+}
+.foot .big:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+@media (max-width:640px){
+  .ctrls{top:44px;padding:10px 14px}
+  .ctrls .inner{gap:6px}
+  .btn{height:32px;padding:0 12px;font-size:12px}
+  .rhead{padding-top:34px}
+  .passage,.bank,.wordbank,.foot{padding-left:16px;padding-right:16px}
+  .toc{padding-left:16px;padding-right:16px}
+  .year,.sets{padding-left:14px;padding-right:14px}
+  details.setblk[open] > summary{top:100px}
+  .zh{font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  .rhead h1,.rhead .rlede,.rhead .rfact{animation:none}
+}
+</style>
+<style>.rhead h1{font-size:clamp(28px,4vw,42px)}</style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <h1>CET-6 融词阅读 · Day 7 · 中英句对照版 · 2026-08-25</h1>
-  <div class="meta">每句英文下方紧跟中文译文 · 黄色高亮 = 本日词汇（变形也算命中）</div>
-  <span class="badge">本日词汇嵌入 105/185 · 57%</span><br>
-  <button class="btn" onclick="document.body.classList.toggle('no-mark')">👁 隐藏高亮裸读（再点恢复）</button>
-  <button class="btn" onclick="document.body.classList.toggle('no-zh')">隐藏译文 · 纯英自测（再点恢复）</button>
-</header>
-<div class="passage">
-<h2 class="pt">The Silicon Dilemma: Humanity&#x27;s Precarious Bargain with Machine Minds</h2>
+<div class="rdbar"><i></i></div><nav class="nav"><a class="navbtn" href="https://alex05250.github.io/cet6-reading/daily.html"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>每日</a><span class="navtitle">Day 07</span><div class="spacer"></div><a class="lnk" href="https://alex05250.github.io/cet6-reading/index.html">主页</a><a class="lnk" href="https://alex05250.github.io/cet6-reading/words.html">词表</a></nav><header class="rhead"><p class="kick">Daily Reading · Day 7</p><h1>The Silicon Dilemma: Humanity&#x27;s Precarious Bargain with Machine Minds</h1><div class="rfact"><span>2026-08-25</span><span class="ok">词汇嵌入 105/185 · 57%</span><span>deepseek-v4-pro @ opencode-go</span></div></header><div class="ctrls"><div class="inner"><button class="btn" data-act="zh" aria-pressed="false"><span class="lab">隐藏译文</span></button><button class="btn" data-act="mark" aria-pressed="false"><span class="lab">隐藏高亮</span></button></div></div><div class="passage">
 <div class="para"><div class="sent"><p class="en">On a quiet <mark>Sunday</mark> <mark>morning</mark>, a <mark>British</mark> <mark>statesman</mark> once remarked that the most dangerous <mark>ingredient</mark> in modern politics is not malice but <mark>ignorance</mark>.</p><p class="zh">在一个宁静的周日早晨，一位英国政治家曾说过，现代政治中最危险的成分不是恶意，而是无知。</p></div><div class="sent"><p class="en">That observation has <mark>rarely</mark> felt more <mark>acute</mark> than in the age of artificial intelligence, when the <mark>capacity</mark> to <mark>fabricate</mark> a <mark>plausible</mark> reality has become almost <mark>commonplace</mark>.</p><p class="zh">在人工智能时代，这一观察显得尤为尖锐，因为编造一个貌似真实的现实的能力已几乎变得司空见惯。</p></div><div class="sent"><p class="en">We have entered an era in which the <mark>electron</mark> has replaced the printing press as the <mark>principal</mark> vehicle of information, and the <mark>publication</mark> of a single algorithm can <mark>spark</mark> a <mark>collision</mark> between public <mark>curiosity</mark> and private <mark>dread</mark>.</p><p class="zh">我们已经进入一个电子取代印刷机成为信息主要载体的时代，发布一个算法就可能在公众好奇与私人恐惧之间引发碰撞。</p></div><div class="sent"><p class="en">To many, <mark>AI</mark> is a <mark>miracle</mark> of <mark>creative</mark> <mark>ambition</mark>; to others, it is a <mark>terrifying</mark> <mark>yoke</mark> that threatens to <mark>chain</mark> human <mark>identity</mark> to the <mark>terminal</mark> logic of machines.</p><p class="zh">对许多人来说，人工智能是创造性雄心的奇迹；对另一些人而言，它是一副可怕的枷锁，可能把人的身份束缚在机器的终极逻辑上。</p></div><div class="sent"><p class="en">The <mark>concept</mark> of intelligence itself is being reformulated, and <mark>unless</mark> we <mark>negotiate</mark> the boundaries of this new <mark>power</mark> with <mark>discipline</mark> and transparency, we may find ourselves <mark>wedged</mark> between <mark>wonder</mark> and <mark>wretched</mark> dependence.</p><p class="zh">智能这一概念本身正在被重新定义，除非我们以纪律和透明的方式划定这种新力量的边界，否则我们可能会发现自己夹在惊叹与可悲的依赖之间。</p></div></div><div class="para"><div class="sent"><p class="en">The <mark>practical</mark> <mark>challenge</mark> is not merely technical; it is a matter of <mark>circulation</mark> and control.</p><p class="zh">实际的挑战不仅是技术性的，更关乎流通与控制。</p></div><div class="sent"><p class="en">Consider the humble <mark>newspaper</mark>, once the <mark>gate</mark> through which most citizens entered the sphere of public <mark>commentary</mark>.</p><p class="zh">想想那份朴素的报纸，它曾是大多数公民进入公共评论领域的大门。</p></div><div class="sent"><p class="en">Today, that <mark>gate</mark> has been replaced by a <mark>screen</mark>, and the flow of data is governed by algorithms that <mark>compute</mark> our preferences with unsettling precision.</p><p class="zh">如今，那扇门已被一块屏幕取代，数据流由算法掌控，这些算法以令人不安的精确度计算着我们的偏好。</p></div><div class="sent"><p class="en">A single click can <mark>transmit</mark> a <mark>draft</mark> of misinformation to <mark>twenty</mark> thousand readers before <mark>any</mark> editor has a chance to <mark>gauge</mark> its truth.</p><p class="zh">一次点击就能把一份错误信息草稿传给两万名读者，而任何编辑都还来不及判断其真伪。</p></div><div class="sent"><p class="en">The <mark>irony</mark> is that this system, designed to <mark>stimulate</mark> engagement, often exploits the very <mark>characteristics</mark> that make us human: our <mark>zeal</mark> for belonging, our <mark>jealous</mark> attachment to our own opinions, and our tendency to <mark>assume</mark> that what we see is what exists.</p><p class="zh">讽刺的是，这个旨在激发参与的系统，往往利用的正是使我们成为人的那些特质：我们对归属感的渴望、对自己观点的执着维护，以及我们倾向于把所见当作实存。</p></div><div class="sent"><p class="en">An <mark>adolescent</mark> scrolling through a feed is not merely a passive <mark>visitor</mark>; he or she is an <mark>amateur</mark> participant in a vast <mark>drama</mark>, one in which the line between fact and fabrication has been eroded to the point of invisibility.</p><p class="zh">一个刷着信息流的青少年不只是被动的访客；他或她是一场宏大戏剧中的业余参与者，而在这场戏剧里，事实与虚构之间的界限已被侵蚀到几乎不可见的地步。</p></div><div class="sent"><p class="en">What makes this predicament so <mark>difficult</mark> is that the machinery itself is <mark>transparent</mark> in its operation—the <mark>silicon</mark> chips, the fiber-optic cables, the server farms—yet the logic <mark>behind</mark> it remains <mark>mostly</mark> opaque, a black box that few can open without specialized training.</p><p class="zh">这一困境之所以如此棘手，是因为机器本身的运作是透明的——硅芯片、光纤电缆、服务器集群——但其背后的逻辑却大多不透明，是一个没有专门训练就几乎无法打开的黑箱。</p></div></div><div class="para"><div class="sent"><p class="en">The financial incentives <mark>behind</mark> this transformation are considerable, and they <mark>rarely</mark> align with the public good.</p><p class="zh">这一转变背后的经济激励相当可观，而且很少与公共利益一致。</p></div><div class="sent"><p class="en">Tech companies, driven by an <mark>ambitious</mark> hunger for profit, have learned that attention is a resource that can be <mark>mined</mark>, refined, and sold.</p><p class="zh">科技公司受逐利雄心的驱动，已经学会把注意力当作一种可以开采、提炼和出售的资源。</p></div><div class="sent"><p class="en">The <mark>equation</mark> is simple: more engagement <mark>yields</mark> more data, and more data <mark>yields</mark> more <mark>precise</mark> predictions about how to keep users hooked.</p><p class="zh">等式很简单：更多的参与产生更多数据，更多数据产生更精准的预测，从而知道如何让用户持续上瘾。</p></div><div class="sent"><p class="en">This model has proven <mark>fruitful</mark> for shareholders, but it has also created a new form of <mark>separation</mark> between those who <mark>formulate</mark> the algorithms and those who live under their influence.</p><p class="zh">这一模式为股东带来了丰厚的回报，但也在算法制定者与受算法影响者之间制造了一种新的隔阂。</p></div><div class="sent"><p class="en">A software engineer in <mark>Silicon</mark> Valley may never meet the factory worker in the <mark>east</mark> whose job has been <mark>offset</mark> by automation, yet their fates are linked by a <mark>chain</mark> of economic forces that no single <mark>statesman</mark> can easily <mark>mediate</mark>.</p><p class="zh">硅谷的软件工程师或许永远不会见到东方工厂里因自动化而失业的工人，但他们的命运却由一条任何政治家都难以轻易调停的经济力量之链紧密相连。</p></div><div class="sent"><p class="en">The result is a kind of digital <mark>slavery</mark>, not of bodies but of attention, in which individuals voluntarily surrender their cognitive autonomy in exchange for the small dopamine hits of <mark>likes</mark> and shares.</p><p class="zh">其结果是一种数字奴役，不是对身体的奴役，而是对注意力的奴役；人们自愿交出认知自主权，只为换取点赞和转发带来的微小多巴胺刺激。</p></div><div class="sent"><p class="en">To call this a fair bargain would be to <mark>betray</mark> the very <mark>concept</mark> of informed consent.</p><p class="zh">若把这种交易称为公平，便是对知情同意这一概念本身的背叛。</p></div></div><div class="para"><div class="sent"><p class="en">One might <mark>presume</mark> that education offers a way out, and indeed, the <mark>capacity</mark> to think critically is the most <mark>useful</mark> <mark>precaution</mark> we possess.</p><p class="zh">有人或许以为教育能提供出路，而批判性思考的能力确实是我们所拥有的最有效的防范。</p></div><div class="sent"><p class="en">Yet even here, the record is mixed.</p><p class="zh">然而即便在教育领域，成效也是好坏参半。</p></div><div class="sent"><p class="en">Schools <mark>emphasize</mark> the acquisition of facts, but they <mark>rarely</mark> teach students how to <mark>gauge</mark> the reliability of a source or how to <mark>trace</mark> an argument back to its origins.</p><p class="zh">学校强调事实的获取，却很少教学生如何判断信息来源的可靠性，或如何追溯一个论点的来龙去脉。</p></div><div class="sent"><p class="en">The result is a generation that can <mark>compute</mark> a standard deviation but cannot distinguish a credible <mark>commentary</mark> from a <mark>fabricated</mark> one.</p><p class="zh">结果造就了一代人：他们能计算标准差，却无法分辨可信的评论与捏造的言论。</p></div><div class="sent"><p class="en">This is not a new problem; the ancient Greeks warned against the dangers of sophistry, and the printing press once <mark>frightened</mark> the <mark>royal</mark> courts of Europe.</p><p class="zh">这并非新问题；古希腊人就曾警告过诡辩的危险，印刷术也曾令欧洲王室惶恐不安。</p></div><div class="sent"><p class="en">But the scale and speed of today&#x27;s information ecosystem are unprecedented.</p><p class="zh">但当今信息生态系统的规模与速度是前所未有的。</p></div><div class="sent"><p class="en">A <mark>typhoon</mark> of data sweeps across the globe every second, and within that storm, the distinction between signal and noise becomes almost impossible to maintain.</p><p class="zh">每一秒都有数据风暴席卷全球，而在风暴之中，信号与噪音的界限几乎无法维持。</p></div><div class="sent"><p class="en">The <mark>challenge</mark> is not to reject technology—that would be both <mark>silly</mark> and <mark>unnecessary</mark>—but to develop what one might call digital literacy: the ability to read a <mark>screen</mark> with the same critical eye once reserved for the printed page.</p><p class="zh">挑战不在于拒绝技术——那既愚蠢也无必要——而在于培养一种可称之为数字素养的能力：以曾经对待印刷文字的那种批判眼光来阅读屏幕。</p></div></div><div class="para"><div class="sent"><p class="en">There is, however, a deeper <mark>irony</mark> at work.</p><p class="zh">然而，更深层的讽刺正在于此。</p></div><div class="sent"><p class="en">The same machines that threaten to undermine our autonomy also hold the potential to extend it.</p><p class="zh">那些威胁要削弱我们自主性的机器，同样也蕴含着扩展自主性的潜力。</p></div><div class="sent"><p class="en"><mark>AI</mark> can help doctors diagnose <mark>rare</mark> <mark>genetic</mark> disorders, optimize supply <mark>chains</mark> to <mark>avert</mark> food shortages, and model the <mark>circumference</mark> of a hurricane&#x27;s path with unprecedented accuracy.</p><p class="zh">人工智能可以帮助医生诊断罕见遗传病，优化供应链以避免粮食短缺，并以空前的精度模拟飓风行经路径的范围。</p></div><div class="sent"><p class="en">In agriculture, sensors embedded in <mark>sandy</mark> soil can <mark>transmit</mark> real-time data on moisture levels, helping farmers in <mark>drought</mark>-prone regions decide precisely when to irrigate.</p><p class="zh">在农业领域，嵌入沙质土壤中的传感器能够实时传输湿度数据，帮助干旱易发地区的农民精确判断何时灌溉。</p></div><div class="sent"><p class="en">In medicine, machine learning systems can analyze <mark>protein</mark> structures and identify promising drug candidates in a fraction of the time required by traditional methods.</p><p class="zh">在医学领域，机器学习系统能够分析蛋白质结构，并以远少于传统方法所需的时间识别出有前景的药物候选物。</p></div><div class="sent"><p class="en">These are not hypothetical promises; they are <mark>practical</mark> achievements already in use.</p><p class="zh">这些并非空头承诺，而是已经投入使用的实际成果。</p></div><div class="sent"><p class="en">The problem is that the same technology can be used to <mark>fabricate</mark> a video of a politician saying something he never said, or to automate the spread of propaganda across a dozen languages before a human moderator has finished her <mark>morning</mark> coffee.</p><p class="zh">问题在于，同样的技术也可以用来伪造一段政客从未说过的言论视频，或在人类审核员还没喝完早间咖啡之前，就以十几种语言自动散布宣传内容。</p></div><div class="sent"><p class="en">The dual-use nature of <mark>AI</mark> is not an <mark>exception</mark> to the rule; it is the rule itself.</p><p class="zh">人工智能的双重用途并非规则的例外，而是规则本身。</p></div></div><div class="para"><div class="sent"><p class="en">The question, then, is not whether we should use <mark>AI</mark>, but how we should <mark>frame</mark> its role in our lives.</p><p class="zh">那么，问题不在于我们是否应该使用人工智能，而在于我们应该如何界定它在生活中的角色。</p></div><div class="sent"><p class="en">A tool is not a master <mark>unless</mark> we choose to obey it.</p><p class="zh">工具不会成为主人，除非我们选择服从它。</p></div><div class="sent"><p class="en">The <mark>statesman</mark> who dismisses <mark>AI</mark> as a passing fad is as foolish as the technologist who <mark>swears</mark> it will solve every problem.</p><p class="zh">将人工智能斥为一时风尚的政治家，与发誓它能解决一切问题的技术专家同样愚蠢。</p></div><div class="sent"><p class="en">Both positions <mark>betray</mark> a lack of <mark>insight</mark> into the nature of <mark>power</mark>: it is never <mark>wholly</mark> good or <mark>wholly</mark> evil, but always shaped by the institutions and incentives that govern its use.</p><p class="zh">这两种立场都暴露出对权力本质缺乏洞察：权力从来不是全善或全恶的，而是始终由规范其使用的制度与激励机制所塑造。</p></div><div class="sent"><p class="en">To <mark>negotiate</mark> a better future, we must be willing to <mark>poke</mark> at our own assumptions, to <mark>separate</mark> our hopes from our fears, and to <mark>formulate</mark> policies that are both <mark>ambitious</mark> and humble.</p><p class="zh">为了争取一个更好的未来，我们必须愿意审视自己的假设，把希望与恐惧分开，并制定既雄心勃勃又谦逊务实的政策。</p></div><div class="sent"><p class="en">This will require a kind of <mark>discipline</mark> that is <mark>rare</mark> in public life: the <mark>discipline</mark> to say no to the profitable but harmful, and yes to the <mark>difficult</mark> but necessary.</p><p class="zh">这需要一种在公共生活中罕见的自律：对有利可图但有害的事物说不，对艰难但必要的事物说是。</p></div><div class="sent"><p class="en">It will also require a recognition that some things—privacy, dignity, the <mark>capacity</mark> for independent thought—cannot be <mark>offset</mark> by <mark>any</mark> amount of efficiency.</p><p class="zh">这还需要我们认识到，有些东西——隐私、尊严、独立思考的能力——无法用任何效率来抵消。</p></div><div class="sent"><p class="en">They are <mark>sacred</mark>, and once lost, they are not easily recovered.</p><p class="zh">它们是神圣的，一旦失去，便难以轻易恢复。</p></div></div><div class="para"><div class="sent"><p class="en">In the end, the real <mark>challenge</mark> is not to tame the machine but to understand ourselves.</p><p class="zh">归根结底，真正的挑战不是驯服机器，而是理解我们自己。</p></div><div class="sent"><p class="en">The <mark>silicon</mark> dilemma is, at its core, a human dilemma.</p><p class="zh">硅基困境的核心，终究是人的困境。</p></div><div class="sent"><p class="en">It is about the choices we make when no one is watching, the values we <mark>transmit</mark> to our children, and the kind of world we <mark>intend</mark> to leave <mark>behind</mark>.</p><p class="zh">它关乎我们在无人注视时所做的选择，关乎我们传递给子女的价值观，以及我们打算留下一个怎样的世界。</p></div><div class="sent"><p class="en">A <mark>cynical</mark> observer might say that we are doomed to repeat the mistakes of the past, that the <mark>collision</mark> between human nature and technological <mark>power</mark> always ends the same way.</p><p class="zh">一个愤世嫉俗的观察者可能会说，我们注定要重蹈过去的覆辙，人性与技术力量的碰撞总是以同样的方式收场。</p></div><div class="sent"><p class="en">But that is a form of fatalism, and fatalism is a poor guide to action.</p><p class="zh">但这是一种宿命论，而宿命论是行动的不良向导。</p></div><div class="sent"><p class="en">The history of civilization is, in many respects, a history of people who refused to accept the world as it was and instead worked to build the world as it ought to be.</p><p class="zh">文明的历史，从许多方面来看，就是一部人们拒绝接受世界现状、转而努力建设理想世界的历史。</p></div><div class="sent"><p class="en">That work is never easy, and it is never finished.</p><p class="zh">这项工作从来都不容易，也永远不会完成。</p></div><div class="sent"><p class="en">But it begins with a simple act of will: the decision to ask a better question, to seek a deeper <mark>insight</mark>, and to refuse the comfortable lie in favor of the <mark>difficult</mark> truth.</p><p class="zh">但它始于一个简单的意志行为：决定提出一个更好的问题，寻求更深刻的洞见，并拒绝安逸的谎言，拥抱艰难的真相。</p></div></div>
-</div>
-<section>
-  <h2>📋 本日词表（绿=已嵌入文章 · 灰=未嵌入）</h2>
-  <div class="legend">共 185 词，按原卡顺序</div>
-  <div class="chips"><span class="chip off">meat</span><span class="chip on">cynical</span><span class="chip on">concept</span><span class="chip on">creative</span><span class="chip on">offset</span><span class="chip on">yield</span><span class="chip off">finance</span><span class="chip off">hunt</span><span class="chip on">electron</span><span class="chip on">discipline</span><span class="chip on">typhoon</span><span class="chip off">alike</span><span class="chip off">liver</span><span class="chip on">poke</span><span class="chip off">zero</span><span class="chip on">circulation</span><span class="chip off">pretext</span><span class="chip on">formulate</span><span class="chip on">like</span><span class="chip off">launch</span><span class="chip on">mine</span><span class="chip on">gauge</span><span class="chip on">intend</span><span class="chip on">royal</span><span class="chip off">come</span><span class="chip off">deposit</span><span class="chip on">mediate</span><span class="chip off">cheek</span><span class="chip off">hare</span><span class="chip off">farewell</span><span class="chip on">unless</span><span class="chip on">ingredient</span><span class="chip on">adolescent</span><span class="chip on">miracle</span><span class="chip on">yoke</span><span class="chip on">chain</span><span class="chip off">shirt</span><span class="chip off">commonly</span><span class="chip off">pick</span><span class="chip off">comply</span><span class="chip on">protein</span><span class="chip on">principal</span><span class="chip on">fabricate</span><span class="chip on">circumference</span><span class="chip off">gentle</span><span class="chip on">capacity</span><span class="chip on">swear</span><span class="chip on">challenge</span><span class="chip on">twenty</span><span class="chip on">separate</span><span class="chip on">publication</span><span class="chip off">nylon</span><span class="chip off">pine</span><span class="chip on">drought</span><span class="chip off">wool</span><span class="chip on">zeal</span><span class="chip on">sacred</span><span class="chip on">ambition</span><span class="chip on">unnecessary</span><span class="chip on">commonplace</span><span class="chip on">practical</span><span class="chip on">assume</span><span class="chip on">equation</span><span class="chip off">aunt</span><span class="chip off">honeymoon</span><span class="chip on">silicon</span><span class="chip off">merge</span><span class="chip on">terrify</span><span class="chip on">ambitious</span><span class="chip on">avert</span><span class="chip on">wretched</span><span class="chip on">spark</span><span class="chip on">mostly</span><span class="chip off">piano</span><span class="chip off">beforehand</span><span class="chip on">jealous</span><span class="chip off">dairy</span><span class="chip off">certify</span><span class="chip on">identity</span><span class="chip off">edge</span><span class="chip on">AI</span><span class="chip off">inventory</span><span class="chip on">characteristic</span><span class="chip on">betray</span><span class="chip on">separation</span><span class="chip off">consideration</span><span class="chip on">presume</span><span class="chip off">criminal</span><span class="chip on">behind</span><span class="chip on">statesman</span><span class="chip on">dread</span><span class="chip on">wedge</span><span class="chip off">wrong</span><span class="chip off">nurse</span><span class="chip off">lumber</span><span class="chip off">Nominal</span><span class="chip off">industry</span><span class="chip on">transmit</span><span class="chip on">rarely</span><span class="chip off">span</span><span class="chip on">newspaper</span><span class="chip on">sandy</span><span class="chip off">somehow</span><span class="chip on">gate</span><span class="chip off">tongue</span><span class="chip on">east</span><span class="chip off">opening</span><span class="chip on">frame</span><span class="chip off">yourself</span><span class="chip on">fruitful</span><span class="chip on">genetic</span><span class="chip on">useful</span><span class="chip off">slightly</span><span class="chip off">fan</span><span class="chip on">Sunday</span><span class="chip on">wholly</span><span class="chip on">difficult</span><span class="chip on">terminal</span><span class="chip off">associate</span><span class="chip on">visitor</span><span class="chip on">silly</span><span class="chip off">nevertheless</span><span class="chip on">morning</span><span class="chip off">tram</span><span class="chip on">any</span><span class="chip on">precise</span><span class="chip on">collision</span><span class="chip off">earth</span><span class="chip on">British</span><span class="chip on">curiosity</span><span class="chip off">indication</span><span class="chip on">drama</span><span class="chip off">tackle</span><span class="chip off">Fahrenheit</span><span class="chip on">draft</span><span class="chip on">transparent</span><span class="chip off">waste</span><span class="chip on">slavery</span><span class="chip on">amateur</span><span class="chip off">greedy</span><span class="chip off">conversion</span><span class="chip off">situated</span><span class="chip off">task</span><span class="chip off">pump</span><span class="chip on">trace</span><span class="chip off">crazy</span><span class="chip off">cat</span><span class="chip on">negotiate</span><span class="chip off">crane</span><span class="chip off">tune</span><span class="chip off">twelve</span><span class="chip on">Plausible</span><span class="chip on">compute</span><span class="chip off">theatre</span><span class="chip off">exit</span><span class="chip off">punctual</span><span class="chip off">punch</span><span class="chip off">type</span><span class="chip on">precaution</span><span class="chip on">wonder</span><span class="chip off">limited</span><span class="chip on">screen</span><span class="chip on">commentary</span><span class="chip off">need</span><span class="chip on">stimulate</span><span class="chip on">emphasize</span><span class="chip on">ignorance</span><span class="chip off">rent</span><span class="chip off">musical</span><span class="chip off">horse</span><span class="chip on">rare</span><span class="chip off">ash</span><span class="chip on">frighten</span><span class="chip off">mean</span><span class="chip off">aspect</span><span class="chip on">irony</span><span class="chip on">insight</span><span class="chip off">English</span><span class="chip off">plea</span><span class="chip off">climax</span><span class="chip on">power</span><span class="chip off">tenth</span><span class="chip on">exception</span><span class="chip on">acute</span><span class="chip off">bristle</span></div>
-</section>
-<footer>原文：卡片机自动生成 · deepseek-v4-pro @ opencode-go · 2026-08-25<br>中英句对照版 · deepseek-v4-pro @ opencode-go · 2026-08-25</footer>
-</div>
+</div><div class="bank"><p class="legend">本日词表 · 185 词（绿 = 已嵌入文章，灰 = 未嵌入）</p><div class="chips"><span class="chip off">meat</span><span class="chip on">cynical</span><span class="chip on">concept</span><span class="chip on">creative</span><span class="chip on">offset</span><span class="chip on">yield</span><span class="chip off">finance</span><span class="chip off">hunt</span><span class="chip on">electron</span><span class="chip on">discipline</span><span class="chip on">typhoon</span><span class="chip off">alike</span><span class="chip off">liver</span><span class="chip on">poke</span><span class="chip off">zero</span><span class="chip on">circulation</span><span class="chip off">pretext</span><span class="chip on">formulate</span><span class="chip on">like</span><span class="chip off">launch</span><span class="chip on">mine</span><span class="chip on">gauge</span><span class="chip on">intend</span><span class="chip on">royal</span><span class="chip off">come</span><span class="chip off">deposit</span><span class="chip on">mediate</span><span class="chip off">cheek</span><span class="chip off">hare</span><span class="chip off">farewell</span><span class="chip on">unless</span><span class="chip on">ingredient</span><span class="chip on">adolescent</span><span class="chip on">miracle</span><span class="chip on">yoke</span><span class="chip on">chain</span><span class="chip off">shirt</span><span class="chip off">commonly</span><span class="chip off">pick</span><span class="chip off">comply</span><span class="chip on">protein</span><span class="chip on">principal</span><span class="chip on">fabricate</span><span class="chip on">circumference</span><span class="chip off">gentle</span><span class="chip on">capacity</span><span class="chip on">swear</span><span class="chip on">challenge</span><span class="chip on">twenty</span><span class="chip on">separate</span><span class="chip on">publication</span><span class="chip off">nylon</span><span class="chip off">pine</span><span class="chip on">drought</span><span class="chip off">wool</span><span class="chip on">zeal</span><span class="chip on">sacred</span><span class="chip on">ambition</span><span class="chip on">unnecessary</span><span class="chip on">commonplace</span><span class="chip on">practical</span><span class="chip on">assume</span><span class="chip on">equation</span><span class="chip off">aunt</span><span class="chip off">honeymoon</span><span class="chip on">silicon</span><span class="chip off">merge</span><span class="chip on">terrify</span><span class="chip on">ambitious</span><span class="chip on">avert</span><span class="chip on">wretched</span><span class="chip on">spark</span><span class="chip on">mostly</span><span class="chip off">piano</span><span class="chip off">beforehand</span><span class="chip on">jealous</span><span class="chip off">dairy</span><span class="chip off">certify</span><span class="chip on">identity</span><span class="chip off">edge</span><span class="chip on">AI</span><span class="chip off">inventory</span><span class="chip on">characteristic</span><span class="chip on">betray</span><span class="chip on">separation</span><span class="chip off">consideration</span><span class="chip on">presume</span><span class="chip off">criminal</span><span class="chip on">behind</span><span class="chip on">statesman</span><span class="chip on">dread</span><span class="chip on">wedge</span><span class="chip off">wrong</span><span class="chip off">nurse</span><span class="chip off">lumber</span><span class="chip off">Nominal</span><span class="chip off">industry</span><span class="chip on">transmit</span><span class="chip on">rarely</span><span class="chip off">span</span><span class="chip on">newspaper</span><span class="chip on">sandy</span><span class="chip off">somehow</span><span class="chip on">gate</span><span class="chip off">tongue</span><span class="chip on">east</span><span class="chip off">opening</span><span class="chip on">frame</span><span class="chip off">yourself</span><span class="chip on">fruitful</span><span class="chip on">genetic</span><span class="chip on">useful</span><span class="chip off">slightly</span><span class="chip off">fan</span><span class="chip on">Sunday</span><span class="chip on">wholly</span><span class="chip on">difficult</span><span class="chip on">terminal</span><span class="chip off">associate</span><span class="chip on">visitor</span><span class="chip on">silly</span><span class="chip off">nevertheless</span><span class="chip on">morning</span><span class="chip off">tram</span><span class="chip on">any</span><span class="chip on">precise</span><span class="chip on">collision</span><span class="chip off">earth</span><span class="chip on">British</span><span class="chip on">curiosity</span><span class="chip off">indication</span><span class="chip on">drama</span><span class="chip off">tackle</span><span class="chip off">Fahrenheit</span><span class="chip on">draft</span><span class="chip on">transparent</span><span class="chip off">waste</span><span class="chip on">slavery</span><span class="chip on">amateur</span><span class="chip off">greedy</span><span class="chip off">conversion</span><span class="chip off">situated</span><span class="chip off">task</span><span class="chip off">pump</span><span class="chip on">trace</span><span class="chip off">crazy</span><span class="chip off">cat</span><span class="chip on">negotiate</span><span class="chip off">crane</span><span class="chip off">tune</span><span class="chip off">twelve</span><span class="chip on">Plausible</span><span class="chip on">compute</span><span class="chip off">theatre</span><span class="chip off">exit</span><span class="chip off">punctual</span><span class="chip off">punch</span><span class="chip off">type</span><span class="chip on">precaution</span><span class="chip on">wonder</span><span class="chip off">limited</span><span class="chip on">screen</span><span class="chip on">commentary</span><span class="chip off">need</span><span class="chip on">stimulate</span><span class="chip on">emphasize</span><span class="chip on">ignorance</span><span class="chip off">rent</span><span class="chip off">musical</span><span class="chip off">horse</span><span class="chip on">rare</span><span class="chip off">ash</span><span class="chip on">frighten</span><span class="chip off">mean</span><span class="chip off">aspect</span><span class="chip on">irony</span><span class="chip on">insight</span><span class="chip off">English</span><span class="chip off">plea</span><span class="chip off">climax</span><span class="chip on">power</span><span class="chip off">tenth</span><span class="chip on">exception</span><span class="chip on">acute</span><span class="chip off">bristle</span></div></div><footer class="foot">原文：卡片机自动生成 · deepseek-v4-pro @ opencode-go · 2026-08-25<br>逐句译文：deepseek-v4-pro @ opencode-go · 2026-08-25<br><a class="big" href="https://alex05250.github.io/cet6-reading/daily.html">返回每日目录</a></footer><button id="topBtn" data-act="top" aria-label="回到顶部">↑</button><script>/* CET-6 · 阅读层运行脚本：译文/高亮开关、阅读进度、回到顶部、锚点展开
+   真题页外链引用；每日文章页在构建时内联进页面（桌面单文件也要能跑）。 */
+(function () {
+  'use strict';
+  var body = document.body;
+
+  function onScroll() {
+    var y = window.scrollY || document.documentElement.scrollTop || 0;
+    body.classList.toggle('scrolled', y > 6);
+    var bar = document.querySelector('.rdbar i');
+    if (bar) {
+      var h = document.documentElement.scrollHeight - innerHeight;
+      bar.style.width = (h > 0 ? Math.min(100, y / h * 100) : 0) + '%';
+    }
+    var top = document.getElementById('topBtn');
+    if (top) top.classList.toggle('on', y > 700);
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* 按钮：data-act = zh | mark | open | close */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]');
+    if (!b) return;
+    var act = b.getAttribute('data-act');
+    if (act === 'zh') {
+      var off = body.classList.toggle('no-zh');
+      b.setAttribute('aria-pressed', String(off));
+      var lab = b.querySelector('.lab');
+      if (lab) lab.textContent = off ? '显示译文' : '隐藏译文';
+    } else if (act === 'mark') {
+      var off2 = body.classList.toggle('no-mark');
+      b.setAttribute('aria-pressed', String(off2));
+      var lab2 = b.querySelector('.lab');
+      if (lab2) lab2.textContent = off2 ? '显示高亮' : '隐藏高亮';
+    } else if (act === 'open') {
+      document.querySelectorAll('details.setblk').forEach(function (d) { d.open = true; });
+    } else if (act === 'close') {
+      document.querySelectorAll('details.setblk').forEach(function (d) { d.open = false; });
+    } else if (act === 'top') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+
+  /* 锚点：展开祖先 details 再滚动 */
+  function openHash() {
+    if (!location.hash) return;
+    var el = null;
+    try { el = document.querySelector(location.hash); } catch (err) { return; }
+    if (!el) return;
+    var d = el.closest('details');
+    if (d) d.open = true;
+    setTimeout(function () { el.scrollIntoView({ block: 'start' }); }, 30);
+  }
+  addEventListener('hashchange', openHash);
+  openHash();
+})();
+</script>
 </body>
 </html>

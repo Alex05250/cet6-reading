@@ -1,61 +1,347 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CET-6 Day 8 · 中英句对照 · The Geometry of Attention</title>
-<style>
-  :root { --bg:#f7f5f0; --card:#fff; --ink:#222; --mut:#6b6b6b; --line:#e3ded3; --accent:#1e4b8f; --zh:#4a4a4a; }
-  * { box-sizing:border-box; }
-  body { margin:0; padding:28px 16px 80px; background:var(--bg); color:var(--ink);
-          font-family:Georgia,"Times New Roman","宋体",serif; line-height:1.85; }
-  .wrap { max-width:720px; margin:0 auto; }
-  header { text-align:center; margin-bottom:26px; }
-  header h1 { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:17px; margin:0 0 8px; color:var(--accent); }
-  .meta { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:13px; color:var(--mut); }
-  .badge { display:inline-block; margin-top:10px; padding:4px 14px; border-radius:20px; font-size:13px;
-            background:#e8f0e8; color:#2f6f4f; font-family:"Segoe UI","Microsoft YaHei",sans-serif; }
-  .btn { margin-top:12px; padding:6px 16px; border:1px solid var(--accent); color:var(--accent);
-          background:#fff; border-radius:8px; cursor:pointer; font-size:13px;
-          font-family:"Segoe UI","Microsoft YaHei",sans-serif; }
-  .btn:hover { background:#eef3fa; }
-  .passage { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:26px 30px; font-size:17px; }
-  .pt { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:19px; margin:0 0 18px; text-align:center; }
-  .para { margin:0 0 24px; }
-  .para:last-child { margin-bottom:0; }
-  .sent { margin:0 0 14px; }
-  .sent:last-child { margin-bottom:0; }
-  .en { margin:0; text-align:justify; }
-  .zh { margin:4px 0 0; padding-left:12px; border-left:3px solid var(--line); color:var(--zh);
-         font-size:15px; line-height:1.75; text-align:justify;
-         font-family:"KaiTi","楷体","STKaiti","宋体",serif; }
-  body.no-zh .zh { display:none; }
-  mark { background:#ffe58a; padding:0 2px; border-radius:3px; }
-  body.no-mark mark { background:transparent; padding:0; }
-  section { background:var(--card); border:1px solid var(--line); border-radius:12px;
-             margin-top:18px; padding:16px 20px; }
-  section h2 { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:14px; margin:0 0 10px; }
-  .chips { line-height:2.1; }
-  .chip { display:inline-block; font-size:12px; font-family:"Segoe UI","Microsoft YaHei",sans-serif;
-           padding:1px 8px; margin:2px 3px; border-radius:10px; }
-  .chip.on { background:#e8f0e8; color:#2f6f4f; border:1px solid #c3dcc3; }
-  .chip.off { background:#f0efea; color:#aaa; border:1px dashed var(--line); }
-  .legend { font-size:12px; color:var(--mut); margin-bottom:6px; }
-  footer { color:var(--mut); font-size:12px; margin-top:20px; text-align:center;
-            font-family:"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.9; }
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Day 08 · The Geometry of Attention: How Urban Design Shapes Collective Memory · CET-6</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230071e3'/%3E%3Ctext x='32' y='45' font-size='36' font-weight='700' font-family='Segoe UI,Arial,sans-serif' text-anchor='middle' fill='%23fff'%3E6%3C/text%3E%3C/svg%3E">
+<style>/* CET-6 词汇站 · 基础层：变量 / 布局骨架 / 导航 / 英雄区 / 工具栏 / 卡片网格 */
+:root{
+  --bg:#ffffff; --fg:#1d1d1f; --sub:#6e6e73; --faint:#a1a1a6;
+  --line:rgba(0,0,0,.09); --hair:rgba(0,0,0,.055); --fill:rgba(0,0,0,.04); --card:#ffffff;
+  --accent:#0071e3; --ok:#1d9a6c; --warn:#b25000;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.03),0 4px 14px rgba(0,0,0,.035);
+  --shadow-lg:0 16px 48px rgba(0,0,0,.10);
+  --ease:cubic-bezier(.32,.72,0,1);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#000000; --fg:#f5f5f7; --sub:#a1a1a6; --faint:#6e6e73;
+    --line:rgba(255,255,255,.14); --hair:rgba(255,255,255,.075); --fill:rgba(255,255,255,.06); --card:#1c1c1e;
+    --accent:#2997ff; --ok:#30d158; --warn:#ff9f0a;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.5); --shadow-lg:0 16px 48px rgba(0,0,0,.75);
+  }
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--fg);line-height:1.5;font-synthesis:none;overflow-x:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI Variable Text","Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  transition:background .5s var(--ease),color .5s var(--ease);
+}
+::selection{background:var(--accent);color:#fff}
+button{font:inherit;color:inherit}
+a{color:inherit}
+
+/* 入场 */
+@keyframes lineUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes softIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.anim{animation:softIn .7s var(--ease) both}
+
+/* 导航 */
+.nav{
+  position:sticky;top:0;z-index:120;height:48px;display:flex;align-items:center;gap:16px;
+  padding:0 max(22px,env(safe-area-inset-left)) 0 max(22px,env(safe-area-inset-right));
+  background:color-mix(in srgb,var(--bg) 74%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid transparent;transition:border-color .3s var(--ease);
+}
+body.scrolled .nav{border-bottom-color:var(--hair)}
+.nav .brand{font-size:13px;font-weight:600;letter-spacing:-.005em;white-space:nowrap;text-decoration:none}
+.nav .brand i{font-style:normal;color:var(--faint);font-weight:400}
+.nav .spacer{flex:1}
+.nav a.lnk{font-size:12.5px;color:var(--sub);text-decoration:none;transition:color .2s var(--ease)}
+.nav a.lnk:hover{color:var(--fg)}
+/* 导航返回键：36px 高、主色描边，作用一眼可见 */
+.nav .navbtn{
+  display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 16px 0 13px;
+  border-radius:99px;border:1px solid color-mix(in srgb,var(--accent) 24%,transparent);
+  background:color-mix(in srgb,var(--accent) 9%,transparent);
+  font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap;
+  transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease),transform .18s var(--ease);
+}
+.nav .navbtn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.nav .navbtn:active{transform:scale(.955)}
+.nav .navbtn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;margin-top:-1px}
+.nav .navtitle{font-size:12.5px;font-weight:500;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}
+
+
+/* 英雄区 */
+.hero{
+  max-width:920px;margin:0 auto;padding:clamp(60px,10vh,120px) 24px clamp(36px,6vh,56px);
+  text-align:center;will-change:opacity,transform;
+}
+@supports (animation-timeline:scroll()){
+  .hero{animation:heroOut linear both;animation-timeline:scroll(root block);animation-range:0 520px}
+  @keyframes heroOut{to{opacity:.1;transform:translateY(52px) scale(.975)}}
+}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+h1{font-size:clamp(38px,7vw,82px);line-height:1.12;font-weight:600;letter-spacing:-.03em;margin-bottom:26px}
+h1 .dim{color:var(--sub)}
+h1 .l{display:block;animation:lineUp 1s var(--ease) both}
+h1 .l:nth-child(1){animation-delay:.10s}
+h1 .l:nth-child(2){animation-delay:.20s}
+.eyebrow{animation:softIn .85s var(--ease) .04s both}
+.lede{animation:softIn .95s var(--ease) .30s both;font-size:clamp(15px,1.9vw,19px);color:var(--sub);line-height:1.6;letter-spacing:-.008em;max-width:min(520px,88vw);margin:0 auto;text-wrap:pretty;word-break:normal;line-break:strict}
+.meter{animation:softIn .95s var(--ease) .42s both;display:inline-flex;align-items:center;gap:12px;margin-top:44px;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums;padding:9px 18px;border-radius:99px;background:var(--fill)}
+.meter .track{width:130px;height:3px;border-radius:99px;background:var(--hair);overflow:hidden}
+.meter .track i{display:block;height:100%;width:0;background:var(--ok);border-radius:99px;transition:width .8s var(--ease)}
+.meter b{color:var(--fg);font-weight:600}
+
+/* 工具栏 */
+.toolbar{
+  position:sticky;top:48px;z-index:110;padding:12px 24px;
+  background:color-mix(in srgb,var(--bg) 84%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid var(--hair);
+}
+.toolbar .inner{max-width:1120px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
+.search{
+  flex:0 1 380px;min-width:180px;height:38px;padding:0 14px 0 36px;font:inherit;font-size:13.5px;color:var(--fg);
+  background:var(--fill) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23a1a1a6' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") no-repeat 13px center;
+  border:0;border-radius:9px;outline:none;transition:box-shadow .25s var(--ease),background .25s var(--ease);
+}
+.search::placeholder{color:var(--faint)}
+.search:focus{box-shadow:0 0 0 3.5px color-mix(in srgb,var(--accent) 20%,transparent);background:var(--card)}
+.seg{display:flex;gap:2px;background:var(--fill);border-radius:9px;padding:2px}
+.seg button{font-size:12.5px;color:var(--sub);background:none;border:0;cursor:pointer;padding:6px 14px;border-radius:7px;transition:all .25s var(--ease);white-space:nowrap}
+.seg button[aria-selected="true"]{background:var(--card);color:var(--fg);box-shadow:var(--shadow-sm);font-weight:500}
+
+/* 网格与卡片 */
+.stage{max-width:1168px;margin:0 auto;padding:36px 24px 140px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:14px}
+.card{
+  position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:20px 20px 18px;cursor:pointer;text-align:left;display:flex;flex-direction:column;
+  text-decoration:none;overflow:hidden;opacity:0;transform:translateY(18px);
+  transition:opacity .6s var(--ease),transform .55s var(--ease),box-shadow .4s var(--ease),border-color .3s var(--ease);
+}
+.card.in{opacity:1;transform:none}
+.card:hover{box-shadow:var(--shadow-lg);border-color:transparent}
+.card.in:hover{transform:translateY(-3px)}
+.card::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;
+  background:radial-gradient(240px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.7),transparent 62%);
+  transition:opacity .45s var(--ease);
+}
+.card:hover::after{opacity:1}
+@media (prefers-color-scheme:dark){
+  .card::after{background:radial-gradient(240px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.07),transparent 62%)}
+}
+.card .top{display:flex;align-items:baseline;justify-content:space-between;gap:9px;margin-bottom:18px}
+.card .dn{font-size:13.5px;font-weight:600;letter-spacing:.005em}
+.card .rng{font-size:11px;color:var(--faint);font-variant-numeric:tabular-nums;letter-spacing:.01em;transition:opacity .3s}
+.card .num{display:flex;align-items:baseline;gap:4px;margin-bottom:11px}
+.card .num b{font-size:27px;font-weight:600;letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums}
+.card .num s{font-size:12.5px;color:var(--faint);text-decoration:none;font-variant-numeric:tabular-nums}
+.card .bar{height:2.5px;border-radius:99px;background:var(--fill);overflow:hidden}
+.card .bar i{display:block;height:100%;width:0;background:var(--ok);border-radius:99px;transition:width .7s var(--ease)}
+.card.full .num b{color:var(--ok)}
+.card .tick{position:absolute;top:17px;right:17px;font-size:11px;color:var(--ok);opacity:0;transform:scale(.6);transition:all .35s var(--ease)}
+.card.full .tick{opacity:1;transform:none}
+.card.full .rng{opacity:0}
+/* 进入按钮：卡片底部的主色胶囊，悬停实心 */
+.card .go{margin-top:16px;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 15px;
+  border-radius:99px;background:color-mix(in srgb,var(--accent) 9%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);
+  font-size:13px;font-weight:600;color:var(--accent);
+  transition:background .28s var(--ease),color .28s var(--ease),border-color .28s var(--ease)}
+.card .go .arw{transition:transform .3s var(--ease)}
+.card:hover .go{background:var(--accent);border-color:var(--accent);color:#fff}
+.card:hover .go .arw{transform:translateX(3px)}
 </style>
+<style>/* CET-6 · 阅读层：真题精读 + 每日融词阅读（与 base.css 的变量、导航共用）
+   依赖 base.css 中的 :root 变量与 .nav 骨架。 */
+
+/* 顶部阅读进度 */
+.rdbar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:transparent;pointer-events:none}
+.rdbar i{display:block;height:100%;width:0;background:var(--accent);opacity:.85;transition:width .12s linear}
+
+/* 文章头 */
+.rhead{
+  max-width:760px;margin:0 auto;padding:clamp(40px,7vh,72px) 24px clamp(20px,3vh,30px);
+}
+.rhead .kick{
+  font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:18px;
+}
+.rhead h1{
+  font-size:clamp(31px,4.6vw,50px);line-height:1.1;font-weight:600;letter-spacing:-.038em;
+  margin-bottom:18px;text-wrap:balance;animation:softIn .8s var(--ease) .08s both;
+}
+.rhead .rlede{
+  font-size:clamp(14px,1.6vw,16px);color:var(--sub);line-height:1.66;letter-spacing:-.005em;
+  max-width:56ch;text-wrap:pretty;animation:softIn .8s var(--ease) .16s both;
+}
+.rhead .rfact{
+  margin-top:22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums;
+  animation:softIn .8s var(--ease) .24s both;
+}
+.rhead .rfact span{padding:6px 12px;border-radius:99px;background:var(--fill);white-space:nowrap}
+.rhead .rfact b{font-weight:600;color:var(--fg)}
+.rhead .rfact .ok{background:color-mix(in srgb,var(--ok) 12%,transparent);color:var(--ok)}
+
+/* 控制条 */
+.ctrls{
+  position:sticky;top:48px;z-index:110;
+  padding:12px max(24px,env(safe-area-inset-left));
+  background:color-mix(in srgb,var(--bg) 82%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid var(--hair);
+}
+.ctrls .inner{max-width:712px;margin:0 auto;display:flex;gap:8px;align-items:center;justify-content:flex-start;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;height:33px;padding:0 15px;
+  border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--fg);
+  font-size:12.5px;font-weight:500;cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:background .24s var(--ease),border-color .24s var(--ease),color .24s var(--ease),transform .18s var(--ease);
+}
+.btn:hover{border-color:transparent;background:var(--fill)}
+.btn:active{transform:scale(.96)}
+.btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn .k{font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.btn[aria-pressed="true"] .k{color:rgba(255,255,255,.7)}
+
+/* 正文 */
+.passage{max-width:760px;margin:0 auto;padding:clamp(26px,5vh,44px) 24px 40px}
+.passage .pt{
+  font-size:clamp(17px,2.2vw,21px);font-weight:600;letter-spacing:-.02em;line-height:1.4;
+  margin:0 0 clamp(22px,3.4vh,32px);color:var(--sub);
+}
+.para{margin:0 0 clamp(26px,4vh,38px)}
+.para:last-child{margin-bottom:0}
+.sent{margin:0 0 15px}
+.sent:last-child{margin-bottom:0}
+.en{
+  margin:0;font-size:clamp(16.5px,1.72vw,18.5px);line-height:1.78;letter-spacing:-.006em;
+  text-align:left;text-wrap:pretty;
+}
+.zh{
+  margin:7px 0 0;font-size:15px;line-height:1.74;color:var(--sub);letter-spacing:.002em;
+  padding-left:13px;border-left:1.5px solid var(--hair);
+  transition:opacity .3s var(--ease);text-wrap:pretty;
+}
+.zh-empty{color:var(--warn);font-size:12.5px;padding-left:0;border-left-color:transparent}
+body.no-zh .zh{display:none}
+mark{
+  background:color-mix(in srgb,var(--accent) 15%,transparent);color:inherit;
+  border-radius:2px;padding:0 1.5px;transition:background .3s var(--ease);
+}
+body.no-mark mark{background:transparent;padding:0}
+.fill{color:var(--warn);border-bottom:2px dotted color-mix(in srgb,var(--warn) 55%,transparent);padding:0 1px}
+
+/* 词库 / 词表 */
+.bank,.wordbank{max-width:760px;margin:0 auto;padding:0 24px 40px}
+.bank .legend,.wordbank .legend{font-size:12px;color:var(--faint);margin-bottom:12px;line-height:1.7}
+.bank .bchips,.bank .chips,.wordbank .chips{
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+.bchip,.chips .chip{
+  display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;
+  font-size:12px;font-variant-numeric:tabular-nums;
+  border:1px solid transparent;transition:transform .2s var(--ease);
+}
+.bchip.on,.chips .chip.on{background:color-mix(in srgb,var(--ok) 11%,transparent);color:var(--ok);border-color:color-mix(in srgb,var(--ok) 22%,transparent)}
+.bchip.off,.chips .chip.off{background:var(--fill);color:var(--faint);border-color:transparent;text-decoration:line-through;text-decoration-thickness:1px}
+.bchip:hover{transform:translateY(-1px)}
+
+/* ───────── 真题页：考期 / 套题 / 文章 ───────── */
+.toc{
+  max-width:760px;margin:0 auto;padding:18px 24px 0;
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+}
+.toc a{
+  display:inline-flex;align-items:center;height:30px;padding:0 13px;border-radius:99px;
+  border:1px solid var(--line);background:transparent;color:var(--sub);font-size:12.5px;text-decoration:none;
+  font-variant-numeric:tabular-nums;transition:background .24s var(--ease),color .24s var(--ease),border-color .24s var(--ease);
+}
+.toc a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.year{
+  max-width:760px;margin:clamp(34px,5vh,52px) auto 14px;padding:0 24px;
+  font-size:clamp(19px,2.4vw,24px);font-weight:600;letter-spacing:-.03em;
+  display:flex;align-items:center;gap:14px;
+}
+.year::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.sets{max-width:760px;margin:0 auto;padding:0 24px 40px}
+details.setblk{
+  border:1px solid var(--line);border-radius:16px;background:var(--card);
+  margin:10px 0;overflow:hidden;transition:box-shadow .35s var(--ease),border-color .3s var(--ease);
+}
+details.setblk:hover{box-shadow:var(--shadow-sm)}
+details.setblk[open]{box-shadow:var(--shadow-sm);border-color:transparent}
+details.setblk > summary{
+  list-style:none;cursor:pointer;padding:17px 24px;display:flex;align-items:center;gap:12px;
+  font-size:14px;font-weight:500;letter-spacing:-.012em;
+}
+details.setblk > summary::-webkit-details-marker{display:none}
+details.setblk > summary::before{
+  content:"";width:6px;height:6px;flex:0 0 auto;margin-top:-3px;
+  border-right:1.5px solid var(--faint);border-bottom:1.5px solid var(--faint);
+  transform:rotate(-45deg);transition:transform .3s var(--ease);
+}
+details.setblk[open] > summary::before{transform:rotate(45deg);margin-top:2px}
+details.setblk > summary .smeta{margin-left:auto;font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums;font-weight:400}
+details.setblk[open] > summary{position:sticky;top:105px;z-index:5;background:color-mix(in srgb,var(--card) 92%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
+
+.art{padding:clamp(22px,3vw,32px) 24px;border-top:1px solid var(--hair)}
+.art:first-of-type{border-top:none}
+.art h3{
+  font-size:13px;font-weight:600;letter-spacing:-.005em;color:var(--sub);
+  margin:0 0 18px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+}
+.art h3 .wc{font-weight:400;font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.plabel{
+  display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;
+  border-radius:6px;background:var(--fill);color:var(--sub);font-size:11px;font-weight:600;
+  margin-right:9px;vertical-align:1px;letter-spacing:.02em;
+}
+
+/* 回到顶部 / 底部导航 */
+#topBtn{
+  position:fixed;right:20px;bottom:20px;z-index:90;width:38px;height:38px;border-radius:50%;
+  display:grid;place-items:center;border:1px solid var(--line);background:var(--card);color:var(--sub);
+  font-size:13px;text-decoration:none;cursor:pointer;box-shadow:var(--shadow-sm);
+  opacity:0;pointer-events:none;transform:translateY(6px);
+  transition:opacity .3s var(--ease),transform .3s var(--ease),color .2s var(--ease),border-color .2s var(--ease);
+}
+#topBtn.on{opacity:1;pointer-events:auto;transform:none}
+#topBtn:hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+.foot{
+  max-width:760px;margin:0 auto;padding:30px 24px 70px;
+  border-top:1px solid var(--hair);font-size:11.5px;color:var(--faint);line-height:1.9;text-align:center;
+}
+.foot a{color:var(--sub);text-decoration:none}
+.foot a:hover{color:var(--accent)}
+.foot .big{
+  display:inline-flex;align-items:center;gap:8px;margin-top:16px;height:38px;padding:0 20px;
+  border-radius:99px;border:1px solid var(--line);color:var(--fg);font-size:13px;font-weight:500;
+  transition:background .24s var(--ease),border-color .24s var(--ease),color .24s var(--ease);
+}
+.foot .big:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+@media (max-width:640px){
+  .ctrls{top:44px;padding:10px 14px}
+  .ctrls .inner{gap:6px}
+  .btn{height:32px;padding:0 12px;font-size:12px}
+  .rhead{padding-top:34px}
+  .passage,.bank,.wordbank,.foot{padding-left:16px;padding-right:16px}
+  .toc{padding-left:16px;padding-right:16px}
+  .year,.sets{padding-left:14px;padding-right:14px}
+  details.setblk[open] > summary{top:100px}
+  .zh{font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  .rhead h1,.rhead .rlede,.rhead .rfact{animation:none}
+}
+</style>
+<style>.rhead h1{font-size:clamp(28px,4vw,42px)}</style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <h1>CET-6 融词阅读 · Day 8 · 中英句对照版 · 2026-08-26</h1>
-  <div class="meta">每句英文下方紧跟中文译文 · 黄色高亮 = 本日词汇（变形也算命中）</div>
-  <span class="badge">本日词汇嵌入 107/185 · 58%</span><br>
-  <button class="btn" onclick="document.body.classList.toggle('no-mark')">👁 隐藏高亮裸读（再点恢复）</button>
-  <button class="btn" onclick="document.body.classList.toggle('no-zh')">隐藏译文 · 纯英自测（再点恢复）</button>
-</header>
-<div class="passage">
-<h2 class="pt">The Geometry of Attention: How Urban Design Shapes Collective Memory</h2>
+<div class="rdbar"><i></i></div><nav class="nav"><a class="navbtn" href="https://alex05250.github.io/cet6-reading/daily.html"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>每日</a><span class="navtitle">Day 08</span><div class="spacer"></div><a class="lnk" href="https://alex05250.github.io/cet6-reading/index.html">主页</a><a class="lnk" href="https://alex05250.github.io/cet6-reading/words.html">词表</a></nav><header class="rhead"><p class="kick">Daily Reading · Day 8</p><h1>The Geometry of Attention: How Urban Design Shapes Collective Memory</h1><div class="rfact"><span>2026-08-26</span><span class="ok">词汇嵌入 107/185 · 58%</span><span>glm-5.2 @ opencode-go</span></div></header><div class="ctrls"><div class="inner"><button class="btn" data-act="zh" aria-pressed="false"><span class="lab">隐藏译文</span></button><button class="btn" data-act="mark" aria-pressed="false"><span class="lab">隐藏高亮</span></button></div></div><div class="passage">
 
 <div class="para">
 <div class="sent">
@@ -320,14 +606,64 @@
 <p class="zh">而这是一场值得下的赌注，哪怕胜算看似渺茫。</p>
 </div>
 </div>
-</div>
+</div><div class="bank"><p class="legend">本日词表 · 185 词（绿 = 已嵌入文章，灰 = 未嵌入）</p><div class="chips"><span class="chip on">endow</span><span class="chip on">sole</span><span class="chip off">beginning</span><span class="chip on">standpoint</span><span class="chip on">testimony</span><span class="chip on">skeptical</span><span class="chip off">handbook</span><span class="chip on">calm</span><span class="chip on">stimulus</span><span class="chip off">defy</span><span class="chip on">memory</span><span class="chip on">cultivate</span><span class="chip on">counterpart</span><span class="chip on">jar</span><span class="chip on">shutter</span><span class="chip on">movement</span><span class="chip on">parameter</span><span class="chip off">touch</span><span class="chip on">swallow</span><span class="chip on">inferior</span><span class="chip off">joy</span><span class="chip on">resemble</span><span class="chip on">retain</span><span class="chip off">pride</span><span class="chip on">envisage</span><span class="chip on">entitle</span><span class="chip on">readily</span><span class="chip off">submit</span><span class="chip off">include</span><span class="chip off">numerous</span><span class="chip on">sufficient</span><span class="chip off">taste</span><span class="chip on">regard</span><span class="chip off">school</span><span class="chip on">daring</span><span class="chip on">subway</span><span class="chip off">drug</span><span class="chip off">kingdom</span><span class="chip on">bow</span><span class="chip on">superficial</span><span class="chip on">zebra</span><span class="chip off">utter</span><span class="chip on">mind</span><span class="chip on">weary</span><span class="chip on">insist</span><span class="chip off">coward</span><span class="chip on">constrain</span><span class="chip on">kill</span><span class="chip on">angle</span><span class="chip off">clock</span><span class="chip on">complex</span><span class="chip off">exemplify</span><span class="chip off">telegram</span><span class="chip off">beard</span><span class="chip on">compatible</span><span class="chip off">shine</span><span class="chip on">metric</span><span class="chip on">container</span><span class="chip on">subsidy</span><span class="chip on">forum</span><span class="chip off">either</span><span class="chip on">ensure</span><span class="chip on">orphan</span><span class="chip off">uncertain</span><span class="chip off">poison</span><span class="chip on">justification</span><span class="chip off">via</span><span class="chip on">aloud</span><span class="chip on">dilemma</span><span class="chip off">powder</span><span class="chip off">organization</span><span class="chip on">optimism</span><span class="chip off">sweater</span><span class="chip on">concede</span><span class="chip on">propel</span><span class="chip off">stroke</span><span class="chip off">bold</span><span class="chip on">generous</span><span class="chip on">tremble</span><span class="chip on">durable</span><span class="chip on">lake</span><span class="chip on">deliberate</span><span class="chip on">racket</span><span class="chip on">vinegar</span><span class="chip off">gramme</span><span class="chip on">vanity</span><span class="chip on">furnish</span><span class="chip off">home</span><span class="chip off">common</span><span class="chip on">holiday</span><span class="chip on">whitewash</span><span class="chip off">door</span><span class="chip off">effective</span><span class="chip off">resource</span><span class="chip on">quote</span><span class="chip on">economical</span><span class="chip on">subtle</span><span class="chip off">little</span><span class="chip off">drastic</span><span class="chip off">length</span><span class="chip off">alert</span><span class="chip on">enclosure</span><span class="chip off">visible</span><span class="chip on">puppet</span><span class="chip on">cinema</span><span class="chip on">perpetual</span><span class="chip off">phone</span><span class="chip off">utmost</span><span class="chip off">lightning</span><span class="chip on">election</span><span class="chip on">government</span><span class="chip off">elephant</span><span class="chip off">winter</span><span class="chip on">brutal</span><span class="chip on">exert</span><span class="chip off">tuck</span><span class="chip off">mention</span><span class="chip on">fraud</span><span class="chip off">energy</span><span class="chip on">overhead</span><span class="chip off">liter</span><span class="chip off">external</span><span class="chip off">must</span><span class="chip on">session</span><span class="chip on">detach</span><span class="chip on">kneel</span><span class="chip off">dislike</span><span class="chip on">actually</span><span class="chip on">wicked</span><span class="chip off">exactly</span><span class="chip off">me</span><span class="chip off">black</span><span class="chip on">window</span><span class="chip off">entail</span><span class="chip off">weekend</span><span class="chip on">apparent</span><span class="chip on">quicken</span><span class="chip on">exposure</span><span class="chip off">worship</span><span class="chip off">isolate</span><span class="chip off">tight</span><span class="chip on">refreshment</span><span class="chip on">evolve</span><span class="chip off">awful</span><span class="chip on">finite</span><span class="chip on">swim</span><span class="chip off">consent</span><span class="chip on">criticize</span><span class="chip on">cooperative</span><span class="chip off">him</span><span class="chip off">across</span><span class="chip off">oil</span><span class="chip off">morality</span><span class="chip on">undergo</span><span class="chip off">possess</span><span class="chip on">rack</span><span class="chip on">altogether</span><span class="chip on">respond</span><span class="chip on">fireman</span><span class="chip on">principle</span><span class="chip on">bureau</span><span class="chip off">connect</span><span class="chip on">industrialize</span><span class="chip on">reduction</span><span class="chip off">garbage</span><span class="chip on">stack</span><span class="chip on">silence</span><span class="chip off">beneficial</span><span class="chip on">kite</span><span class="chip on">phrase</span><span class="chip off">indulge</span><span class="chip on">innovation</span><span class="chip on">starve</span><span class="chip on">incident</span><span class="chip off">eager</span><span class="chip off">scarce</span><span class="chip off">umbrella</span><span class="chip off">us</span><span class="chip on">colonial</span><span class="chip off">fond</span><span class="chip off">sheep</span><span class="chip on">command</span><span class="chip on">lovely</span><span class="chip on">doom</span><span class="chip off">towards</span></div></div><footer class="foot">原文：卡片机自动生成 · deepseek-v4-pro @ opencode-go · 2026-08-26<br>逐句译文：glm-5.2 @ opencode-go · 2026-08-26<br><a class="big" href="https://alex05250.github.io/cet6-reading/daily.html">返回每日目录</a></footer><button id="topBtn" data-act="top" aria-label="回到顶部">↑</button><script>/* CET-6 · 阅读层运行脚本：译文/高亮开关、阅读进度、回到顶部、锚点展开
+   真题页外链引用；每日文章页在构建时内联进页面（桌面单文件也要能跑）。 */
+(function () {
+  'use strict';
+  var body = document.body;
 
-<section>
-  <h2>📋 本日词表（绿=已嵌入文章 · 灰=未嵌入）</h2>
-  <div class="legend">共 185 词，按原卡顺序</div>
-  <div class="chips"><span class="chip on">endow</span><span class="chip on">sole</span><span class="chip off">beginning</span><span class="chip on">standpoint</span><span class="chip on">testimony</span><span class="chip on">skeptical</span><span class="chip off">handbook</span><span class="chip on">calm</span><span class="chip on">stimulus</span><span class="chip off">defy</span><span class="chip on">memory</span><span class="chip on">cultivate</span><span class="chip on">counterpart</span><span class="chip on">jar</span><span class="chip on">shutter</span><span class="chip on">movement</span><span class="chip on">parameter</span><span class="chip off">touch</span><span class="chip on">swallow</span><span class="chip on">inferior</span><span class="chip off">joy</span><span class="chip on">resemble</span><span class="chip on">retain</span><span class="chip off">pride</span><span class="chip on">envisage</span><span class="chip on">entitle</span><span class="chip on">readily</span><span class="chip off">submit</span><span class="chip off">include</span><span class="chip off">numerous</span><span class="chip on">sufficient</span><span class="chip off">taste</span><span class="chip on">regard</span><span class="chip off">school</span><span class="chip on">daring</span><span class="chip on">subway</span><span class="chip off">drug</span><span class="chip off">kingdom</span><span class="chip on">bow</span><span class="chip on">superficial</span><span class="chip on">zebra</span><span class="chip off">utter</span><span class="chip on">mind</span><span class="chip on">weary</span><span class="chip on">insist</span><span class="chip off">coward</span><span class="chip on">constrain</span><span class="chip on">kill</span><span class="chip on">angle</span><span class="chip off">clock</span><span class="chip on">complex</span><span class="chip off">exemplify</span><span class="chip off">telegram</span><span class="chip off">beard</span><span class="chip on">compatible</span><span class="chip off">shine</span><span class="chip on">metric</span><span class="chip on">container</span><span class="chip on">subsidy</span><span class="chip on">forum</span><span class="chip off">either</span><span class="chip on">ensure</span><span class="chip on">orphan</span><span class="chip off">uncertain</span><span class="chip off">poison</span><span class="chip on">justification</span><span class="chip off">via</span><span class="chip on">aloud</span><span class="chip on">dilemma</span><span class="chip off">powder</span><span class="chip off">organization</span><span class="chip on">optimism</span><span class="chip off">sweater</span><span class="chip on">concede</span><span class="chip on">propel</span><span class="chip off">stroke</span><span class="chip off">bold</span><span class="chip on">generous</span><span class="chip on">tremble</span><span class="chip on">durable</span><span class="chip on">lake</span><span class="chip on">deliberate</span><span class="chip on">racket</span><span class="chip on">vinegar</span><span class="chip off">gramme</span><span class="chip on">vanity</span><span class="chip on">furnish</span><span class="chip off">home</span><span class="chip off">common</span><span class="chip on">holiday</span><span class="chip on">whitewash</span><span class="chip off">door</span><span class="chip off">effective</span><span class="chip off">resource</span><span class="chip on">quote</span><span class="chip on">economical</span><span class="chip on">subtle</span><span class="chip off">little</span><span class="chip off">drastic</span><span class="chip off">length</span><span class="chip off">alert</span><span class="chip on">enclosure</span><span class="chip off">visible</span><span class="chip on">puppet</span><span class="chip on">cinema</span><span class="chip on">perpetual</span><span class="chip off">phone</span><span class="chip off">utmost</span><span class="chip off">lightning</span><span class="chip on">election</span><span class="chip on">government</span><span class="chip off">elephant</span><span class="chip off">winter</span><span class="chip on">brutal</span><span class="chip on">exert</span><span class="chip off">tuck</span><span class="chip off">mention</span><span class="chip on">fraud</span><span class="chip off">energy</span><span class="chip on">overhead</span><span class="chip off">liter</span><span class="chip off">external</span><span class="chip off">must</span><span class="chip on">session</span><span class="chip on">detach</span><span class="chip on">kneel</span><span class="chip off">dislike</span><span class="chip on">actually</span><span class="chip on">wicked</span><span class="chip off">exactly</span><span class="chip off">me</span><span class="chip off">black</span><span class="chip on">window</span><span class="chip off">entail</span><span class="chip off">weekend</span><span class="chip on">apparent</span><span class="chip on">quicken</span><span class="chip on">exposure</span><span class="chip off">worship</span><span class="chip off">isolate</span><span class="chip off">tight</span><span class="chip on">refreshment</span><span class="chip on">evolve</span><span class="chip off">awful</span><span class="chip on">finite</span><span class="chip on">swim</span><span class="chip off">consent</span><span class="chip on">criticize</span><span class="chip on">cooperative</span><span class="chip off">him</span><span class="chip off">across</span><span class="chip off">oil</span><span class="chip off">morality</span><span class="chip on">undergo</span><span class="chip off">possess</span><span class="chip on">rack</span><span class="chip on">altogether</span><span class="chip on">respond</span><span class="chip on">fireman</span><span class="chip on">principle</span><span class="chip on">bureau</span><span class="chip off">connect</span><span class="chip on">industrialize</span><span class="chip on">reduction</span><span class="chip off">garbage</span><span class="chip on">stack</span><span class="chip on">silence</span><span class="chip off">beneficial</span><span class="chip on">kite</span><span class="chip on">phrase</span><span class="chip off">indulge</span><span class="chip on">innovation</span><span class="chip on">starve</span><span class="chip on">incident</span><span class="chip off">eager</span><span class="chip off">scarce</span><span class="chip off">umbrella</span><span class="chip off">us</span><span class="chip on">colonial</span><span class="chip off">fond</span><span class="chip off">sheep</span><span class="chip on">command</span><span class="chip on">lovely</span><span class="chip on">doom</span><span class="chip off">towards</span></div>
-</section>
-<footer>原文：卡片机自动生成 · deepseek-v4-pro @ opencode-go · 2026-08-26<br>中英句对照版 · glm-5.2 @ opencode-go · 2026-08-31</footer>
-</div>
+  function onScroll() {
+    var y = window.scrollY || document.documentElement.scrollTop || 0;
+    body.classList.toggle('scrolled', y > 6);
+    var bar = document.querySelector('.rdbar i');
+    if (bar) {
+      var h = document.documentElement.scrollHeight - innerHeight;
+      bar.style.width = (h > 0 ? Math.min(100, y / h * 100) : 0) + '%';
+    }
+    var top = document.getElementById('topBtn');
+    if (top) top.classList.toggle('on', y > 700);
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* 按钮：data-act = zh | mark | open | close */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]');
+    if (!b) return;
+    var act = b.getAttribute('data-act');
+    if (act === 'zh') {
+      var off = body.classList.toggle('no-zh');
+      b.setAttribute('aria-pressed', String(off));
+      var lab = b.querySelector('.lab');
+      if (lab) lab.textContent = off ? '显示译文' : '隐藏译文';
+    } else if (act === 'mark') {
+      var off2 = body.classList.toggle('no-mark');
+      b.setAttribute('aria-pressed', String(off2));
+      var lab2 = b.querySelector('.lab');
+      if (lab2) lab2.textContent = off2 ? '显示高亮' : '隐藏高亮';
+    } else if (act === 'open') {
+      document.querySelectorAll('details.setblk').forEach(function (d) { d.open = true; });
+    } else if (act === 'close') {
+      document.querySelectorAll('details.setblk').forEach(function (d) { d.open = false; });
+    } else if (act === 'top') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+
+  /* 锚点：展开祖先 details 再滚动 */
+  function openHash() {
+    if (!location.hash) return;
+    var el = null;
+    try { el = document.querySelector(location.hash); } catch (err) { return; }
+    if (!el) return;
+    var d = el.closest('details');
+    if (d) d.open = true;
+    setTimeout(function () { el.scrollIntoView({ block: 'start' }); }, 30);
+  }
+  addEventListener('hashchange', openHash);
+  openHash();
+})();
+</script>
 </body>
 </html>

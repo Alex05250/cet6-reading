@@ -1,70 +1,406 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CET-6 Day 12 · 中英句对照 · The Science of Urban Heat: How Data Transforms Our Understanding of Climate Risk</title>
-<style>
-  :root { --bg:#f7f5f0; --card:#fff; --ink:#222; --mut:#6b6b6b; --line:#e3ded3; --accent:#1e4b8f; --zh:#4a4a4a; }
-  * { box-sizing:border-box; }
-  body { margin:0; padding:28px 16px 80px; background:var(--bg); color:var(--ink);
-          font-family:Georgia,"Times New Roman","宋体",serif; line-height:1.85; }
-  .wrap { max-width:720px; margin:0 auto; }
-  header { text-align:center; margin-bottom:26px; }
-  header h1 { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:17px; margin:0 0 8px; color:var(--accent); }
-  .meta { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:13px; color:var(--mut); }
-  .badge { display:inline-block; margin-top:10px; padding:4px 14px; border-radius:20px; font-size:13px;
-            background:#e8f0e8; color:#2f6f4f; font-family:"Segoe UI","Microsoft YaHei",sans-serif; }
-  .btn { margin-top:12px; padding:6px 16px; border:1px solid var(--accent); color:var(--accent);
-          background:#fff; border-radius:8px; cursor:pointer; font-size:13px;
-          font-family:"Segoe UI","Microsoft YaHei",sans-serif; }
-  .btn:hover { background:#eef3fa; }
-  .passage { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:26px 30px; font-size:17px; }
-  .pt { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:19px; margin:0 0 18px; text-align:center; }
-  .para { margin:0 0 24px; }
-  .para:last-child { margin-bottom:0; }
-  .sent { margin:0 0 14px; }
-  .sent:last-child { margin-bottom:0; }
-  .en { margin:0; text-align:justify; }
-  .zh { margin:4px 0 0; padding-left:12px; border-left:3px solid var(--line); color:var(--zh);
-         font-size:15px; line-height:1.75; text-align:justify;
-         font-family:"KaiTi","楷体","STKaiti","宋体",serif; }
-  .zh-empty { color:#b08d57; font-size:13px; }
-  body.no-zh .zh { display:none; }
-  mark { background:#ffe58a; padding:0 2px; border-radius:3px; }
-  body.no-mark mark { background:transparent; padding:0; }
-  section { background:var(--card); border:1px solid var(--line); border-radius:12px;
-             margin-top:18px; padding:16px 20px; }
-  section h2 { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:14px; margin:0 0 10px; }
-  .chips { line-height:2.1; }
-  .chip { display:inline-block; font-size:12px; font-family:"Segoe UI","Microsoft YaHei",sans-serif;
-           padding:1px 8px; margin:2px 3px; border-radius:10px; }
-  .chip.on { background:#e8f0e8; color:#2f6f4f; border:1px solid #c3dcc3; }
-  .chip.off { background:#f0efea; color:#aaa; border:1px dashed var(--line); }
-  .legend { font-size:12px; color:var(--mut); margin-bottom:6px; }
-  footer { color:var(--mut); font-size:12px; margin-top:20px; text-align:center;
-            font-family:"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.9; }
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Day 12 · The Science of Urban Heat: How Data Transforms Our Understanding of Climate Risk · CET-6</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230071e3'/%3E%3Ctext x='32' y='45' font-size='36' font-weight='700' font-family='Segoe UI,Arial,sans-serif' text-anchor='middle' fill='%23fff'%3E6%3C/text%3E%3C/svg%3E">
+<style>/* CET-6 词汇站 · 基础层：变量 / 布局骨架 / 导航 / 英雄区 / 工具栏 / 卡片网格 */
+:root{
+  --bg:#ffffff; --fg:#1d1d1f; --sub:#6e6e73; --faint:#a1a1a6;
+  --line:rgba(0,0,0,.09); --hair:rgba(0,0,0,.055); --fill:rgba(0,0,0,.04); --card:#ffffff;
+  --accent:#0071e3; --ok:#1d9a6c; --warn:#b25000;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.03),0 4px 14px rgba(0,0,0,.035);
+  --shadow-lg:0 16px 48px rgba(0,0,0,.10);
+  --ease:cubic-bezier(.32,.72,0,1);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#000000; --fg:#f5f5f7; --sub:#a1a1a6; --faint:#6e6e73;
+    --line:rgba(255,255,255,.14); --hair:rgba(255,255,255,.075); --fill:rgba(255,255,255,.06); --card:#1c1c1e;
+    --accent:#2997ff; --ok:#30d158; --warn:#ff9f0a;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.5); --shadow-lg:0 16px 48px rgba(0,0,0,.75);
+  }
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--fg);line-height:1.5;font-synthesis:none;overflow-x:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI Variable Text","Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  transition:background .5s var(--ease),color .5s var(--ease);
+}
+::selection{background:var(--accent);color:#fff}
+button{font:inherit;color:inherit}
+a{color:inherit}
+
+/* 入场 */
+@keyframes lineUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes softIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.anim{animation:softIn .7s var(--ease) both}
+
+/* 导航 */
+.nav{
+  position:sticky;top:0;z-index:120;height:48px;display:flex;align-items:center;gap:16px;
+  padding:0 max(22px,env(safe-area-inset-left)) 0 max(22px,env(safe-area-inset-right));
+  background:color-mix(in srgb,var(--bg) 74%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid transparent;transition:border-color .3s var(--ease);
+}
+body.scrolled .nav{border-bottom-color:var(--hair)}
+.nav .brand{font-size:13px;font-weight:600;letter-spacing:-.005em;white-space:nowrap;text-decoration:none}
+.nav .brand i{font-style:normal;color:var(--faint);font-weight:400}
+.nav .spacer{flex:1}
+.nav a.lnk{font-size:12.5px;color:var(--sub);text-decoration:none;transition:color .2s var(--ease)}
+.nav a.lnk:hover{color:var(--fg)}
+/* 导航返回键：36px 高、主色描边，作用一眼可见 */
+.nav .navbtn{
+  display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 16px 0 13px;
+  border-radius:99px;border:1px solid color-mix(in srgb,var(--accent) 24%,transparent);
+  background:color-mix(in srgb,var(--accent) 9%,transparent);
+  font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap;
+  transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease),transform .18s var(--ease);
+}
+.nav .navbtn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.nav .navbtn:active{transform:scale(.955)}
+.nav .navbtn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;margin-top:-1px}
+.nav .navtitle{font-size:12.5px;font-weight:500;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}
+
+
+/* 英雄区 */
+.hero{
+  max-width:920px;margin:0 auto;padding:clamp(60px,10vh,120px) 24px clamp(36px,6vh,56px);
+  text-align:center;will-change:opacity,transform;
+}
+@supports (animation-timeline:scroll()){
+  .hero{animation:heroOut linear both;animation-timeline:scroll(root block);animation-range:0 520px}
+  @keyframes heroOut{to{opacity:.1;transform:translateY(52px) scale(.975)}}
+}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+h1{font-size:clamp(38px,7vw,82px);line-height:1.12;font-weight:600;letter-spacing:-.03em;margin-bottom:26px}
+h1 .dim{color:var(--sub)}
+h1 .l{display:block;animation:lineUp 1s var(--ease) both}
+h1 .l:nth-child(1){animation-delay:.10s}
+h1 .l:nth-child(2){animation-delay:.20s}
+.eyebrow{animation:softIn .85s var(--ease) .04s both}
+.lede{animation:softIn .95s var(--ease) .30s both;font-size:clamp(15px,1.9vw,19px);color:var(--sub);line-height:1.6;letter-spacing:-.008em;max-width:min(520px,88vw);margin:0 auto;text-wrap:pretty;word-break:normal;line-break:strict}
+.meter{animation:softIn .95s var(--ease) .42s both;display:inline-flex;align-items:center;gap:12px;margin-top:44px;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums;padding:9px 18px;border-radius:99px;background:var(--fill)}
+.meter .track{width:130px;height:3px;border-radius:99px;background:var(--hair);overflow:hidden}
+.meter .track i{display:block;height:100%;width:0;background:var(--ok);border-radius:99px;transition:width .8s var(--ease)}
+.meter b{color:var(--fg);font-weight:600}
+
+/* 工具栏 */
+.toolbar{
+  position:sticky;top:48px;z-index:110;padding:12px 24px;
+  background:color-mix(in srgb,var(--bg) 84%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid var(--hair);
+}
+.toolbar .inner{max-width:1120px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
+.search{
+  flex:0 1 380px;min-width:180px;height:38px;padding:0 14px 0 36px;font:inherit;font-size:13.5px;color:var(--fg);
+  background:var(--fill) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23a1a1a6' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") no-repeat 13px center;
+  border:0;border-radius:9px;outline:none;transition:box-shadow .25s var(--ease),background .25s var(--ease);
+}
+.search::placeholder{color:var(--faint)}
+.search:focus{box-shadow:0 0 0 3.5px color-mix(in srgb,var(--accent) 20%,transparent);background:var(--card)}
+.seg{display:flex;gap:2px;background:var(--fill);border-radius:9px;padding:2px}
+.seg button{font-size:12.5px;color:var(--sub);background:none;border:0;cursor:pointer;padding:6px 14px;border-radius:7px;transition:all .25s var(--ease);white-space:nowrap}
+.seg button[aria-selected="true"]{background:var(--card);color:var(--fg);box-shadow:var(--shadow-sm);font-weight:500}
+
+/* 网格与卡片 */
+.stage{max-width:1168px;margin:0 auto;padding:36px 24px 140px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:14px}
+.card{
+  position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:20px 20px 18px;cursor:pointer;text-align:left;display:flex;flex-direction:column;
+  text-decoration:none;overflow:hidden;opacity:0;transform:translateY(18px);
+  transition:opacity .6s var(--ease),transform .55s var(--ease),box-shadow .4s var(--ease),border-color .3s var(--ease);
+}
+.card.in{opacity:1;transform:none}
+.card:hover{box-shadow:var(--shadow-lg);border-color:transparent}
+.card.in:hover{transform:translateY(-3px)}
+.card::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;
+  background:radial-gradient(240px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.7),transparent 62%);
+  transition:opacity .45s var(--ease);
+}
+.card:hover::after{opacity:1}
+@media (prefers-color-scheme:dark){
+  .card::after{background:radial-gradient(240px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.07),transparent 62%)}
+}
+.card .top{display:flex;align-items:baseline;justify-content:space-between;gap:9px;margin-bottom:18px}
+.card .dn{font-size:13.5px;font-weight:600;letter-spacing:.005em}
+.card .rng{font-size:11px;color:var(--faint);font-variant-numeric:tabular-nums;letter-spacing:.01em;transition:opacity .3s}
+.card .num{display:flex;align-items:baseline;gap:4px;margin-bottom:11px}
+.card .num b{font-size:27px;font-weight:600;letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums}
+.card .num s{font-size:12.5px;color:var(--faint);text-decoration:none;font-variant-numeric:tabular-nums}
+.card .bar{height:2.5px;border-radius:99px;background:var(--fill);overflow:hidden}
+.card .bar i{display:block;height:100%;width:0;background:var(--ok);border-radius:99px;transition:width .7s var(--ease)}
+.card.full .num b{color:var(--ok)}
+.card .tick{position:absolute;top:17px;right:17px;font-size:11px;color:var(--ok);opacity:0;transform:scale(.6);transition:all .35s var(--ease)}
+.card.full .tick{opacity:1;transform:none}
+.card.full .rng{opacity:0}
+/* 进入按钮：卡片底部的主色胶囊，悬停实心 */
+.card .go{margin-top:16px;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 15px;
+  border-radius:99px;background:color-mix(in srgb,var(--accent) 9%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);
+  font-size:13px;font-weight:600;color:var(--accent);
+  transition:background .28s var(--ease),color .28s var(--ease),border-color .28s var(--ease)}
+.card .go .arw{transition:transform .3s var(--ease)}
+.card:hover .go{background:var(--accent);border-color:var(--accent);color:#fff}
+.card:hover .go .arw{transform:translateX(3px)}
 </style>
+<style>/* CET-6 · 阅读层：真题精读 + 每日融词阅读（与 base.css 的变量、导航共用）
+   依赖 base.css 中的 :root 变量与 .nav 骨架。 */
+
+/* 顶部阅读进度 */
+.rdbar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:transparent;pointer-events:none}
+.rdbar i{display:block;height:100%;width:0;background:var(--accent);opacity:.85;transition:width .12s linear}
+
+/* 文章头 */
+.rhead{
+  max-width:760px;margin:0 auto;padding:clamp(40px,7vh,72px) 24px clamp(20px,3vh,30px);
+}
+.rhead .kick{
+  font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:18px;
+}
+.rhead h1{
+  font-size:clamp(31px,4.6vw,50px);line-height:1.1;font-weight:600;letter-spacing:-.038em;
+  margin-bottom:18px;text-wrap:balance;animation:softIn .8s var(--ease) .08s both;
+}
+.rhead .rlede{
+  font-size:clamp(14px,1.6vw,16px);color:var(--sub);line-height:1.66;letter-spacing:-.005em;
+  max-width:56ch;text-wrap:pretty;animation:softIn .8s var(--ease) .16s both;
+}
+.rhead .rfact{
+  margin-top:22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums;
+  animation:softIn .8s var(--ease) .24s both;
+}
+.rhead .rfact span{padding:6px 12px;border-radius:99px;background:var(--fill);white-space:nowrap}
+.rhead .rfact b{font-weight:600;color:var(--fg)}
+.rhead .rfact .ok{background:color-mix(in srgb,var(--ok) 12%,transparent);color:var(--ok)}
+
+/* 控制条 */
+.ctrls{
+  position:sticky;top:48px;z-index:110;
+  padding:12px max(24px,env(safe-area-inset-left));
+  background:color-mix(in srgb,var(--bg) 82%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid var(--hair);
+}
+.ctrls .inner{max-width:712px;margin:0 auto;display:flex;gap:8px;align-items:center;justify-content:flex-start;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;height:33px;padding:0 15px;
+  border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--fg);
+  font-size:12.5px;font-weight:500;cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:background .24s var(--ease),border-color .24s var(--ease),color .24s var(--ease),transform .18s var(--ease);
+}
+.btn:hover{border-color:transparent;background:var(--fill)}
+.btn:active{transform:scale(.96)}
+.btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn .k{font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.btn[aria-pressed="true"] .k{color:rgba(255,255,255,.7)}
+
+/* 正文 */
+.passage{max-width:760px;margin:0 auto;padding:clamp(26px,5vh,44px) 24px 40px}
+.passage .pt{
+  font-size:clamp(17px,2.2vw,21px);font-weight:600;letter-spacing:-.02em;line-height:1.4;
+  margin:0 0 clamp(22px,3.4vh,32px);color:var(--sub);
+}
+.para{margin:0 0 clamp(26px,4vh,38px)}
+.para:last-child{margin-bottom:0}
+.sent{margin:0 0 15px}
+.sent:last-child{margin-bottom:0}
+.en{
+  margin:0;font-size:clamp(16.5px,1.72vw,18.5px);line-height:1.78;letter-spacing:-.006em;
+  text-align:left;text-wrap:pretty;
+}
+.zh{
+  margin:7px 0 0;font-size:15px;line-height:1.74;color:var(--sub);letter-spacing:.002em;
+  padding-left:13px;border-left:1.5px solid var(--hair);
+  transition:opacity .3s var(--ease);text-wrap:pretty;
+}
+.zh-empty{color:var(--warn);font-size:12.5px;padding-left:0;border-left-color:transparent}
+body.no-zh .zh{display:none}
+mark{
+  background:color-mix(in srgb,var(--accent) 15%,transparent);color:inherit;
+  border-radius:2px;padding:0 1.5px;transition:background .3s var(--ease);
+}
+body.no-mark mark{background:transparent;padding:0}
+.fill{color:var(--warn);border-bottom:2px dotted color-mix(in srgb,var(--warn) 55%,transparent);padding:0 1px}
+
+/* 词库 / 词表 */
+.bank,.wordbank{max-width:760px;margin:0 auto;padding:0 24px 40px}
+.bank .legend,.wordbank .legend{font-size:12px;color:var(--faint);margin-bottom:12px;line-height:1.7}
+.bank .bchips,.bank .chips,.wordbank .chips{
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+.bchip,.chips .chip{
+  display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;
+  font-size:12px;font-variant-numeric:tabular-nums;
+  border:1px solid transparent;transition:transform .2s var(--ease);
+}
+.bchip.on,.chips .chip.on{background:color-mix(in srgb,var(--ok) 11%,transparent);color:var(--ok);border-color:color-mix(in srgb,var(--ok) 22%,transparent)}
+.bchip.off,.chips .chip.off{background:var(--fill);color:var(--faint);border-color:transparent;text-decoration:line-through;text-decoration-thickness:1px}
+.bchip:hover{transform:translateY(-1px)}
+
+/* ───────── 真题页：考期 / 套题 / 文章 ───────── */
+.toc{
+  max-width:760px;margin:0 auto;padding:18px 24px 0;
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+}
+.toc a{
+  display:inline-flex;align-items:center;height:30px;padding:0 13px;border-radius:99px;
+  border:1px solid var(--line);background:transparent;color:var(--sub);font-size:12.5px;text-decoration:none;
+  font-variant-numeric:tabular-nums;transition:background .24s var(--ease),color .24s var(--ease),border-color .24s var(--ease);
+}
+.toc a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.year{
+  max-width:760px;margin:clamp(34px,5vh,52px) auto 14px;padding:0 24px;
+  font-size:clamp(19px,2.4vw,24px);font-weight:600;letter-spacing:-.03em;
+  display:flex;align-items:center;gap:14px;
+}
+.year::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.sets{max-width:760px;margin:0 auto;padding:0 24px 40px}
+details.setblk{
+  border:1px solid var(--line);border-radius:16px;background:var(--card);
+  margin:10px 0;overflow:hidden;transition:box-shadow .35s var(--ease),border-color .3s var(--ease);
+}
+details.setblk:hover{box-shadow:var(--shadow-sm)}
+details.setblk[open]{box-shadow:var(--shadow-sm);border-color:transparent}
+details.setblk > summary{
+  list-style:none;cursor:pointer;padding:17px 24px;display:flex;align-items:center;gap:12px;
+  font-size:14px;font-weight:500;letter-spacing:-.012em;
+}
+details.setblk > summary::-webkit-details-marker{display:none}
+details.setblk > summary::before{
+  content:"";width:6px;height:6px;flex:0 0 auto;margin-top:-3px;
+  border-right:1.5px solid var(--faint);border-bottom:1.5px solid var(--faint);
+  transform:rotate(-45deg);transition:transform .3s var(--ease);
+}
+details.setblk[open] > summary::before{transform:rotate(45deg);margin-top:2px}
+details.setblk > summary .smeta{margin-left:auto;font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums;font-weight:400}
+details.setblk[open] > summary{position:sticky;top:105px;z-index:5;background:color-mix(in srgb,var(--card) 92%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
+
+.art{padding:clamp(22px,3vw,32px) 24px;border-top:1px solid var(--hair)}
+.art:first-of-type{border-top:none}
+.art h3{
+  font-size:13px;font-weight:600;letter-spacing:-.005em;color:var(--sub);
+  margin:0 0 18px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+}
+.art h3 .wc{font-weight:400;font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.plabel{
+  display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;
+  border-radius:6px;background:var(--fill);color:var(--sub);font-size:11px;font-weight:600;
+  margin-right:9px;vertical-align:1px;letter-spacing:.02em;
+}
+
+/* 回到顶部 / 底部导航 */
+#topBtn{
+  position:fixed;right:20px;bottom:20px;z-index:90;width:38px;height:38px;border-radius:50%;
+  display:grid;place-items:center;border:1px solid var(--line);background:var(--card);color:var(--sub);
+  font-size:13px;text-decoration:none;cursor:pointer;box-shadow:var(--shadow-sm);
+  opacity:0;pointer-events:none;transform:translateY(6px);
+  transition:opacity .3s var(--ease),transform .3s var(--ease),color .2s var(--ease),border-color .2s var(--ease);
+}
+#topBtn.on{opacity:1;pointer-events:auto;transform:none}
+#topBtn:hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+.foot{
+  max-width:760px;margin:0 auto;padding:30px 24px 70px;
+  border-top:1px solid var(--hair);font-size:11.5px;color:var(--faint);line-height:1.9;text-align:center;
+}
+.foot a{color:var(--sub);text-decoration:none}
+.foot a:hover{color:var(--accent)}
+.foot .big{
+  display:inline-flex;align-items:center;gap:8px;margin-top:16px;height:38px;padding:0 20px;
+  border-radius:99px;border:1px solid var(--line);color:var(--fg);font-size:13px;font-weight:500;
+  transition:background .24s var(--ease),border-color .24s var(--ease),color .24s var(--ease);
+}
+.foot .big:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+@media (max-width:640px){
+  .ctrls{top:44px;padding:10px 14px}
+  .ctrls .inner{gap:6px}
+  .btn{height:32px;padding:0 12px;font-size:12px}
+  .rhead{padding-top:34px}
+  .passage,.bank,.wordbank,.foot{padding-left:16px;padding-right:16px}
+  .toc{padding-left:16px;padding-right:16px}
+  .year,.sets{padding-left:14px;padding-right:14px}
+  details.setblk[open] > summary{top:100px}
+  .zh{font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  .rhead h1,.rhead .rlede,.rhead .rfact{animation:none}
+}
+</style>
+<style>.rhead h1{font-size:clamp(28px,4vw,42px)}</style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <h1>CET-6 融词阅读 · Day 12 · 中英句对照版 · 2026-09-02</h1>
-  <div class="meta">每句英文下方紧跟中文译文 · 黄色高亮 = 本日词汇（变形也算命中）</div>
-  <span class="badge">本日词汇嵌入 108/185 · 58%</span><br>
-  <button class="btn" onclick="document.body.classList.toggle('no-mark')">👁 隐藏高亮裸读（再点恢复）</button>
-  <button class="btn" onclick="document.body.classList.toggle('no-zh')">隐藏译文 · 纯英自测（再点恢复）</button>
-</header>
-<div class="passage">
-<h2 class="pt">The Science of Urban Heat: How Data Transforms Our Understanding of Climate Risk</h2>
+<div class="rdbar"><i></i></div><nav class="nav"><a class="navbtn" href="https://alex05250.github.io/cet6-reading/daily.html"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>每日</a><span class="navtitle">Day 12</span><div class="spacer"></div><a class="lnk" href="https://alex05250.github.io/cet6-reading/index.html">主页</a><a class="lnk" href="https://alex05250.github.io/cet6-reading/words.html">词表</a></nav><header class="rhead"><p class="kick">Daily Reading · Day 12</p><h1>The Science of Urban Heat: How Data Transforms Our Understanding of Climate Risk</h1><div class="rfact"><span>2026-09-02</span><span class="ok">词汇嵌入 108/185 · 58%</span><span>deepseek-v4-pro @ opencode-go</span></div></header><div class="ctrls"><div class="inner"><button class="btn" data-act="zh" aria-pressed="false"><span class="lab">隐藏译文</span></button><button class="btn" data-act="mark" aria-pressed="false"><span class="lab">隐藏高亮</span></button></div></div><div class="passage">
 <div class="para"><div class="sent"><p class="en">For decades, <mark>researchers</mark> <mark>who</mark> study climate change have worked to <mark>estimate</mark> the <mark>scale</mark> of urban heat <mark>hazards</mark> with increasing precision.</p><p class="zh">几十年来，研究气候变化的研究人员一直在努力提高对城市热浪危害规模的估算精度。</p></div><div class="sent"><p class="en">On any given <mark>Friday</mark> afternoon, a <mark>variety</mark> of specialists—from meteorologists to public health officials—can be found hunched over a <mark>desk</mark>, sifting through an <mark>array</mark> of satellite data, temperature logs, and demographic <mark>maps</mark>.</p><p class="zh">任何一个周五下午，从气象学家到公共卫生官员等各类专家都可能伏案工作，仔细筛查卫星数据、温度记录和人口地图。</p></div><div class="sent"><p class="en">Their <mark>purpose</mark> is not merely to describe the weather, but to <mark>locate</mark> the invisible <mark>intersections</mark> where social vulnerability and environmental stress <mark>coincide</mark>.</p><p class="zh">他们的目的不只是描述天气，而是找出社会脆弱性与环境压力交汇的无形地带。</p></div><div class="sent"><p class="en">A <mark>neat</mark> spreadsheet of <mark>decimal</mark>-point temperature readings may look dull, but beneath those <mark>orderly</mark> columns lies the <mark>essence</mark> of a <mark>deepening</mark> crisis.</p><p class="zh">一张排列整齐、满是小数位温度读数的表格看似枯燥，但在那些有序的列下，隐藏着一场日益加深的危机的本质。</p></div><div class="sent"><p class="en">One <mark>researcher</mark>, frankly acknowledging the challenge, recently told a <mark>news</mark> outlet that the <mark>evidence</mark> is now too strong to ignore: heat is not a <mark>temporary</mark> inconvenience but a <mark>steady</mark>, structural threat that will <mark>define</mark> the <mark>future</mark> of urban life.</p><p class="zh">一位研究人员坦率承认这一挑战，最近对一家新闻媒体表示，证据已经强到无法忽视：高温不是暂时的麻烦，而是一种持续的、结构性的威胁，将决定城市生活的未来。</p></div></div><div class="para"><div class="sent"><p class="en">The <mark>transformation</mark> of raw measurements into actionable knowledge <mark>requires</mark> more than sophisticated <mark>devices</mark>.</p><p class="zh">将原始测量数据转化为可操作的知识，需要的不仅是精密设备。</p></div><div class="sent"><p class="en">A <mark>skilled</mark> analyst must <mark>grasp</mark> how a <mark>cloudy</mark> morning can <mark>lessen</mark> the heat absorbed by asphalt, while a clear night allows stored warmth to radiate back into bedrooms without air conditioning.</p><p class="zh">熟练的分析人员必须明白，多云的早晨如何减少沥青吸收的热量，而晴朗的夜晚又如何让储存的热量辐射回没有空调的卧室。</p></div><div class="sent"><p class="en">Satellite imagery can reveal how a concrete <mark>ceiling</mark> of rooftops, a tangle of <mark>transit</mark> <mark>lanes</mark>, and the absence of tree canopy combine to form a <mark>compound</mark> <mark>hazard</mark>.</p><p class="zh">卫星图像可以揭示大片屋顶形成的混凝土顶盖、纵横交错的车道以及树冠缺失如何共同构成复合危险。</p></div><div class="sent"><p class="en"><mark>Inhabitants</mark> of low-income <mark>sectors</mark> often live in buildings that <mark>trap</mark> heat, and <mark>they</mark> may lack the <mark>money</mark> to <mark>insure</mark> their homes against damage or to pay for <mark>extra</mark> cooling.</p><p class="zh">低收入地区的居民往往住在容易积热的建筑里，而且可能没有钱为房屋投保或支付额外降温费用。</p></div><div class="sent"><p class="en">When a <mark>hurricane</mark> knocks out power, the same neighborhoods frequently suffer the most.</p><p class="zh">当飓风导致停电时，同样的社区往往受害最深。</p></div><div class="sent"><p class="en"><mark>Moreover</mark>, the <mark>confusion</mark> that <mark>arises</mark> during an emergency is <mark>aggravated</mark> by language barriers and by the fact that many residents are <mark>temporary</mark> renters with few <mark>qualifications</mark> to demand <mark>better</mark> housing from landlords.</p><p class="zh">此外，紧急情况中出现的混乱会因语言障碍而加剧，也因许多居民是临时租户、几乎没有资格要求房东改善住房条件而更加严重。</p></div><div class="sent"><p class="en"><mark>Nobody</mark> should have to <mark>grope</mark> through a heat wave without reliable information, yet that is precisely what happens in many cities.</p><p class="zh">任何人都不该在热浪中因缺乏可靠信息而手足无措，然而在许多城市，这恰恰是现实。</p></div></div><div class="para"><div class="sent"><p class="en">The drive to <mark>communicate</mark> risk effectively has pushed <mark>researchers</mark> to borrow tools from fields as diverse as psychology and transportation planning.</p><p class="zh">有效传达风险的动力促使研究人员借用心理学、交通规划等多个领域的工具。</p></div><div class="sent"><p class="en">One influential <mark>director</mark> of a climate institute argues that a single, <mark>universal</mark> heat index is less useful than a <mark>series</mark> of location-specific warnings.</p><p class="zh">一位有影响力的气候研究所所长认为，单一通用的热指数不如一系列针对具体地点的预警有用。</p></div><div class="sent"><p class="en">A temperature of 38 degrees Celsius may be merely unpleasant in a dry, breezy suburb but lethal in a humid, stagnant apartment block.</p><p class="zh">38摄氏度的气温在干燥多风的郊区或许只是令人不适，但在潮湿闷热、空气不流通的公寓楼里却可能致命。</p></div><div class="sent"><p class="en">To <mark>discriminate</mark> between these conditions, scientists now <mark>map</mark> surface temperatures at the <mark>scale</mark> of individual buildings, using sensors mounted on cars, drones, and even bicycles.</p><p class="zh">为了区分这些情况，科学家现在利用安装在汽车、无人机甚至自行车上的传感器，以单栋建筑为尺度绘制地表温度图。</p></div><div class="sent"><p class="en">This approach allows them to detect a <mark>noticeable</mark> <mark>glow</mark> of retained heat around certain <mark>intersections</mark>, where a lack of shade and a <mark>surplus</mark> of exhaust fumes create a <mark>foul</mark> microclimate.</p><p class="zh">这种方法使他们能够探测到某些交叉路口周围明显滞留的热量，那里缺乏遮阴且尾气过多，形成了恶劣的微气候。</p></div><div class="sent"><p class="en">The resulting <mark>maps</mark> are not static; <mark>they</mark> are periodically updated to capture the <mark>cycle</mark> of daily heating and cooling.</p><p class="zh">由此生成的地图并非一成不变；它们会定期更新，以捕捉每日升温和降温的循环。</p></div><div class="sent"><p class="en">A <mark>rider</mark> on a bicycle equipped with a small sensor can, in a single afternoon, <mark>dispatch</mark> thousands of readings to a central database, helping to <mark>purify</mark> the picture of how heat accumulates across a <mark>town</mark>.</p><p class="zh">骑着一辆装有小型传感器的自行车，一个下午就能向中央数据库发送数千条读数，帮助更清晰地呈现热量如何在城镇中积聚。</p></div></div><div class="para"><div class="sent"><p class="en">The political implications of this research are impossible to dismiss.</p><p class="zh">这项研究的政治影响不容忽视。</p></div><div class="sent"><p class="en">Urban heat is a <mark>scandal</mark> that <mark>haunts</mark> every level of <mark>administration</mark>, from the mayor&#x27;s office to the federal agencies that control disaster relief.</p><p class="zh">城市高温是一个困扰各级行政部门的丑闻，从市长办公室到负责救灾的联邦机构无一幸免。</p></div><div class="sent"><p class="en">When officials <mark>appoint</mark> task forces to study the problem, <mark>they</mark> often <mark>recruit</mark> <mark>enthusiastic</mark> volunteers, but sustained change <mark>requires</mark> the <mark>restraint</mark> to avoid quick fixes.</p><p class="zh">当官员们任命工作组研究这一问题时，他们常常招募热心的志愿者，但持续的改变需要克制，避免急功近利的权宜之计。</p></div><div class="sent"><p class="en">A <mark>patriotic</mark> appeal to shared sacrifice may <mark>excite</mark> a crowd at a rally, yet it cannot replace the slow, unglamorous work of rewriting building codes, expanding tree-planting <mark>campaigns</mark>, and retrofitting schools.</p><p class="zh">呼吁共同牺牲的爱国号召或许能在集会上激起人群的热情，但它无法取代重写建筑规范、扩大植树活动和改造学校这类缓慢而不起眼的工作。</p></div><div class="sent"><p class="en">Some legislators have tried to <mark>veto</mark> stricter regulations, claiming that the cost of compliance would <mark>drag</mark> <mark>down</mark> the construction <mark>sector</mark>.</p><p class="zh">一些立法者试图否决更严格的法规，声称合规成本会拖累建筑业。</p></div><div class="sent"><p class="en">But a <mark>frank</mark> look at the numbers suggests otherwise: every dollar spent on reflective roofs and shaded bus stops <mark>relieves</mark> pressure on emergency rooms and <mark>lessens</mark> the long-term <mark>tax</mark> burden.</p><p class="zh">但坦率地审视数据却得出相反的结论：花在反光屋顶和遮阴公交站上的每一美元，都能减轻急诊室的压力，并降低长期税收负担。</p></div><div class="sent"><p class="en">The <mark>validity</mark> of this argument is reinforced by studies that compare cities with similar climates but different policies.</p><p class="zh">这一论点的有效性得到了比较气候相似但政策不同城市的研究的支持。</p></div></div><div class="para"><div class="sent"><p class="en">There is also a deeper, almost philosophical question about what <mark>we</mark> owe to one another.</p><p class="zh">还有一个更深层、近乎哲学性的问题：我们彼此之间究竟亏欠什么。</p></div><div class="sent"><p class="en">The word &quot;community&quot; <mark>originates</mark> from the Latin for &quot;shared obligation,&quot; and a <mark>thoughtful</mark> observer might <mark>reckon</mark> that no amount of individual effort can substitute for collective action.</p><p class="zh">“社区”一词源自拉丁语，意为“共同的义务”，而有心的观察者可能会认为，任何个人的努力都无法替代集体行动。</p></div><div class="sent"><p class="en">When a family can afford a <mark>vacation</mark> to a cooler region, <mark>they</mark> can temporarily escape the worst of a heat wave.</p><p class="zh">当一个家庭负担得起去凉爽地区度假时，他们可以暂时避开最严重的酷热。</p></div><div class="sent"><p class="en">But the old man <mark>who</mark> lives alone on the top floor, the child waiting at an unsheltered bus stop, and the night-shift worker <mark>who</mark> cannot afford a taxi cannot simply <mark>lift</mark> themselves out of harm&#x27;s way.</p><p class="zh">但独居在顶楼的老人、在没有遮蔽的公交站等车的孩子，以及付不起出租车费的夜班工人，却无法自行脱离险境。</p></div><div class="sent"><p class="en">The <mark>latent</mark> danger of extreme heat is that it <mark>punishes</mark> precisely those <mark>who</mark> have the fewest options.</p><p class="zh">极端高温的潜在危险在于，它恰恰惩罚那些选择最少的人。</p></div><div class="sent"><p class="en">To <mark>snatch</mark> a few hours of sleep, some residents <mark>drag</mark> mattresses onto fire escapes or sleep in parked cars with the engine running—a decision that introduces its own set of risks.</p><p class="zh">为了抢得几个小时的睡眠，一些居民把床垫拖到消防梯上，或睡在发动机仍在运转的汽车里——这一决定本身就带来一系列风险。</p></div><div class="sent"><p class="en">The <mark>sadness</mark> of these <mark>scenes</mark> should not <mark>bore</mark> us into indifference; it should <mark>bind</mark> us to a higher <mark>standard</mark> of care.</p><p class="zh">这些场景的悲哀不应让我们麻木到无动于衷；它应当促使我们达到更高的照护标准。</p></div></div><div class="para"><div class="sent"><p class="en">Looking ahead, the challenge is to move from mapping to mitigation.</p><p class="zh">展望未来，挑战在于从绘图走向缓解。</p></div><div class="sent"><p class="en">A <mark>revolutionary</mark> shift in building design is already underway, with architects experimenting with materials that <mark>quench</mark> heat rather than store it.</p><p class="zh">建筑设计领域的一场革命性转变已经开始，建筑师们正在试验能够消解热量而非储存热量的材料。</p></div><div class="sent"><p class="en">Green roofs planted with native grasses act as natural <mark>transformers</mark>, converting sunlight into evaporation instead of thermal mass.</p><p class="zh">种植本地草的绿色屋顶充当天然的转换器，把阳光转化为蒸发，而不是热质量。</p></div><div class="sent"><p class="en">Some cities are installing misting stations at busy <mark>intersections</mark>, while others are <mark>dispatching</mark> mobile teams to check on vulnerable residents during heat alerts.</p><p class="zh">一些城市正在繁忙路口安装喷雾降温站，另一些则在高温警报期间派出流动小组探访易受影响居民。</p></div><div class="sent"><p class="en">The goal is not to eliminate heat—an impossible task—but to make it survivable for everyone, regardless of income or neighborhood.</p><p class="zh">目标不是消除高温——那是不可能完成的任务——而是让每个人都能在高温中生存下来，无论收入高低或住在哪个社区。</p></div><div class="sent"><p class="en">A <mark>director</mark> of a public health agency recently put it this way: &quot;<mark>We</mark> cannot control the sun, but <mark>we</mark> can control the surfaces beneath it.</p><p class="zh">一位公共卫生机构负责人最近这样说道：“我们无法控制太阳，但我们可以控制太阳底下的表面。</p></div><div class="sent"><p class="en">&quot; That <mark>message</mark>, simple as it sounds, implies a profound shift in responsibility.</p><p class="zh">” 这句话听起来简单，却意味着责任上的深刻转变。</p></div><div class="sent"><p class="en">It asks us to see urban design not as a neutral backdrop but as a <mark>decisive</mark> factor in <mark>who</mark> lives and <mark>who</mark> dies when temperatures soar.</p><p class="zh">它要求我们不要把城市设计看作中性的背景，而要把它视为气温飙升时决定谁生谁死的关键因素。</p></div></div><div class="para"><div class="sent"><p class="en">In the end, the fight against urban heat is a test of whether <mark>we</mark> can use knowledge to <mark>lessen</mark> suffering.</p><p class="zh">归根结底，对抗城市高温是一场考验，考验我们能否运用知识来减轻苦难。</p></div><div class="sent"><p class="en">The data are there, waiting to be read.</p><p class="zh">数据就在那里，等待被解读。</p></div><div class="sent"><p class="en">The technology exists to <mark>map</mark>, <mark>communicate</mark>, and respond.</p><p class="zh">用于绘图、沟通和响应的技术已经存在。</p></div><div class="sent"><p class="en">What remains is the harder work of political will and moral imagination.</p><p class="zh">剩下的是更艰难的工作：政治意愿和道德想象力。</p></div><div class="sent"><p class="en">A <mark>boy</mark> growing up in a treeless apartment complex, a <mark>frog</mark> stranded in a drying urban wetland, a <mark>cherry</mark> tree struggling to bloom beside a heat-belching <mark>transformer</mark>—all are sending <mark>signals</mark> about the same underlying reality.</p><p class="zh">一个在没有树木的公寓楼群里长大的男孩，一只被困在日渐干涸的城市湿地中的青蛙，一棵在喷吐热气的变压器旁艰难开花的樱桃树——它们都在传递着同一个现实底层的信号。</p></div><div class="sent"><p class="en">To ignore those <mark>signals</mark> is to choose <mark>confusion</mark> over clarity, and neglect over care.</p><p class="zh">忽视这些信号，就是选择混乱而非清晰，选择疏忽而非关怀。</p></div><div class="sent"><p class="en">The <mark>future</mark> will not be shaped by accidents of weather alone, but by the choices <mark>we</mark> make in the intervals between disasters.</p><p class="zh">未来不会仅由天气的偶然所塑造，更取决于我们在灾难间歇期做出的选择。</p></div><div class="sent"><p class="en">If <mark>we</mark> are <mark>honest</mark> about the science and <mark>confident</mark> in our capacity to act, the next heat wave need not be a tragedy foretold.</p><p class="zh">如果我们对科学坦诚，并对自己行动的能力充满信心，那么下一场热浪未必注定成为悲剧。</p></div></div>
-</div>
-<section>
-  <h2>📋 本日词表（绿=已嵌入文章 · 灰=未嵌入）</h2>
-  <div class="legend">共 185 词，按原卡顺序</div>
-  <div class="chips"><span class="chip on">news</span><span class="chip on">estimate</span><span class="chip on">Friday</span><span class="chip on">variety</span><span class="chip on">purpose</span><span class="chip on">neat</span><span class="chip off">outstanding</span><span class="chip on">essence</span><span class="chip off">razor</span><span class="chip off">independent</span><span class="chip on">frog</span><span class="chip off">woollen</span><span class="chip on">lessen</span><span class="chip off">carrot</span><span class="chip on">cycle</span><span class="chip on">discriminate</span><span class="chip on">scale</span><span class="chip off">lever</span><span class="chip on">locate</span><span class="chip on">decimal</span><span class="chip on">coincide</span><span class="chip on">ceiling</span><span class="chip on">hurricane</span><span class="chip on">orderly</span><span class="chip off">bill</span><span class="chip off">editorial</span><span class="chip on">better</span><span class="chip on">excite</span><span class="chip on">aggravate</span><span class="chip on">skilled</span><span class="chip on">snatch</span><span class="chip on">inhabitant</span><span class="chip on">appoint</span><span class="chip on">deepen</span><span class="chip on">we</span><span class="chip off">spectator</span><span class="chip on">insure</span><span class="chip off">Notation</span><span class="chip on">compound</span><span class="chip on">who</span><span class="chip on">punish</span><span class="chip on">future</span><span class="chip off">conquest</span><span class="chip on">confident</span><span class="chip on">lane</span><span class="chip on">communicate</span><span class="chip off">rank</span><span class="chip off">fun</span><span class="chip off">convict</span><span class="chip on">nobody</span><span class="chip on">map</span><span class="chip off">search</span><span class="chip on">hazard</span><span class="chip on">director</span><span class="chip on">signal</span><span class="chip on">define</span><span class="chip on">noticeable</span><span class="chip on">extra</span><span class="chip off">heavily</span><span class="chip off">sensitive</span><span class="chip on">vacation</span><span class="chip on">qualification</span><span class="chip on">patriotic</span><span class="chip on">reckon</span><span class="chip on">desk</span><span class="chip on">enthusiastic</span><span class="chip on">honest</span><span class="chip on">decisive</span><span class="chip on">temporary</span><span class="chip off">terminate</span><span class="chip off">nest</span><span class="chip on">require</span><span class="chip on">universal</span><span class="chip off">instruct</span><span class="chip off">acquaintance</span><span class="chip off">justify</span><span class="chip off">strongly</span><span class="chip on">validity</span><span class="chip on">they</span><span class="chip on">cloudy</span><span class="chip on">revolutionary</span><span class="chip on">researcher</span><span class="chip off">incredible</span><span class="chip off">price</span><span class="chip on">dispatch</span><span class="chip on">town</span><span class="chip off">frequent</span><span class="chip off">badminton</span><span class="chip off">turbulent</span><span class="chip off">spy</span><span class="chip on">intersection</span><span class="chip on">glow</span><span class="chip off">piece</span><span class="chip off">mineral</span><span class="chip on">quench</span><span class="chip on">latent</span><span class="chip on">recruit</span><span class="chip off">basketball</span><span class="chip on">restraint</span><span class="chip on">bore</span><span class="chip on">sadness</span><span class="chip off">swamp</span><span class="chip on">transformation</span><span class="chip off">rainy</span><span class="chip off">ownership</span><span class="chip on">drag</span><span class="chip on">bind</span><span class="chip off">imply</span><span class="chip on">steady</span><span class="chip on">veto</span><span class="chip on">boy</span><span class="chip on">administration</span><span class="chip off">tube</span><span class="chip off">practically</span><span class="chip on">arise</span><span class="chip off">westward</span><span class="chip on">grope</span><span class="chip on">money</span><span class="chip off">augment</span><span class="chip on">sector</span><span class="chip off">picnic</span><span class="chip off">freely</span><span class="chip on">series</span><span class="chip on">message</span><span class="chip on">trap</span><span class="chip on">haunt</span><span class="chip on">campaign</span><span class="chip off">fertilize</span><span class="chip on">purify</span><span class="chip off">horn</span><span class="chip on">originate</span><span class="chip off">learned</span><span class="chip off">please</span><span class="chip off">right</span><span class="chip on">evidence</span><span class="chip on">grasp</span><span class="chip off">glue</span><span class="chip off">simultaneous</span><span class="chip off">FALSE</span><span class="chip on">cherry</span><span class="chip on">lift</span><span class="chip off">plate</span><span class="chip on">frank</span><span class="chip on">device</span><span class="chip off">tractor</span><span class="chip on">confusion</span><span class="chip off">expensive</span><span class="chip on">foul</span><span class="chip on">moreover</span><span class="chip off">await</span><span class="chip on">surplus</span><span class="chip off">urge</span><span class="chip on">down</span><span class="chip off">proficiency</span><span class="chip off">professional</span><span class="chip off">lazy</span><span class="chip on">relieve</span><span class="chip on">standard</span><span class="chip off">grip</span><span class="chip on">scene</span><span class="chip off">spelling</span><span class="chip on">array</span><span class="chip on">tax</span><span class="chip off">chocolate</span><span class="chip off">amongst</span><span class="chip off">concern</span><span class="chip off">mix</span><span class="chip off">marry</span><span class="chip off">fish</span><span class="chip off">stall</span><span class="chip on">thoughtful</span><span class="chip on">transit</span><span class="chip off">tan</span><span class="chip on">scandal</span><span class="chip on">rider</span><span class="chip off">communism</span><span class="chip off">chalk</span><span class="chip on">transformer</span><span class="chip off">tooth</span><span class="chip off">strive</span><span class="chip off">range</span><span class="chip off">kilometer</span><span class="chip off">ore</span><span class="chip off">special</span><span class="chip off">periodic</span></div>
-</section>
-<footer>原文：卡片机自动生成 · deepseek-v4-pro @ opencode-go · 2026-09-02<br>中英句对照版 · deepseek-v4-pro @ opencode-go · 2026-09-02</footer>
-</div>
+</div><div class="bank"><p class="legend">本日词表 · 185 词（绿 = 已嵌入文章，灰 = 未嵌入）</p><div class="chips"><span class="chip on">news</span><span class="chip on">estimate</span><span class="chip on">Friday</span><span class="chip on">variety</span><span class="chip on">purpose</span><span class="chip on">neat</span><span class="chip off">outstanding</span><span class="chip on">essence</span><span class="chip off">razor</span><span class="chip off">independent</span><span class="chip on">frog</span><span class="chip off">woollen</span><span class="chip on">lessen</span><span class="chip off">carrot</span><span class="chip on">cycle</span><span class="chip on">discriminate</span><span class="chip on">scale</span><span class="chip off">lever</span><span class="chip on">locate</span><span class="chip on">decimal</span><span class="chip on">coincide</span><span class="chip on">ceiling</span><span class="chip on">hurricane</span><span class="chip on">orderly</span><span class="chip off">bill</span><span class="chip off">editorial</span><span class="chip on">better</span><span class="chip on">excite</span><span class="chip on">aggravate</span><span class="chip on">skilled</span><span class="chip on">snatch</span><span class="chip on">inhabitant</span><span class="chip on">appoint</span><span class="chip on">deepen</span><span class="chip on">we</span><span class="chip off">spectator</span><span class="chip on">insure</span><span class="chip off">Notation</span><span class="chip on">compound</span><span class="chip on">who</span><span class="chip on">punish</span><span class="chip on">future</span><span class="chip off">conquest</span><span class="chip on">confident</span><span class="chip on">lane</span><span class="chip on">communicate</span><span class="chip off">rank</span><span class="chip off">fun</span><span class="chip off">convict</span><span class="chip on">nobody</span><span class="chip on">map</span><span class="chip off">search</span><span class="chip on">hazard</span><span class="chip on">director</span><span class="chip on">signal</span><span class="chip on">define</span><span class="chip on">noticeable</span><span class="chip on">extra</span><span class="chip off">heavily</span><span class="chip off">sensitive</span><span class="chip on">vacation</span><span class="chip on">qualification</span><span class="chip on">patriotic</span><span class="chip on">reckon</span><span class="chip on">desk</span><span class="chip on">enthusiastic</span><span class="chip on">honest</span><span class="chip on">decisive</span><span class="chip on">temporary</span><span class="chip off">terminate</span><span class="chip off">nest</span><span class="chip on">require</span><span class="chip on">universal</span><span class="chip off">instruct</span><span class="chip off">acquaintance</span><span class="chip off">justify</span><span class="chip off">strongly</span><span class="chip on">validity</span><span class="chip on">they</span><span class="chip on">cloudy</span><span class="chip on">revolutionary</span><span class="chip on">researcher</span><span class="chip off">incredible</span><span class="chip off">price</span><span class="chip on">dispatch</span><span class="chip on">town</span><span class="chip off">frequent</span><span class="chip off">badminton</span><span class="chip off">turbulent</span><span class="chip off">spy</span><span class="chip on">intersection</span><span class="chip on">glow</span><span class="chip off">piece</span><span class="chip off">mineral</span><span class="chip on">quench</span><span class="chip on">latent</span><span class="chip on">recruit</span><span class="chip off">basketball</span><span class="chip on">restraint</span><span class="chip on">bore</span><span class="chip on">sadness</span><span class="chip off">swamp</span><span class="chip on">transformation</span><span class="chip off">rainy</span><span class="chip off">ownership</span><span class="chip on">drag</span><span class="chip on">bind</span><span class="chip off">imply</span><span class="chip on">steady</span><span class="chip on">veto</span><span class="chip on">boy</span><span class="chip on">administration</span><span class="chip off">tube</span><span class="chip off">practically</span><span class="chip on">arise</span><span class="chip off">westward</span><span class="chip on">grope</span><span class="chip on">money</span><span class="chip off">augment</span><span class="chip on">sector</span><span class="chip off">picnic</span><span class="chip off">freely</span><span class="chip on">series</span><span class="chip on">message</span><span class="chip on">trap</span><span class="chip on">haunt</span><span class="chip on">campaign</span><span class="chip off">fertilize</span><span class="chip on">purify</span><span class="chip off">horn</span><span class="chip on">originate</span><span class="chip off">learned</span><span class="chip off">please</span><span class="chip off">right</span><span class="chip on">evidence</span><span class="chip on">grasp</span><span class="chip off">glue</span><span class="chip off">simultaneous</span><span class="chip off">FALSE</span><span class="chip on">cherry</span><span class="chip on">lift</span><span class="chip off">plate</span><span class="chip on">frank</span><span class="chip on">device</span><span class="chip off">tractor</span><span class="chip on">confusion</span><span class="chip off">expensive</span><span class="chip on">foul</span><span class="chip on">moreover</span><span class="chip off">await</span><span class="chip on">surplus</span><span class="chip off">urge</span><span class="chip on">down</span><span class="chip off">proficiency</span><span class="chip off">professional</span><span class="chip off">lazy</span><span class="chip on">relieve</span><span class="chip on">standard</span><span class="chip off">grip</span><span class="chip on">scene</span><span class="chip off">spelling</span><span class="chip on">array</span><span class="chip on">tax</span><span class="chip off">chocolate</span><span class="chip off">amongst</span><span class="chip off">concern</span><span class="chip off">mix</span><span class="chip off">marry</span><span class="chip off">fish</span><span class="chip off">stall</span><span class="chip on">thoughtful</span><span class="chip on">transit</span><span class="chip off">tan</span><span class="chip on">scandal</span><span class="chip on">rider</span><span class="chip off">communism</span><span class="chip off">chalk</span><span class="chip on">transformer</span><span class="chip off">tooth</span><span class="chip off">strive</span><span class="chip off">range</span><span class="chip off">kilometer</span><span class="chip off">ore</span><span class="chip off">special</span><span class="chip off">periodic</span></div></div><footer class="foot">原文：卡片机自动生成 · deepseek-v4-pro @ opencode-go · 2026-09-02<br>逐句译文：deepseek-v4-pro @ opencode-go · 2026-09-02<br><a class="big" href="https://alex05250.github.io/cet6-reading/daily.html">返回每日目录</a></footer><button id="topBtn" data-act="top" aria-label="回到顶部">↑</button><script>/* CET-6 · 阅读层运行脚本：译文/高亮开关、阅读进度、回到顶部、锚点展开
+   真题页外链引用；每日文章页在构建时内联进页面（桌面单文件也要能跑）。 */
+(function () {
+  'use strict';
+  var body = document.body;
+
+  function onScroll() {
+    var y = window.scrollY || document.documentElement.scrollTop || 0;
+    body.classList.toggle('scrolled', y > 6);
+    var bar = document.querySelector('.rdbar i');
+    if (bar) {
+      var h = document.documentElement.scrollHeight - innerHeight;
+      bar.style.width = (h > 0 ? Math.min(100, y / h * 100) : 0) + '%';
+    }
+    var top = document.getElementById('topBtn');
+    if (top) top.classList.toggle('on', y > 700);
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* 按钮：data-act = zh | mark | open | close */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]');
+    if (!b) return;
+    var act = b.getAttribute('data-act');
+    if (act === 'zh') {
+      var off = body.classList.toggle('no-zh');
+      b.setAttribute('aria-pressed', String(off));
+      var lab = b.querySelector('.lab');
+      if (lab) lab.textContent = off ? '显示译文' : '隐藏译文';
+    } else if (act === 'mark') {
+      var off2 = body.classList.toggle('no-mark');
+      b.setAttribute('aria-pressed', String(off2));
+      var lab2 = b.querySelector('.lab');
+      if (lab2) lab2.textContent = off2 ? '显示高亮' : '隐藏高亮';
+    } else if (act === 'open') {
+      document.querySelectorAll('details.setblk').forEach(function (d) { d.open = true; });
+    } else if (act === 'close') {
+      document.querySelectorAll('details.setblk').forEach(function (d) { d.open = false; });
+    } else if (act === 'top') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+
+  /* 锚点：展开祖先 details 再滚动 */
+  function openHash() {
+    if (!location.hash) return;
+    var el = null;
+    try { el = document.querySelector(location.hash); } catch (err) { return; }
+    if (!el) return;
+    var d = el.closest('details');
+    if (d) d.open = true;
+    setTimeout(function () { el.scrollIntoView({ block: 'start' }); }, 30);
+  }
+  addEventListener('hashchange', openHash);
+  openHash();
+})();
+</script>
 </body>
 </html>

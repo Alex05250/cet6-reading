@@ -2,63 +2,39 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>每日融词阅读 · 目录</title>
-<style>
-  :root { --bg:#f7f5f0; --card:#fff; --ink:#222; --mut:#6b6b6b; --line:#e3ded3; --accent:#1e4b8f; }
-  * { box-sizing:border-box; }
-  body { margin:0; padding:32px 16px 80px; background:var(--bg); color:var(--ink);
-         font-family:Georgia,"Times New Roman","宋体",serif; line-height:1.7; }
-  .wrap { max-width:720px; margin:0 auto; }
-  header { text-align:center; margin-bottom:28px; }
-  header h1 { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:22px; margin:0 0 8px; color:var(--accent); }
-  header p { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:13px; color:var(--mut); margin:0; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 20px;
-         margin-bottom:12px; display:flex; align-items:center; gap:16px; text-decoration:none; color:inherit;
-         transition:box-shadow .15s ease, transform .1s ease; }
-  .card:hover { box-shadow:0 4px 14px rgba(0,0,0,.07); transform:translateY(-1px); }
-  .day { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-weight:700; font-size:14px; color:var(--accent);
-         background:#eef3fa; border-radius:8px; padding:8px 12px; white-space:nowrap; }
-  .info { flex:1; min-width:0; }
-  .info h2 { font-size:15px; margin:0 0 4px; font-weight:600; }
-  .info .cov { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:12px; color:var(--mut); }
-  footer { color:var(--mut); font-size:12px; margin-top:24px; text-align:center;
-         font-family:"Segoe UI","Microsoft YaHei",sans-serif; }
-  a { color:var(--accent); text-decoration:none; }
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>每日融词阅读 · CET-6</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230071e3'/%3E%3Ctext x='32' y='45' font-size='36' font-weight='700' font-family='Segoe UI,Arial,sans-serif' text-anchor='middle' fill='%23fff'%3E6%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/base.css?v=20261031b">
+<link rel="stylesheet" href="assets/site.css?v=20261031b">
 </head>
 <body>
-<div class="wrap">
-<header>
-  <p><a href="index.html">← 返回主页</a></p>
-  <h1>📅 每日融词阅读</h1>
-  <p>每日一篇，词汇自然融入地道英语文章 · 点击进入阅读</p>
-</header>
-<div id="list"></div>
-<footer>自动生成 · 每天 15:00 更新</footer>
-</div>
-<script>
-// 文章目录由 cet6_machine.py 生成时写入 manifest.json
-var ARTICLES = [];
-fetch('manifest.json').then(r => r.json()).then(function(d){
-  ARTICLES = d;
-  render();
-}).catch(function(){ render(); });
 
-function render(){
-  var list = document.getElementById('list');
-  if(!ARTICLES.length){
-    list.innerHTML = '<div class="card"><div class="info"><h2>还没有文章</h2><div class="cov">等待首次生成</div></div></div>';
-    return;
-  }
-  ARTICLES.sort(function(a,b){ return b.day - a.day; });
-  list.innerHTML = ARTICLES.map(function(a){
-    return '<a class="card" href="cet6-day' + a.day + '.html">' +
-           '<span class="day">Day ' + a.day + '</span>' +
-           '<span class="info"><h2>' + a.title + '</h2>' +
-           '<span class="cov">词汇嵌入 ' + a.cover + ' · ' + a.date + '</span></span></a>';
-  }).join('');
-}
-</script>
+<nav class="nav">
+  <a class="navbtn" href="index.html">
+    <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>主页
+  </a>
+  <div class="spacer"></div>
+  <a class="lnk" href="words.html">词表</a>
+  <a class="lnk" href="exams.html">真题</a>
+</nav>
+
+<header class="phead">
+  <p class="kick">Daily Reading</p>
+  <h1>每日融词阅读</h1>
+  <p class="lede">每天 15:00 生成一篇。当日词卡的词被写进文章里，逐句对照，高亮与译文都能一键收起。</p>
+  <div class="fact"><span>每天 <b>185</b> 词</span><span>逐句对照</span><span>可藏中文</span></div>
+</header>
+
+<div class="list" id="list">
+  <div class="empty">读取中…</div>
+</div>
+
+<footer class="foot">
+  <a href="index.html">主页</a><a href="words.html">词表</a><a href="exams.html">真题精读</a><br>
+  自动生成 · 每天 15:00 更新 · 文章永久保留
+</footer>
+
+<script src="assets/site.js?v=20261031b"></script>
 </body>
 </html>

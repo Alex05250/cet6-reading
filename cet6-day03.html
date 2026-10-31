@@ -1,70 +1,406 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CET-6 Day 3 · 中英句对照 · The Anatomy of Renewal: Governance, Enterprise, and Resilience in a Riverside Valley</title>
-<style>
-  :root { --bg:#f7f5f0; --card:#fff; --ink:#222; --mut:#6b6b6b; --line:#e3ded3; --accent:#1e4b8f; --zh:#4a4a4a; }
-  * { box-sizing:border-box; }
-  body { margin:0; padding:28px 16px 80px; background:var(--bg); color:var(--ink);
-          font-family:Georgia,"Times New Roman","宋体",serif; line-height:1.85; }
-  .wrap { max-width:720px; margin:0 auto; }
-  header { text-align:center; margin-bottom:26px; }
-  header h1 { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:17px; margin:0 0 8px; color:var(--accent); }
-  .meta { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:13px; color:var(--mut); }
-  .badge { display:inline-block; margin-top:10px; padding:4px 14px; border-radius:20px; font-size:13px;
-            background:#e8f0e8; color:#2f6f4f; font-family:"Segoe UI","Microsoft YaHei",sans-serif; }
-  .btn { margin-top:12px; padding:6px 16px; border:1px solid var(--accent); color:var(--accent);
-          background:#fff; border-radius:8px; cursor:pointer; font-size:13px;
-          font-family:"Segoe UI","Microsoft YaHei",sans-serif; }
-  .btn:hover { background:#eef3fa; }
-  .passage { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:26px 30px; font-size:17px; }
-  .pt { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:19px; margin:0 0 18px; text-align:center; }
-  .para { margin:0 0 24px; }
-  .para:last-child { margin-bottom:0; }
-  .sent { margin:0 0 14px; }
-  .sent:last-child { margin-bottom:0; }
-  .en { margin:0; text-align:justify; }
-  .zh { margin:4px 0 0; padding-left:12px; border-left:3px solid var(--line); color:var(--zh);
-         font-size:15px; line-height:1.75; text-align:justify;
-         font-family:"KaiTi","楷体","STKaiti","宋体",serif; }
-  .zh-empty { color:#b08d57; font-size:13px; }
-  body.no-zh .zh { display:none; }
-  mark { background:#ffe58a; padding:0 2px; border-radius:3px; }
-  body.no-mark mark { background:transparent; padding:0; }
-  section { background:var(--card); border:1px solid var(--line); border-radius:12px;
-             margin-top:18px; padding:16px 20px; }
-  section h2 { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:14px; margin:0 0 10px; }
-  .chips { line-height:2.1; }
-  .chip { display:inline-block; font-size:12px; font-family:"Segoe UI","Microsoft YaHei",sans-serif;
-           padding:1px 8px; margin:2px 3px; border-radius:10px; }
-  .chip.on { background:#e8f0e8; color:#2f6f4f; border:1px solid #c3dcc3; }
-  .chip.off { background:#f0efea; color:#aaa; border:1px dashed var(--line); }
-  .legend { font-size:12px; color:var(--mut); margin-bottom:6px; }
-  footer { color:var(--mut); font-size:12px; margin-top:20px; text-align:center;
-            font-family:"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.9; }
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Day 03 · The Anatomy of Renewal: Governance, Enterprise, and Resilience in a Riverside Valley · CET-6</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230071e3'/%3E%3Ctext x='32' y='45' font-size='36' font-weight='700' font-family='Segoe UI,Arial,sans-serif' text-anchor='middle' fill='%23fff'%3E6%3C/text%3E%3C/svg%3E">
+<style>/* CET-6 词汇站 · 基础层：变量 / 布局骨架 / 导航 / 英雄区 / 工具栏 / 卡片网格 */
+:root{
+  --bg:#ffffff; --fg:#1d1d1f; --sub:#6e6e73; --faint:#a1a1a6;
+  --line:rgba(0,0,0,.09); --hair:rgba(0,0,0,.055); --fill:rgba(0,0,0,.04); --card:#ffffff;
+  --accent:#0071e3; --ok:#1d9a6c; --warn:#b25000;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.03),0 4px 14px rgba(0,0,0,.035);
+  --shadow-lg:0 16px 48px rgba(0,0,0,.10);
+  --ease:cubic-bezier(.32,.72,0,1);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#000000; --fg:#f5f5f7; --sub:#a1a1a6; --faint:#6e6e73;
+    --line:rgba(255,255,255,.14); --hair:rgba(255,255,255,.075); --fill:rgba(255,255,255,.06); --card:#1c1c1e;
+    --accent:#2997ff; --ok:#30d158; --warn:#ff9f0a;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.5); --shadow-lg:0 16px 48px rgba(0,0,0,.75);
+  }
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--fg);line-height:1.5;font-synthesis:none;overflow-x:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI Variable Text","Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  transition:background .5s var(--ease),color .5s var(--ease);
+}
+::selection{background:var(--accent);color:#fff}
+button{font:inherit;color:inherit}
+a{color:inherit}
+
+/* 入场 */
+@keyframes lineUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes softIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.anim{animation:softIn .7s var(--ease) both}
+
+/* 导航 */
+.nav{
+  position:sticky;top:0;z-index:120;height:48px;display:flex;align-items:center;gap:16px;
+  padding:0 max(22px,env(safe-area-inset-left)) 0 max(22px,env(safe-area-inset-right));
+  background:color-mix(in srgb,var(--bg) 74%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid transparent;transition:border-color .3s var(--ease);
+}
+body.scrolled .nav{border-bottom-color:var(--hair)}
+.nav .brand{font-size:13px;font-weight:600;letter-spacing:-.005em;white-space:nowrap;text-decoration:none}
+.nav .brand i{font-style:normal;color:var(--faint);font-weight:400}
+.nav .spacer{flex:1}
+.nav a.lnk{font-size:12.5px;color:var(--sub);text-decoration:none;transition:color .2s var(--ease)}
+.nav a.lnk:hover{color:var(--fg)}
+/* 导航返回键：36px 高、主色描边，作用一眼可见 */
+.nav .navbtn{
+  display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 16px 0 13px;
+  border-radius:99px;border:1px solid color-mix(in srgb,var(--accent) 24%,transparent);
+  background:color-mix(in srgb,var(--accent) 9%,transparent);
+  font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap;
+  transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease),transform .18s var(--ease);
+}
+.nav .navbtn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.nav .navbtn:active{transform:scale(.955)}
+.nav .navbtn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;margin-top:-1px}
+.nav .navtitle{font-size:12.5px;font-weight:500;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}
+
+
+/* 英雄区 */
+.hero{
+  max-width:920px;margin:0 auto;padding:clamp(60px,10vh,120px) 24px clamp(36px,6vh,56px);
+  text-align:center;will-change:opacity,transform;
+}
+@supports (animation-timeline:scroll()){
+  .hero{animation:heroOut linear both;animation-timeline:scroll(root block);animation-range:0 520px}
+  @keyframes heroOut{to{opacity:.1;transform:translateY(52px) scale(.975)}}
+}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+h1{font-size:clamp(38px,7vw,82px);line-height:1.12;font-weight:600;letter-spacing:-.03em;margin-bottom:26px}
+h1 .dim{color:var(--sub)}
+h1 .l{display:block;animation:lineUp 1s var(--ease) both}
+h1 .l:nth-child(1){animation-delay:.10s}
+h1 .l:nth-child(2){animation-delay:.20s}
+.eyebrow{animation:softIn .85s var(--ease) .04s both}
+.lede{animation:softIn .95s var(--ease) .30s both;font-size:clamp(15px,1.9vw,19px);color:var(--sub);line-height:1.6;letter-spacing:-.008em;max-width:min(520px,88vw);margin:0 auto;text-wrap:pretty;word-break:normal;line-break:strict}
+.meter{animation:softIn .95s var(--ease) .42s both;display:inline-flex;align-items:center;gap:12px;margin-top:44px;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums;padding:9px 18px;border-radius:99px;background:var(--fill)}
+.meter .track{width:130px;height:3px;border-radius:99px;background:var(--hair);overflow:hidden}
+.meter .track i{display:block;height:100%;width:0;background:var(--ok);border-radius:99px;transition:width .8s var(--ease)}
+.meter b{color:var(--fg);font-weight:600}
+
+/* 工具栏 */
+.toolbar{
+  position:sticky;top:48px;z-index:110;padding:12px 24px;
+  background:color-mix(in srgb,var(--bg) 84%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid var(--hair);
+}
+.toolbar .inner{max-width:1120px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
+.search{
+  flex:0 1 380px;min-width:180px;height:38px;padding:0 14px 0 36px;font:inherit;font-size:13.5px;color:var(--fg);
+  background:var(--fill) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23a1a1a6' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") no-repeat 13px center;
+  border:0;border-radius:9px;outline:none;transition:box-shadow .25s var(--ease),background .25s var(--ease);
+}
+.search::placeholder{color:var(--faint)}
+.search:focus{box-shadow:0 0 0 3.5px color-mix(in srgb,var(--accent) 20%,transparent);background:var(--card)}
+.seg{display:flex;gap:2px;background:var(--fill);border-radius:9px;padding:2px}
+.seg button{font-size:12.5px;color:var(--sub);background:none;border:0;cursor:pointer;padding:6px 14px;border-radius:7px;transition:all .25s var(--ease);white-space:nowrap}
+.seg button[aria-selected="true"]{background:var(--card);color:var(--fg);box-shadow:var(--shadow-sm);font-weight:500}
+
+/* 网格与卡片 */
+.stage{max-width:1168px;margin:0 auto;padding:36px 24px 140px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:14px}
+.card{
+  position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:20px 20px 18px;cursor:pointer;text-align:left;display:flex;flex-direction:column;
+  text-decoration:none;overflow:hidden;opacity:0;transform:translateY(18px);
+  transition:opacity .6s var(--ease),transform .55s var(--ease),box-shadow .4s var(--ease),border-color .3s var(--ease);
+}
+.card.in{opacity:1;transform:none}
+.card:hover{box-shadow:var(--shadow-lg);border-color:transparent}
+.card.in:hover{transform:translateY(-3px)}
+.card::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;
+  background:radial-gradient(240px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.7),transparent 62%);
+  transition:opacity .45s var(--ease);
+}
+.card:hover::after{opacity:1}
+@media (prefers-color-scheme:dark){
+  .card::after{background:radial-gradient(240px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.07),transparent 62%)}
+}
+.card .top{display:flex;align-items:baseline;justify-content:space-between;gap:9px;margin-bottom:18px}
+.card .dn{font-size:13.5px;font-weight:600;letter-spacing:.005em}
+.card .rng{font-size:11px;color:var(--faint);font-variant-numeric:tabular-nums;letter-spacing:.01em;transition:opacity .3s}
+.card .num{display:flex;align-items:baseline;gap:4px;margin-bottom:11px}
+.card .num b{font-size:27px;font-weight:600;letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums}
+.card .num s{font-size:12.5px;color:var(--faint);text-decoration:none;font-variant-numeric:tabular-nums}
+.card .bar{height:2.5px;border-radius:99px;background:var(--fill);overflow:hidden}
+.card .bar i{display:block;height:100%;width:0;background:var(--ok);border-radius:99px;transition:width .7s var(--ease)}
+.card.full .num b{color:var(--ok)}
+.card .tick{position:absolute;top:17px;right:17px;font-size:11px;color:var(--ok);opacity:0;transform:scale(.6);transition:all .35s var(--ease)}
+.card.full .tick{opacity:1;transform:none}
+.card.full .rng{opacity:0}
+/* 进入按钮：卡片底部的主色胶囊，悬停实心 */
+.card .go{margin-top:16px;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 15px;
+  border-radius:99px;background:color-mix(in srgb,var(--accent) 9%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);
+  font-size:13px;font-weight:600;color:var(--accent);
+  transition:background .28s var(--ease),color .28s var(--ease),border-color .28s var(--ease)}
+.card .go .arw{transition:transform .3s var(--ease)}
+.card:hover .go{background:var(--accent);border-color:var(--accent);color:#fff}
+.card:hover .go .arw{transform:translateX(3px)}
 </style>
+<style>/* CET-6 · 阅读层：真题精读 + 每日融词阅读（与 base.css 的变量、导航共用）
+   依赖 base.css 中的 :root 变量与 .nav 骨架。 */
+
+/* 顶部阅读进度 */
+.rdbar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:transparent;pointer-events:none}
+.rdbar i{display:block;height:100%;width:0;background:var(--accent);opacity:.85;transition:width .12s linear}
+
+/* 文章头 */
+.rhead{
+  max-width:760px;margin:0 auto;padding:clamp(40px,7vh,72px) 24px clamp(20px,3vh,30px);
+}
+.rhead .kick{
+  font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:18px;
+}
+.rhead h1{
+  font-size:clamp(31px,4.6vw,50px);line-height:1.1;font-weight:600;letter-spacing:-.038em;
+  margin-bottom:18px;text-wrap:balance;animation:softIn .8s var(--ease) .08s both;
+}
+.rhead .rlede{
+  font-size:clamp(14px,1.6vw,16px);color:var(--sub);line-height:1.66;letter-spacing:-.005em;
+  max-width:56ch;text-wrap:pretty;animation:softIn .8s var(--ease) .16s both;
+}
+.rhead .rfact{
+  margin-top:22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums;
+  animation:softIn .8s var(--ease) .24s both;
+}
+.rhead .rfact span{padding:6px 12px;border-radius:99px;background:var(--fill);white-space:nowrap}
+.rhead .rfact b{font-weight:600;color:var(--fg)}
+.rhead .rfact .ok{background:color-mix(in srgb,var(--ok) 12%,transparent);color:var(--ok)}
+
+/* 控制条 */
+.ctrls{
+  position:sticky;top:48px;z-index:110;
+  padding:12px max(24px,env(safe-area-inset-left));
+  background:color-mix(in srgb,var(--bg) 82%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid var(--hair);
+}
+.ctrls .inner{max-width:712px;margin:0 auto;display:flex;gap:8px;align-items:center;justify-content:flex-start;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;height:33px;padding:0 15px;
+  border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--fg);
+  font-size:12.5px;font-weight:500;cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:background .24s var(--ease),border-color .24s var(--ease),color .24s var(--ease),transform .18s var(--ease);
+}
+.btn:hover{border-color:transparent;background:var(--fill)}
+.btn:active{transform:scale(.96)}
+.btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn .k{font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.btn[aria-pressed="true"] .k{color:rgba(255,255,255,.7)}
+
+/* 正文 */
+.passage{max-width:760px;margin:0 auto;padding:clamp(26px,5vh,44px) 24px 40px}
+.passage .pt{
+  font-size:clamp(17px,2.2vw,21px);font-weight:600;letter-spacing:-.02em;line-height:1.4;
+  margin:0 0 clamp(22px,3.4vh,32px);color:var(--sub);
+}
+.para{margin:0 0 clamp(26px,4vh,38px)}
+.para:last-child{margin-bottom:0}
+.sent{margin:0 0 15px}
+.sent:last-child{margin-bottom:0}
+.en{
+  margin:0;font-size:clamp(16.5px,1.72vw,18.5px);line-height:1.78;letter-spacing:-.006em;
+  text-align:left;text-wrap:pretty;
+}
+.zh{
+  margin:7px 0 0;font-size:15px;line-height:1.74;color:var(--sub);letter-spacing:.002em;
+  padding-left:13px;border-left:1.5px solid var(--hair);
+  transition:opacity .3s var(--ease);text-wrap:pretty;
+}
+.zh-empty{color:var(--warn);font-size:12.5px;padding-left:0;border-left-color:transparent}
+body.no-zh .zh{display:none}
+mark{
+  background:color-mix(in srgb,var(--accent) 15%,transparent);color:inherit;
+  border-radius:2px;padding:0 1.5px;transition:background .3s var(--ease);
+}
+body.no-mark mark{background:transparent;padding:0}
+.fill{color:var(--warn);border-bottom:2px dotted color-mix(in srgb,var(--warn) 55%,transparent);padding:0 1px}
+
+/* 词库 / 词表 */
+.bank,.wordbank{max-width:760px;margin:0 auto;padding:0 24px 40px}
+.bank .legend,.wordbank .legend{font-size:12px;color:var(--faint);margin-bottom:12px;line-height:1.7}
+.bank .bchips,.bank .chips,.wordbank .chips{
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+.bchip,.chips .chip{
+  display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;
+  font-size:12px;font-variant-numeric:tabular-nums;
+  border:1px solid transparent;transition:transform .2s var(--ease);
+}
+.bchip.on,.chips .chip.on{background:color-mix(in srgb,var(--ok) 11%,transparent);color:var(--ok);border-color:color-mix(in srgb,var(--ok) 22%,transparent)}
+.bchip.off,.chips .chip.off{background:var(--fill);color:var(--faint);border-color:transparent;text-decoration:line-through;text-decoration-thickness:1px}
+.bchip:hover{transform:translateY(-1px)}
+
+/* ───────── 真题页：考期 / 套题 / 文章 ───────── */
+.toc{
+  max-width:760px;margin:0 auto;padding:18px 24px 0;
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+}
+.toc a{
+  display:inline-flex;align-items:center;height:30px;padding:0 13px;border-radius:99px;
+  border:1px solid var(--line);background:transparent;color:var(--sub);font-size:12.5px;text-decoration:none;
+  font-variant-numeric:tabular-nums;transition:background .24s var(--ease),color .24s var(--ease),border-color .24s var(--ease);
+}
+.toc a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.year{
+  max-width:760px;margin:clamp(34px,5vh,52px) auto 14px;padding:0 24px;
+  font-size:clamp(19px,2.4vw,24px);font-weight:600;letter-spacing:-.03em;
+  display:flex;align-items:center;gap:14px;
+}
+.year::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.sets{max-width:760px;margin:0 auto;padding:0 24px 40px}
+details.setblk{
+  border:1px solid var(--line);border-radius:16px;background:var(--card);
+  margin:10px 0;overflow:hidden;transition:box-shadow .35s var(--ease),border-color .3s var(--ease);
+}
+details.setblk:hover{box-shadow:var(--shadow-sm)}
+details.setblk[open]{box-shadow:var(--shadow-sm);border-color:transparent}
+details.setblk > summary{
+  list-style:none;cursor:pointer;padding:17px 24px;display:flex;align-items:center;gap:12px;
+  font-size:14px;font-weight:500;letter-spacing:-.012em;
+}
+details.setblk > summary::-webkit-details-marker{display:none}
+details.setblk > summary::before{
+  content:"";width:6px;height:6px;flex:0 0 auto;margin-top:-3px;
+  border-right:1.5px solid var(--faint);border-bottom:1.5px solid var(--faint);
+  transform:rotate(-45deg);transition:transform .3s var(--ease);
+}
+details.setblk[open] > summary::before{transform:rotate(45deg);margin-top:2px}
+details.setblk > summary .smeta{margin-left:auto;font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums;font-weight:400}
+details.setblk[open] > summary{position:sticky;top:105px;z-index:5;background:color-mix(in srgb,var(--card) 92%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
+
+.art{padding:clamp(22px,3vw,32px) 24px;border-top:1px solid var(--hair)}
+.art:first-of-type{border-top:none}
+.art h3{
+  font-size:13px;font-weight:600;letter-spacing:-.005em;color:var(--sub);
+  margin:0 0 18px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+}
+.art h3 .wc{font-weight:400;font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.plabel{
+  display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;
+  border-radius:6px;background:var(--fill);color:var(--sub);font-size:11px;font-weight:600;
+  margin-right:9px;vertical-align:1px;letter-spacing:.02em;
+}
+
+/* 回到顶部 / 底部导航 */
+#topBtn{
+  position:fixed;right:20px;bottom:20px;z-index:90;width:38px;height:38px;border-radius:50%;
+  display:grid;place-items:center;border:1px solid var(--line);background:var(--card);color:var(--sub);
+  font-size:13px;text-decoration:none;cursor:pointer;box-shadow:var(--shadow-sm);
+  opacity:0;pointer-events:none;transform:translateY(6px);
+  transition:opacity .3s var(--ease),transform .3s var(--ease),color .2s var(--ease),border-color .2s var(--ease);
+}
+#topBtn.on{opacity:1;pointer-events:auto;transform:none}
+#topBtn:hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+.foot{
+  max-width:760px;margin:0 auto;padding:30px 24px 70px;
+  border-top:1px solid var(--hair);font-size:11.5px;color:var(--faint);line-height:1.9;text-align:center;
+}
+.foot a{color:var(--sub);text-decoration:none}
+.foot a:hover{color:var(--accent)}
+.foot .big{
+  display:inline-flex;align-items:center;gap:8px;margin-top:16px;height:38px;padding:0 20px;
+  border-radius:99px;border:1px solid var(--line);color:var(--fg);font-size:13px;font-weight:500;
+  transition:background .24s var(--ease),border-color .24s var(--ease),color .24s var(--ease);
+}
+.foot .big:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+@media (max-width:640px){
+  .ctrls{top:44px;padding:10px 14px}
+  .ctrls .inner{gap:6px}
+  .btn{height:32px;padding:0 12px;font-size:12px}
+  .rhead{padding-top:34px}
+  .passage,.bank,.wordbank,.foot{padding-left:16px;padding-right:16px}
+  .toc{padding-left:16px;padding-right:16px}
+  .year,.sets{padding-left:14px;padding-right:14px}
+  details.setblk[open] > summary{top:100px}
+  .zh{font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  .rhead h1,.rhead .rlede,.rhead .rfact{animation:none}
+}
+</style>
+<style>.rhead h1{font-size:clamp(28px,4vw,42px)}</style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <h1>CET-6 融词阅读 · Day 3 · 中英句对照版 · 2026-09-24</h1>
-  <div class="meta">每句英文下方紧跟中文译文 · 黄色高亮 = 本日词汇（变形也算命中）</div>
-  <span class="badge">本日词汇嵌入 186/186 · 100%</span><br>
-  <button class="btn" onclick="document.body.classList.toggle('no-mark')">👁 隐藏高亮裸读（再点恢复）</button>
-  <button class="btn" onclick="document.body.classList.toggle('no-zh')">隐藏译文 · 纯英自测（再点恢复）</button>
-</header>
-<div class="passage">
-<h2 class="pt">The Anatomy of Renewal: Governance, Enterprise, and Resilience in a Riverside Valley</h2>
+<div class="rdbar"><i></i></div><nav class="nav"><a class="navbtn" href="https://alex05250.github.io/cet6-reading/daily.html"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>每日</a><span class="navtitle">Day 03</span><div class="spacer"></div><a class="lnk" href="https://alex05250.github.io/cet6-reading/index.html">主页</a><a class="lnk" href="https://alex05250.github.io/cet6-reading/words.html">词表</a></nav><header class="rhead"><p class="kick">Daily Reading · Day 3</p><h1>The Anatomy of Renewal: Governance, Enterprise, and Resilience in a Riverside Valley</h1><div class="rfact"><span>2026-09-24</span><span class="ok">词汇嵌入 186/186 · 100%</span><span>external</span></div></header><div class="ctrls"><div class="inner"><button class="btn" data-act="zh" aria-pressed="false"><span class="lab">隐藏译文</span></button><button class="btn" data-act="mark" aria-pressed="false"><span class="lab">隐藏高亮</span></button></div></div><div class="passage">
 <div class="para"><div class="sent"><p class="en">Along the winding country road, a heavy <mark>lorry</mark> rattled past as its <mark>driver</mark> braced against an <mark>abrupt</mark> shudder of the steering <mark>wheel</mark>.</p><p class="zh">沿着蜿蜒的乡村公路，一辆重型卡车咔嗒咔嗒驶过，司机紧紧握稳因方向盘突如其来的剧烈震颤而晃动的把手。</p></div><div class="sent"><p class="en">A <mark>mechanic</mark>, wrapping his thick <mark>overcoat</mark> against the cold, stood <mark>upright</mark> near a stone <mark>hedge</mark> to inspect the vehicle.</p><p class="zh">一位修理工裹紧厚重的大衣以抵御严寒，笔直地站在石砌树篱旁仔细检查车辆。</p></div><div class="sent"><p class="en">Outside the gate, a <mark>sudden</mark> <mark>rush</mark> of workers began their daily <mark>commute</mark>, traveling a considerable <mark>distance</mark> to reach the processing <mark>plant</mark>.</p><p class="zh">大门外，一阵突如其来的工人人潮开始了每日的通勤，奔波相当长一段路程前往河畔的加工厂。</p></div><div class="sent"><p class="en">In adjacent pastures, a quiet <mark>cow</mark> grazed near a wild <mark>deer</mark> emerging from the woods.</p><p class="zh">在相邻的牧场上，一头安静的奶牛正在吃草，身旁不远处是一只刚从树林里钻出来的野鹿。</p></div><div class="sent"><p class="en">Surrounding fields were celebrated for a <mark>plentiful</mark> harvest of <mark>potato</mark> crops, yet severe <mark>soil</mark> <mark>erosion</mark> from <mark>summer</mark> storms had left thick <mark>mud</mark> across the road.</p><p class="zh">周遭的田野向来因丰饶的马铃薯收成而闻名，然而夏日暴雨带来的严重水土流失，却在道路上留下了厚厚的泥泞。</p></div><div class="sent"><p class="en">Near the old water <mark>mill</mark>, whose <mark>roof</mark> had recently been repaired, a <mark>cluster</mark> of villagers gathered to <mark>wait</mark> for the bus.</p><p class="zh">在屋顶近期刚刚修缮完工的古老水磨坊旁，一群村民聚在一起等待班车。</p></div><div class="sent"><p class="en">An elderly <mark>resident</mark> took a deep <mark>breath</mark>, let out a gentle <mark>sigh</mark>, and spoke <mark>softly</mark> about the climate.</p><p class="zh">一位年长的居民深吸了一口气，轻轻叹了一声，温和地聊起了最近的气候。</p></div><div class="sent"><p class="en">Before beginning another long <mark>hour</mark> of labor, they shared a hot <mark>pint</mark> of <mark>tea</mark>, watching the mist lift above the valley.</p><p class="zh">在开始又一个漫长辛劳的钟头之前，他们分着喝了一品脱热茶，看着晨雾在山谷上空缓缓散去。</p></div></div><div class="para"><div class="sent"><p class="en">In the town center, expanding <mark>commerce</mark> began to <mark>transform</mark> the historic district into an active market.</p><p class="zh">在市镇中心，不断繁荣的商业活动开始将这片历史悠久的街区转变为充满活力的集市。</p></div><div class="sent"><p class="en">Every <mark>shop</mark> announced a seasonal <mark>sale</mark>, while customers crowded into a popular <mark>cafe</mark> for their <mark>favourite</mark> breakfast.</p><p class="zh">沿街的每家店铺都挂出了换季特惠促销的海报，顾客们则挤进一家颇受欢迎的咖啡馆，享用他们最喜爱的早餐。</p></div><div class="sent"><p class="en">Traders discussed the price of each essential <mark>commodity</mark>, debating whether to <mark>invest</mark> fresh <mark>capital</mark> into local enterprise.</p><p class="zh">商人们热烈讨论着每种大宗基本商品的价格，权衡是否应向本地企业注入新的资本。</p></div><div class="sent"><p class="en">Critics argued that <mark>modern</mark> <mark>materialism</mark> eroded traditional <mark>romance</mark>, confronting <mark>residents</mark> with harsh economic <mark>reality</mark>.</p><p class="zh">批评人士认为，现代物质主义侵蚀了传统的浪漫情调，让居民不得不直面残酷的经济现实。</p></div><div class="sent"><p class="en">Nevertheless, the town offered <mark>beautiful</mark> parks, <mark><mark>interesting</mark></mark> exhibits, and <mark>sensible</mark> planning that bridged the <mark>difference</mark> between tradition and growth.</p><p class="zh">尽管如此，该镇依然拥有美丽的公园、妙趣横生的展览以及合理的规划，架起了连接传统风貌与时代发展的桥梁。</p></div><div class="sent"><p class="en">Clear <mark>communication</mark> across <mark>diverse</mark> commercial networks helped traders <mark>orient</mark> businesses toward international buyers, accompanied by <mark>corresponding</mark> gains in efficiency.</p><p class="zh">多元商业网络间顺畅清晰的沟通，帮助商家将业务导向国际买家，并随之带来了效率上的相应提升。</p></div><div class="sent"><p class="en">Transit managers agreed to <mark>loosen</mark> rules on pricing, reducing the standard <mark>fare</mark> while allocating a <mark>portion</mark> of profits to public squares.</p><p class="zh">交通管理者同意放宽票价限制，降低常规车票价格，同时将一部分利润专项划拨用于公共广场建设。</p></div><div class="sent"><p class="en">On a nearby terrace, a tiny <mark>spider</mark> spun silk above an ornamental fountain as white <mark>foam</mark> began to <mark>fill</mark> the stone basin.</p><p class="zh">在附近露台上，随着洁白的泡沫开始涌满石制水盆，一只微小的蜘蛛在观赏喷泉上方结网吐丝。</p></div><div class="sent"><p class="en">A quiet pump worked to <mark>suck</mark> water through clean pipes, while visitors stopped to <mark>snap</mark> photos and <mark>capture</mark> the morning light, feeling genuine <mark>relief</mark> after a busy week.</p><p class="zh">一台静音水泵持续运转，将水流抽吸进洁净的管道中；游人们纷纷驻足拍照捕捉晨光，在忙碌了一周后体会到了由衷的放松。</p></div></div><div class="para"><div class="sent"><p class="en">At the regional council hall, the civic <mark>federation</mark> met to debate local <mark>democracy</mark>.</p><p class="zh">在地方议会大厅里，市民联合会齐聚一堂，共同探讨基层民主的发展。</p></div><div class="sent"><p class="en">Scholars from <mark>France</mark> and experts in <mark>ancient</mark> <mark>Chinese</mark> administration compared past governance <mark>models</mark> with twentieth-century <mark>communist</mark> systems.</p><p class="zh">来自法国的学者与研究中国古代行政体制的专家，将过去的治理模式与二十世纪的共产主义制度进行了比较分析。</p></div><div class="sent"><p class="en">This gathering marked the <mark>fourth</mark> public forum this year, beginning shortly <mark>post</mark> <mark>meridiem</mark> in the main hall.</p><p class="zh">这是本年度举行的第四场公开论坛，于午后时分在主大厅正式开幕。</p></div><div class="sent"><p class="en">Delegates expanded the <mark>scope</mark> of reform beyond <mark>initial</mark> drafts, convincing each <mark>resident</mark> that civic destiny was truly <mark>theirs</mark> to shape.</p><p class="zh">代表们进一步拓宽了超出最初草案的改革范畴，让每一位居民深信市镇的命运真正掌握在他们自己手中。</p></div><div class="sent"><p class="en">In this complex <mark>case</mark> of governance, memories of past <mark>warfare</mark> reminded leaders that the rule of law remained a vital <mark>pillar</mark> of peace.</p><p class="zh">在这个错综复杂的治理案例中，对往昔战争的记忆时刻警示着领导者们：法治始终是守护和平的关键支柱。</p></div><div class="sent"><p class="en">The council awarded an annual <mark>prize</mark> to organizers who helped <mark>authorize</mark> new environmental statutes.</p><p class="zh">议会向协助推动并核准新环境法规的组织者们颁发了年度嘉奖。</p></div><div class="sent"><p class="en"><mark>Relevant</mark> documentation was distributed to <mark>motivate</mark> citizens to <mark>protect</mark> shared heritage and <mark>safeguard</mark> municipal reservoirs.</p><p class="zh">会场分发了相关文件资料，以激励市民保护共同的文化遗产，并切实捍卫市镇的水库资源。</p></div><div class="sent"><p class="en">Leaders refused to <mark>overlook</mark> poor families living in <mark>narrow</mark> alleys or <mark>humble</mark> hillside homes, <mark>where</mark> budget deficits could <mark>drain</mark> essential public services.</p><p class="zh">领导层坚决不忽视居住在狭窄巷道或山坡简陋民房里的贫困家庭，因为财政赤字可能会耗尽必不可少的公共服务资源。</p></div><div class="sent"><p class="en">If a structural <mark>breakdown</mark> were allowed to <mark>recur</mark>, a <mark>succession</mark> of severe crises could erupt.</p><p class="zh">如果任由结构性体制崩溃再次发生，一系列严峻的危机恐将接踵爆发。</p></div><div class="sent"><p class="en">When a skeptical member offered a <mark>curt</mark> remark and glanced <mark>sideways</mark> at the crowd, the chairperson calmly defended open discussion.</p><p class="zh">当一名心存疑虑的委员抛出一句简短生硬的评注并侧目斜视人群时，大会主席从容不迫地捍卫了公开辩论的权利。</p></div></div><div class="para"><div class="sent"><p class="en">Behind this peaceful facade, an intensive campaign against organized <mark>crime</mark> occupied law enforcement.</p><p class="zh">在这片祥和的表象背后，一场打击有组织犯罪的严密行动正让执法部门全力以赴。</p></div><div class="sent"><p class="en">Detectives tracked a violent <mark>gang</mark> attempting to <mark>smuggle</mark> illicit cargo along the canal.</p><p class="zh">刑警们紧密追踪一个企图沿着运河走私违禁货物的暴力黑帮团伙。</p></div><div class="sent"><p class="en">A thorough <mark>investigation</mark> and strict border <mark>inspection</mark> revealed that a <mark>corrupt</mark> official aided the network.</p><p class="zh">深入透彻的调查与严格的边境检查表明，一名腐败官员暗中为该走私网络提供了协助。</p></div><div class="sent"><p class="en"><mark>Suspicious</mark> transfers posed an immediate <mark>threat</mark> to civic stability, prompting an undercover <mark>agent</mark> to act before <mark>adverse</mark> fallout ruined local <mark>commerce</mark>.</p><p class="zh">多笔可疑转账对市镇的稳定构成了直接威胁，促使卧底探员在不利后果摧毁本地商业前果断采取行动。</p></div><div class="sent"><p class="en">A forensic <mark>specialist</mark> applied technical <mark>expertise</mark> to build an <mark>accurate</mark> file, enabling prosecutors to <mark>discern</mark> factual truth.</p><p class="zh">法医专家运用精湛的专业技能整理出一套准确详实的证据卷宗，使检察官得以甄别案情的客观真相。</p></div><div class="sent"><p class="en">The <mark>horrible</mark> <mark>revelation</mark> of betrayal <mark>recalled</mark> a <mark>tragic</mark> disaster that had once seemed <mark>hopeless</mark>.</p><p class="zh">这起令人震惊的背叛内幕令人回想起多年前一场曾让人感到无望的悲剧灾难。</p></div><div class="sent"><p class="en">Under relentless questioning, an accomplice turned almost <mark>hysterical</mark>, whereas a <mark>timid</mark> witness seemed <mark>too</mark> <mark>shy</mark> to speak clearly.</p><p class="zh">在持续不断的严厉审讯下，一名同谋几乎变得歇斯底里，而一位胆小的证人则显得过于怯弱拘谨，甚至难以清晰开口。</p></div><div class="sent"><p class="en">Wiping sweat from his <mark>forehead</mark>, a prominent defense <mark>lawyer</mark> and a consulting <mark>physician</mark> assessed the physical <mark>strain</mark> on the suspect, whose <mark>feeble</mark> testimony and <mark>broken</mark> pledges crumbled.</p><p class="zh">著名辩护律师一边擦去额头的汗水，一边与出诊医师共同评估嫌疑人承受的身体负荷；在质证下，嫌疑人苍白无力的供词与违背的誓言分崩离析。</p></div><div class="sent"><p class="en">The town celebrated when police closed a private <mark>club</mark> used to <mark>mock</mark> ethical standards and conceal the physical <mark>remains</mark> of contraband, demonstrating that authorities will <mark>do</mark> whatever is required to uphold justice.</p><p class="zh">当警方查封了一家用以嘲弄道德准则并隐匿违禁品残存痕迹的私人会所时，全镇为之欢呼，这充分证明当局必将采取一切必要手段来捍卫正义。</p></div></div><div class="para"><div class="sent"><p class="en">Innovation also thrived inside the municipal <mark>college</mark>, <mark>where</mark> <mark>learning</mark> crossed traditional disciplines.</p><p class="zh">创新之风同样在市立学院内部蓬勃兴起，这里的学术求知跨越了传统的学科界限。</p></div><div class="sent"><p class="en">In the engineering lab, researchers examined <mark>gravity</mark>, <mark>velocity</mark>, and current flowing through a copper <mark>coil</mark>.</p><p class="zh">在工程实验室里，研究人员深入探究重力、速度以及流经铜线圈的电流特性。</p></div><div class="sent"><p class="en">Generating <mark>electricity</mark> across a plate of <mark>metal</mark>, they measured how heavy <mark>weight</mark> shifted as internal rotors <mark>revolve</mark> inside a turbine.</p><p class="zh">他们通过金属板导电发电，测定内部转子在涡轮机中旋转时沉重的负荷是如何转移的。</p></div><div class="sent"><p class="en">An experienced <mark>operator</mark> guided apprentices to <mark>devise</mark> new methods and <mark>exercise</mark> critical judgment on a working <mark>model</mark> of the power grid.</p><p class="zh">一位经验丰富的操作员悉心指导学徒在电网运行模型上设计新方法并锻炼批判性判断力。</p></div><div class="sent"><p class="en">Nearby, a stone <mark>angel</mark> <mark>overlooked</mark> the arts center, <mark>where</mark> students read a moving <mark>poem</mark> on civic labor.</p><p class="zh">在附近，一尊石雕天使俯瞰着艺术中心，学生们在那里朗诵了一首歌颂劳动者的感人诗篇。</p></div><div class="sent"><p class="en">Dancers gathered in a sunny <mark>ballet</mark> <mark>studio</mark> to <mark>practise</mark> routines designed to <mark>inspire</mark> regional audiences.</p><p class="zh">舞者们聚集在洒满阳光的芭蕾舞练习室里排练剧目，旨在激发广大观众的情感共鸣。</p></div><div class="sent"><p class="en">A foreign <mark>correspondent</mark> showed keen <mark>interest</mark> in how technical skill helped the town <mark>earn</mark> national acclaim.</p><p class="zh">一位外籍记者对专业技术如何帮助这座小镇赢得全国声誉表现出了浓厚的兴趣。</p></div><div class="sent"><p class="en">Even farmers wrestling a stubborn <mark>bull</mark> or watching wild hawks <mark>fly</mark> overhead acknowledged that <mark>somewhere</mark> in this mixture lay <mark>something</mark> truly valuable.</p><p class="zh">哪怕是正在与倔强公牛角力的农夫，或是仰望雄鹰掠过天际的乡民，也不得不承认，在这番新旧交融的深处，蕴藏着某种真正弥足珍贵的价值。</p></div><div class="sent"><p class="en">Elders could <mark>recall</mark> hard decades and <mark>resume</mark> optimistic plans with confidence, recognizing <mark>why</mark> education built a foundation <mark>where</mark> citizens prosper under <mark>whichever</mark> administration holds power.</p><p class="zh">长辈们能够忆起往昔的艰辛岁月，并信心百倍地重新启动乐观的发展规划；他们深刻明白，唯有教育能筑牢基石，使公民在无论由哪个政府主政的时期都能实现繁荣。</p></div></div><div class="para"><div class="sent"><p class="en">At dusk, community leaders gathered to <mark>reconcile</mark> divergent views into a <mark>coherent</mark> development strategy.</p><p class="zh">黄昏时分，社区领袖们齐聚一堂，将各种分歧意见调和凝聚为一项协调连贯的发展战略。</p></div><div class="sent"><p class="en">From an <mark>apartment</mark> above the square, the mayor watched the recent <mark>clearance</mark> of outdated warehouses with <mark>satisfaction</mark>.</p><p class="zh">在广场上方的一间公寓里，市长满怀欣慰地注视着近期对废弃旧仓库的清理腾退成果。</p></div><div class="sent"><p class="en">An <mark>extensive</mark> renovation program was underway, <mark>where</mark> builders used fresh <mark>plaster</mark> and natural <mark>dye</mark> to restore damaged storefronts.</p><p class="zh">一项大规模翻修工程正全面铺开，工人们使用新鲜石膏与天然染料修缮破损的临街店面。</p></div><div class="sent"><p class="en">Medical teams promoted balanced diets rich in each essential <mark>vitamin</mark> to curb <mark>disease</mark>, ensuring all clinics were <mark>properly</mark> funded.</p><p class="zh">医疗团队大力推广富含各类必需维生素的均衡饮食以遏制疾病蔓延，并确保所有诊所获得充足恰当的资金保障。</p></div><div class="sent"><p class="en">In <mark>addition</mark> to healthcare, officials enacted <mark>moderate</mark> reforms, knowing prudent budgeting was <mark>preferable</mark> to reckless borrowing.</p><p class="zh">除医疗保障外，官员们还推行了温和稳健的改革举措，深知审慎的预算安排远胜过鲁莽盲目的借贷。</p></div><div class="sent"><p class="en">In the town hall, a young <mark>girl</mark> delivered a <mark>humorous</mark> presentation on local history, illustrating how one ambiguous <mark>preposition</mark> could turn legal interpretation <mark>upside-down</mark>.</p><p class="zh">在市政厅内，一名小女孩就本地历史带来了一场幽默风趣的演讲，生动展示了一个歧义介词是如何让法律条文的释义发生彻底颠倒的。</p></div><div class="sent"><p class="en">The mayor <mark>himself</mark> paused to <mark>imagine</mark> future prosperity, noting a clear <mark>resemblance</mark> between <mark>modern</mark> obstacles and pioneer hardships.</p><p class="zh">市长本人也驻足沉思，憧憬着未来的繁荣，同时注意到了当代困难与早期开拓者所历经的艰辛之间有着惊人的相似之处。</p></div><div class="sent"><p class="en">Though <mark>several</mark> conservative delegates were initially <mark>unwilling</mark> to accept rapid changes, a <mark>well-known</mark> community elder urged unity for the <mark>sake</mark> of the collective good.</p><p class="zh">尽管数名保守派代表起初不愿接受突飞猛进的变革，但一位声名卓著的社区长辈力劝大家为了公众的共同福祉紧密团结。</p></div><div class="sent"><p class="en">Analysts <mark>anticipate</mark> that these pragmatic policies are <mark>likely</mark> to produce <mark>superb</mark> results, generating <mark>indirect</mark> economic benefits as the town sleeps peacefully <mark>tonight</mark>, never <mark>too</mark> discouraged to pursue continuous progress.</p><p class="zh">分析人士预计，这些务实的政策极有可能取得卓越成效并创造间接经济效益；今夜小镇在祥和中安歇，却从未因挫折而气馁，始终坚定地追求不断向前的进步。</p></div></div>
-</div>
-<section>
-  <h2>📋 本日词表（绿=已嵌入文章 · 灰=未嵌入）</h2>
-  <div class="legend">共 186 词，按原卡顺序</div>
-  <div class="chips"><span class="chip on">crime</span><span class="chip on">abrupt</span><span class="chip on">do</span><span class="chip on">erosion</span><span class="chip on">poem</span><span class="chip on">favourite</span><span class="chip on">vitamin</span><span class="chip on">addition</span><span class="chip on">commerce</span><span class="chip on">model</span><span class="chip on">whichever</span><span class="chip on">strain</span><span class="chip on">potato</span><span class="chip on">plaster</span><span class="chip on">feeble</span><span class="chip on">studio</span><span class="chip on">theirs</span><span class="chip on">sake</span><span class="chip on">learning</span><span class="chip on">relevant</span><span class="chip on">motivate</span><span class="chip on">reality</span><span class="chip on">materialism</span><span class="chip on">romance</span><span class="chip on">upside-down</span><span class="chip on">gang</span><span class="chip on">beautiful</span><span class="chip on">tea</span><span class="chip on">sensible</span><span class="chip on">interesting</span><span class="chip on">loosen</span><span class="chip on">several</span><span class="chip on">club</span><span class="chip on">something</span><span class="chip on">recall</span><span class="chip on">drain</span><span class="chip on">resume</span><span class="chip on">suck</span><span class="chip on">well-known</span><span class="chip on">mill</span><span class="chip on">broken</span><span class="chip on">preferable</span><span class="chip on">sudden</span><span class="chip on">wait</span><span class="chip on">agent</span><span class="chip on">adverse</span><span class="chip on">initial</span><span class="chip on">scope</span><span class="chip on">democracy</span><span class="chip on">humorous</span><span class="chip on">invest</span><span class="chip on">ancient</span><span class="chip on">preposition</span><span class="chip on">recur</span><span class="chip on">expertise</span><span class="chip on">fly</span><span class="chip on">upright</span><span class="chip on">sigh</span><span class="chip on">somewhere</span><span class="chip on">unwilling</span><span class="chip on">coil</span><span class="chip on">commodity</span><span class="chip on">federation</span><span class="chip on">weight</span><span class="chip on">specialist</span><span class="chip on">case</span><span class="chip on">cow</span><span class="chip on">revolve</span><span class="chip on">too</span><span class="chip on">hysterical</span><span class="chip on">timid</span><span class="chip on">why</span><span class="chip on">accurate</span><span class="chip on">dye</span><span class="chip on">breakdown</span><span class="chip on">fill</span><span class="chip on">gravity</span><span class="chip on">college</span><span class="chip on">suspicious</span><span class="chip on">capital</span><span class="chip on">warfare</span><span class="chip on">clearance</span><span class="chip on">angel</span><span class="chip on">prize</span><span class="chip on">pillar</span><span class="chip on">velocity</span><span class="chip on">authorize</span><span class="chip on">plant</span><span class="chip on">deer</span><span class="chip on">safeguard</span><span class="chip on">fourth</span><span class="chip on">mud</span><span class="chip on">modern</span><span class="chip on">superb</span><span class="chip on">coherent</span><span class="chip on">shy</span><span class="chip on">operator</span><span class="chip on">reconcile</span><span class="chip on">resident</span><span class="chip on">Chinese</span><span class="chip on">discern</span><span class="chip on">France</span><span class="chip on">communist</span><span class="chip on">likely</span><span class="chip on">breath</span><span class="chip on">shop</span><span class="chip on">curt</span><span class="chip on">succession</span><span class="chip on">wheel</span><span class="chip on">softly</span><span class="chip on">investigation</span><span class="chip on">sideways</span><span class="chip on">smuggle</span><span class="chip on">imagine</span><span class="chip on">metal</span><span class="chip on">meridiem</span><span class="chip on">electricity</span><span class="chip on">hedge</span><span class="chip on">inspection</span><span class="chip on">forehead</span><span class="chip on">extensive</span><span class="chip on">tragic</span><span class="chip on">physician</span><span class="chip on">lawyer</span><span class="chip on">tonight</span><span class="chip on">difference</span><span class="chip on">post</span><span class="chip on">moderate</span><span class="chip on">anticipate</span><span class="chip on">threat</span><span class="chip on">interest</span><span class="chip on">pint</span><span class="chip on">resemblance</span><span class="chip on">ballet</span><span class="chip on">corresponding</span><span class="chip on">communication</span><span class="chip on">overlook</span><span class="chip on">narrow</span><span class="chip on">sale</span><span class="chip on">cafe</span><span class="chip on">hour</span><span class="chip on">spider</span><span class="chip on">horrible</span><span class="chip on">revelation</span><span class="chip on">practise</span><span class="chip on">humble</span><span class="chip on">earn</span><span class="chip on">bull</span><span class="chip on">devise</span><span class="chip on">rush</span><span class="chip on">where</span><span class="chip on">snap</span><span class="chip on">commute</span><span class="chip on">distance</span><span class="chip on">protect</span><span class="chip on">exercise</span><span class="chip on">roof</span><span class="chip on">lorry</span><span class="chip on">driver</span><span class="chip on">portion</span><span class="chip on">himself</span><span class="chip on">inspire</span><span class="chip on">correspondent</span><span class="chip on">mechanic</span><span class="chip on">plentiful</span><span class="chip on">summer</span><span class="chip on">disease</span><span class="chip on">girl</span><span class="chip on">hopeless</span><span class="chip on">satisfaction</span><span class="chip on">foam</span><span class="chip on">capture</span><span class="chip on">indirect</span><span class="chip on">soil</span><span class="chip on">transform</span><span class="chip on">fare</span><span class="chip on">cluster</span><span class="chip on">remains</span><span class="chip on">overcoat</span><span class="chip on">properly</span><span class="chip on">orient</span><span class="chip on">apartment</span><span class="chip on">relief</span><span class="chip on">corrupt</span><span class="chip on">mock</span><span class="chip on">diverse</span></div>
-</section>
-<footer>原文：卡片机自动生成 · gemini-3.8-flash-high (antigravity) · 2026-09-24<br>中英句对照版 · external · 2026-09-24</footer>
-</div>
+</div><div class="bank"><p class="legend">本日词表 · 186 词（绿 = 已嵌入文章，灰 = 未嵌入）</p><div class="chips"><span class="chip on">crime</span><span class="chip on">abrupt</span><span class="chip on">do</span><span class="chip on">erosion</span><span class="chip on">poem</span><span class="chip on">favourite</span><span class="chip on">vitamin</span><span class="chip on">addition</span><span class="chip on">commerce</span><span class="chip on">model</span><span class="chip on">whichever</span><span class="chip on">strain</span><span class="chip on">potato</span><span class="chip on">plaster</span><span class="chip on">feeble</span><span class="chip on">studio</span><span class="chip on">theirs</span><span class="chip on">sake</span><span class="chip on">learning</span><span class="chip on">relevant</span><span class="chip on">motivate</span><span class="chip on">reality</span><span class="chip on">materialism</span><span class="chip on">romance</span><span class="chip on">upside-down</span><span class="chip on">gang</span><span class="chip on">beautiful</span><span class="chip on">tea</span><span class="chip on">sensible</span><span class="chip on">interesting</span><span class="chip on">loosen</span><span class="chip on">several</span><span class="chip on">club</span><span class="chip on">something</span><span class="chip on">recall</span><span class="chip on">drain</span><span class="chip on">resume</span><span class="chip on">suck</span><span class="chip on">well-known</span><span class="chip on">mill</span><span class="chip on">broken</span><span class="chip on">preferable</span><span class="chip on">sudden</span><span class="chip on">wait</span><span class="chip on">agent</span><span class="chip on">adverse</span><span class="chip on">initial</span><span class="chip on">scope</span><span class="chip on">democracy</span><span class="chip on">humorous</span><span class="chip on">invest</span><span class="chip on">ancient</span><span class="chip on">preposition</span><span class="chip on">recur</span><span class="chip on">expertise</span><span class="chip on">fly</span><span class="chip on">upright</span><span class="chip on">sigh</span><span class="chip on">somewhere</span><span class="chip on">unwilling</span><span class="chip on">coil</span><span class="chip on">commodity</span><span class="chip on">federation</span><span class="chip on">weight</span><span class="chip on">specialist</span><span class="chip on">case</span><span class="chip on">cow</span><span class="chip on">revolve</span><span class="chip on">too</span><span class="chip on">hysterical</span><span class="chip on">timid</span><span class="chip on">why</span><span class="chip on">accurate</span><span class="chip on">dye</span><span class="chip on">breakdown</span><span class="chip on">fill</span><span class="chip on">gravity</span><span class="chip on">college</span><span class="chip on">suspicious</span><span class="chip on">capital</span><span class="chip on">warfare</span><span class="chip on">clearance</span><span class="chip on">angel</span><span class="chip on">prize</span><span class="chip on">pillar</span><span class="chip on">velocity</span><span class="chip on">authorize</span><span class="chip on">plant</span><span class="chip on">deer</span><span class="chip on">safeguard</span><span class="chip on">fourth</span><span class="chip on">mud</span><span class="chip on">modern</span><span class="chip on">superb</span><span class="chip on">coherent</span><span class="chip on">shy</span><span class="chip on">operator</span><span class="chip on">reconcile</span><span class="chip on">resident</span><span class="chip on">Chinese</span><span class="chip on">discern</span><span class="chip on">France</span><span class="chip on">communist</span><span class="chip on">likely</span><span class="chip on">breath</span><span class="chip on">shop</span><span class="chip on">curt</span><span class="chip on">succession</span><span class="chip on">wheel</span><span class="chip on">softly</span><span class="chip on">investigation</span><span class="chip on">sideways</span><span class="chip on">smuggle</span><span class="chip on">imagine</span><span class="chip on">metal</span><span class="chip on">meridiem</span><span class="chip on">electricity</span><span class="chip on">hedge</span><span class="chip on">inspection</span><span class="chip on">forehead</span><span class="chip on">extensive</span><span class="chip on">tragic</span><span class="chip on">physician</span><span class="chip on">lawyer</span><span class="chip on">tonight</span><span class="chip on">difference</span><span class="chip on">post</span><span class="chip on">moderate</span><span class="chip on">anticipate</span><span class="chip on">threat</span><span class="chip on">interest</span><span class="chip on">pint</span><span class="chip on">resemblance</span><span class="chip on">ballet</span><span class="chip on">corresponding</span><span class="chip on">communication</span><span class="chip on">overlook</span><span class="chip on">narrow</span><span class="chip on">sale</span><span class="chip on">cafe</span><span class="chip on">hour</span><span class="chip on">spider</span><span class="chip on">horrible</span><span class="chip on">revelation</span><span class="chip on">practise</span><span class="chip on">humble</span><span class="chip on">earn</span><span class="chip on">bull</span><span class="chip on">devise</span><span class="chip on">rush</span><span class="chip on">where</span><span class="chip on">snap</span><span class="chip on">commute</span><span class="chip on">distance</span><span class="chip on">protect</span><span class="chip on">exercise</span><span class="chip on">roof</span><span class="chip on">lorry</span><span class="chip on">driver</span><span class="chip on">portion</span><span class="chip on">himself</span><span class="chip on">inspire</span><span class="chip on">correspondent</span><span class="chip on">mechanic</span><span class="chip on">plentiful</span><span class="chip on">summer</span><span class="chip on">disease</span><span class="chip on">girl</span><span class="chip on">hopeless</span><span class="chip on">satisfaction</span><span class="chip on">foam</span><span class="chip on">capture</span><span class="chip on">indirect</span><span class="chip on">soil</span><span class="chip on">transform</span><span class="chip on">fare</span><span class="chip on">cluster</span><span class="chip on">remains</span><span class="chip on">overcoat</span><span class="chip on">properly</span><span class="chip on">orient</span><span class="chip on">apartment</span><span class="chip on">relief</span><span class="chip on">corrupt</span><span class="chip on">mock</span><span class="chip on">diverse</span></div></div><footer class="foot">原文：卡片机自动生成 · gemini-3.8-flash-high (antigravity) · 2026-09-24<br>逐句译文：external · 2026-09-24<br><a class="big" href="https://alex05250.github.io/cet6-reading/daily.html">返回每日目录</a></footer><button id="topBtn" data-act="top" aria-label="回到顶部">↑</button><script>/* CET-6 · 阅读层运行脚本：译文/高亮开关、阅读进度、回到顶部、锚点展开
+   真题页外链引用；每日文章页在构建时内联进页面（桌面单文件也要能跑）。 */
+(function () {
+  'use strict';
+  var body = document.body;
+
+  function onScroll() {
+    var y = window.scrollY || document.documentElement.scrollTop || 0;
+    body.classList.toggle('scrolled', y > 6);
+    var bar = document.querySelector('.rdbar i');
+    if (bar) {
+      var h = document.documentElement.scrollHeight - innerHeight;
+      bar.style.width = (h > 0 ? Math.min(100, y / h * 100) : 0) + '%';
+    }
+    var top = document.getElementById('topBtn');
+    if (top) top.classList.toggle('on', y > 700);
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* 按钮：data-act = zh | mark | open | close */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]');
+    if (!b) return;
+    var act = b.getAttribute('data-act');
+    if (act === 'zh') {
+      var off = body.classList.toggle('no-zh');
+      b.setAttribute('aria-pressed', String(off));
+      var lab = b.querySelector('.lab');
+      if (lab) lab.textContent = off ? '显示译文' : '隐藏译文';
+    } else if (act === 'mark') {
+      var off2 = body.classList.toggle('no-mark');
+      b.setAttribute('aria-pressed', String(off2));
+      var lab2 = b.querySelector('.lab');
+      if (lab2) lab2.textContent = off2 ? '显示高亮' : '隐藏高亮';
+    } else if (act === 'open') {
+      document.querySelectorAll('details.setblk').forEach(function (d) { d.open = true; });
+    } else if (act === 'close') {
+      document.querySelectorAll('details.setblk').forEach(function (d) { d.open = false; });
+    } else if (act === 'top') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+
+  /* 锚点：展开祖先 details 再滚动 */
+  function openHash() {
+    if (!location.hash) return;
+    var el = null;
+    try { el = document.querySelector(location.hash); } catch (err) { return; }
+    if (!el) return;
+    var d = el.closest('details');
+    if (d) d.open = true;
+    setTimeout(function () { el.scrollIntoView({ block: 'start' }); }, 30);
+  }
+  addEventListener('hashchange', openHash);
+  openHash();
+})();
+</script>
 </body>
 </html>

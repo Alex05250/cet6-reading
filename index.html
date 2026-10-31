@@ -2,60 +2,85 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CET-6 学习站</title>
-<style>
-  :root { --bg:#f7f5f0; --card:#fff; --ink:#222; --mut:#6b6b6b; --line:#e3ded3; --accent:#1e4b8f; }
-  * { box-sizing:border-box; }
-  body { margin:0; padding:40px 16px 80px; background:var(--bg); color:var(--ink);
-         font-family:Georgia,"Times New Roman","宋体",serif; line-height:1.7; }
-  .wrap { max-width:720px; margin:0 auto; }
-  header { text-align:center; margin-bottom:32px; }
-  header h1 { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:26px; margin:0 0 10px; color:var(--accent); }
-  header p { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:14px; color:var(--mut); margin:0; }
-  .navcard { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:22px 24px;
-         margin-bottom:16px; display:flex; align-items:center; gap:20px; text-decoration:none; color:inherit;
-         transition:box-shadow .15s ease, transform .1s ease; }
-  .navcard:hover { box-shadow:0 6px 18px rgba(0,0,0,.08); transform:translateY(-2px); }
-  .icon { font-size:38px; line-height:1; }
-  .navcard h2 { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:18px; margin:0 0 6px; color:var(--accent); }
-  .navcard p { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:13px; color:var(--mut); margin:0; }
-  footer { color:var(--mut); font-size:12px; margin-top:32px; text-align:center;
-         font-family:"Segoe UI","Microsoft YaHei",sans-serif; }
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>CET-6 · 词表、真题与每日阅读</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230071e3'/%3E%3Ctext x='32' y='45' font-size='36' font-weight='700' font-family='Segoe UI,Arial,sans-serif' text-anchor='middle' fill='%23fff'%3E6%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/base.css?v=20261031b">
+<link rel="stylesheet" href="assets/site.css?v=20261031b">
 </head>
 <body>
-<div class="wrap">
-<header>
-  <h1>📖 CET-6 学习站</h1>
-  <p>真题精读 + 每日融词阅读 · 中英逐句对照</p>
-</header>
 
-<a class="navcard" href="words.html">
-  <span class="icon">🎴</span>
-  <div>
-    <h2>30 天速通 · 核心词 5556</h2>
-    <p>30 天分组 · 中英搜索 · 闪卡自测 · 打勾记进度（本地保存，每天 185 词）</p>
-  </div>
-</a>
+<nav class="nav">
+  <a class="brand" href="index.html">CET-6 <i>· 2026</i></a>
+  <div class="spacer"></div>
+  <a class="lnk" href="words.html">词表</a>
+  <a class="lnk" href="exams.html">真题</a>
+  <a class="lnk" href="daily.html">每日</a>
+</nav>
 
-<a class="navcard" href="exams.html">
-  <span class="icon">📚</span>
-  <div>
-    <h2>六级真题精读（2023–2026）</h2>
-    <p>7 个考期 · 21 套真题 · 84 篇文章 · 选词填空已还原 · 逐句对照翻译（可隐藏）</p>
-  </div>
-</a>
+<div class="home">
 
-<a class="navcard" href="daily.html">
-  <span class="icon">📅</span>
-  <div>
-    <h2>每日融词阅读</h2>
-    <p>每天 15:00 更新 · 当日词卡词汇嵌入文章 · 逐句对照翻译</p>
-  </div>
-</a>
+  <header class="hero hero--home">
+    <div>
+      <p class="eyebrow">CET-6 · 2026 年 12 月</p>
+      <h1><span class="l">五千五百词。</span><span class="l dim">八十四篇文章。</span></h1>
+      <p class="lede">词过一遍，真题逐句拆开，每天再读一篇把词放回语境。<span class="br-d"></span>英文在上，中文在下，随时可以藏起来自测。</p>
+      <div class="meter">
+        <span><b>5556</b> 词</span><span class="dot">·</span>
+        <span><b>21</b> 套真题</span><span class="dot">·</span>
+        <span><b>84</b> 篇</span><span class="dot">·</span>
+        <span>每天 <b>15:00</b> 更新</span>
+      </div>
+    </div>
+  </header>
 
-<footer>自动生成 · 每天 15:00 更新</footer>
+  <section class="tiles">
+
+    <a class="tile" href="words.html">
+      <div class="tile-txt">
+        <p class="kick">Vocabulary · 30 Days</p>
+        <h2>三十天，把 5556 个词过一遍。</h2>
+        <p class="body">按天分组，中英双向搜索，闪卡自测；会的打勾，进度存在本机浏览器，关掉再回来还在。</p>
+        <span class="go">打开词表
+          <svg class="arw" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </div>
+      <div class="tile-num"><b data-count="5556">5,556</b><s>每天 185 词</s></div>
+    </a>
+
+    <a class="tile" href="exams.html">
+      <div class="tile-txt">
+        <p class="kick">Past Papers · 2023—2026</p>
+        <h2>21 套真题，84 篇，一句一句读。</h2>
+        <p class="body">每句英文下面紧跟中文译文；选词填空已按答案还原并标出原空位；译文可一键收起，纯英自测。</p>
+        <span class="go">开始精读
+          <svg class="arw" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </div>
+      <div class="tile-num"><b data-count="84">84</b><s>篇 · 7 个考期</s></div>
+    </a>
+
+    <a class="tile" href="daily.html">
+      <div class="tile-txt">
+        <p class="kick">Daily Reading · 15:00</p>
+        <h2>每天一篇，把当天的词用出去。</h2>
+        <p class="body">当日词卡里的词被写进一篇地道英语文章，逐句对照，高亮可隐藏。想让词记住，先让它出现在句子里。</p>
+        <span class="go">读最新一篇
+          <svg class="arw" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </div>
+      <div class="tile-num"><b data-count="185">185</b><s>词 / 篇</s><span class="live" id="liveDay">读取中…</span></div>
+    </a>
+
+  </section>
+
 </div>
+
+<footer class="foot">
+  <a href="words.html">词表</a><a href="exams.html">真题精读</a><a href="daily.html">每日阅读</a><br>
+  自动生成 · 每天 15:00 更新 · 学习进度只存在本机浏览器
+</footer>
+
+<script src="assets/site.js?v=20261031b"></script>
 </body>
 </html>

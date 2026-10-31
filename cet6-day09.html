@@ -1,70 +1,406 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CET-6 Day 9 · 中英句对照 · The Geometry of Recovery: How Spatial Thinking Reshapes Post-Disaster Communities</title>
-<style>
-  :root { --bg:#f7f5f0; --card:#fff; --ink:#222; --mut:#6b6b6b; --line:#e3ded3; --accent:#1e4b8f; --zh:#4a4a4a; }
-  * { box-sizing:border-box; }
-  body { margin:0; padding:28px 16px 80px; background:var(--bg); color:var(--ink);
-          font-family:Georgia,"Times New Roman","宋体",serif; line-height:1.85; }
-  .wrap { max-width:720px; margin:0 auto; }
-  header { text-align:center; margin-bottom:26px; }
-  header h1 { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:17px; margin:0 0 8px; color:var(--accent); }
-  .meta { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:13px; color:var(--mut); }
-  .badge { display:inline-block; margin-top:10px; padding:4px 14px; border-radius:20px; font-size:13px;
-            background:#e8f0e8; color:#2f6f4f; font-family:"Segoe UI","Microsoft YaHei",sans-serif; }
-  .btn { margin-top:12px; padding:6px 16px; border:1px solid var(--accent); color:var(--accent);
-          background:#fff; border-radius:8px; cursor:pointer; font-size:13px;
-          font-family:"Segoe UI","Microsoft YaHei",sans-serif; }
-  .btn:hover { background:#eef3fa; }
-  .passage { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:26px 30px; font-size:17px; }
-  .pt { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:19px; margin:0 0 18px; text-align:center; }
-  .para { margin:0 0 24px; }
-  .para:last-child { margin-bottom:0; }
-  .sent { margin:0 0 14px; }
-  .sent:last-child { margin-bottom:0; }
-  .en { margin:0; text-align:justify; }
-  .zh { margin:4px 0 0; padding-left:12px; border-left:3px solid var(--line); color:var(--zh);
-         font-size:15px; line-height:1.75; text-align:justify;
-         font-family:"KaiTi","楷体","STKaiti","宋体",serif; }
-  .zh-empty { color:#b08d57; font-size:13px; }
-  body.no-zh .zh { display:none; }
-  mark { background:#ffe58a; padding:0 2px; border-radius:3px; }
-  body.no-mark mark { background:transparent; padding:0; }
-  section { background:var(--card); border:1px solid var(--line); border-radius:12px;
-             margin-top:18px; padding:16px 20px; }
-  section h2 { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:14px; margin:0 0 10px; }
-  .chips { line-height:2.1; }
-  .chip { display:inline-block; font-size:12px; font-family:"Segoe UI","Microsoft YaHei",sans-serif;
-           padding:1px 8px; margin:2px 3px; border-radius:10px; }
-  .chip.on { background:#e8f0e8; color:#2f6f4f; border:1px solid #c3dcc3; }
-  .chip.off { background:#f0efea; color:#aaa; border:1px dashed var(--line); }
-  .legend { font-size:12px; color:var(--mut); margin-bottom:6px; }
-  footer { color:var(--mut); font-size:12px; margin-top:20px; text-align:center;
-            font-family:"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.9; }
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Day 09 · The Geometry of Recovery: How Spatial Thinking Reshapes Post-Disaster Communities · CET-6</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230071e3'/%3E%3Ctext x='32' y='45' font-size='36' font-weight='700' font-family='Segoe UI,Arial,sans-serif' text-anchor='middle' fill='%23fff'%3E6%3C/text%3E%3C/svg%3E">
+<style>/* CET-6 词汇站 · 基础层：变量 / 布局骨架 / 导航 / 英雄区 / 工具栏 / 卡片网格 */
+:root{
+  --bg:#ffffff; --fg:#1d1d1f; --sub:#6e6e73; --faint:#a1a1a6;
+  --line:rgba(0,0,0,.09); --hair:rgba(0,0,0,.055); --fill:rgba(0,0,0,.04); --card:#ffffff;
+  --accent:#0071e3; --ok:#1d9a6c; --warn:#b25000;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.03),0 4px 14px rgba(0,0,0,.035);
+  --shadow-lg:0 16px 48px rgba(0,0,0,.10);
+  --ease:cubic-bezier(.32,.72,0,1);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#000000; --fg:#f5f5f7; --sub:#a1a1a6; --faint:#6e6e73;
+    --line:rgba(255,255,255,.14); --hair:rgba(255,255,255,.075); --fill:rgba(255,255,255,.06); --card:#1c1c1e;
+    --accent:#2997ff; --ok:#30d158; --warn:#ff9f0a;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.5); --shadow-lg:0 16px 48px rgba(0,0,0,.75);
+  }
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--fg);line-height:1.5;font-synthesis:none;overflow-x:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI Variable Text","Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  transition:background .5s var(--ease),color .5s var(--ease);
+}
+::selection{background:var(--accent);color:#fff}
+button{font:inherit;color:inherit}
+a{color:inherit}
+
+/* 入场 */
+@keyframes lineUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes softIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.anim{animation:softIn .7s var(--ease) both}
+
+/* 导航 */
+.nav{
+  position:sticky;top:0;z-index:120;height:48px;display:flex;align-items:center;gap:16px;
+  padding:0 max(22px,env(safe-area-inset-left)) 0 max(22px,env(safe-area-inset-right));
+  background:color-mix(in srgb,var(--bg) 74%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid transparent;transition:border-color .3s var(--ease);
+}
+body.scrolled .nav{border-bottom-color:var(--hair)}
+.nav .brand{font-size:13px;font-weight:600;letter-spacing:-.005em;white-space:nowrap;text-decoration:none}
+.nav .brand i{font-style:normal;color:var(--faint);font-weight:400}
+.nav .spacer{flex:1}
+.nav a.lnk{font-size:12.5px;color:var(--sub);text-decoration:none;transition:color .2s var(--ease)}
+.nav a.lnk:hover{color:var(--fg)}
+/* 导航返回键：36px 高、主色描边，作用一眼可见 */
+.nav .navbtn{
+  display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 16px 0 13px;
+  border-radius:99px;border:1px solid color-mix(in srgb,var(--accent) 24%,transparent);
+  background:color-mix(in srgb,var(--accent) 9%,transparent);
+  font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap;
+  transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease),transform .18s var(--ease);
+}
+.nav .navbtn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.nav .navbtn:active{transform:scale(.955)}
+.nav .navbtn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;margin-top:-1px}
+.nav .navtitle{font-size:12.5px;font-weight:500;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}
+
+
+/* 英雄区 */
+.hero{
+  max-width:920px;margin:0 auto;padding:clamp(60px,10vh,120px) 24px clamp(36px,6vh,56px);
+  text-align:center;will-change:opacity,transform;
+}
+@supports (animation-timeline:scroll()){
+  .hero{animation:heroOut linear both;animation-timeline:scroll(root block);animation-range:0 520px}
+  @keyframes heroOut{to{opacity:.1;transform:translateY(52px) scale(.975)}}
+}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+h1{font-size:clamp(38px,7vw,82px);line-height:1.12;font-weight:600;letter-spacing:-.03em;margin-bottom:26px}
+h1 .dim{color:var(--sub)}
+h1 .l{display:block;animation:lineUp 1s var(--ease) both}
+h1 .l:nth-child(1){animation-delay:.10s}
+h1 .l:nth-child(2){animation-delay:.20s}
+.eyebrow{animation:softIn .85s var(--ease) .04s both}
+.lede{animation:softIn .95s var(--ease) .30s both;font-size:clamp(15px,1.9vw,19px);color:var(--sub);line-height:1.6;letter-spacing:-.008em;max-width:min(520px,88vw);margin:0 auto;text-wrap:pretty;word-break:normal;line-break:strict}
+.meter{animation:softIn .95s var(--ease) .42s both;display:inline-flex;align-items:center;gap:12px;margin-top:44px;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums;padding:9px 18px;border-radius:99px;background:var(--fill)}
+.meter .track{width:130px;height:3px;border-radius:99px;background:var(--hair);overflow:hidden}
+.meter .track i{display:block;height:100%;width:0;background:var(--ok);border-radius:99px;transition:width .8s var(--ease)}
+.meter b{color:var(--fg);font-weight:600}
+
+/* 工具栏 */
+.toolbar{
+  position:sticky;top:48px;z-index:110;padding:12px 24px;
+  background:color-mix(in srgb,var(--bg) 84%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid var(--hair);
+}
+.toolbar .inner{max-width:1120px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
+.search{
+  flex:0 1 380px;min-width:180px;height:38px;padding:0 14px 0 36px;font:inherit;font-size:13.5px;color:var(--fg);
+  background:var(--fill) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23a1a1a6' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") no-repeat 13px center;
+  border:0;border-radius:9px;outline:none;transition:box-shadow .25s var(--ease),background .25s var(--ease);
+}
+.search::placeholder{color:var(--faint)}
+.search:focus{box-shadow:0 0 0 3.5px color-mix(in srgb,var(--accent) 20%,transparent);background:var(--card)}
+.seg{display:flex;gap:2px;background:var(--fill);border-radius:9px;padding:2px}
+.seg button{font-size:12.5px;color:var(--sub);background:none;border:0;cursor:pointer;padding:6px 14px;border-radius:7px;transition:all .25s var(--ease);white-space:nowrap}
+.seg button[aria-selected="true"]{background:var(--card);color:var(--fg);box-shadow:var(--shadow-sm);font-weight:500}
+
+/* 网格与卡片 */
+.stage{max-width:1168px;margin:0 auto;padding:36px 24px 140px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:14px}
+.card{
+  position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:20px 20px 18px;cursor:pointer;text-align:left;display:flex;flex-direction:column;
+  text-decoration:none;overflow:hidden;opacity:0;transform:translateY(18px);
+  transition:opacity .6s var(--ease),transform .55s var(--ease),box-shadow .4s var(--ease),border-color .3s var(--ease);
+}
+.card.in{opacity:1;transform:none}
+.card:hover{box-shadow:var(--shadow-lg);border-color:transparent}
+.card.in:hover{transform:translateY(-3px)}
+.card::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;
+  background:radial-gradient(240px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.7),transparent 62%);
+  transition:opacity .45s var(--ease);
+}
+.card:hover::after{opacity:1}
+@media (prefers-color-scheme:dark){
+  .card::after{background:radial-gradient(240px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.07),transparent 62%)}
+}
+.card .top{display:flex;align-items:baseline;justify-content:space-between;gap:9px;margin-bottom:18px}
+.card .dn{font-size:13.5px;font-weight:600;letter-spacing:.005em}
+.card .rng{font-size:11px;color:var(--faint);font-variant-numeric:tabular-nums;letter-spacing:.01em;transition:opacity .3s}
+.card .num{display:flex;align-items:baseline;gap:4px;margin-bottom:11px}
+.card .num b{font-size:27px;font-weight:600;letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums}
+.card .num s{font-size:12.5px;color:var(--faint);text-decoration:none;font-variant-numeric:tabular-nums}
+.card .bar{height:2.5px;border-radius:99px;background:var(--fill);overflow:hidden}
+.card .bar i{display:block;height:100%;width:0;background:var(--ok);border-radius:99px;transition:width .7s var(--ease)}
+.card.full .num b{color:var(--ok)}
+.card .tick{position:absolute;top:17px;right:17px;font-size:11px;color:var(--ok);opacity:0;transform:scale(.6);transition:all .35s var(--ease)}
+.card.full .tick{opacity:1;transform:none}
+.card.full .rng{opacity:0}
+/* 进入按钮：卡片底部的主色胶囊，悬停实心 */
+.card .go{margin-top:16px;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 15px;
+  border-radius:99px;background:color-mix(in srgb,var(--accent) 9%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);
+  font-size:13px;font-weight:600;color:var(--accent);
+  transition:background .28s var(--ease),color .28s var(--ease),border-color .28s var(--ease)}
+.card .go .arw{transition:transform .3s var(--ease)}
+.card:hover .go{background:var(--accent);border-color:var(--accent);color:#fff}
+.card:hover .go .arw{transform:translateX(3px)}
 </style>
+<style>/* CET-6 · 阅读层：真题精读 + 每日融词阅读（与 base.css 的变量、导航共用）
+   依赖 base.css 中的 :root 变量与 .nav 骨架。 */
+
+/* 顶部阅读进度 */
+.rdbar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:transparent;pointer-events:none}
+.rdbar i{display:block;height:100%;width:0;background:var(--accent);opacity:.85;transition:width .12s linear}
+
+/* 文章头 */
+.rhead{
+  max-width:760px;margin:0 auto;padding:clamp(40px,7vh,72px) 24px clamp(20px,3vh,30px);
+}
+.rhead .kick{
+  font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:18px;
+}
+.rhead h1{
+  font-size:clamp(31px,4.6vw,50px);line-height:1.1;font-weight:600;letter-spacing:-.038em;
+  margin-bottom:18px;text-wrap:balance;animation:softIn .8s var(--ease) .08s both;
+}
+.rhead .rlede{
+  font-size:clamp(14px,1.6vw,16px);color:var(--sub);line-height:1.66;letter-spacing:-.005em;
+  max-width:56ch;text-wrap:pretty;animation:softIn .8s var(--ease) .16s both;
+}
+.rhead .rfact{
+  margin-top:22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums;
+  animation:softIn .8s var(--ease) .24s both;
+}
+.rhead .rfact span{padding:6px 12px;border-radius:99px;background:var(--fill);white-space:nowrap}
+.rhead .rfact b{font-weight:600;color:var(--fg)}
+.rhead .rfact .ok{background:color-mix(in srgb,var(--ok) 12%,transparent);color:var(--ok)}
+
+/* 控制条 */
+.ctrls{
+  position:sticky;top:48px;z-index:110;
+  padding:12px max(24px,env(safe-area-inset-left));
+  background:color-mix(in srgb,var(--bg) 82%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid var(--hair);
+}
+.ctrls .inner{max-width:712px;margin:0 auto;display:flex;gap:8px;align-items:center;justify-content:flex-start;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;height:33px;padding:0 15px;
+  border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--fg);
+  font-size:12.5px;font-weight:500;cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:background .24s var(--ease),border-color .24s var(--ease),color .24s var(--ease),transform .18s var(--ease);
+}
+.btn:hover{border-color:transparent;background:var(--fill)}
+.btn:active{transform:scale(.96)}
+.btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn .k{font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.btn[aria-pressed="true"] .k{color:rgba(255,255,255,.7)}
+
+/* 正文 */
+.passage{max-width:760px;margin:0 auto;padding:clamp(26px,5vh,44px) 24px 40px}
+.passage .pt{
+  font-size:clamp(17px,2.2vw,21px);font-weight:600;letter-spacing:-.02em;line-height:1.4;
+  margin:0 0 clamp(22px,3.4vh,32px);color:var(--sub);
+}
+.para{margin:0 0 clamp(26px,4vh,38px)}
+.para:last-child{margin-bottom:0}
+.sent{margin:0 0 15px}
+.sent:last-child{margin-bottom:0}
+.en{
+  margin:0;font-size:clamp(16.5px,1.72vw,18.5px);line-height:1.78;letter-spacing:-.006em;
+  text-align:left;text-wrap:pretty;
+}
+.zh{
+  margin:7px 0 0;font-size:15px;line-height:1.74;color:var(--sub);letter-spacing:.002em;
+  padding-left:13px;border-left:1.5px solid var(--hair);
+  transition:opacity .3s var(--ease);text-wrap:pretty;
+}
+.zh-empty{color:var(--warn);font-size:12.5px;padding-left:0;border-left-color:transparent}
+body.no-zh .zh{display:none}
+mark{
+  background:color-mix(in srgb,var(--accent) 15%,transparent);color:inherit;
+  border-radius:2px;padding:0 1.5px;transition:background .3s var(--ease);
+}
+body.no-mark mark{background:transparent;padding:0}
+.fill{color:var(--warn);border-bottom:2px dotted color-mix(in srgb,var(--warn) 55%,transparent);padding:0 1px}
+
+/* 词库 / 词表 */
+.bank,.wordbank{max-width:760px;margin:0 auto;padding:0 24px 40px}
+.bank .legend,.wordbank .legend{font-size:12px;color:var(--faint);margin-bottom:12px;line-height:1.7}
+.bank .bchips,.bank .chips,.wordbank .chips{
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+.bchip,.chips .chip{
+  display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;
+  font-size:12px;font-variant-numeric:tabular-nums;
+  border:1px solid transparent;transition:transform .2s var(--ease);
+}
+.bchip.on,.chips .chip.on{background:color-mix(in srgb,var(--ok) 11%,transparent);color:var(--ok);border-color:color-mix(in srgb,var(--ok) 22%,transparent)}
+.bchip.off,.chips .chip.off{background:var(--fill);color:var(--faint);border-color:transparent;text-decoration:line-through;text-decoration-thickness:1px}
+.bchip:hover{transform:translateY(-1px)}
+
+/* ───────── 真题页：考期 / 套题 / 文章 ───────── */
+.toc{
+  max-width:760px;margin:0 auto;padding:18px 24px 0;
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+}
+.toc a{
+  display:inline-flex;align-items:center;height:30px;padding:0 13px;border-radius:99px;
+  border:1px solid var(--line);background:transparent;color:var(--sub);font-size:12.5px;text-decoration:none;
+  font-variant-numeric:tabular-nums;transition:background .24s var(--ease),color .24s var(--ease),border-color .24s var(--ease);
+}
+.toc a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.year{
+  max-width:760px;margin:clamp(34px,5vh,52px) auto 14px;padding:0 24px;
+  font-size:clamp(19px,2.4vw,24px);font-weight:600;letter-spacing:-.03em;
+  display:flex;align-items:center;gap:14px;
+}
+.year::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.sets{max-width:760px;margin:0 auto;padding:0 24px 40px}
+details.setblk{
+  border:1px solid var(--line);border-radius:16px;background:var(--card);
+  margin:10px 0;overflow:hidden;transition:box-shadow .35s var(--ease),border-color .3s var(--ease);
+}
+details.setblk:hover{box-shadow:var(--shadow-sm)}
+details.setblk[open]{box-shadow:var(--shadow-sm);border-color:transparent}
+details.setblk > summary{
+  list-style:none;cursor:pointer;padding:17px 24px;display:flex;align-items:center;gap:12px;
+  font-size:14px;font-weight:500;letter-spacing:-.012em;
+}
+details.setblk > summary::-webkit-details-marker{display:none}
+details.setblk > summary::before{
+  content:"";width:6px;height:6px;flex:0 0 auto;margin-top:-3px;
+  border-right:1.5px solid var(--faint);border-bottom:1.5px solid var(--faint);
+  transform:rotate(-45deg);transition:transform .3s var(--ease);
+}
+details.setblk[open] > summary::before{transform:rotate(45deg);margin-top:2px}
+details.setblk > summary .smeta{margin-left:auto;font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums;font-weight:400}
+details.setblk[open] > summary{position:sticky;top:105px;z-index:5;background:color-mix(in srgb,var(--card) 92%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
+
+.art{padding:clamp(22px,3vw,32px) 24px;border-top:1px solid var(--hair)}
+.art:first-of-type{border-top:none}
+.art h3{
+  font-size:13px;font-weight:600;letter-spacing:-.005em;color:var(--sub);
+  margin:0 0 18px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+}
+.art h3 .wc{font-weight:400;font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.plabel{
+  display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;
+  border-radius:6px;background:var(--fill);color:var(--sub);font-size:11px;font-weight:600;
+  margin-right:9px;vertical-align:1px;letter-spacing:.02em;
+}
+
+/* 回到顶部 / 底部导航 */
+#topBtn{
+  position:fixed;right:20px;bottom:20px;z-index:90;width:38px;height:38px;border-radius:50%;
+  display:grid;place-items:center;border:1px solid var(--line);background:var(--card);color:var(--sub);
+  font-size:13px;text-decoration:none;cursor:pointer;box-shadow:var(--shadow-sm);
+  opacity:0;pointer-events:none;transform:translateY(6px);
+  transition:opacity .3s var(--ease),transform .3s var(--ease),color .2s var(--ease),border-color .2s var(--ease);
+}
+#topBtn.on{opacity:1;pointer-events:auto;transform:none}
+#topBtn:hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+.foot{
+  max-width:760px;margin:0 auto;padding:30px 24px 70px;
+  border-top:1px solid var(--hair);font-size:11.5px;color:var(--faint);line-height:1.9;text-align:center;
+}
+.foot a{color:var(--sub);text-decoration:none}
+.foot a:hover{color:var(--accent)}
+.foot .big{
+  display:inline-flex;align-items:center;gap:8px;margin-top:16px;height:38px;padding:0 20px;
+  border-radius:99px;border:1px solid var(--line);color:var(--fg);font-size:13px;font-weight:500;
+  transition:background .24s var(--ease),border-color .24s var(--ease),color .24s var(--ease);
+}
+.foot .big:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+@media (max-width:640px){
+  .ctrls{top:44px;padding:10px 14px}
+  .ctrls .inner{gap:6px}
+  .btn{height:32px;padding:0 12px;font-size:12px}
+  .rhead{padding-top:34px}
+  .passage,.bank,.wordbank,.foot{padding-left:16px;padding-right:16px}
+  .toc{padding-left:16px;padding-right:16px}
+  .year,.sets{padding-left:14px;padding-right:14px}
+  details.setblk[open] > summary{top:100px}
+  .zh{font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  .rhead h1,.rhead .rlede,.rhead .rfact{animation:none}
+}
+</style>
+<style>.rhead h1{font-size:clamp(28px,4vw,42px)}</style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <h1>CET-6 融词阅读 · Day 9 · 中英句对照版 · 2026-08-28</h1>
-  <div class="meta">每句英文下方紧跟中文译文 · 黄色高亮 = 本日词汇（变形也算命中）</div>
-  <span class="badge">本日词汇嵌入 111/185 · 60%</span><br>
-  <button class="btn" onclick="document.body.classList.toggle('no-mark')">👁 隐藏高亮裸读（再点恢复）</button>
-  <button class="btn" onclick="document.body.classList.toggle('no-zh')">隐藏译文 · 纯英自测（再点恢复）</button>
-</header>
-<div class="passage">
-<h2 class="pt">The Geometry of Recovery: How Spatial Thinking Reshapes Post-Disaster Communities</h2>
+<div class="rdbar"><i></i></div><nav class="nav"><a class="navbtn" href="https://alex05250.github.io/cet6-reading/daily.html"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>每日</a><span class="navtitle">Day 09</span><div class="spacer"></div><a class="lnk" href="https://alex05250.github.io/cet6-reading/index.html">主页</a><a class="lnk" href="https://alex05250.github.io/cet6-reading/words.html">词表</a></nav><header class="rhead"><p class="kick">Daily Reading · Day 9</p><h1>The Geometry of Recovery: How Spatial Thinking Reshapes Post-Disaster Communities</h1><div class="rfact"><span>2026-08-28</span><span class="ok">词汇嵌入 111/185 · 60%</span><span>deepseek-v4-pro @ opencode-go</span></div></header><div class="ctrls"><div class="inner"><button class="btn" data-act="zh" aria-pressed="false"><span class="lab">隐藏译文</span></button><button class="btn" data-act="mark" aria-pressed="false"><span class="lab">隐藏高亮</span></button></div></div><div class="passage">
 <div class="para"><div class="sent"><p class="en">In the <mark>fortnight</mark> following the river <mark>delta</mark>&#x27;s most destructive flood in a century, the sheer <mark>horror</mark> of the event remained <mark>vivid</mark> in the public mind.</p><p class="zh">在三角洲地区经历了一个世纪以来最具破坏性的洪水后的两周里，这场灾难的恐怖景象在公众心中依然历历在目。</p></div><div class="sent"><p class="en">Emergency crews worked in the <mark>midst</mark> of mud and debris, their <mark>buckets</mark> and <mark>straw</mark> mats serving as <mark>modest</mark> tools against an overwhelming force.</p><p class="zh">紧急救援人员在泥泞和废墟中工作，水桶和草席成了他们对抗这场巨大灾难的简陋工具。</p></div><div class="sent"><p class="en">The authorities, under intense <mark>scrutiny</mark>, <mark>attempted</mark> to <mark>mobilize</mark> every available resource, from <mark>canoe</mark> rescue teams to helicopter <mark>pilots</mark> who skimmed over submerged rooftops in the frail <mark>daylight</mark>.</p><p class="zh">受到严密关注的当局试图调动一切可用资源，从独木舟救援队到在微弱日光下掠过被淹没屋顶的直升机飞行员。</p></div><div class="sent"><p class="en">For many residents, the <mark>decision</mark> to stay or leave was <mark>not</mark> <mark>simply</mark> a matter of logistics; it was a <mark>spiritual</mark> trial.</p><p class="zh">对许多居民来说，留下还是离开的决定不仅仅是后勤问题，更是一场精神考验。</p></div><div class="sent"><p class="en">One elderly <mark>landlady</mark>, whose <mark>modest</mark> home had been reduced to a <mark>skeleton</mark> of timber, refused to abandon the property, <mark>exclaiming</mark> that no flood would strip her of her memory.</p><p class="zh">一位年迈的女房东，她那简朴的家已被冲得只剩木架，却拒绝放弃这处房产，声称任何洪水都无法夺走她的记忆。</p></div><div class="sent"><p class="en">Her <mark>neighbours</mark>, <mark>generally</mark> <mark>optimistic</mark> but <mark>sobered</mark> by the scale of the loss, began to <mark>speculate</mark> about what the <mark>remainder</mark> of the <mark>month</mark> would bring.</p><p class="zh">她的邻居们总体上乐观，但被损失的规模所警醒，开始猜测这个月剩下的日子还会带来什么。</p></div><div class="sent"><p class="en">The official <mark>proposal</mark> to rebuild on higher ground met with both applause and <mark>refusal</mark>, for the <mark>fundamental</mark> question was <mark>not</mark> whether to reconstruct, but how to do so without repeating the mistakes that had made the community so <mark>vulnerable</mark> in the first place.</p><p class="zh">官方提出的在高地重建的方案既赢得了掌声，也遭到了拒绝，因为根本问题不在于是否重建，而在于如何重建才能避免重蹈覆辙，不再让社区从一开始就如此脆弱。</p></div></div><div class="para"><div class="sent"><p class="en">Researchers from a nearby university <mark>lab</mark> arrived to study the disaster&#x27;s <mark>spatial</mark> <mark>dynamics</mark>, bringing with them <mark>X-ray</mark> equipment, <mark>calculators</mark>, and a <mark>concise</mark> set of survey <mark>charts</mark>.</p><p class="zh">来自附近大学实验室的研究人员前来研究这场灾难的空间动态，他们带来了X光设备、计算器和一套简明的调查图表。</p></div><div class="sent"><p class="en">They treated the ruined landscape as a <mark>triangle</mark> of interacting forces: topography, hydrology, and human settlement.</p><p class="zh">他们将这片被毁的地貌视为地形、水文和人类聚落三股力量相互作用的三角形。</p></div><div class="sent"><p class="en">By mapping every <mark>acre</mark> of the floodplain, they hoped to <mark>develop</mark> a <mark>rational</mark> model that would <mark>prevent</mark> future casualties.</p><p class="zh">通过绘制洪泛区每一英亩的地图，他们希望建立一个合理的模型，以防止未来的人员伤亡。</p></div><div class="sent"><p class="en">Their preliminary data suggested that the collapse of certain structures followed a <mark>grim</mark> pattern: buildings with weak foundations, often hidden beneath a <mark>crisp</mark> layer of fresh paint, had ripped apart at the joints within minutes of the first <mark>blast</mark> of water.</p><p class="zh">他们的初步数据表明，某些建筑的倒塌遵循着一个残酷的规律：地基薄弱的建筑，往往隐藏在一层崭新的油漆之下，在第一次水流冲击后的几分钟内就从接缝处撕裂开来。</p></div><div class="sent"><p class="en">The team&#x27;s leader, a physicist with a reputation for <mark>exceptional</mark> field work, referred to the process as &quot;forensic geography.</p><p class="zh">该团队的负责人是一位以出色的实地工作闻名的物理学家，她将这一过程称为“法证地理学”。</p></div><div class="sent"><p class="en">&quot; She argued that the disaster was <mark>not</mark> an isolated event but a symptom of long-term <mark>neglect</mark>.</p><p class="zh">她认为这场灾难并非孤立事件，而是长期忽视的一个症状。</p></div><div class="sent"><p class="en"><mark>Conversely</mark>, she <mark>noted</mark>, neighbourhoods that had <mark>adhered</mark> to stricter building codes—however unfavourable the <mark>cost</mark>—suffered far less.</p><p class="zh">反之，她指出，那些遵守了更严格建筑规范的社区——无论成本多么不利——遭受的损失要小得多。</p></div><div class="sent"><p class="en">Her assistant, a young geologist with an <mark>appetite</mark> for detail, used soil samples to measure <mark>carbon</mark> content and traces of <mark>sulphur</mark>, evidence of <mark>decay</mark> that had weakened the earth long before the <mark>rain</mark> arrived.</p><p class="zh">她的助手是一位注重细节的年轻地质学家，利用土壤样本测量碳含量和硫的痕迹，这些是早在降雨到来之前就已削弱土地的腐烂证据。</p></div></div><div class="para"><div class="sent"><p class="en">The <mark>arrival</mark> of a <mark>wealthy</mark> <mark>entrepreneur</mark> from the capital shifted the conversation from diagnosis to <mark>delivery</mark>.</p><p class="zh">一位来自首都的富有企业家的到来，使讨论从诊断问题转向了具体实施。</p></div><div class="sent"><p class="en">He proposed a <mark>plan</mark> to rebuild the town as a &quot;smart village,&quot; complete with solar panels, a new sewage system, and a network of sensors to monitor <mark>pulse</mark>, temperature, and air quality in real time.</p><p class="zh">他提出了一项计划，将小镇重建为“智慧村庄”，配备太阳能板、新下水道系统，以及实时监测脉搏、温度和空气质量的传感器网络。</p></div><div class="sent"><p class="en">His <mark>slogan</mark>, &quot;From ruin to <mark>rocket</mark>,&quot; was printed on every <mark>receipt</mark> and <mark>ticket</mark> issued at the temporary relief centre.</p><p class="zh">他的口号“从废墟到腾飞”印在临时救援中心签发的每一张收据和票据上。</p></div><div class="sent"><p class="en">Many residents found the vision appealing; it promised to transform their misery into an <mark>inclusive</mark>, <mark>dynamic</mark> future.</p><p class="zh">许多居民觉得这一愿景很有吸引力；它承诺把他们的苦难转化为一个包容、充满活力的未来。</p></div><div class="sent"><p class="en">Yet others <mark>accused</mark> the <mark>entrepreneur</mark> of using the tragedy as an advertisement for his own companies.</p><p class="zh">但也有人指责这位企业家利用这场悲剧为自己的公司做广告。</p></div><div class="sent"><p class="en">They pointed to the fine print in his <mark>proposal</mark>, which included a clause allowing him to control the village&#x27;s data infrastructure for thirty years.</p><p class="zh">他们指出他提案中的细则，其中包含一项条款，允许他控制该村的数据基础设施长达三十年。</p></div><div class="sent"><p class="en">A local <mark>poet</mark>, whose verses had once celebrated the <mark>grape</mark> harvest and the <mark>scent</mark> of <mark>hay</mark>, wrote a bitter piece in the town newsletter: &quot;They offer us <mark>crystal</mark> towers, but take away the soil beneath our <mark>knees</mark>.</p><p class="zh">一位曾以诗歌赞美葡萄丰收和干草气味的本地诗人，在镇上的通讯刊物上发表了一篇辛辣的作品：“他们给我们水晶塔，却夺走我们膝下的泥土。”</p></div><div class="sent"><p class="en">&quot; The <mark>hostess</mark> of the community radio station read the poem aloud, her voice trembling between <mark>distress</mark> and defiance.</p><p class="zh">社区广播电台的女主持人朗读了这首诗，她的声音在痛苦与反抗之间颤抖。</p></div><div class="sent"><p class="en">The debate over the <mark>entrepreneur</mark>&#x27;s <mark>plan</mark> became a proxy for a deeper <mark>struggle</mark> over <mark>equality</mark>, ownership, and the soul of the place.</p><p class="zh">围绕企业家计划的争论，成了更深层斗争的代理——关乎平等、所有权和这个地方的灵魂。</p></div></div><div class="para"><div class="sent"><p class="en">Meanwhile, a quieter experiment was taking shape in a corner of the camp.</p><p class="zh">与此同时，营地一角正在酝酿一项更为安静的实验。</p></div><div class="sent"><p class="en">A group of <mark>sixth</mark>-form students, led by their <mark>physics</mark> teacher and a <mark>musician</mark> who had lost his piano in the flood, built a small greenhouse from salvaged materials.</p><p class="zh">一群六年级学生，在物理老师和一位在洪水中失去钢琴的音乐家的带领下，用回收材料搭建了一座小温室。</p></div><div class="sent"><p class="en">They used a <mark>delicate</mark> system of mirrors to concentrate <mark>daylight</mark> onto seedlings of <mark>corn</mark> and grapevines, and they kept a <mark>log</mark> of temperature and humidity on a whiteboard.</p><p class="zh">他们用一套精巧的镜面系统把日光集中到玉米和葡萄藤幼苗上，并在白板上记录温度和湿度。</p></div><div class="sent"><p class="en">Their project, <mark>modest</mark> in <mark>appearance</mark> but ambitious in design, was an <mark>attempt</mark> to answer a simple question: could food production <mark>be</mark> restored without waiting for outside investment?</p><p class="zh">他们的项目外观朴素但设计雄心勃勃，试图回答一个简单的问题：能否不等外部投资就恢复粮食生产？</p></div><div class="sent"><p class="en">The students <mark>weighed</mark> each <mark>bucket</mark> of compost, recorded every <mark>injection</mark> of nutrients, and adjusted the <mark>spatial</mark> arrangement of plants to maximize exposure to the sun.</p><p class="zh">学生们称量每一桶堆肥，记录每一次养分注入，并调整植物的空间布局以最大限度接受日照。</p></div><div class="sent"><p class="en">Their teacher, a woman of quiet <mark>wit</mark>, called the greenhouse &quot;a <mark>rehearsal</mark> for a different kind of recovery.</p><p class="zh">他们的老师，一位言语风趣的女士，把这座温室称为“另一种复苏方式的排练”。</p></div><div class="sent"><p class="en">&quot; She <mark>encouraged</mark> her students to <mark>master</mark> the art of observation, to see the soil <mark>not</mark> as <mark>dirt</mark> but as a living <mark>entity</mark>.</p><p class="zh">她鼓励学生们掌握观察的艺术，把土壤看作有生命的实体，而不是尘土。</p></div><div class="sent"><p class="en">The project attracted the attention of a documentary filmmaker, who arrived with a single camera and a box of <mark>soda</mark>, and who spent a week filming the students as they <mark>turned</mark> their grief into a curriculum.</p><p class="zh">这个项目吸引了一位纪录片制片人的注意，他带着一台摄像机和一箱苏打水来到这里，花了一周时间拍摄学生们如何把悲伤转化为课程。</p></div></div><div class="para"><div class="sent"><p class="en">The contrast between the two approaches—the <mark>entrepreneur</mark>&#x27;s top-down vision and the students&#x27; bottom-up experiment—became the central theme of a public forum held in the remains of the town hall.</p><p class="zh">两种方式的对比——企业家自上而下的设想与学生自下而上的实验——成为在市政厅废墟中举行的公开论坛的核心主题。</p></div><div class="sent"><p class="en">A panel of experts, including an architect, an economist, and a historian of <mark>Roman</mark> engineering, was invited to <mark>weigh</mark> the <mark>proposals</mark>.</p><p class="zh">一个由建筑师、经济学家和罗马工程史学者组成的专家小组受邀评估这些提案。</p></div><div class="sent"><p class="en">The architect praised the <mark>entrepreneur</mark>&#x27;s use of prefabricated units, but warned that a fortress-like perimeter would isolate the community from the surrounding farmland.</p><p class="zh">建筑师称赞企业家使用预制单元的做法，但警告说，堡垒式的外围会使社区与周围农田隔绝。</p></div><div class="sent"><p class="en">The economist <mark>noted</mark> that the <mark>entrepreneur</mark>&#x27;s <mark>plan</mark> would create jobs in the short term, yet the long-term <mark>expenditure</mark> on imported technology could strain the local budget.</p><p class="zh">经济学家指出，企业家的计划短期内会创造就业机会，但长期在进口技术上的支出可能会给地方财政带来压力。</p></div><div class="sent"><p class="en">The historian, a <mark>gracious</mark> woman with a <mark>vivid</mark> memory for detail, reminded the audience that ancient cities often rebuilt <mark>themselves</mark> through small, distributed acts rather than grand gestures.</p><p class="zh">历史学家是一位和蔼可亲、对细节记忆清晰的女士，她提醒听众，古代城市往往通过分散的小规模行动而非宏大举措来实现重建。</p></div><div class="sent"><p class="en">She cited the example of a <mark>Roman</mark> <mark>fort</mark> that had been repaired over centuries by successive generations of farmers, each adding a wall, a gate, or a cistern.</p><p class="zh">她举了一个罗马堡垒的例子，这个堡垒历经数百年，由一代又一代农民不断修缮，每人添上一段墙、一扇门或一个蓄水池。</p></div><div class="sent"><p class="en">&quot;The <mark>skeleton</mark> of a city,&quot; she said, &quot;is <mark>not</mark> its buildings but its networks of trust.</p><p class="zh">她说：“一座城市的骨架不是它的建筑，而是它的信任网络。</p></div><div class="sent"><p class="en">&quot;</p><p class="zh">”</p></div></div><div class="para"><div class="sent"><p class="en">By the end of the forum, no single <mark>decision</mark> had been reached, but a subtle shift had occurred.</p><p class="zh">论坛结束时，虽然没有达成任何单一决定，但已经发生了微妙的变化。</p></div><div class="sent"><p class="en">The <mark>entrepreneur</mark>, perhaps sensing the mood, agreed to <mark>modify</mark> his <mark>proposal</mark>: he would fund the students&#x27; greenhouse and donate a fleet of electric <mark>taxis</mark> for rural transport, but he would <mark>not</mark> control the data network.</p><p class="zh">企业家或许察觉到了这种氛围，同意修改他的提案：他将资助学生们的温室，并捐赠一批电动出租车用于乡村交通，但他不会控制数据网络。</p></div><div class="sent"><p class="en">The authorities, eager to avoid the <mark>appearance</mark> of <mark>prejudice</mark>, promised to review both <mark>plans</mark> under the same <mark>scrutiny</mark>.</p><p class="zh">当局为了避免显得有所偏袒，承诺将以同样的严格标准审查两项计划。</p></div><div class="sent"><p class="en">The students, for their part, began to teach their <mark>neighbours</mark> how to <mark>reproduce</mark> the greenhouse model, using local materials and simple tools.</p><p class="zh">学生们则开始教邻居如何用当地材料和简单工具复制温室模式。</p></div><div class="sent"><p class="en">A <mark>fortnight</mark> later, the first tomatoes ripened, and the <mark>hostess</mark> of the radio station invited the whole town to a <mark>toast</mark>.</p><p class="zh">两周后，第一批西红柿成熟了，电台的女主持人邀请全镇居民举杯庆祝。</p></div><div class="sent"><p class="en">The event was <mark>not</mark> a victory, <mark>nor</mark> was it a return to the way things had been.</p><p class="zh">那件事既不是一场胜利，也不是回到过去的样子。</p></div><div class="sent"><p class="en">It was something more <mark>delicate</mark>: a recognition that recovery is <mark>not</mark> a single act but a continuous process of negotiation, experiment, and care.</p><p class="zh">它更为微妙：是一种认识，即恢复不是一次性的行动，而是一个持续协商、试验和关怀的过程。</p></div><div class="sent"><p class="en">The <mark>pilot</mark> who had flown rescue missions during the flood returned to the village for the celebration, and as he looked at the green rows stretching toward the river, he said quietly, &quot;This is what a map looks like when it starts to breathe.</p><p class="zh">洪水期间执行过救援任务的飞行员回到村里参加庆祝活动，当他望着伸向河边的绿色田垄时，轻声说道：“这就是地图开始呼吸时的样子。</p></div><div class="sent"><p class="en">&quot;</p><p class="zh">”</p></div></div><div class="para"><div class="sent"><p class="en">The story of this small <mark>delta</mark> town offers a <mark>concise</mark> lesson for an era of <mark>extreme</mark> weather.</p><p class="zh">这个三角洲小镇的故事，为极端天气时代提供了一个简明而深刻的教训。</p></div><div class="sent"><p class="en">Disasters reveal the hidden geometry of our lives—the <mark>spatial</mark> arrangements, economic assumptions, and social bonds that normally go unnoticed.</p><p class="zh">灾难揭示了我们生活中隐藏的几何结构——那些平时不被注意的空间布局、经济假设和社会纽带。</p></div><div class="sent"><p class="en">They also expose the limits of purely technical solutions.</p><p class="zh">它们也暴露了纯技术解决方案的局限。</p></div><div class="sent"><p class="en">A <mark>rocket</mark> can carry us away from a problem, but it cannot teach us how to live with the land.</p><p class="zh">火箭可以带我们远离问题，却不能教会我们如何与土地共处。</p></div><div class="sent"><p class="en">The <mark>sixth</mark>-form students understood this; so did the elderly <mark>landlady</mark> who refused to leave her ruined home.</p><p class="zh">六年级的学生们明白这一点；那位拒绝离开自己毁坏家园的老房东太太也明白。</p></div><div class="sent"><p class="en">What they shared was <mark>not</mark> optimism in the naive sense, but a <mark>sober</mark> <mark>certainty</mark> that the future must <mark>be</mark> built from the materials of the present, however damaged.</p><p class="zh">他们共有的不是天真意义上的乐观，而是一种清醒的坚定：未来必须用当下的材料来建造，无论这些材料多么残破。</p></div><div class="sent"><p class="en">The <mark>entrepreneur</mark> came to see this too, though it <mark>cost</mark> him a portion of his pride.</p><p class="zh">那位企业家也逐渐明白了这一点，尽管这让他付出了一部分自尊。</p></div><div class="sent"><p class="en">In the end, the town&#x27;s recovery was <mark>not</mark> measured in <mark>acres</mark> rebuilt or <mark>receipts</mark> issued, but in the <mark>friendships</mark> formed across old divisions, in the <mark>scent</mark> of tomatoes ripening in a makeshift greenhouse, and in the quiet, stubborn <mark>refusal</mark> to let a flood—however dreadful—have the final word.</p><p class="zh">最终，小镇的恢复不是以重建的亩数或开出的收据来衡量，而是以跨越旧日隔阂结成的友谊、临时温室里番茄成熟的气味，以及那种安静而倔强的拒绝——不让一场洪水，无论多么可怕，拥有最后的发言权。</p></div></div>
-</div>
-<section>
-  <h2>📋 本日词表（绿=已嵌入文章 · 灰=未嵌入）</h2>
-  <div class="legend">共 185 词，按原卡顺序</div>
-  <div class="chips"><span class="chip on">sulphur</span><span class="chip on">pilot</span><span class="chip on">remainder</span><span class="chip on">skeleton</span><span class="chip off">opinion</span><span class="chip off">hide</span><span class="chip on">rehearsal</span><span class="chip on">taxi</span><span class="chip on">grape</span><span class="chip on">wit</span><span class="chip off">dreadfu</span><span class="chip off">innocent</span><span class="chip on">prevent</span><span class="chip on">generally</span><span class="chip on">triangle</span><span class="chip on">straw</span><span class="chip on">mobilize</span><span class="chip off">wealth</span><span class="chip on">attempt</span><span class="chip on">simply</span><span class="chip off">Bible</span><span class="chip on">fortnight</span><span class="chip on">wealthy</span><span class="chip on">plan</span><span class="chip on">toast</span><span class="chip on">soda</span><span class="chip off">garment</span><span class="chip on">spatial</span><span class="chip on">entrepreneur</span><span class="chip off">artist</span><span class="chip on">neighbour</span><span class="chip on">expenditure</span><span class="chip on">fundamental</span><span class="chip on">midst</span><span class="chip on">lab</span><span class="chip on">landlady</span><span class="chip off">favourable</span><span class="chip on">exclaim</span><span class="chip off">obedient</span><span class="chip off">due</span><span class="chip on">speculate</span><span class="chip on">horror</span><span class="chip on">bucket</span><span class="chip on">daylight</span><span class="chip on">scrutiny</span><span class="chip off">slit</span><span class="chip on">ticket</span><span class="chip on">fort</span><span class="chip off">rip</span><span class="chip off">become</span><span class="chip off">table</span><span class="chip on">friendship</span><span class="chip on">exceptional</span><span class="chip on">hay</span><span class="chip off">assignment</span><span class="chip off">try</span><span class="chip off">campus</span><span class="chip on">delicate</span><span class="chip on">optimistic</span><span class="chip on">X-ray</span><span class="chip on">arrival</span><span class="chip off">heroine</span><span class="chip on">turn</span><span class="chip on">calculator</span><span class="chip on">accuse</span><span class="chip on">rational</span><span class="chip on">acre</span><span class="chip off">unique</span><span class="chip on">not</span><span class="chip on">scent</span><span class="chip off">suspension</span><span class="chip off">aside</span><span class="chip off">skim</span><span class="chip on">struggle</span><span class="chip on">encourage</span><span class="chip on">conversely</span><span class="chip off">sleeve</span><span class="chip on">musician</span><span class="chip off">violet</span><span class="chip off">ad</span><span class="chip on">inclusive</span><span class="chip on">modest</span><span class="chip off">spoon</span><span class="chip on">vulnerable</span><span class="chip off">coffee</span><span class="chip off">flame</span><span class="chip on">vivid</span><span class="chip on">crisp</span><span class="chip off">intelligent</span><span class="chip on">pulse</span><span class="chip off">domain</span><span class="chip off">turkey</span><span class="chip off">smash</span><span class="chip off">sister</span><span class="chip on">chart</span><span class="chip off">jail</span><span class="chip off">award</span><span class="chip on">distress</span><span class="chip off">odor</span><span class="chip off">possibility</span><span class="chip off">commemorate</span><span class="chip on">dynamic</span><span class="chip off">glory</span><span class="chip off">alleviate</span><span class="chip on">appearance</span><span class="chip off">stuff</span><span class="chip on">Roman</span><span class="chip off">expression</span><span class="chip on">be</span><span class="chip on">crystal</span><span class="chip on">entity</span><span class="chip on">master</span><span class="chip off">theft</span><span class="chip on">concise</span><span class="chip on">poet</span><span class="chip on">proposal</span><span class="chip on">certainty</span><span class="chip on">sober</span><span class="chip on">log</span><span class="chip off">sprinkle</span><span class="chip off">unite</span><span class="chip off">source</span><span class="chip on">decay</span><span class="chip off">eternal</span><span class="chip on">hostess</span><span class="chip off">brief</span><span class="chip off">youth</span><span class="chip off">miserable</span><span class="chip on">gracious</span><span class="chip on">grim</span><span class="chip on">knee</span><span class="chip on">nor</span><span class="chip on">decision</span><span class="chip on">canoe</span><span class="chip on">rain</span><span class="chip off">population</span><span class="chip off">authority</span><span class="chip on">cost</span><span class="chip on">themselves</span><span class="chip on">appetite</span><span class="chip on">carbon</span><span class="chip off">chest</span><span class="chip off">upset</span><span class="chip off">bug</span><span class="chip on">equality</span><span class="chip on">reproduce</span><span class="chip on">injection</span><span class="chip on">physics</span><span class="chip on">sixth</span><span class="chip on">delivery</span><span class="chip on">adhere</span><span class="chip off">nose</span><span class="chip off">heart</span><span class="chip off">tough</span><span class="chip off">version</span><span class="chip off">strike</span><span class="chip on">month</span><span class="chip off">attendance</span><span class="chip off">casualty</span><span class="chip on">receipt</span><span class="chip off">around</span><span class="chip off">serve</span><span class="chip off">pursuit</span><span class="chip off">coach</span><span class="chip on">extreme</span><span class="chip off">sweet</span><span class="chip on">spiritual</span><span class="chip on">slogan</span><span class="chip on">dirt</span><span class="chip on">prejudice</span><span class="chip off">stamp</span><span class="chip off">stomach</span><span class="chip on">rocket</span><span class="chip on">develop</span><span class="chip off">travel</span><span class="chip on">corn</span><span class="chip on">blast</span><span class="chip on">neglect</span><span class="chip on">weigh</span><span class="chip on">refusal</span><span class="chip off">thunder</span><span class="chip on">delta</span><span class="chip on">modify</span><span class="chip off">refer</span><span class="chip off">muscle</span></div>
-</section>
-<footer>原文：卡片机自动生成 · deepseek-v4-pro @ opencode-go · 2026-08-28<br>中英句对照版 · deepseek-v4-pro @ opencode-go · 2026-08-28</footer>
-</div>
+</div><div class="bank"><p class="legend">本日词表 · 185 词（绿 = 已嵌入文章，灰 = 未嵌入）</p><div class="chips"><span class="chip on">sulphur</span><span class="chip on">pilot</span><span class="chip on">remainder</span><span class="chip on">skeleton</span><span class="chip off">opinion</span><span class="chip off">hide</span><span class="chip on">rehearsal</span><span class="chip on">taxi</span><span class="chip on">grape</span><span class="chip on">wit</span><span class="chip off">dreadfu</span><span class="chip off">innocent</span><span class="chip on">prevent</span><span class="chip on">generally</span><span class="chip on">triangle</span><span class="chip on">straw</span><span class="chip on">mobilize</span><span class="chip off">wealth</span><span class="chip on">attempt</span><span class="chip on">simply</span><span class="chip off">Bible</span><span class="chip on">fortnight</span><span class="chip on">wealthy</span><span class="chip on">plan</span><span class="chip on">toast</span><span class="chip on">soda</span><span class="chip off">garment</span><span class="chip on">spatial</span><span class="chip on">entrepreneur</span><span class="chip off">artist</span><span class="chip on">neighbour</span><span class="chip on">expenditure</span><span class="chip on">fundamental</span><span class="chip on">midst</span><span class="chip on">lab</span><span class="chip on">landlady</span><span class="chip off">favourable</span><span class="chip on">exclaim</span><span class="chip off">obedient</span><span class="chip off">due</span><span class="chip on">speculate</span><span class="chip on">horror</span><span class="chip on">bucket</span><span class="chip on">daylight</span><span class="chip on">scrutiny</span><span class="chip off">slit</span><span class="chip on">ticket</span><span class="chip on">fort</span><span class="chip off">rip</span><span class="chip off">become</span><span class="chip off">table</span><span class="chip on">friendship</span><span class="chip on">exceptional</span><span class="chip on">hay</span><span class="chip off">assignment</span><span class="chip off">try</span><span class="chip off">campus</span><span class="chip on">delicate</span><span class="chip on">optimistic</span><span class="chip on">X-ray</span><span class="chip on">arrival</span><span class="chip off">heroine</span><span class="chip on">turn</span><span class="chip on">calculator</span><span class="chip on">accuse</span><span class="chip on">rational</span><span class="chip on">acre</span><span class="chip off">unique</span><span class="chip on">not</span><span class="chip on">scent</span><span class="chip off">suspension</span><span class="chip off">aside</span><span class="chip off">skim</span><span class="chip on">struggle</span><span class="chip on">encourage</span><span class="chip on">conversely</span><span class="chip off">sleeve</span><span class="chip on">musician</span><span class="chip off">violet</span><span class="chip off">ad</span><span class="chip on">inclusive</span><span class="chip on">modest</span><span class="chip off">spoon</span><span class="chip on">vulnerable</span><span class="chip off">coffee</span><span class="chip off">flame</span><span class="chip on">vivid</span><span class="chip on">crisp</span><span class="chip off">intelligent</span><span class="chip on">pulse</span><span class="chip off">domain</span><span class="chip off">turkey</span><span class="chip off">smash</span><span class="chip off">sister</span><span class="chip on">chart</span><span class="chip off">jail</span><span class="chip off">award</span><span class="chip on">distress</span><span class="chip off">odor</span><span class="chip off">possibility</span><span class="chip off">commemorate</span><span class="chip on">dynamic</span><span class="chip off">glory</span><span class="chip off">alleviate</span><span class="chip on">appearance</span><span class="chip off">stuff</span><span class="chip on">Roman</span><span class="chip off">expression</span><span class="chip on">be</span><span class="chip on">crystal</span><span class="chip on">entity</span><span class="chip on">master</span><span class="chip off">theft</span><span class="chip on">concise</span><span class="chip on">poet</span><span class="chip on">proposal</span><span class="chip on">certainty</span><span class="chip on">sober</span><span class="chip on">log</span><span class="chip off">sprinkle</span><span class="chip off">unite</span><span class="chip off">source</span><span class="chip on">decay</span><span class="chip off">eternal</span><span class="chip on">hostess</span><span class="chip off">brief</span><span class="chip off">youth</span><span class="chip off">miserable</span><span class="chip on">gracious</span><span class="chip on">grim</span><span class="chip on">knee</span><span class="chip on">nor</span><span class="chip on">decision</span><span class="chip on">canoe</span><span class="chip on">rain</span><span class="chip off">population</span><span class="chip off">authority</span><span class="chip on">cost</span><span class="chip on">themselves</span><span class="chip on">appetite</span><span class="chip on">carbon</span><span class="chip off">chest</span><span class="chip off">upset</span><span class="chip off">bug</span><span class="chip on">equality</span><span class="chip on">reproduce</span><span class="chip on">injection</span><span class="chip on">physics</span><span class="chip on">sixth</span><span class="chip on">delivery</span><span class="chip on">adhere</span><span class="chip off">nose</span><span class="chip off">heart</span><span class="chip off">tough</span><span class="chip off">version</span><span class="chip off">strike</span><span class="chip on">month</span><span class="chip off">attendance</span><span class="chip off">casualty</span><span class="chip on">receipt</span><span class="chip off">around</span><span class="chip off">serve</span><span class="chip off">pursuit</span><span class="chip off">coach</span><span class="chip on">extreme</span><span class="chip off">sweet</span><span class="chip on">spiritual</span><span class="chip on">slogan</span><span class="chip on">dirt</span><span class="chip on">prejudice</span><span class="chip off">stamp</span><span class="chip off">stomach</span><span class="chip on">rocket</span><span class="chip on">develop</span><span class="chip off">travel</span><span class="chip on">corn</span><span class="chip on">blast</span><span class="chip on">neglect</span><span class="chip on">weigh</span><span class="chip on">refusal</span><span class="chip off">thunder</span><span class="chip on">delta</span><span class="chip on">modify</span><span class="chip off">refer</span><span class="chip off">muscle</span></div></div><footer class="foot">原文：卡片机自动生成 · deepseek-v4-pro @ opencode-go · 2026-08-28<br>逐句译文：deepseek-v4-pro @ opencode-go · 2026-08-28<br><a class="big" href="https://alex05250.github.io/cet6-reading/daily.html">返回每日目录</a></footer><button id="topBtn" data-act="top" aria-label="回到顶部">↑</button><script>/* CET-6 · 阅读层运行脚本：译文/高亮开关、阅读进度、回到顶部、锚点展开
+   真题页外链引用；每日文章页在构建时内联进页面（桌面单文件也要能跑）。 */
+(function () {
+  'use strict';
+  var body = document.body;
+
+  function onScroll() {
+    var y = window.scrollY || document.documentElement.scrollTop || 0;
+    body.classList.toggle('scrolled', y > 6);
+    var bar = document.querySelector('.rdbar i');
+    if (bar) {
+      var h = document.documentElement.scrollHeight - innerHeight;
+      bar.style.width = (h > 0 ? Math.min(100, y / h * 100) : 0) + '%';
+    }
+    var top = document.getElementById('topBtn');
+    if (top) top.classList.toggle('on', y > 700);
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* 按钮：data-act = zh | mark | open | close */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]');
+    if (!b) return;
+    var act = b.getAttribute('data-act');
+    if (act === 'zh') {
+      var off = body.classList.toggle('no-zh');
+      b.setAttribute('aria-pressed', String(off));
+      var lab = b.querySelector('.lab');
+      if (lab) lab.textContent = off ? '显示译文' : '隐藏译文';
+    } else if (act === 'mark') {
+      var off2 = body.classList.toggle('no-mark');
+      b.setAttribute('aria-pressed', String(off2));
+      var lab2 = b.querySelector('.lab');
+      if (lab2) lab2.textContent = off2 ? '显示高亮' : '隐藏高亮';
+    } else if (act === 'open') {
+      document.querySelectorAll('details.setblk').forEach(function (d) { d.open = true; });
+    } else if (act === 'close') {
+      document.querySelectorAll('details.setblk').forEach(function (d) { d.open = false; });
+    } else if (act === 'top') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+
+  /* 锚点：展开祖先 details 再滚动 */
+  function openHash() {
+    if (!location.hash) return;
+    var el = null;
+    try { el = document.querySelector(location.hash); } catch (err) { return; }
+    if (!el) return;
+    var d = el.closest('details');
+    if (d) d.open = true;
+    setTimeout(function () { el.scrollIntoView({ block: 'start' }); }, 30);
+  }
+  addEventListener('hashchange', openHash);
+  openHash();
+})();
+</script>
 </body>
 </html>

@@ -153,3 +153,18 @@ footer a:hover{color:var(--accent)}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .card{opacity:1;transform:none}
 }
+@media (max-width:560px){
+  .nav .navtitle{display:none}
+}
+
+/* 页尾大号返回键 */
+.dayfoot{max-width:920px;margin:0 auto;padding:0 24px 64px;display:flex;justify-content:center}
+.backbig{
+  display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 22px;border-radius:99px;
+  border:1px solid var(--line);background:var(--card);color:var(--fg);
+  font-size:13.5px;font-weight:500;text-decoration:none;white-space:nowrap;
+  transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease),transform .18s var(--ease);
+}
+.backbig:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.backbig:active{transform:scale(.97)}
+.backbig svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}

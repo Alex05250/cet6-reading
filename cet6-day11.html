@@ -1,70 +1,406 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CET-6 Day 11 · 中英句对照 · The Architecture of Doubt: How Scientific Revolutions Reshape Public Trust</title>
-<style>
-  :root { --bg:#f7f5f0; --card:#fff; --ink:#222; --mut:#6b6b6b; --line:#e3ded3; --accent:#1e4b8f; --zh:#4a4a4a; }
-  * { box-sizing:border-box; }
-  body { margin:0; padding:28px 16px 80px; background:var(--bg); color:var(--ink);
-          font-family:Georgia,"Times New Roman","宋体",serif; line-height:1.85; }
-  .wrap { max-width:720px; margin:0 auto; }
-  header { text-align:center; margin-bottom:26px; }
-  header h1 { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:17px; margin:0 0 8px; color:var(--accent); }
-  .meta { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:13px; color:var(--mut); }
-  .badge { display:inline-block; margin-top:10px; padding:4px 14px; border-radius:20px; font-size:13px;
-            background:#e8f0e8; color:#2f6f4f; font-family:"Segoe UI","Microsoft YaHei",sans-serif; }
-  .btn { margin-top:12px; padding:6px 16px; border:1px solid var(--accent); color:var(--accent);
-          background:#fff; border-radius:8px; cursor:pointer; font-size:13px;
-          font-family:"Segoe UI","Microsoft YaHei",sans-serif; }
-  .btn:hover { background:#eef3fa; }
-  .passage { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:26px 30px; font-size:17px; }
-  .pt { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:19px; margin:0 0 18px; text-align:center; }
-  .para { margin:0 0 24px; }
-  .para:last-child { margin-bottom:0; }
-  .sent { margin:0 0 14px; }
-  .sent:last-child { margin-bottom:0; }
-  .en { margin:0; text-align:justify; }
-  .zh { margin:4px 0 0; padding-left:12px; border-left:3px solid var(--line); color:var(--zh);
-         font-size:15px; line-height:1.75; text-align:justify;
-         font-family:"KaiTi","楷体","STKaiti","宋体",serif; }
-  .zh-empty { color:#b08d57; font-size:13px; }
-  body.no-zh .zh { display:none; }
-  mark { background:#ffe58a; padding:0 2px; border-radius:3px; }
-  body.no-mark mark { background:transparent; padding:0; }
-  section { background:var(--card); border:1px solid var(--line); border-radius:12px;
-             margin-top:18px; padding:16px 20px; }
-  section h2 { font-family:"Segoe UI","Microsoft YaHei",sans-serif; font-size:14px; margin:0 0 10px; }
-  .chips { line-height:2.1; }
-  .chip { display:inline-block; font-size:12px; font-family:"Segoe UI","Microsoft YaHei",sans-serif;
-           padding:1px 8px; margin:2px 3px; border-radius:10px; }
-  .chip.on { background:#e8f0e8; color:#2f6f4f; border:1px solid #c3dcc3; }
-  .chip.off { background:#f0efea; color:#aaa; border:1px dashed var(--line); }
-  .legend { font-size:12px; color:var(--mut); margin-bottom:6px; }
-  footer { color:var(--mut); font-size:12px; margin-top:20px; text-align:center;
-            font-family:"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.9; }
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Day 11 · The Architecture of Doubt: How Scientific Revolutions Reshape Public Trust · CET-6</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230071e3'/%3E%3Ctext x='32' y='45' font-size='36' font-weight='700' font-family='Segoe UI,Arial,sans-serif' text-anchor='middle' fill='%23fff'%3E6%3C/text%3E%3C/svg%3E">
+<style>/* CET-6 词汇站 · 基础层：变量 / 布局骨架 / 导航 / 英雄区 / 工具栏 / 卡片网格 */
+:root{
+  --bg:#ffffff; --fg:#1d1d1f; --sub:#6e6e73; --faint:#a1a1a6;
+  --line:rgba(0,0,0,.09); --hair:rgba(0,0,0,.055); --fill:rgba(0,0,0,.04); --card:#ffffff;
+  --accent:#0071e3; --ok:#1d9a6c; --warn:#b25000;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.03),0 4px 14px rgba(0,0,0,.035);
+  --shadow-lg:0 16px 48px rgba(0,0,0,.10);
+  --ease:cubic-bezier(.32,.72,0,1);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#000000; --fg:#f5f5f7; --sub:#a1a1a6; --faint:#6e6e73;
+    --line:rgba(255,255,255,.14); --hair:rgba(255,255,255,.075); --fill:rgba(255,255,255,.06); --card:#1c1c1e;
+    --accent:#2997ff; --ok:#30d158; --warn:#ff9f0a;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.5); --shadow-lg:0 16px 48px rgba(0,0,0,.75);
+  }
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--fg);line-height:1.5;font-synthesis:none;overflow-x:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI Variable Text","Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  transition:background .5s var(--ease),color .5s var(--ease);
+}
+::selection{background:var(--accent);color:#fff}
+button{font:inherit;color:inherit}
+a{color:inherit}
+
+/* 入场 */
+@keyframes lineUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes softIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.anim{animation:softIn .7s var(--ease) both}
+
+/* 导航 */
+.nav{
+  position:sticky;top:0;z-index:120;height:48px;display:flex;align-items:center;gap:16px;
+  padding:0 max(22px,env(safe-area-inset-left)) 0 max(22px,env(safe-area-inset-right));
+  background:color-mix(in srgb,var(--bg) 74%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid transparent;transition:border-color .3s var(--ease);
+}
+body.scrolled .nav{border-bottom-color:var(--hair)}
+.nav .brand{font-size:13px;font-weight:600;letter-spacing:-.005em;white-space:nowrap;text-decoration:none}
+.nav .brand i{font-style:normal;color:var(--faint);font-weight:400}
+.nav .spacer{flex:1}
+.nav a.lnk{font-size:12.5px;color:var(--sub);text-decoration:none;transition:color .2s var(--ease)}
+.nav a.lnk:hover{color:var(--fg)}
+/* 导航返回键：36px 高、主色描边，作用一眼可见 */
+.nav .navbtn{
+  display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 16px 0 13px;
+  border-radius:99px;border:1px solid color-mix(in srgb,var(--accent) 24%,transparent);
+  background:color-mix(in srgb,var(--accent) 9%,transparent);
+  font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap;
+  transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease),transform .18s var(--ease);
+}
+.nav .navbtn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.nav .navbtn:active{transform:scale(.955)}
+.nav .navbtn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;margin-top:-1px}
+.nav .navtitle{font-size:12.5px;font-weight:500;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}
+
+
+/* 英雄区 */
+.hero{
+  max-width:920px;margin:0 auto;padding:clamp(60px,10vh,120px) 24px clamp(36px,6vh,56px);
+  text-align:center;will-change:opacity,transform;
+}
+@supports (animation-timeline:scroll()){
+  .hero{animation:heroOut linear both;animation-timeline:scroll(root block);animation-range:0 520px}
+  @keyframes heroOut{to{opacity:.1;transform:translateY(52px) scale(.975)}}
+}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+h1{font-size:clamp(38px,7vw,82px);line-height:1.12;font-weight:600;letter-spacing:-.03em;margin-bottom:26px}
+h1 .dim{color:var(--sub)}
+h1 .l{display:block;animation:lineUp 1s var(--ease) both}
+h1 .l:nth-child(1){animation-delay:.10s}
+h1 .l:nth-child(2){animation-delay:.20s}
+.eyebrow{animation:softIn .85s var(--ease) .04s both}
+.lede{animation:softIn .95s var(--ease) .30s both;font-size:clamp(15px,1.9vw,19px);color:var(--sub);line-height:1.6;letter-spacing:-.008em;max-width:min(520px,88vw);margin:0 auto;text-wrap:pretty;word-break:normal;line-break:strict}
+.meter{animation:softIn .95s var(--ease) .42s both;display:inline-flex;align-items:center;gap:12px;margin-top:44px;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums;padding:9px 18px;border-radius:99px;background:var(--fill)}
+.meter .track{width:130px;height:3px;border-radius:99px;background:var(--hair);overflow:hidden}
+.meter .track i{display:block;height:100%;width:0;background:var(--ok);border-radius:99px;transition:width .8s var(--ease)}
+.meter b{color:var(--fg);font-weight:600}
+
+/* 工具栏 */
+.toolbar{
+  position:sticky;top:48px;z-index:110;padding:12px 24px;
+  background:color-mix(in srgb,var(--bg) 84%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid var(--hair);
+}
+.toolbar .inner{max-width:1120px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
+.search{
+  flex:0 1 380px;min-width:180px;height:38px;padding:0 14px 0 36px;font:inherit;font-size:13.5px;color:var(--fg);
+  background:var(--fill) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23a1a1a6' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") no-repeat 13px center;
+  border:0;border-radius:9px;outline:none;transition:box-shadow .25s var(--ease),background .25s var(--ease);
+}
+.search::placeholder{color:var(--faint)}
+.search:focus{box-shadow:0 0 0 3.5px color-mix(in srgb,var(--accent) 20%,transparent);background:var(--card)}
+.seg{display:flex;gap:2px;background:var(--fill);border-radius:9px;padding:2px}
+.seg button{font-size:12.5px;color:var(--sub);background:none;border:0;cursor:pointer;padding:6px 14px;border-radius:7px;transition:all .25s var(--ease);white-space:nowrap}
+.seg button[aria-selected="true"]{background:var(--card);color:var(--fg);box-shadow:var(--shadow-sm);font-weight:500}
+
+/* 网格与卡片 */
+.stage{max-width:1168px;margin:0 auto;padding:36px 24px 140px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:14px}
+.card{
+  position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:20px 20px 18px;cursor:pointer;text-align:left;display:flex;flex-direction:column;
+  text-decoration:none;overflow:hidden;opacity:0;transform:translateY(18px);
+  transition:opacity .6s var(--ease),transform .55s var(--ease),box-shadow .4s var(--ease),border-color .3s var(--ease);
+}
+.card.in{opacity:1;transform:none}
+.card:hover{box-shadow:var(--shadow-lg);border-color:transparent}
+.card.in:hover{transform:translateY(-3px)}
+.card::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;
+  background:radial-gradient(240px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.7),transparent 62%);
+  transition:opacity .45s var(--ease);
+}
+.card:hover::after{opacity:1}
+@media (prefers-color-scheme:dark){
+  .card::after{background:radial-gradient(240px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.07),transparent 62%)}
+}
+.card .top{display:flex;align-items:baseline;justify-content:space-between;gap:9px;margin-bottom:18px}
+.card .dn{font-size:13.5px;font-weight:600;letter-spacing:.005em}
+.card .rng{font-size:11px;color:var(--faint);font-variant-numeric:tabular-nums;letter-spacing:.01em;transition:opacity .3s}
+.card .num{display:flex;align-items:baseline;gap:4px;margin-bottom:11px}
+.card .num b{font-size:27px;font-weight:600;letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums}
+.card .num s{font-size:12.5px;color:var(--faint);text-decoration:none;font-variant-numeric:tabular-nums}
+.card .bar{height:2.5px;border-radius:99px;background:var(--fill);overflow:hidden}
+.card .bar i{display:block;height:100%;width:0;background:var(--ok);border-radius:99px;transition:width .7s var(--ease)}
+.card.full .num b{color:var(--ok)}
+.card .tick{position:absolute;top:17px;right:17px;font-size:11px;color:var(--ok);opacity:0;transform:scale(.6);transition:all .35s var(--ease)}
+.card.full .tick{opacity:1;transform:none}
+.card.full .rng{opacity:0}
+/* 进入按钮：卡片底部的主色胶囊，悬停实心 */
+.card .go{margin-top:16px;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 15px;
+  border-radius:99px;background:color-mix(in srgb,var(--accent) 9%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);
+  font-size:13px;font-weight:600;color:var(--accent);
+  transition:background .28s var(--ease),color .28s var(--ease),border-color .28s var(--ease)}
+.card .go .arw{transition:transform .3s var(--ease)}
+.card:hover .go{background:var(--accent);border-color:var(--accent);color:#fff}
+.card:hover .go .arw{transform:translateX(3px)}
 </style>
+<style>/* CET-6 · 阅读层：真题精读 + 每日融词阅读（与 base.css 的变量、导航共用）
+   依赖 base.css 中的 :root 变量与 .nav 骨架。 */
+
+/* 顶部阅读进度 */
+.rdbar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:transparent;pointer-events:none}
+.rdbar i{display:block;height:100%;width:0;background:var(--accent);opacity:.85;transition:width .12s linear}
+
+/* 文章头 */
+.rhead{
+  max-width:760px;margin:0 auto;padding:clamp(40px,7vh,72px) 24px clamp(20px,3vh,30px);
+}
+.rhead .kick{
+  font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:18px;
+}
+.rhead h1{
+  font-size:clamp(31px,4.6vw,50px);line-height:1.1;font-weight:600;letter-spacing:-.038em;
+  margin-bottom:18px;text-wrap:balance;animation:softIn .8s var(--ease) .08s both;
+}
+.rhead .rlede{
+  font-size:clamp(14px,1.6vw,16px);color:var(--sub);line-height:1.66;letter-spacing:-.005em;
+  max-width:56ch;text-wrap:pretty;animation:softIn .8s var(--ease) .16s both;
+}
+.rhead .rfact{
+  margin-top:22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums;
+  animation:softIn .8s var(--ease) .24s both;
+}
+.rhead .rfact span{padding:6px 12px;border-radius:99px;background:var(--fill);white-space:nowrap}
+.rhead .rfact b{font-weight:600;color:var(--fg)}
+.rhead .rfact .ok{background:color-mix(in srgb,var(--ok) 12%,transparent);color:var(--ok)}
+
+/* 控制条 */
+.ctrls{
+  position:sticky;top:48px;z-index:110;
+  padding:12px max(24px,env(safe-area-inset-left));
+  background:color-mix(in srgb,var(--bg) 82%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid var(--hair);
+}
+.ctrls .inner{max-width:712px;margin:0 auto;display:flex;gap:8px;align-items:center;justify-content:flex-start;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;height:33px;padding:0 15px;
+  border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--fg);
+  font-size:12.5px;font-weight:500;cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:background .24s var(--ease),border-color .24s var(--ease),color .24s var(--ease),transform .18s var(--ease);
+}
+.btn:hover{border-color:transparent;background:var(--fill)}
+.btn:active{transform:scale(.96)}
+.btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn .k{font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.btn[aria-pressed="true"] .k{color:rgba(255,255,255,.7)}
+
+/* 正文 */
+.passage{max-width:760px;margin:0 auto;padding:clamp(26px,5vh,44px) 24px 40px}
+.passage .pt{
+  font-size:clamp(17px,2.2vw,21px);font-weight:600;letter-spacing:-.02em;line-height:1.4;
+  margin:0 0 clamp(22px,3.4vh,32px);color:var(--sub);
+}
+.para{margin:0 0 clamp(26px,4vh,38px)}
+.para:last-child{margin-bottom:0}
+.sent{margin:0 0 15px}
+.sent:last-child{margin-bottom:0}
+.en{
+  margin:0;font-size:clamp(16.5px,1.72vw,18.5px);line-height:1.78;letter-spacing:-.006em;
+  text-align:left;text-wrap:pretty;
+}
+.zh{
+  margin:7px 0 0;font-size:15px;line-height:1.74;color:var(--sub);letter-spacing:.002em;
+  padding-left:13px;border-left:1.5px solid var(--hair);
+  transition:opacity .3s var(--ease);text-wrap:pretty;
+}
+.zh-empty{color:var(--warn);font-size:12.5px;padding-left:0;border-left-color:transparent}
+body.no-zh .zh{display:none}
+mark{
+  background:color-mix(in srgb,var(--accent) 15%,transparent);color:inherit;
+  border-radius:2px;padding:0 1.5px;transition:background .3s var(--ease);
+}
+body.no-mark mark{background:transparent;padding:0}
+.fill{color:var(--warn);border-bottom:2px dotted color-mix(in srgb,var(--warn) 55%,transparent);padding:0 1px}
+
+/* 词库 / 词表 */
+.bank,.wordbank{max-width:760px;margin:0 auto;padding:0 24px 40px}
+.bank .legend,.wordbank .legend{font-size:12px;color:var(--faint);margin-bottom:12px;line-height:1.7}
+.bank .bchips,.bank .chips,.wordbank .chips{
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+.bchip,.chips .chip{
+  display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;
+  font-size:12px;font-variant-numeric:tabular-nums;
+  border:1px solid transparent;transition:transform .2s var(--ease);
+}
+.bchip.on,.chips .chip.on{background:color-mix(in srgb,var(--ok) 11%,transparent);color:var(--ok);border-color:color-mix(in srgb,var(--ok) 22%,transparent)}
+.bchip.off,.chips .chip.off{background:var(--fill);color:var(--faint);border-color:transparent;text-decoration:line-through;text-decoration-thickness:1px}
+.bchip:hover{transform:translateY(-1px)}
+
+/* ───────── 真题页：考期 / 套题 / 文章 ───────── */
+.toc{
+  max-width:760px;margin:0 auto;padding:18px 24px 0;
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+}
+.toc a{
+  display:inline-flex;align-items:center;height:30px;padding:0 13px;border-radius:99px;
+  border:1px solid var(--line);background:transparent;color:var(--sub);font-size:12.5px;text-decoration:none;
+  font-variant-numeric:tabular-nums;transition:background .24s var(--ease),color .24s var(--ease),border-color .24s var(--ease);
+}
+.toc a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.year{
+  max-width:760px;margin:clamp(34px,5vh,52px) auto 14px;padding:0 24px;
+  font-size:clamp(19px,2.4vw,24px);font-weight:600;letter-spacing:-.03em;
+  display:flex;align-items:center;gap:14px;
+}
+.year::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.sets{max-width:760px;margin:0 auto;padding:0 24px 40px}
+details.setblk{
+  border:1px solid var(--line);border-radius:16px;background:var(--card);
+  margin:10px 0;overflow:hidden;transition:box-shadow .35s var(--ease),border-color .3s var(--ease);
+}
+details.setblk:hover{box-shadow:var(--shadow-sm)}
+details.setblk[open]{box-shadow:var(--shadow-sm);border-color:transparent}
+details.setblk > summary{
+  list-style:none;cursor:pointer;padding:17px 24px;display:flex;align-items:center;gap:12px;
+  font-size:14px;font-weight:500;letter-spacing:-.012em;
+}
+details.setblk > summary::-webkit-details-marker{display:none}
+details.setblk > summary::before{
+  content:"";width:6px;height:6px;flex:0 0 auto;margin-top:-3px;
+  border-right:1.5px solid var(--faint);border-bottom:1.5px solid var(--faint);
+  transform:rotate(-45deg);transition:transform .3s var(--ease);
+}
+details.setblk[open] > summary::before{transform:rotate(45deg);margin-top:2px}
+details.setblk > summary .smeta{margin-left:auto;font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums;font-weight:400}
+details.setblk[open] > summary{position:sticky;top:105px;z-index:5;background:color-mix(in srgb,var(--card) 92%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
+
+.art{padding:clamp(22px,3vw,32px) 24px;border-top:1px solid var(--hair)}
+.art:first-of-type{border-top:none}
+.art h3{
+  font-size:13px;font-weight:600;letter-spacing:-.005em;color:var(--sub);
+  margin:0 0 18px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+}
+.art h3 .wc{font-weight:400;font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.plabel{
+  display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;
+  border-radius:6px;background:var(--fill);color:var(--sub);font-size:11px;font-weight:600;
+  margin-right:9px;vertical-align:1px;letter-spacing:.02em;
+}
+
+/* 回到顶部 / 底部导航 */
+#topBtn{
+  position:fixed;right:20px;bottom:20px;z-index:90;width:38px;height:38px;border-radius:50%;
+  display:grid;place-items:center;border:1px solid var(--line);background:var(--card);color:var(--sub);
+  font-size:13px;text-decoration:none;cursor:pointer;box-shadow:var(--shadow-sm);
+  opacity:0;pointer-events:none;transform:translateY(6px);
+  transition:opacity .3s var(--ease),transform .3s var(--ease),color .2s var(--ease),border-color .2s var(--ease);
+}
+#topBtn.on{opacity:1;pointer-events:auto;transform:none}
+#topBtn:hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+.foot{
+  max-width:760px;margin:0 auto;padding:30px 24px 70px;
+  border-top:1px solid var(--hair);font-size:11.5px;color:var(--faint);line-height:1.9;text-align:center;
+}
+.foot a{color:var(--sub);text-decoration:none}
+.foot a:hover{color:var(--accent)}
+.foot .big{
+  display:inline-flex;align-items:center;gap:8px;margin-top:16px;height:38px;padding:0 20px;
+  border-radius:99px;border:1px solid var(--line);color:var(--fg);font-size:13px;font-weight:500;
+  transition:background .24s var(--ease),border-color .24s var(--ease),color .24s var(--ease);
+}
+.foot .big:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+@media (max-width:640px){
+  .ctrls{top:44px;padding:10px 14px}
+  .ctrls .inner{gap:6px}
+  .btn{height:32px;padding:0 12px;font-size:12px}
+  .rhead{padding-top:34px}
+  .passage,.bank,.wordbank,.foot{padding-left:16px;padding-right:16px}
+  .toc{padding-left:16px;padding-right:16px}
+  .year,.sets{padding-left:14px;padding-right:14px}
+  details.setblk[open] > summary{top:100px}
+  .zh{font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  .rhead h1,.rhead .rlede,.rhead .rfact{animation:none}
+}
+</style>
+<style>.rhead h1{font-size:clamp(28px,4vw,42px)}</style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <h1>CET-6 融词阅读 · Day 11 · 中英句对照版 · 2026-09-06</h1>
-  <div class="meta">每句英文下方紧跟中文译文 · 黄色高亮 = 本日词汇（变形也算命中）</div>
-  <span class="badge">本日词汇嵌入 113/185 · 61%</span><br>
-  <button class="btn" onclick="document.body.classList.toggle('no-mark')">👁 隐藏高亮裸读（再点恢复）</button>
-  <button class="btn" onclick="document.body.classList.toggle('no-zh')">隐藏译文 · 纯英自测（再点恢复）</button>
-</header>
-<div class="passage">
-<h2 class="pt">The Architecture of Doubt: How Scientific Revolutions Reshape Public Trust</h2>
+<div class="rdbar"><i></i></div><nav class="nav"><a class="navbtn" href="https://alex05250.github.io/cet6-reading/daily.html"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>每日</a><span class="navtitle">Day 11</span><div class="spacer"></div><a class="lnk" href="https://alex05250.github.io/cet6-reading/index.html">主页</a><a class="lnk" href="https://alex05250.github.io/cet6-reading/words.html">词表</a></nav><header class="rhead"><p class="kick">Daily Reading · Day 11</p><h1>The Architecture of Doubt: How Scientific Revolutions Reshape Public Trust</h1><div class="rfact"><span>2026-09-06</span><span class="ok">词汇嵌入 113/185 · 61%</span><span>deepseek-v4-pro @ opencode-go</span></div></header><div class="ctrls"><div class="inner"><button class="btn" data-act="zh" aria-pressed="false"><span class="lab">隐藏译文</span></button><button class="btn" data-act="mark" aria-pressed="false"><span class="lab">隐藏高亮</span></button></div></div><div class="passage">
 <div class="para"><div class="sent"><p class="en">In <mark>retrospect</mark>, <mark>the</mark> relationship between scientific expertise and public confidence has never been a simple one.</p><p class="zh">回顾起来，科学专业知识与公众信任之间的关系从来都不是简单的。</p></div><div class="sent"><p class="en"><mark>During</mark> <mark>the</mark> nineteenth century, <mark>the</mark> word of a laboratory researcher carried <mark>considerable</mark> weight, yet that <mark>trust</mark> was rarely extended to <mark>every</mark> corner of society.</p><p class="zh">在十九世纪，实验室研究者的话颇具分量，但这种信任很少延伸到社会的每个角落。</p></div><div class="sent"><p class="en"><mark>The</mark> <mark>majority</mark> of ordinary citizens, whose daily lives revolved around <mark>the</mark> <mark>elementary</mark> demands of work, <mark>lunch</mark>, and <mark>accommodation</mark>, had little <mark>means</mark> to <mark>evaluate</mark> a <mark>quantitative</mark> <mark>report</mark> on <mark>the</mark> <mark>atom</mark> or <mark>the</mark> <mark>germ</mark> theory of disease.</p><p class="zh">大多数普通市民的日常生活围绕着工作、吃饭和住宿的基本需求，几乎没有途径去评估关于原子或疾病细菌理论的量化报告。</p></div><div class="sent"><p class="en"><mark>Although</mark> a <mark>curious</mark> minority <mark>flocked</mark> to public lectures and <mark>museum</mark> exhibits, <mark>the</mark> professional classes tended to <mark>argue</mark> that knowledge should remain <mark>the</mark> preserve of <mark>the</mark> learned.</p><p class="zh">尽管有少数好奇者涌向公开讲座和博物馆展览，专业阶层却倾向于主张知识应保留在学者手中。</p></div><div class="sent"><p class="en"><mark>The</mark> <mark>democratic</mark> impulse, however, would not be suppressed.</p><p class="zh">然而，民主的冲动不会受到压制。</p></div><div class="sent"><p class="en">As <mark>the</mark> <mark>postage</mark> <mark>system</mark> and <mark>the</mark> <mark>electronic</mark> telegraph <mark>compressed</mark> distance, a newly literate public began to demand <mark>explanations</mark> that did not <mark>degrade</mark> their intelligence.</p><p class="zh">随着邮政系统和电报压缩了距离，新近识字的公众开始要求得到不贬低他们智力的解释。</p></div><div class="sent"><p class="en">This was <mark>the</mark> <mark>first</mark> great test of what we might call <mark>the</mark> architecture of doubt.</p><p class="zh">这是对我们所称的“怀疑架构”的第一次重大考验。</p></div></div><div class="para"><div class="sent"><p class="en">By <mark>the</mark> <mark>middle</mark> of <mark>the</mark> twentieth century, <mark>the</mark> <mark>configuration</mark> of public knowledge had shifted dramatically.</p><p class="zh">到二十世纪中叶，公共知识的格局已经发生了巨大变化。</p></div><div class="sent"><p class="en"><mark>The</mark> <mark>microcomputer</mark>, still a <mark>novelty</mark> in its early years, promised to put <mark>sophisticated</mark> analytical tools into <mark>the</mark> hands of anyone with a desk and a modest budget.</p><p class="zh">微型计算机在早期仍是新奇之物，却承诺将精密的分析工具交到任何有书桌和适度预算的人手中。</p></div><div class="sent"><p class="en">Researchers could now <mark>investigate</mark> <mark>previously</mark> opaque phenomena, from <mark>the</mark> <mark>radius</mark> of a <mark>rust</mark> <mark>stain</mark> on a steel <mark>blade</mark> to <mark>the</mark> <mark>duration</mark> of a depressive episode.</p><p class="zh">研究者如今可以探究以前难以看清的现象，从钢刀上锈斑的半径到抑郁发作的持续时间。</p></div><div class="sent"><p class="en"><mark>The</mark> <mark>orientation</mark> of entire <mark>professions</mark> changed: <mark>medicine</mark>, for instance, moved from an art of bedside persuasion to a <mark>system</mark> of evidence-based protocols.</p><p class="zh">整个职业的取向发生了变化：例如，医学从床边说服的艺术转变为循证方案的体系。</p></div><div class="sent"><p class="en">Yet this <mark>quantitative</mark> turn had a hidden <mark>weakness</mark>.</p><p class="zh">然而，这种量化转向有一个隐藏的弱点。</p></div><div class="sent"><p class="en">When <mark>every</mark> <mark>fact</mark> could be <mark>compressed</mark> into a <mark>bit</mark> of data, <mark>the</mark> temptation to <mark>discard</mark> context grew.</p><p class="zh">当每个事实都能被压缩成一点数据时，抛弃背景的诱惑就增加了。</p></div><div class="sent"><p class="en">A single <mark>striking</mark> statistic could <mark>tumble</mark> a carefully constructed argument; a <mark>premature</mark> headline could <mark>distort</mark> <mark>the</mark> public&#x27;s understanding of a complex trial.</p><p class="zh">一个醒目的统计数字就能推翻一个精心构建的论点；一条过早的标题就能扭曲公众对复杂试验的理解。</p></div><div class="sent"><p class="en"><mark>The</mark> <mark>execution</mark> of a study, no matter how <mark>sophisticated</mark>, could not <mark>cure</mark> <mark>the</mark> public&#x27;s tendency to <mark>grab</mark> <mark>the</mark> most alarming number and <mark>run</mark> with it.</p><p class="zh">无论一项研究的执行多么精密，都无法治愈公众抓住最惊人数字就跑的倾向。</p></div></div><div class="para"><div class="sent"><p class="en"><mark>The</mark> cultural history of scientific authority is full of moments when a new <mark>ideology</mark>, dressed in <mark>the</mark> language of progress, promised to liberate us from <mark>error</mark>.</p><p class="zh">科学权威的文化史中充满了这样的时刻：一种披着进步语言外衣的新意识形态，承诺将我们从谬误中解放出来。</p></div><div class="sent"><p class="en"><mark>The</mark> <mark>prophet</mark> of <mark>the</mark> digital age, often a young engineer in a <mark>vest</mark> and a fresh <mark>haircut</mark>, would stand before a <mark>flock</mark> of <mark>hopeful</mark> investors and proclaim that <mark>the</mark> old world of <mark>fax</mark> machines and filing cabinets was about to be <mark>discarded</mark>.</p><p class="zh">数字时代的先知，往往是一位穿着背心、理着新发型的年轻工程师，站在一群满怀希望的投资人面前，宣告那个由传真机和文件柜构成的旧世界即将被抛弃。</p></div><div class="sent"><p class="en">He would <mark>argue</mark> that <mark>every</mark> problem, from <mark>the</mark> scheduling of <mark>freight</mark> to <mark>the</mark> teaching of a <mark>grandson</mark> in a distant city, could be solved by a sufficiently <mark>elaborate</mark> algorithm.</p><p class="zh">他会论证说，每一个问题——从货运调度到远在另一座城市的孙辈教育——都可以由一个足够精密的算法来解决。</p></div><div class="sent"><p class="en">There was <mark>considerable</mark> <mark>enthusiasm</mark> for this <mark>vision</mark>, and not without reason.</p><p class="zh">人们对这一愿景抱有极大的热情，而且并非没有道理。</p></div><div class="sent"><p class="en"><mark>The</mark> <mark>autonomy</mark> granted by a personal computer was genuinely novel; it allowed a student in <mark>Portugal</mark> to correspond with a <mark>minister</mark> in <mark>Australia</mark>, to <mark>analyse</mark> a <mark>text</mark>, or to <mark>retell</mark> a <mark>classic</mark> <mark>comedy</mark> with <mark>the</mark> press of a key.</p><p class="zh">个人计算机所带来的自主性确实是前所未有的；它让葡萄牙的一名学生能够与澳大利亚的一位部长通信，分析一篇文章，或者只需按一下键就能重述一部经典喜剧。</p></div><div class="sent"><p class="en">But <mark>the</mark> same technology also made it easier to <mark>thrust</mark> a misleading narrative into <mark>the</mark> public sphere.</p><p class="zh">但同样的技术也让误导性叙事更容易被推入公共领域。</p></div><div class="sent"><p class="en">A single post, written in <mark>the</mark> <mark>middle</mark> of <mark>the</mark> <mark>night</mark>, could reach a <mark>thousand</mark> readers by morning, and <mark>the</mark> <mark>messenger</mark> was rarely held accountable for <mark>the</mark> accuracy of <mark>the</mark> message.</p><p class="zh">一篇半夜写下的帖子，到早晨就能传到上千名读者手中，而传递信息的人很少为信息的准确性承担责任。</p></div></div><div class="para"><div class="sent"><p class="en">This brings us to a more uncomfortable <mark>fact</mark>: public <mark>trust</mark> in expertise has always been fragile, and its erosion is not solely <mark>the</mark> fault of scientists or journalists.</p><p class="zh">这引出一个更令人不安的事实：公众对专业知识的信任从来都是脆弱的，而这种信任的侵蚀并不全是科学家或记者的过错。</p></div><div class="sent"><p class="en"><mark>The</mark> human mind, as any <mark>elementary</mark> psychology <mark>text</mark> will confirm, is <mark>inclined</mark> to reject information that <mark>contradicts</mark> its existing beliefs.</p><p class="zh">任何一本基础心理学教材都会证实，人的心智倾向于拒绝那些与既有信念相矛盾的信息。</p></div><div class="sent"><p class="en">When a <mark>report</mark> on climate change <mark>highlights</mark> <mark>the</mark> <mark>harmful</mark> effects of industrial emissions, a portion of <mark>the</mark> audience will <mark>refuse</mark> to accept it, not because they have <mark>analysed</mark> <mark>the</mark> data, but because <mark>the</mark> conclusion feels like a threat to their economic <mark>liberty</mark>.</p><p class="zh">当一份关于气候变化的报告指出工业排放的有害影响时，一部分受众会拒绝接受，不是因为他们分析过数据，而是因为这个结论在感觉上威胁到了他们的经济自由。</p></div><div class="sent"><p class="en">They may <mark>argue</mark> <mark>loudly</mark> that <mark>the</mark> science is unsettled, that <mark>the</mark> researchers have a political bias, or that <mark>the</mark> whole enterprise is a form of intellectual <mark>torture</mark> designed to <mark>steal</mark> their <mark>autonomy</mark>.</p><p class="zh">他们可能会大声争辩说科学尚无定论，说研究者带有政治偏见，或者说这整个事业是一种旨在剥夺他们自主权的智力折磨。</p></div><div class="sent"><p class="en">Such reactions are not merely ignorant; they are, in a sense, a natural response to a world in which <mark>the</mark> volume of information has outstripped our capacity to <mark>digest</mark> it.</p><p class="zh">这类反应不仅仅是无知；从某种意义上说，它们是对这样一个世界的自然回应：在这个世界里，信息的数量已经超出了我们消化信息的能力。</p></div><div class="sent"><p class="en"><mark>The</mark> result is a paradoxical condition: we have never had more access to knowledge, yet <mark>the</mark> <mark>likelihood</mark> of a consensus on even basic <mark>facts</mark> seems to be shrinking.</p><p class="zh">其结果是一种悖论式的状态：我们获取知识的途径从未如此之多，然而即便在最基本的事实上达成共识的可能性似乎正在缩小。</p></div></div><div class="para"><div class="sent"><p class="en"><mark>Notwithstanding</mark> these difficulties, there are grounds for cautious optimism.</p><p class="zh">尽管存在这些困难，仍有理由保持谨慎的乐观。</p></div><div class="sent"><p class="en"><mark>The</mark> best scientific institutions have learned to treat public communication not as an <mark>optional</mark> extra but as an <mark>indispensable</mark> part of their mission.</p><p class="zh">最优秀的科学机构已经学会把公共传播视为其使命中不可或缺的一部分，而不是可有可无的附加项。</p></div><div class="sent"><p class="en">They have begun to <mark>use</mark> narrative, not merely data, to convey <mark>the</mark> significance of their work.</p><p class="zh">他们已开始运用叙事，而不仅仅是数据，来传达其工作的重要性。</p></div><div class="sent"><p class="en">A well-<mark>crafted</mark> <mark>article</mark> on <mark>the</mark> ecology of a <mark>turnip</mark> field, for example, can do more to <mark>convince</mark> a skeptical reader than a dry statistical table.</p><p class="zh">例如，一篇关于芜菁田生态的精心撰写的文章，比一张枯燥的统计表更能说服持怀疑态度的读者。</p></div><div class="sent"><p class="en"><mark>The</mark> key is to avoid <mark>the</mark> twin <mark>errors</mark> of condescension and sensationalism.</p><p class="zh">关键在于避免居高临下与耸人听闻这两个错误。</p></div><div class="sent"><p class="en">When a researcher takes <mark>the</mark> time to explain <mark>the</mark> reasoning behind a controversial finding, to acknowledge <mark>the</mark> genuine <mark>weaknesses</mark> in <mark>the</mark> data, and to <mark>present</mark> <mark>the</mark> evidence without <mark>glitter</mark> or distortion, <mark>the</mark> public is often surprisingly receptive.</p><p class="zh">当研究者花时间解释一个有争议发现背后的推理，坦承数据中确实存在的弱点，并以不加粉饰、不歪曲的方式呈现证据时，公众往往出人意料地愿意接受。</p></div><div class="sent"><p class="en"><mark>The</mark> goal is not to win a <mark>battle</mark> of ideologies but to build a shared <mark>basis</mark> for judgment—a common ground on which a <mark>realistic</mark> conversation about risks and benefits can <mark>unfold</mark>.</p><p class="zh">目标不是赢得意识形态之战，而是建立共同的判断基础——一个能够展开关于风险与收益的现实对话的共同立足点。</p></div></div><div class="para"><div class="sent"><p class="en">This is not a call for blind faith in authority.</p><p class="zh">这并不是呼吁对权威盲目信任。</p></div><div class="sent"><p class="en">On <mark>the</mark> contrary, a healthy skepticism is a vital component of any free society.</p><p class="zh">相反，健康的怀疑精神是任何自由社会不可或缺的组成部分。</p></div><div class="sent"><p class="en"><mark>The</mark> challenge is to cultivate a form of skepticism that is <mark>curious</mark> rather than <mark>hateful</mark>, rigorous rather than reflexive.</p><p class="zh">挑战在于培养一种好奇而非敌意、严谨而非条件反射式的怀疑态度。</p></div><div class="sent"><p class="en">It requires <mark>the</mark> <mark>courage</mark> to admit that one&#x27;s own understanding is incomplete, and <mark>the</mark> patience to <mark>investigate</mark> a question thoroughly before drawing a conclusion.</p><p class="zh">它需要勇气承认自己的理解并不完整，也需要耐心在得出结论之前彻底调查一个问题。</p></div><div class="sent"><p class="en">In a world where a rumor can <mark>float</mark> across borders in seconds, where a <mark>sour</mark> comment can <mark>stain</mark> a reputation, and where <mark>the</mark> line between <mark>comedy</mark> and tragedy is often a matter of perspective, <mark>the</mark> ability to think clearly about evidence is a form of civic virtue.</p><p class="zh">在一个谣言可以在几秒内跨越国界、一句尖刻的评论可以玷污声誉、喜剧与悲剧的界限往往取决于视角的世界里，清晰思考证据的能力是一种公民美德。</p></div><div class="sent"><p class="en"><mark>The</mark> scientist, <mark>the</mark> journalist, and <mark>the</mark> ordinary citizen each have a role to play: <mark>the</mark> <mark>first</mark> by speaking with precision, <mark>the</mark> second by refusing to amplify falsehoods, and <mark>the</mark> third by demanding <mark>explanations</mark> that respect their intelligence without pandering to their fears.</p><p class="zh">科学家、记者和普通公民各有其角色：第一类人以精确的方式发言，第二类人拒绝放大虚假信息，第三类人要求得到尊重其智力而不迎合其恐惧的解释。</p></div><div class="sent"><p class="en"><mark>The</mark> future of public <mark>trust</mark> depends on whether we can learn to <mark>cross</mark> <mark>the</mark> gap between expertise and experience, and to do so without tumbling into despair.</p><p class="zh">公共信任的未来取决于我们能否学会跨越专业知识与日常经验之间的鸿沟，并且在此过程中不坠入绝望。</p></div></div><div class="para"><div class="sent"><p class="en">In <mark>the</mark> end, <mark>the</mark> story of science and society is not a simple tale of <mark>victorious</mark> reason over superstition.</p><p class="zh">归根结底，科学与社会的故事并非理性战胜迷信的简单叙事。</p></div><div class="sent"><p class="en">It is an ongoing, often messy, negotiation between <mark>the</mark> need for certainty and <mark>the</mark> reality of uncertainty.</p><p class="zh">它是一场持续的、往往混乱的协商，发生在对确定性的需求与不确定性的现实之间。</p></div><div class="sent"><p class="en"><mark>The</mark> next time you read a headline that seems too neat, too perfectly aligned with your existing beliefs, pause for a moment.</p><p class="zh">下次你读到一条标题，它显得过于工整、与你已有的信念过于完美契合时，不妨暂停片刻。</p></div><div class="sent"><p class="en">Ask yourself what has been left out, what context has been <mark>compressed</mark>, what alternative <mark>explanation</mark> might fit <mark>the</mark> same <mark>facts</mark>.</p><p class="zh">问问自己，遗漏了什么，哪些背景被压缩了，还有哪些替代解释可能同样符合事实。</p></div><div class="sent"><p class="en">This habit of mind, more than any technological fix, is what will determine whether <mark>the</mark> architecture of doubt can be rebuilt on a firmer foundation.</p><p class="zh">这种思维习惯，比任何技术修复都更能决定怀疑的架构能否在更坚实的基础上重建。</p></div><div class="sent"><p class="en"><mark>The</mark> tools are already in our hands; whether we <mark>use</mark> them wisely is a question that each of us must answer for <mark>oneself</mark>.</p><p class="zh">工具已在手中；能否明智地使用它们，是每个人都必须自己回答的问题。</p></div></div>
-</div>
-<section>
-  <h2>📋 本日词表（绿=已嵌入文章 · 灰=未嵌入）</h2>
-  <div class="legend">共 185 词，按原卡顺序</div>
-  <div class="chips"><span class="chip off">thought</span><span class="chip on">quantitative</span><span class="chip on">unfold</span><span class="chip on">postage</span><span class="chip off">receiver</span><span class="chip on">text</span><span class="chip on">system</span><span class="chip off">along</span><span class="chip on">weakness</span><span class="chip on">premature</span><span class="chip on">orientation</span><span class="chip on">during</span><span class="chip on">profession</span><span class="chip on">novelty</span><span class="chip on">democratic</span><span class="chip on">curious</span><span class="chip off">optimum</span><span class="chip off">stool</span><span class="chip on">ideology</span><span class="chip on">cross</span><span class="chip on">cure</span><span class="chip on">fact</span><span class="chip on">evaluate</span><span class="chip off">Permissible</span><span class="chip on">germ</span><span class="chip on">atom</span><span class="chip on">haircut</span><span class="chip off">tear</span><span class="chip off">finish</span><span class="chip off">possibly</span><span class="chip off">hot</span><span class="chip off">negative</span><span class="chip on">rust</span><span class="chip on">vest</span><span class="chip on">trust</span><span class="chip off">know</span><span class="chip off">heading</span><span class="chip off">mist</span><span class="chip on">argue</span><span class="chip off">boom</span><span class="chip on">classic</span><span class="chip on">considerable</span><span class="chip off">visit</span><span class="chip off">influence</span><span class="chip on">oneself</span><span class="chip on">night</span><span class="chip on">article</span><span class="chip on">error</span><span class="chip off">goat</span><span class="chip on">comedy</span><span class="chip off">while</span><span class="chip on">blade</span><span class="chip on">microcomputer</span><span class="chip on">execution</span><span class="chip on">contradict</span><span class="chip off">ridiculous</span><span class="chip on">tumble</span><span class="chip off">hate</span><span class="chip on">explanation</span><span class="chip off">jump</span><span class="chip on">battle</span><span class="chip off">soup</span><span class="chip on">radius</span><span class="chip on">optional</span><span class="chip off">lord</span><span class="chip on">elementary</span><span class="chip on">loudly</span><span class="chip on">thrust</span><span class="chip on">liberty</span><span class="chip on">indispensable</span><span class="chip on">bit</span><span class="chip on">prophet</span><span class="chip off">team</span><span class="chip off">eighty</span><span class="chip on">basis</span><span class="chip on">grab</span><span class="chip on">hateful</span><span class="chip on">means</span><span class="chip on">autonomy</span><span class="chip on">elaborate</span><span class="chip on">fax</span><span class="chip on">Portugal</span><span class="chip on">minister</span><span class="chip on">messenger</span><span class="chip on">digest</span><span class="chip off">probe</span><span class="chip on">museum</span><span class="chip on">notwithstanding</span><span class="chip off">throat</span><span class="chip off">superior</span><span class="chip on">hopeful</span><span class="chip off">material</span><span class="chip off">bonus</span><span class="chip on">glitter</span><span class="chip off">tissue</span><span class="chip off">chop</span><span class="chip on">retell</span><span class="chip on">courage</span><span class="chip on">first</span><span class="chip on">investigate</span><span class="chip off">attribute</span><span class="chip on">torture</span><span class="chip on">striking</span><span class="chip off">reign</span><span class="chip off">mayor</span><span class="chip on">lunch</span><span class="chip on">steal</span><span class="chip off">publicity</span><span class="chip off">undoubtedly</span><span class="chip on">the</span><span class="chip on">accommodation</span><span class="chip off">dimension</span><span class="chip on">harmful</span><span class="chip off">prescribe</span><span class="chip off">necessary</span><span class="chip off">praise</span><span class="chip off">unlike</span><span class="chip on">freight</span><span class="chip off">throw</span><span class="chip off">elapse</span><span class="chip on">configuration</span><span class="chip off">sunny</span><span class="chip off">disrupt</span><span class="chip on">retrospect</span><span class="chip on">duration</span><span class="chip on">medicine</span><span class="chip on">convince</span><span class="chip off">depression</span><span class="chip on">float</span><span class="chip on">previously</span><span class="chip on">compress</span><span class="chip on">report</span><span class="chip on">flock</span><span class="chip off">rejoice</span><span class="chip off">half</span><span class="chip off">decent</span><span class="chip off">toilet</span><span class="chip off">glide</span><span class="chip off">unity</span><span class="chip off">rely</span><span class="chip off">saint</span><span class="chip on">degrade</span><span class="chip on">realistic</span><span class="chip off">Africa</span><span class="chip on">discard</span><span class="chip on">highlight</span><span class="chip off">therefore</span><span class="chip on">sour</span><span class="chip off">lap</span><span class="chip off">resistance</span><span class="chip off">shabby</span><span class="chip off">toy</span><span class="chip off">storey</span><span class="chip on">craft</span><span class="chip on">likelihood</span><span class="chip off">coat</span><span class="chip on">electronic</span><span class="chip on">refuse</span><span class="chip off">tourist</span><span class="chip off">gaze</span><span class="chip on">victorious</span><span class="chip on">Australia</span><span class="chip on">although</span><span class="chip off">ankle</span><span class="chip on">thousand</span><span class="chip on">majority</span><span class="chip on">grandson</span><span class="chip on">stain</span><span class="chip on">use</span><span class="chip on">distort</span><span class="chip on">analyse</span><span class="chip on">incline</span><span class="chip on">sophisticated</span><span class="chip on">middle</span><span class="chip off">lofty</span><span class="chip on">every</span><span class="chip off">removal</span><span class="chip on">turnip</span><span class="chip on">vision</span><span class="chip off">oriental</span><span class="chip off">America</span><span class="chip on">enthusiasm</span><span class="chip off">secret</span><span class="chip on">present</span><span class="chip on">run</span></div>
-</section>
-<footer>原文：卡片机自动生成 · deepseek-v4-pro @ opencode-go · 2026-09-06<br>中英句对照版 · deepseek-v4-pro @ opencode-go · 2026-09-06</footer>
-</div>
+</div><div class="bank"><p class="legend">本日词表 · 185 词（绿 = 已嵌入文章，灰 = 未嵌入）</p><div class="chips"><span class="chip off">thought</span><span class="chip on">quantitative</span><span class="chip on">unfold</span><span class="chip on">postage</span><span class="chip off">receiver</span><span class="chip on">text</span><span class="chip on">system</span><span class="chip off">along</span><span class="chip on">weakness</span><span class="chip on">premature</span><span class="chip on">orientation</span><span class="chip on">during</span><span class="chip on">profession</span><span class="chip on">novelty</span><span class="chip on">democratic</span><span class="chip on">curious</span><span class="chip off">optimum</span><span class="chip off">stool</span><span class="chip on">ideology</span><span class="chip on">cross</span><span class="chip on">cure</span><span class="chip on">fact</span><span class="chip on">evaluate</span><span class="chip off">Permissible</span><span class="chip on">germ</span><span class="chip on">atom</span><span class="chip on">haircut</span><span class="chip off">tear</span><span class="chip off">finish</span><span class="chip off">possibly</span><span class="chip off">hot</span><span class="chip off">negative</span><span class="chip on">rust</span><span class="chip on">vest</span><span class="chip on">trust</span><span class="chip off">know</span><span class="chip off">heading</span><span class="chip off">mist</span><span class="chip on">argue</span><span class="chip off">boom</span><span class="chip on">classic</span><span class="chip on">considerable</span><span class="chip off">visit</span><span class="chip off">influence</span><span class="chip on">oneself</span><span class="chip on">night</span><span class="chip on">article</span><span class="chip on">error</span><span class="chip off">goat</span><span class="chip on">comedy</span><span class="chip off">while</span><span class="chip on">blade</span><span class="chip on">microcomputer</span><span class="chip on">execution</span><span class="chip on">contradict</span><span class="chip off">ridiculous</span><span class="chip on">tumble</span><span class="chip off">hate</span><span class="chip on">explanation</span><span class="chip off">jump</span><span class="chip on">battle</span><span class="chip off">soup</span><span class="chip on">radius</span><span class="chip on">optional</span><span class="chip off">lord</span><span class="chip on">elementary</span><span class="chip on">loudly</span><span class="chip on">thrust</span><span class="chip on">liberty</span><span class="chip on">indispensable</span><span class="chip on">bit</span><span class="chip on">prophet</span><span class="chip off">team</span><span class="chip off">eighty</span><span class="chip on">basis</span><span class="chip on">grab</span><span class="chip on">hateful</span><span class="chip on">means</span><span class="chip on">autonomy</span><span class="chip on">elaborate</span><span class="chip on">fax</span><span class="chip on">Portugal</span><span class="chip on">minister</span><span class="chip on">messenger</span><span class="chip on">digest</span><span class="chip off">probe</span><span class="chip on">museum</span><span class="chip on">notwithstanding</span><span class="chip off">throat</span><span class="chip off">superior</span><span class="chip on">hopeful</span><span class="chip off">material</span><span class="chip off">bonus</span><span class="chip on">glitter</span><span class="chip off">tissue</span><span class="chip off">chop</span><span class="chip on">retell</span><span class="chip on">courage</span><span class="chip on">first</span><span class="chip on">investigate</span><span class="chip off">attribute</span><span class="chip on">torture</span><span class="chip on">striking</span><span class="chip off">reign</span><span class="chip off">mayor</span><span class="chip on">lunch</span><span class="chip on">steal</span><span class="chip off">publicity</span><span class="chip off">undoubtedly</span><span class="chip on">the</span><span class="chip on">accommodation</span><span class="chip off">dimension</span><span class="chip on">harmful</span><span class="chip off">prescribe</span><span class="chip off">necessary</span><span class="chip off">praise</span><span class="chip off">unlike</span><span class="chip on">freight</span><span class="chip off">throw</span><span class="chip off">elapse</span><span class="chip on">configuration</span><span class="chip off">sunny</span><span class="chip off">disrupt</span><span class="chip on">retrospect</span><span class="chip on">duration</span><span class="chip on">medicine</span><span class="chip on">convince</span><span class="chip off">depression</span><span class="chip on">float</span><span class="chip on">previously</span><span class="chip on">compress</span><span class="chip on">report</span><span class="chip on">flock</span><span class="chip off">rejoice</span><span class="chip off">half</span><span class="chip off">decent</span><span class="chip off">toilet</span><span class="chip off">glide</span><span class="chip off">unity</span><span class="chip off">rely</span><span class="chip off">saint</span><span class="chip on">degrade</span><span class="chip on">realistic</span><span class="chip off">Africa</span><span class="chip on">discard</span><span class="chip on">highlight</span><span class="chip off">therefore</span><span class="chip on">sour</span><span class="chip off">lap</span><span class="chip off">resistance</span><span class="chip off">shabby</span><span class="chip off">toy</span><span class="chip off">storey</span><span class="chip on">craft</span><span class="chip on">likelihood</span><span class="chip off">coat</span><span class="chip on">electronic</span><span class="chip on">refuse</span><span class="chip off">tourist</span><span class="chip off">gaze</span><span class="chip on">victorious</span><span class="chip on">Australia</span><span class="chip on">although</span><span class="chip off">ankle</span><span class="chip on">thousand</span><span class="chip on">majority</span><span class="chip on">grandson</span><span class="chip on">stain</span><span class="chip on">use</span><span class="chip on">distort</span><span class="chip on">analyse</span><span class="chip on">incline</span><span class="chip on">sophisticated</span><span class="chip on">middle</span><span class="chip off">lofty</span><span class="chip on">every</span><span class="chip off">removal</span><span class="chip on">turnip</span><span class="chip on">vision</span><span class="chip off">oriental</span><span class="chip off">America</span><span class="chip on">enthusiasm</span><span class="chip off">secret</span><span class="chip on">present</span><span class="chip on">run</span></div></div><footer class="foot">原文：卡片机自动生成 · deepseek-v4-pro @ opencode-go · 2026-09-06<br>逐句译文：deepseek-v4-pro @ opencode-go · 2026-09-06<br><a class="big" href="https://alex05250.github.io/cet6-reading/daily.html">返回每日目录</a></footer><button id="topBtn" data-act="top" aria-label="回到顶部">↑</button><script>/* CET-6 · 阅读层运行脚本：译文/高亮开关、阅读进度、回到顶部、锚点展开
+   真题页外链引用；每日文章页在构建时内联进页面（桌面单文件也要能跑）。 */
+(function () {
+  'use strict';
+  var body = document.body;
+
+  function onScroll() {
+    var y = window.scrollY || document.documentElement.scrollTop || 0;
+    body.classList.toggle('scrolled', y > 6);
+    var bar = document.querySelector('.rdbar i');
+    if (bar) {
+      var h = document.documentElement.scrollHeight - innerHeight;
+      bar.style.width = (h > 0 ? Math.min(100, y / h * 100) : 0) + '%';
+    }
+    var top = document.getElementById('topBtn');
+    if (top) top.classList.toggle('on', y > 700);
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* 按钮：data-act = zh | mark | open | close */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]');
+    if (!b) return;
+    var act = b.getAttribute('data-act');
+    if (act === 'zh') {
+      var off = body.classList.toggle('no-zh');
+      b.setAttribute('aria-pressed', String(off));
+      var lab = b.querySelector('.lab');
+      if (lab) lab.textContent = off ? '显示译文' : '隐藏译文';
+    } else if (act === 'mark') {
+      var off2 = body.classList.toggle('no-mark');
+      b.setAttribute('aria-pressed', String(off2));
+      var lab2 = b.querySelector('.lab');
+      if (lab2) lab2.textContent = off2 ? '显示高亮' : '隐藏高亮';
+    } else if (act === 'open') {
+      document.querySelectorAll('details.setblk').forEach(function (d) { d.open = true; });
+    } else if (act === 'close') {
+      document.querySelectorAll('details.setblk').forEach(function (d) { d.open = false; });
+    } else if (act === 'top') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+
+  /* 锚点：展开祖先 details 再滚动 */
+  function openHash() {
+    if (!location.hash) return;
+    var el = null;
+    try { el = document.querySelector(location.hash); } catch (err) { return; }
+    if (!el) return;
+    var d = el.closest('details');
+    if (d) d.open = true;
+    setTimeout(function () { el.scrollIntoView({ block: 'start' }); }, 30);
+  }
+  addEventListener('hashchange', openHash);
+  openHash();
+})();
+</script>
 </body>
 </html>
