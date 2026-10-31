@@ -1,325 +1,97 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Day 5 · CET-6 单词卡</title>
-<style>
-:root{
-  --text:#2C2C2B; --sub:#7D7A75; --canvas:#FFFFFF; --soft:#F9F8F7; --soft2:#F0EFED;
-  --border:#E6E5E3; --blue:#2783DE; --blueSoft:#E5F2FC; --green:#46A171; --greenSoft:#E8F1EC;
-  --orange:#D5803B; --orangeSoft:#FBEBDE; --red:#E56458; --redSoft:#FCE9E7;
-}
-@media (prefers-color-scheme: dark){
-  :root{--text:#FFFFFF; --sub:rgba(255,255,255,.65); --canvas:#191919; --soft:#202020;
-  --soft2:#383836; --border:rgba(255,255,255,.20); --blue:#5E9FE8; --blueSoft:rgba(94,159,232,.12);
-  --green:#72BC8F; --greenSoft:rgba(114,188,143,.12); --orange:#DE9255; --orangeSoft:rgba(222,146,85,.12);
-  --red:#E97366; --redSoft:rgba(233,115,102,.12);}
-}
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{background:var(--canvas);color:var(--text);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1000px;margin:0 auto;padding:20px 24px 32px}
-header{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-end;justify-content:space-between}
-.title{font-size:26px;font-weight:700;letter-spacing:-.01em;line-height:1.15}
-.meta{font-size:14px;color:var(--sub);margin-top:4px}
-.stat{font-size:14px;color:var(--sub);text-align:right}
-.stat b{font-size:22px;color:var(--green);font-weight:700}
-.bar{height:6px;border-radius:8px;background:var(--soft2);margin-top:14px;overflow:hidden}
-.bar>i{display:block;height:100%;width:0;background:var(--green);transition:width .25s ease}
-nav{display:flex;gap:8px;margin:20px 0 16px;flex-wrap:wrap}
-nav button{min-height:44px;padding:0 16px;border-radius:8px;border:1px solid var(--border);background:var(--canvas);color:var(--text);font-size:15px;font-weight:500;cursor:pointer}
-nav button[aria-selected="true"]{background:var(--blueSoft);border-color:var(--blue);color:var(--blue)}
-nav button:focus-visible,.row button:focus-visible,.card:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.hint{font-size:14px;color:var(--sub);background:var(--soft);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:16px}
-.group{border:1px solid var(--border);border-radius:8px;margin-bottom:12px;overflow:hidden}
-.group>summary{cursor:pointer;padding:12px 16px;font-weight:600;font-size:15px;background:var(--soft);list-style:none;display:flex;justify-content:space-between;gap:12px}
-.group>summary::-webkit-details-marker{display:none}
-.group>summary span{color:var(--sub);font-weight:500;font-size:13px}
-.row{display:grid;grid-template-columns:44px 1fr 1.3fr 44px;gap:12px;align-items:center;padding:10px 16px;border-top:1px solid var(--border)}
-.row .no{font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums}
-.row .w{font-weight:600;font-size:16px;word-break:break-word}
-.row .ph{font-size:12px;color:var(--sub);font-family:Menlo,Consolas,monospace;word-break:break-all}
-.row .m{font-size:14px;color:var(--text)}
-.row .chip{display:inline-block;font-size:11px;color:var(--blue);background:var(--blueSoft);border-radius:4px;padding:1px 6px;margin:4px 4px 0 0}
-.row button{width:44px;height:44px;border-radius:8px;border:1px solid var(--border);background:var(--canvas);cursor:pointer;font-size:16px;color:var(--sub)}
-.row.done{background:var(--greenSoft)}
-.row.done button{border-color:var(--green);color:var(--green)}
-.row.hide .m,.row.hide .chip{filter:blur(5px);transition:filter .15s}
-.row.hide:hover .m,.row.hide:hover .chip,.row.hide.show .m,.row.hide.show .chip{filter:none}
-.cardbox{display:flex;flex-direction:column;align-items:center;gap:16px}
-.card{width:100%;max-width:560px;min-height:210px;border:1px solid var(--border);border-radius:12px;background:var(--soft);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;cursor:pointer;text-align:center}
-.card .cw{font-size:34px;font-weight:700;line-height:1.2;word-break:break-word}
-.card .cp{font-size:14px;color:var(--sub);font-family:Menlo,Consolas,monospace}
-.card .cm{font-size:17px;max-width:460px}
-.card .tip{font-size:13px;color:var(--sub)}
-.card .chip{font-size:12px;color:var(--blue);background:var(--blueSoft);border-radius:4px;padding:2px 8px;margin:2px}
-.acts{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-.acts button{min-height:44px;padding:0 18px;border-radius:8px;border:1px solid var(--border);background:var(--canvas);color:var(--text);font-size:15px;cursor:pointer}
-.acts .ok{border-color:var(--green);color:var(--green);background:var(--greenSoft)}
-.acts .no{border-color:var(--orange);color:var(--orange);background:var(--orangeSoft)}
-.counter{font-size:14px;color:var(--sub)}
-.quiz{max-width:620px;margin:0 auto}
-.q{font-size:15px;color:var(--sub);margin-bottom:6px}
-.qw{font-size:30px;font-weight:700;margin-bottom:18px;word-break:break-word}
-.opts{display:grid;gap:10px}
-.opts button{min-height:48px;text-align:left;padding:10px 16px;border-radius:8px;border:1px solid var(--border);background:var(--canvas);color:var(--text);font-size:15px;cursor:pointer}
-.opts button.right{border-color:var(--green);background:var(--greenSoft);color:var(--green)}
-.opts button.wrong{border-color:var(--red);background:var(--redSoft);color:var(--red)}
-.aid h3{font-size:15px;margin:22px 0 10px;font-weight:600}
-.aid h3:first-child{margin-top:0}
-.aid .box{border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:10px;background:var(--soft)}
-.aid .head{font-weight:600;font-size:15px;margin-bottom:6px}
-.aid .head em{font-style:normal;color:var(--blue)}
-.aid .ws{font-size:14px;color:var(--text);line-height:1.7}
-.aid .pair{font-size:14px;line-height:1.7}
-.aid .pair b{font-weight:600}
-.aid .pair span{color:var(--sub)}
-.foot{margin-top:24px;font-size:13px;color:var(--sub);display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.foot button{min-height:36px;padding:0 12px;border-radius:8px;border:1px solid var(--border);background:var(--canvas);color:var(--sub);font-size:13px;cursor:pointer}
-[hidden]{display:none !important}
-@media (max-width:600px){
-  .wrap{padding:16px 16px 28px}
-  .title{font-size:22px}
-  .row{grid-template-columns:1fr 44px;gap:6px}
-  .row .no{display:none}
-  .row .mcell{grid-column:1}
-  .card .cw{font-size:28px}
-}
-@media (prefers-reduced-motion:reduce){*{transition:none !important}}
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Day 5 · CET-6 核心词</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/app.css">
 </head>
 <body>
-<div class="wrap">
-<div class="topnav" style="margin:0 0 6px;font:14px/1.6 -apple-system,'Segoe UI','Microsoft YaHei',sans-serif"><a href="../words.html" style="color:var(--blue);text-decoration:none">&larr; 返回 30 天总览</a><span style="color:var(--sub);margin-left:12px">Day 5 &middot; No.745&ndash;930</span></div>
 
-<header>
-  <div>
-    <div class="title" id="ttl"></div>
-    <div class="meta" id="mta"></div>
-  </div>
-  <div class="stat"><b id="cnt">0</b> / <span id="tot">0</span> 已标记为“熟”</div>
-</header>
-<div class="bar"><i id="pbar"></i></div>
-
-<nav role="tablist">
-  <button role="tab" data-t="list" aria-selected="true">词表速过</button>
-  <button role="tab" data-t="card" aria-selected="false">卡片自测</button>
-  <button role="tab" data-t="quiz" aria-selected="false">选项测验</button>
-  <button role="tab" data-t="aid" aria-selected="false">记忆助手</button>
+<nav class="nav">
+  <a class="brand" href="../words.html">CET-6 <i>· 核心词</i></a>
+  <div class="spacer"></div>
+  <a class="lnk" href="../words.html">← 全部 30 天</a>
 </nav>
 
-<section id="list">
-  <div class="hint">建议：每组 25 分钟，先不要求背住，只求“看到单词能想起大致意思”。右侧 ✓ 标记已熟，未标记的就是你的错词本。
-    <button id="blurBtn" style="margin-left:8px;min-height:32px;padding:0 10px;border-radius:6px;border:1px solid var(--border);background:var(--canvas);color:var(--blue);cursor:pointer">遮住释义</button>
+<div class="dayhead">
+  <p class="kick">Day 5</p>
+  <h2>No.745 – 930</h2>
+  <div class="sub">
+    <span><b id="dDone">0</b> / <span id="dTotal">186</span> 已会</span>
+    <span class="track"><i id="dBar"></i></span>
+    <span id="dPct">0%</span>
   </div>
-  <div id="groups"></div>
-</section>
+</div>
 
-<section id="card" hidden>
-  <div class="cardbox">
-    <div class="counter" id="cardCounter"></div>
-    <div class="card" id="theCard" tabindex="0" role="button" aria-label="点击翻面"></div>
-    <div class="acts">
-      <button class="ok" id="btnOk">认识 ✓</button>
-      <button class="no" id="btnNo">模糊，再练</button>
-      <button id="btnShuffle">乱序重洗</button>
-      <button id="btnOnlyWeak">只练未熟</button>
+<div class="tabbar">
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-t="list">词表速过</button>
+    <button role="tab" aria-selected="false" data-t="card">卡片自测</button>
+    <button role="tab" aria-selected="false" data-t="quiz">选项测验</button>
+    <button role="tab" aria-selected="false" data-t="aid">记忆助手</button>
+  </div>
+</div>
+
+<!-- 词表 -->
+<section class="view on" id="p-list">
+  <div class="rows">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:10px">
+      <button class="pill" id="blurBtn" style="font-size:12px;padding:7px 15px">遮住释义</button>
     </div>
+    <div id="groups"></div>
   </div>
 </section>
 
-<section id="quiz" hidden>
+<!-- 卡片 -->
+<section class="view" id="p-card">
+  <div style="padding:10px 24px 140px">
+    <div class="fstage" style="margin:0 auto">
+      <div class="fcard" id="fcard" tabindex="0">
+        <div class="face front">
+          <div class="fw" id="fw">—</div>
+          <div class="fi" id="fi"></div>
+          <div class="fhint" id="fh">点击翻面</div>
+        </div>
+        <div class="face back">
+          <div class="fw" id="bw"></div>
+          <div class="fi" id="bi"></div>
+          <div class="fm" id="bm"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fbar">
+      <button class="pill" id="fNo">不熟</button>
+      <button class="pill primary" id="fYes">已会</button>
+      <button class="pill" id="fWeak">只练未熟</button>
+      <button class="pill" id="fShuffle">洗牌</button>
+    </div>
+    <div class="fmeta" id="fmeta"></div>
+  </div>
+</section>
+
+<!-- 测验 -->
+<section class="view" id="p-quiz">
   <div class="quiz">
-    <div class="q" id="qProg"></div>
-    <div class="qw" id="qWord"></div>
-    <div class="opts" id="qOpts"></div>
-    <div class="foot"><button id="qRestart">重新出题（10 道）</button><span id="qScore"></span></div>
+    <div class="qmeta" id="qmeta"></div>
+    <div class="qword" id="qword">—</div>
+    <div class="qipa" id="qipa"></div>
+    <div class="opts" id="opts"></div>
+    <div class="score" id="score"></div>
+    <button class="pill again" id="qAgain" style="display:none">再来一组</button>
   </div>
 </section>
 
-<section id="aid" hidden class="aid"></section>
+<!-- 助记 -->
+<section class="view" id="p-aid">
+  <div class="aids" id="aids"></div>
+</section>
 
-<div class="foot">
-  <button id="expBtn">导出未熟词</button>
-  <button id="resetBtn">清空本日标记</button>
-  <span id="expOut"></span>
-</div>
-</div>
+<footer>词表来自 Notion 30 天词卡　·　音标为标准美式 IPA　·　进度保存在本机浏览器</footer>
 
-<script>
-const DATA = {"day": 5, "start": 745, "end": 930, "count": 186, "review": [4, 3, 1], "items": [{"n": 745, "w": "obey", "p": "ə'bei", "m": "vt. 顺从 ❘ vi. 服从听从", "g": "顺从", "c": []}, {"n": 746, "w": "hostage", "p": "‘hɔstidʒ", "m": "n. 人质，抵押品", "g": "人质", "c": []}, {"n": 747, "w": "crush", "p": "krʌʃ", "m": "vt. 压碎碾碎镇压拥挤的人群迷恋关键时刻果汁榨汁酿酒 ❘ vt. 压破征服挤入镇压 ❘ vi. 被压碎挤", "g": "压碎碾碎镇压拥挤的人群迷恋关", "c": []}, {"n": 748, "w": "repay", "p": "ri:’pei", "m": "vt. & ❘ vi. 偿还，报答", "g": "&", "c": []}, {"n": 749, "w": "relativity", "p": ".relə'tiviti", "m": "n. 相关性相对性", "g": "相关性相对性", "c": ["-ity / -ty：名词：性质"]}, {"n": 750, "w": "strap", "p": "stræp", "m": "n. 带子皮带 ❘ vt. (用带)捆扎(用带)打", "g": "带子皮带", "c": []}, {"n": 751, "w": "buzz", "p": "bΛz", "m": "vi. (蜂等)嗡嗡叫", "g": "(蜂等)嗡嗡叫", "c": []}, {"n": 752, "w": "recession", "p": "әri’seʃ n", "m": "n. (经济)衰退,不景气", "g": "(经济)衰退", "c": ["-tion / -sion：名词：动作、结果"]}, {"n": 753, "w": "proportional", "p": "prə'pɔ:ʃənəl", "m": "adj. (成)比例的相称的 ❘ n. [数]比例项", "g": "(成)比例的相称的", "c": ["词根 port：携带、运"]}, {"n": 754, "w": "teacher", "p": "'ti:tʃə", "m": "n. 教师老师先生", "g": "教师老师先生", "c": []}, {"n": 755, "w": "startle", "p": "‘sta:tl", "m": "vt. 使大吃一惊 ❘ n. 吃惊", "g": "使大吃一惊", "c": []}, {"n": 756, "w": "skate", "p": "skeit", "m": "n. 冰鞋滑冰 ❘ vi. 滑冰溜冰 ❘ vt. 滑冰", "g": "冰鞋滑冰", "c": []}, {"n": 757, "w": "supply", "p": "sə'plai", "m": "n. 补给供给供应贮备 ❘ vt. 补给供给提供提供足够以满足", "g": "补给供给供应贮备", "c": ["词根 plic / ply：折叠", "-ly：副词"]}, {"n": 758, "w": "customer", "p": "'kʌstəmə", "m": "n. 顾客主顾家伙", "g": "顾客主顾家伙", "c": []}, {"n": 759, "w": "sausage", "p": "'sɔ:sidʒ", "m": "n. 香肠腊肠", "g": "香肠腊肠", "c": []}, {"n": 760, "w": "music", "p": "'mju:zik", "m": "n. 音乐乐曲乐谱伴奏美妙的声音", "g": "音乐乐曲乐谱伴奏美妙的声音", "c": []}, {"n": 761, "w": "amount", "p": "ə'maunt", "m": "n. 总数数量总额和 ❘ vi. 总计等于", "g": "总数数量总额和", "c": []}, {"n": 762, "w": "boycott", "p": "ә‘bɔik t", "m": "vt. & ❘ n. 联合抵制", "g": "&", "c": []}, {"n": 763, "w": "bomb", "p": "bɔm", "m": "n. 炸弹高压罐火山口喷出的熔岩 ❘ vt. 轰炸大败长传 ❘ vi. 失败", "g": "炸弹高压罐火山口喷出的熔岩", "c": []}, {"n": 764, "w": "express", "p": "iks'pres", "m": "vt. 表达表示挤压出快递 ❘ n. 快车快递专使 ❘ adj. 急速的明确的直接的 ❘ adv. 用快递特意地", "g": "表达表示挤压出快递", "c": ["拆分 ex- (向外) + press", "词根 press：压"]}, {"n": 765, "w": "worthy", "p": "'wə:ði", "m": "adj. 有价值的可尊敬的值得的配得上的 ❘ n. 知名人士杰出人物", "g": "有价值的可尊敬的值得的配得上", "c": []}, {"n": 766, "w": "presumably", "p": "әpri’zju:m bli", "m": "ad. 推测起来，大概", "g": "推测起来", "c": ["-ly：副词"]}, {"n": 767, "w": "copper", "p": "'kɔpə", "m": "n. 铜铜币铜制器有紫铜色翅膀的小蝴蝶警官 ❘ vt. 镀铜", "g": "铜铜币铜制器有紫铜色翅膀的小", "c": []}, {"n": 768, "w": "dive", "p": "daiv", "m": "vi. 跳水潜水俯冲 ❘ vt. 跳水俯冲 ❘ vi. 把...伸入", "g": "跳水潜水俯冲", "c": []}, {"n": 769, "w": "spectacular", "p": "әspek’tækjul", "m": "a. 公开展示的,惊人的 ❘ n. 展览物", "g": "公开展示的", "c": []}, {"n": 770, "w": "definitely", "p": "'definitli", "m": "adv. 一定地明确地确切地", "g": "一定地明确地确切地", "c": ["-ly：副词"]}, {"n": 771, "w": "condemn", "p": "kən'dem", "m": "vt. 谴责指责判刑官方宣称(某事物)有缺陷或不宜使用", "g": "谴责指责判刑官方宣称(某事物", "c": []}, {"n": 772, "w": "England", "p": "'inglənd", "m": "n. 英格兰英国", "g": "英格兰英国", "c": []}, {"n": 773, "w": "skip", "p": "skip", "m": "vi. 跳；跳绳；略过", "g": "跳", "c": []}, {"n": 774, "w": "street", "p": "stri:t", "m": "n. 街街道行车道 ❘ adj. 街道的", "g": "街街道行车道", "c": []}, {"n": 775, "w": "rouse", "p": "rauz", "m": "vt. 唤醒唤起惊起鼓舞激起 ❘ n. 觉醒奋起", "g": "唤醒唤起惊起鼓舞激起", "c": []}, {"n": 776, "w": "ninth", "p": "nainθ", "m": "num. 第九九分之一 ❘ adj. 第九的九分之一的", "g": "第九九分之一", "c": []}, {"n": 777, "w": "banana", "p": "ɑbə'n :nə", "m": "n. 香蕉芭蕉属植物", "g": "香蕉芭蕉属植物", "c": []}, {"n": 778, "w": "hasten", "p": "'heisn", "m": "vt. 催促赶快急忙 ❘ vi. 赶紧赶快急忙", "g": "催促赶快急忙", "c": []}, {"n": 779, "w": "sharpen", "p": "ɑ'ʃ :pən", "m": "vt. 削尖使敏锐使...尖锐变为锐利加剧(苦痛等)", "g": "削尖使敏锐使...尖锐变为锐", "c": []}, {"n": 780, "w": "symposium", "p": "ә әsim’p uzj m", "m": "n. 酒会；座谈会", "g": "酒会", "c": ["词根 pos / pon：放置"]}, {"n": 781, "w": "drive", "p": "draiv", "m": "vt. & ❘ vi. 驾驶驱驱使驾进力打入 ❘ n. 驾车快车道推进力驱使路街,驱动器", "g": "&", "c": []}, {"n": 782, "w": "original", "p": "ə'ridʒənl", "m": "adj. 最初的新颖的原始的有独创性的原版的 ❘ n. 原件原稿有独创性的人怪人", "g": "最初的新颖的原始的有独创性的", "c": []}, {"n": 783, "w": "journalist", "p": "ә ә‘dʒ :n list", "m": "n. 记者，新闻工作者", "g": "记者", "c": []}, {"n": 784, "w": "boot", "p": "bu:t", "m": "n. 靴子长统靴(英)汽车行李箱猛踢锁扣 ❘ vt. 踢穿靴子锁车 ❘ vi. (计算机)启动在(通常为非法停放的汽车)车轮上装制动装置利用帮助", "g": "靴子长统靴(英)汽车行李箱猛", "c": []}, {"n": 785, "w": "republic", "p": "ri'pʌblik", "m": "n. 共和国共和政体", "g": "共和国共和政体", "c": ["拆分 re- (再/回) + public"]}, {"n": 786, "w": "diameter", "p": "dai'æmitə", "m": "n. 直径", "g": "直径", "c": []}, {"n": 787, "w": "outlook", "p": "'autluk", "m": "n. 观点看法展望前景景色", "g": "观点看法展望前景景色", "c": ["拆分 out- (向外/超出) + look"]}, {"n": 788, "w": "fashion", "p": "'fæʃən", "m": "n. 样子方式风尚流行时装 ❘ vt. 形成适合", "g": "样子方式风尚流行时装", "c": []}, {"n": 789, "w": "product", "p": "'prɔdəkt", "m": "n. 产品产物(乘)积", "g": "产品产物(乘)积", "c": []}, {"n": 790, "w": "shipment", "p": "ә‘ʃipm nt", "m": "n. 装货；装载的货物", "g": "装货", "c": []}, {"n": 791, "w": "intricate", "p": "‘intrikit", "m": "a. 复杂的,错综的,缠结的,难懂的", "g": "复杂的", "c": ["-ate：动词/形容词"]}, {"n": 792, "w": "alongside", "p": "ә’lɔŋ’said", "m": "prep. 在…旁边", "g": "在…旁边", "c": []}, {"n": 793, "w": "sparrow", "p": "'spærəu", "m": "n. 麻雀", "g": "麻雀", "c": []}, {"n": 794, "w": "suppress", "p": "әs ’pres", "m": "vt. 镇压；抑制；隐瞒", "g": "镇压", "c": ["词根 press：压"]}, {"n": 795, "w": "raise", "p": "reiz", "m": "vt. 举起引起提高升起饲养提出 ❘ n. 上升增高高地", "g": "举起引起提高升起饲养提出", "c": []}, {"n": 796, "w": "servant", "p": "'sə:vənt", "m": "n. 仆人佣人雇工", "g": "仆人佣人雇工", "c": []}, {"n": 797, "w": "rude", "p": "ru:d", "m": "adj. 加工粗糙的粗野的无礼的", "g": "加工粗糙的粗野的无礼的", "c": []}, {"n": 798, "w": "deficiency", "p": "әdi’fiʃ nsi", "m": "n. 缺乏；不足之数", "g": "缺乏", "c": ["词根 fac / fect / fic：做"]}, {"n": 799, "w": "prayer", "p": "prɛə", "m": "n. 祈祷祈求祷告祷文 ❘ v. 祷告祷文", "g": "祈祷祈求祷告祷文", "c": []}, {"n": 800, "w": "sandwich", "p": "'sændwitʃ", "m": "n. 三明治 ❘ vt. 夹入插入夹在中间", "g": "三明治", "c": []}, {"n": 801, "w": "immigrant", "p": "'imigrənt", "m": "n. 移民侨民 ❘ adj. 移民的", "g": "移民侨民", "c": []}, {"n": 802, "w": "setting", "p": "setiŋ", "m": "n. 安装调整环境放置周围(为诗等谱写的)乐曲", "g": "安装调整环境放置周围(为诗等", "c": []}, {"n": 803, "w": "poster", "p": "ә ә‘p ust", "m": "n. 海报,招贴,脚夫", "g": "海报", "c": ["词根 pos / pon：放置"]}, {"n": 804, "w": "manufacture", "p": ".mænju'fæktʃə", "m": "vt. 制造加工 ❘ vi. 参与制造 ❘ n. 制造产品制造业", "g": "制造加工", "c": ["词根 fac / fect / fic：做"]}, {"n": 805, "w": "illusion", "p": "әi’lju:ʒ n", "m": "n. 幻想；错觉；假象", "g": "幻想", "c": ["-tion / -sion：名词：动作、结果"]}, {"n": 806, "w": "rate", "p": "reit", "m": "n. 比率速度价格等级 ❘ vt. 估价认为定等级责骂 ❘ vi. 受欢迎受推崇责骂", "g": "比率速度价格等级", "c": []}, {"n": 807, "w": "sweat", "p": "swet", "m": "n. 汗汗水(凝结在物体表面的)水珠焦急繁重工作 ❘ vi. 出汗渗出焦躁辛苦工作 ❘ vt. (使)出汗使渗出榨取逼问使焦虑", "g": "汗汗水(凝结在物体表面的)水", "c": []}, {"n": 808, "w": "shampoo", "p": "ʃæm'pu:", "m": "vt. 用洗发剂洗洗(头发地毯等) ❘ n. 洗头洗发剂洗涤剂", "g": "用洗发剂洗洗(头发地毯等)", "c": []}, {"n": 809, "w": "lie", "p": "lai", "m": "vi. 躺平放位于说谎欺骗 ❘ n. 谎言", "g": "躺平放位于说谎欺骗", "c": []}, {"n": 810, "w": "textbook", "p": "'tekstbuk", "m": "n. 课本教科书", "g": "课本教科书", "c": []}, {"n": 811, "w": "onto", "p": "'ɔntu:", "m": "prep. 到...上", "g": "到...上", "c": []}, {"n": 812, "w": "shortly", "p": "'ʃɔ:tli", "m": "adv. 立刻马上简短地", "g": "立刻马上简短地", "c": ["-ly：副词"]}, {"n": 813, "w": "division", "p": "di'viʒən", "m": "n. 分分配除法划分分开部门师(军队)", "g": "分分配除法划分分开部门师(军", "c": ["词根 vis / vid：看", "-tion / -sion：名词：动作、结果"]}, {"n": 814, "w": "continuous", "p": "kən'tinjuəs", "m": "adj. 连续不断的连续的继续的连绵不断的持续的", "g": "连续不断的连续的继续的连绵不", "c": []}, {"n": 815, "w": "anxiety", "p": "æŋ'zaiəti", "m": "n. 焦虑忧虑渴望担心", "g": "焦虑忧虑渴望担心", "c": ["-ity / -ty：名词：性质"]}, {"n": 816, "w": "versatile", "p": "ә ә‘v :s tail", "m": "a. 多方面的；通用的", "g": "多方面的", "c": []}, {"n": 817, "w": "bless", "p": "bles", "m": "vt. 为...祝福赐福祈佑称颂上帝使神圣赋予", "g": "为...祝福赐福祈佑称颂上帝", "c": []}, {"n": 818, "w": "bankrupt", "p": "ә‘bæŋkr pt", "m": "a. 破产的 ❘ vt. 使破产", "g": "破产的", "c": []}, {"n": 819, "w": "dignity", "p": "‘digniti", "m": "a. 尊贵；(举止)庄严", "g": "尊贵", "c": ["-ity / -ty：名词：性质"]}, {"n": 820, "w": "legislation", "p": "әledʒis’leiʃ n", "m": "n. 立法；法规", "g": "立法", "c": ["词根 leg / lect：选、读", "-tion / -sion：名词：动作、结果"]}, {"n": 821, "w": "prototype", "p": "ә ә‘pr ut taip", "m": "n. 原型；典型，范例", "g": "原型", "c": []}, {"n": 822, "w": "flank", "p": "flæŋk", "m": "n. 肋，肋腹；侧面", "g": "肋", "c": []}, {"n": 823, "w": "instantaneous", "p": "ә әinst n’teinj s", "m": "a. 瞬间的，即刻的", "g": "瞬间的", "c": []}, {"n": 824, "w": "fast", "p": "ɑf :st", "m": "adj. 快速的偏快的固定的关紧的忠诚的聪明的耐久的野性的 ❘ adv. 快很快地固定地彻底地鲁莽的超前的 ❘ vi. 绝食斋戒 ❘ n. 禁食(期)系泊用具", "g": "快速的偏快的固定的关紧的忠诚", "c": []}, {"n": 825, "w": "tomorrow", "p": "tə'mɔrəu", "m": "adv. 在明天 ❘ n. 明天将来", "g": "在明天", "c": []}, {"n": 826, "w": "stair", "p": "stɛə", "m": "n. 楼梯", "g": "楼梯", "c": []}, {"n": 827, "w": "tug", "p": "tΛg", "m": "vi. 用力拖 ❘ n. 猛拉，拖", "g": "用力拖", "c": []}, {"n": 828, "w": "repetition", "p": ".repi'tiʃən", "m": "n. 重复反复", "g": "重复反复", "c": ["拆分 re- (再/回) + petition", "-tion / -sion：名词：动作、结果"]}, {"n": 829, "w": "exhaust", "p": "ig'zɔ:st", "m": "vt. 使筋疲力尽用尽排空 ❘ vi. 耗尽 ❘ n. 排气排气装置", "g": "使筋疲力尽用尽排空", "c": []}, {"n": 830, "w": "illegal", "p": "i'li:gəl", "m": "adj. 不合法的非法的 ❘ n. 非法移民", "g": "不合法的非法的", "c": ["词根 leg / lect：选、读"]}, {"n": 831, "w": "handsome", "p": "'hænsəm", "m": "adj. 英俊的慷慨大方的可观的灵巧的相当大的", "g": "英俊的慷慨大方的可观的灵巧的", "c": []}, {"n": 832, "w": "stiffen", "p": "'stifn", "m": "vt. 使硬使僵硬变为浓粘", "g": "使硬使僵硬变为浓粘", "c": []}, {"n": 833, "w": "prefer", "p": "pri'fə:", "m": "vt. 宁可宁愿较喜欢 ❘ vt. 【法】提出(控告)", "g": "宁可宁愿较喜欢", "c": ["词根 fer：带来"]}, {"n": 834, "w": "never", "p": "'nevə", "m": "adv. 永不决不不", "g": "永不决不不", "c": []}, {"n": 835, "w": "thanksgiving", "p": "‘θæŋksgiviŋ", "m": "n. 感恩节", "g": "感恩节", "c": []}, {"n": 836, "w": "late", "p": "leit", "m": "adj. 迟的晚的已故的 ❘ adv. 迟很迟晚最近地", "g": "迟的晚的已故的", "c": []}, {"n": 837, "w": "exist", "p": "ig'zist", "m": "vi. 存在生存生活", "g": "存在生存生活", "c": []}, {"n": 838, "w": "criticism", "p": "'kriti.sizəm", "m": "n. 批评批判评论", "g": "批评批判评论", "c": []}, {"n": 839, "w": "shed", "p": "ʃed", "m": "vt. 散发脱落使...流出除掉 ❘ n. 车棚小屋贷棚脱落物", "g": "散发脱落使...流出除掉", "c": []}, {"n": 840, "w": "descend", "p": "di'send", "m": "vt. & ❘ vi. 降传降临下来下降下倾", "g": "&", "c": []}, {"n": 841, "w": "unlucky", "p": "ʌn'lʌki", "m": "adj. 不幸的不吉的倒霉的", "g": "不幸的不吉的倒霉的", "c": ["拆分 un- (不/非) + lucky"]}, {"n": 842, "w": "vegetation", "p": "әvedʒi’teiʃ n", "m": "n. 植物,草木", "g": "植物", "c": ["-tion / -sion：名词：动作、结果"]}, {"n": 843, "w": "offer", "p": "'ɔ:fə", "m": "vt. 提供提出出价贡献奉献 ❘ vi. 提议出现求婚 ❘ n. 提供出价", "g": "提供提出出价贡献奉献", "c": []}, {"n": 844, "w": "reproach", "p": "ri'prəutʃ", "m": "n. 责备耻辱 ❘ vt. 责备申斥指责", "g": "责备耻辱", "c": []}, {"n": 845, "w": "cubic", "p": "'kju:bik", "m": "adj. 立方体的立方的", "g": "立方体的立方的", "c": []}, {"n": 846, "w": "for", "p": "fɔ:", "m": "prep. 为给因为关于代表支持往 ❘ conj. 因为", "g": "为给因为关于代表支持往", "c": []}, {"n": 847, "w": "emerge", "p": "i'mə:dʒ", "m": "vi. 出现涌现冒出(由某种状态)脱出(事实)显现出来", "g": "出现涌现冒出(由某种状态)脱", "c": []}, {"n": 848, "w": "volume", "p": "'vɔljum", "m": "n. 卷册容积体积音量", "g": "卷册容积体积音量", "c": []}, {"n": 849, "w": "cheerful", "p": "'tʃiəfəl", "m": "adj. 快乐的愉快的", "g": "快乐的愉快的", "c": []}, {"n": 850, "w": "aircraft", "p": "ɑ'eəkr :ft", "m": "n. 飞机飞行器", "g": "飞机飞行器", "c": []}, {"n": 851, "w": "tiger", "p": "'taigə", "m": "n. 老虎凶残之人", "g": "老虎凶残之人", "c": []}, {"n": 852, "w": "electrician", "p": "әilek’triʃ n", "m": "n. 电工，电气技师", "g": "电工", "c": ["词根 leg / lect：选、读"]}, {"n": 853, "w": "handicap", "p": "‘hændikæp", "m": "vt. 妨碍，使不利", "g": "妨碍", "c": ["词根 cap / cept / ceiv：拿、取"]}, {"n": 854, "w": "stumble", "p": "'stʌmbl", "m": "vi. 绊倒犯错失策踌躇无意中发现 ❘ vt. 绊倒困惑 ❘ n. 绊倒失策", "g": "绊倒犯错失策踌躇无意中发现", "c": []}, {"n": 855, "w": "village", "p": "'vilidʒ", "m": "n. 乡村村庄", "g": "乡村村庄", "c": []}, {"n": 856, "w": "notable", "p": "ә ә‘n ut bl", "m": "n. 值得注意的；著名的", "g": "值得注意的", "c": []}, {"n": 857, "w": "warrant", "p": "ә‘wɔr nt", "m": "n. 正当理由,委任状，许可证", "g": "正当理由", "c": []}, {"n": 858, "w": "obstacle", "p": "'ɔbstəkl", "m": "n. 障碍障碍物妨害绊脚石", "g": "障碍障碍物妨害绊脚石", "c": []}, {"n": 859, "w": "skill", "p": "'skil", "m": "n. 技能技巧熟练", "g": "技能技巧熟练", "c": []}, {"n": 860, "w": "weather", "p": "'weðə", "m": "n. 天气气候气象 ❘ vt. 经受住使风化使日晒雨淋 ❘ vi. 风化褪色 ❘ adj. 上风的", "g": "天气气候气象", "c": []}, {"n": 861, "w": "someone", "p": "'sʌmwʌn", "m": "pron. 某人有人", "g": "某人有人", "c": []}, {"n": 862, "w": "journal", "p": "'dʒə:nl", "m": "n. 日报期刊杂志日志", "g": "日报期刊杂志日志", "c": []}, {"n": 863, "w": "clinic", "p": "klinik", "m": "n. 诊所，医务室；会诊", "g": "诊所", "c": []}, {"n": 864, "w": "example", "p": "ɑig'z :mpl", "m": "n. 例子实例模范榜样 ❘ vt. 把...作为例子", "g": "例子实例模范榜样", "c": ["拆分 ex- (向外) + ample"]}, {"n": 865, "w": "fixture", "p": "ә‘fikstʃ", "m": "n. 固定；定期存款", "g": "固定", "c": []}, {"n": 866, "w": "realize", "p": "'riəlaiz", "m": "vt. 实现认识到了解意识到净得", "g": "实现认识到了解意识到净得", "c": []}, {"n": 867, "w": "crash", "p": "kræʃ", "m": "vi. 碰撞坠落猛使...破碎迫降 ❘ n. 碰撞猛撞轰隆声崩溃破产垮台", "g": "碰撞坠落猛使...破碎迫降", "c": []}, {"n": 868, "w": "unify", "p": "‘ju:nifai", "m": "vt. 统一,使成一体", "g": "统一", "c": []}, {"n": 869, "w": "depend", "p": "di'pend", "m": "vi. 依靠依赖相信指望", "g": "依靠依赖相信指望", "c": []}, {"n": 870, "w": "portrait", "p": "'pɔ:trit", "m": "n. 消像画像 ❘ adj. (文件页面)竖的", "g": "消像画像", "c": ["词根 port：携带、运"]}, {"n": 871, "w": "moist", "p": "mɔist", "m": "adj. 湿润的潮湿的多雨的(果物)多汁的,有分泌物的湿性的 ❘ n. 潮湿", "g": "湿润的潮湿的多雨的(果物)多", "c": []}, {"n": 872, "w": "swarm", "p": "swɔ:m", "m": "n. 一大群蜂窝 ❘ vi. 密集云集充满", "g": "一大群蜂窝", "c": []}, {"n": 873, "w": "childish", "p": "'tʃaildiʃ", "m": "adj. 孩子气的幼稚的简单的年老糊涂的", "g": "孩子气的幼稚的简单的年老糊涂", "c": []}, {"n": 874, "w": "eliminate", "p": "i'limineit", "m": "vt. 消灭消除排除除去剔除忽略", "g": "消灭消除排除除去剔除忽略", "c": ["-ate：动词/形容词"]}, {"n": 875, "w": "liquid", "p": "'likwid", "m": "n. 液体 ❘ a. 液体的液态的", "g": "液体", "c": []}, {"n": 876, "w": "look", "p": "luk", "m": "vi. 看显得注意朝着好象 ❘ vt. 打量注视用眼神或脸色表示期待 ❘ n. 看神色样子脸色", "g": "看显得注意朝着好象", "c": []}, {"n": 877, "w": "interior", "p": "in'tiəriə", "m": "adj. 内的内地的国内的内部的 ❘ n. 内部内在", "g": "内的内地的国内的内部的", "c": []}, {"n": 878, "w": "unknown", "p": "'ʌn'nəun", "m": "adj. 不知道的未知的不出名的", "g": "不知道的未知的不出名的", "c": []}, {"n": 879, "w": "graze", "p": "greiz", "m": "vi. 喂草；放牧(牲畜)", "g": "喂草", "c": []}, {"n": 880, "w": "correspond", "p": ".kɔris'pɔnd", "m": "vi. 相符合相当通信", "g": "相符合相当通信", "c": ["词根 pos / pon：放置"]}, {"n": 881, "w": "degenerate", "p": "әdi’dʒen reit", "m": "a. 堕落的 ❘ vi. vt. (使)变质,(使)退化", "g": "堕落的", "c": ["拆分 de- (向下/去除) + generate", "-ate：动词/形容词"]}, {"n": 882, "w": "global", "p": "ә ә‘gl ub l", "m": "a. 球面的；全球的", "g": "球面的", "c": []}, {"n": 883, "w": "bough", "p": "bau", "m": "n. 大树枝", "g": "大树枝", "c": []}, {"n": 884, "w": "lean", "p": "li:n", "m": "vi. 倾斜屈身倚靠依赖 ❘ vt. 使倾斜 ❘ n. 瘦肉倾斜弯曲 ❘ adj. 瘦的贫乏的歉收的", "g": "倾斜屈身倚靠依赖", "c": []}, {"n": 885, "w": "nucleus", "p": "'nju:kliəs", "m": "n. 核核心(原子)核细胞核", "g": "核核心(原子)核细胞核", "c": []}, {"n": 886, "w": "pedestrian", "p": "әpi’destri n", "m": "n. 行人，步行者", "g": "行人", "c": []}, {"n": 887, "w": "flat", "p": "flæt", "m": "adj. 平的扁平的平坦的单调的 ❘ adv. 平直地干脆地 ❘ n. 一套房间单元住宅[英]公寓 ❘ vt. 变平 ❘ vi. 降调", "g": "平的扁平的平坦的单调的", "c": []}, {"n": 888, "w": "differ", "p": "'difə", "m": "vi. 不同(意见)相异不一致", "g": "不同(意见)相异不一致", "c": ["词根 fer：带来"]}, {"n": 889, "w": "exile", "p": "‘eksail", "m": "vt. 流放 ❘ n. 被流放者", "g": "流放", "c": []}, {"n": 890, "w": "guardian", "p": "ә‘ga:dj n", "m": "n. 监护人,保护人 ❘ a. 保护的", "g": "监护人", "c": []}, {"n": 891, "w": "slave", "p": "sleiv", "m": "n. 奴隶苦工完全受控制的人劳工从动装置 ❘ vt. 对另一种装置作出直接回应 ❘ vi. 拼命工作贩卖奴隶", "g": "奴隶苦工完全受控制的人劳工从", "c": []}, {"n": 892, "w": "inject", "p": "in’dʒekt", "m": "vt. 注射；注满；喷射", "g": "注射", "c": []}, {"n": 893, "w": "positive", "p": "'pɔzitiv", "m": "adj. 确定的积极的肯定的绝对的正面的正数的阳性的", "g": "确定的积极的肯定的绝对的正面", "c": ["词根 pos / pon：放置"]}, {"n": 894, "w": "death", "p": "deθ", "m": "n. 死死亡灭亡死神", "g": "死死亡灭亡死神", "c": []}, {"n": 895, "w": "equal", "p": "'i:kwəl", "m": "adj. 相等的平等的胜任的 ❘ n. 对手匹敌同辈 ❘ vt. 等于比得上", "g": "相等的平等的胜任的", "c": []}, {"n": 896, "w": "accuracy", "p": "'ækjurəsi", "m": "n. 准确(性)准确度", "g": "准确(性)准确度", "c": []}, {"n": 897, "w": "gun", "p": "gʌn", "m": "n. 枪炮手枪", "g": "枪炮手枪", "c": []}, {"n": 898, "w": "meadow", "p": "ә‘med u", "m": "n. 草地，牧草地", "g": "草地", "c": []}, {"n": 899, "w": "base", "p": "beis", "m": "n. 基础底层基地（支持、收入、力量等的）基础 ❘ vt. 以...作基础 ❘ adj. 卑鄙的不道德的", "g": "基础底层基地（支持、收入、力", "c": []}, {"n": 900, "w": "destined", "p": "‘destind", "m": "a. (由神、命运)预定的,注定的", "g": "(由神、命运)预定的", "c": []}, {"n": 901, "w": "magnet", "p": "'mægnit", "m": "n. 磁铁磁石磁体有强大吸引力的人或物", "g": "磁铁磁石磁体有强大吸引力的人", "c": []}, {"n": 902, "w": "swan", "p": "swɔn", "m": "n. 天鹅 ❘ vi. 闲荡游荡", "g": "天鹅", "c": []}, {"n": 903, "w": "despise", "p": "dis’paiz", "m": "vt. 鄙视，蔑视", "g": "鄙视", "c": []}, {"n": 904, "w": "implicit", "p": "im’plisit", "m": "a. 暗示的,盲从的,绝对的,固有的", "g": "暗示的", "c": ["词根 plic / ply：折叠"]}, {"n": 905, "w": "literacy", "p": "ә ә‘lit r si", "m": "n. 读写能力,识字", "g": "读写能力", "c": []}, {"n": 906, "w": "cabin", "p": "'kæbin", "m": "n. 小木屋船舱机舱 ❘ vt. 抑制 ❘ vi. 住在小屋", "g": "小木屋船舱机舱", "c": []}, {"n": 907, "w": "tiny", "p": "'taini", "m": "adj. 微小的极小的", "g": "微小的极小的", "c": []}, {"n": 908, "w": "establish", "p": "i'stæbliʃ", "m": "vt. 建立设立确立创办", "g": "建立设立确立创办", "c": []}, {"n": 909, "w": "equip", "p": "i'kwip", "m": "vt. 装备配备设穿…", "g": "装备配备设穿…", "c": []}, {"n": 910, "w": "momentum", "p": "әmou’ment m", "m": "n. 动力,要素", "g": "动力", "c": []}, {"n": 911, "w": "elevator", "p": "'eliveitə", "m": "n. 电梯升降机飞机升降舵斗式皮带输送机", "g": "电梯升降机飞机升降舵斗式皮带", "c": []}, {"n": 912, "w": "estate", "p": "is’teit", "m": "n. 房地产；财产，产业", "g": "房地产", "c": ["-ate：动词/形容词"]}, {"n": 913, "w": "buffer", "p": "ә‘bΛf", "m": "n. 缓冲,缓冲区 ❘ vt. 缓冲", "g": "缓冲", "c": ["词根 fer：带来"]}, {"n": 914, "w": "hang", "p": "hæŋ", "m": "vt. 挂悬吊死悬挂方式 ❘ vt. (hangedhanged)悬挂绞死 ❘ vi. (使)低垂悬浮(在空中)逗留", "g": "挂悬吊死悬挂方式", "c": []}, {"n": 915, "w": "tin", "p": "tin", "m": "n. 锡罐头听头 ❘ adj. 锡制的 ❘ vt. 镀锡于", "g": "锡罐头听头", "c": []}, {"n": 916, "w": "ground", "p": "graund", "m": "n. 土地战场场地根据背景 ❘ vt. 放在地上使...搁浅打基础grind的过去式和过去分词", "g": "土地战场场地根据背景", "c": []}, {"n": 917, "w": "robbery", "p": "'rɔbəri", "m": "n. 抢劫劫掠盗取", "g": "抢劫劫掠盗取", "c": []}, {"n": 918, "w": "receive", "p": "ri'si:v", "m": "vt. 收到得到接待接受迎接容纳遭受相信 ❘ vi. 接到获得", "g": "收到得到接待接受迎接容纳遭受", "c": ["词根 cap / cept / ceiv：拿、取"]}, {"n": 919, "w": "daughter", "p": "'dɔ:tə", "m": "n. 女儿 ❘ adj. 与女儿有关的女性直系后代的", "g": "女儿", "c": []}, {"n": 920, "w": "only", "p": "'əunli", "m": "adv. 只仅仅专门地唯一地刚才 ❘ adj. 最好的唯一的出众的 ❘ conj. 除非但是然而毕竟", "g": "只仅仅专门地唯一地刚才", "c": []}, {"n": 921, "w": "aluminium", "p": ".ælju'miniəm", "m": "n. 铝", "g": "铝", "c": []}, {"n": 922, "w": "blue", "p": "blu:", "m": "adj. 蓝色的沮丧的忧郁的(女人)有学问的 ❘ n. 蓝色 ❘ vt. 使...变蓝 ❘ vi. 变蓝", "g": "蓝色的沮丧的忧郁的(女人)有", "c": []}, {"n": 923, "w": "soft", "p": "sɔft", "m": "adj. 软的柔软的柔和的温和的不强烈的轻的 ❘ adv. 柔软地温和地 ❘ n. 柔软的东西", "g": "软的柔软的柔和的温和的不强烈", "c": []}, {"n": 924, "w": "orange", "p": "'ɔ:rindʒ", "m": "n. 橙(树)柑(树)橙黄色 ❘ adj. 橙色的", "g": "橙(树)柑(树)橙黄色", "c": []}, {"n": 925, "w": "cook", "p": "kuk", "m": "vt. 烹调煮编造虚构烧(菜) ❘ vi. 烧菜发生做好 ❘ n. 厨师烧菜", "g": "烹调煮编造虚构烧(菜)", "c": []}, {"n": 926, "w": "proposition", "p": "ә әprɔp ’ziʃ n", "m": "n. 命题，主题；提议", "g": "命题", "c": ["词根 pos / pon：放置", "-tion / -sion：名词：动作、结果"]}, {"n": 927, "w": "obtain", "p": "əb'tein", "m": "vt. 获得得到买到 ❘ vi. 通用流行存在", "g": "获得得到买到", "c": []}, {"n": 928, "w": "provide", "p": "prə'vaid", "m": "vt. 提供供给装备规定准备 ❘ vi. 供给提供", "g": "提供供给装备规定准备", "c": ["词根 vis / vid：看"]}, {"n": 929, "w": "forecast", "p": "ɑ'fɔ:k :st", "m": "n. 预测预报 ❘ vt. & ❘ vi. 预示预测", "g": "预测预报", "c": []}, {"n": 930, "w": "fellow", "p": "'feləu", "m": "n. 人家伙伙伴朋友同类校董研究生 ❘ adj. 同类的同事的同伴的", "g": "人家伙伙伴朋友同类校董研究生", "c": []}], "roots": [{"root": "pos / pon", "mean": "放置", "words": ["correspond", "positive", "poster", "proposition", "symposium"]}, {"root": "leg / lect", "mean": "选、读", "words": ["electrician", "illegal", "legislation"]}, {"root": "fer", "mean": "带来", "words": ["buffer", "differ", "prefer"]}, {"root": "port", "mean": "携带、运", "words": ["portrait", "proportional"]}, {"root": "plic / ply", "mean": "折叠", "words": ["implicit", "supply"]}, {"root": "press", "mean": "压", "words": ["express", "suppress"]}, {"root": "fac / fect / fic", "mean": "做", "words": ["deficiency", "manufacture"]}, {"root": "vis / vid", "mean": "看", "words": ["division", "provide"]}, {"root": "cap / cept / ceiv", "mean": "拿、取", "words": ["handicap", "receive"]}], "suffixes": [{"suffix": "-tion / -sion", "mean": "名词：动作、结果", "words": ["division", "illusion", "legislation", "proposition", "recession", "repetition", "vegetation"]}, {"suffix": "-ly", "mean": "副词", "words": ["definitely", "presumably", "shortly", "supply"]}, {"suffix": "-ate", "mean": "动词/形容词", "words": ["degenerate", "eliminate", "estate", "intricate"]}, {"suffix": "-ity / -ty", "mean": "名词：性质", "words": ["anxiety", "dignity", "relativity"]}], "confuse": [{"a": "crush", "am": "压碎碾碎镇压拥挤的人群迷恋关", "b": "crash", "bm": "碰撞坠落猛使...破碎迫降"}, {"a": "dive", "am": "跳水潜水俯冲", "b": "drive", "bm": "&"}, {"a": "rate", "am": "比率速度价格等级", "b": "late", "bm": "迟的晚的已故的"}, {"a": "look", "am": "看显得注意朝着好象", "b": "cook", "bm": "烹调煮编造虚构烧(菜)"}]};
-const KEY = 'cet6-day-' + DATA.day;
-let done = {};
-try { done = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { done = {}; }
-const save = () => { try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {} };
-const $ = id => document.getElementById(id);
-const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-
-$('ttl').textContent = 'Day ' + DATA.day + ' · 六级单词';
-$('mta').textContent = 'No.' + DATA.start + '–' + DATA.end + ' · 共 ' + DATA.count + ' 词'
-  + (DATA.review.length ? ' · 今日回顾 Day ' + DATA.review.join(' / ') : ' · 第一天，开工！');
-$('tot').textContent = DATA.count;
-
-function refresh(){
-  const n = DATA.items.filter(it => done[it.w]).length;
-  $('cnt').textContent = n;
-  $('pbar').style.width = (100 * n / DATA.count).toFixed(1) + '%';
-}
-
-/* ---------- list ---------- */
-const GROUP = 46;
-let blurred = false;
-function buildList(){
-  const host = $('groups');
-  host.innerHTML = '';
-  for (let g = 0; g * GROUP < DATA.items.length; g++) {
-    const part = DATA.items.slice(g * GROUP, (g + 1) * GROUP);
-    const d = document.createElement('details');
-    d.className = 'group';
-    if (g === 0) d.open = true;
-    const nd = part.filter(it => done[it.w]).length;
-    d.innerHTML = '<summary>第 ' + (g + 1) + ' 组 · ' + part[0].w + ' → ' + part[part.length - 1].w
-      + '<span>' + nd + '/' + part.length + ' 已熟 · 建议 25 分钟</span></summary>'
-      + part.map(it => rowHtml(it)).join('');
-    host.appendChild(d);
-  }
-  host.querySelectorAll('.row').forEach(r => r.addEventListener('click', e => {
-    if (blurred && !e.target.closest('button')) r.classList.toggle('show');
-  }));
-  host.querySelectorAll('.row button').forEach(b => b.onclick = () => {
-    const w = b.dataset.w;
-    done[w] = !done[w];
-    save();
-    b.closest('.row').classList.toggle('done', !!done[w]);
-    b.textContent = done[w] ? '✓' : '○';
-    refresh();
-  });
-}
-function rowHtml(it){
-  const chips = (it.c || []).map(c => '<span class="chip">' + esc(c) + '</span>').join('');
-  return '<div class="row' + (done[it.w] ? ' done' : '') + (blurred ? ' hide' : '') + '">'
-    + '<div class="no">' + it.n + '</div>'
-    + '<div><div class="w">' + esc(it.w) + '</div><div class="ph">' + esc(it.p) + '</div></div>'
-    + '<div class="mcell"><div class="m">' + esc(it.m) + '</div>' + chips + '</div>'
-    + '<button data-w="' + esc(it.w) + '" aria-label="标记已熟">' + (done[it.w] ? '✓' : '○') + '</button></div>';
-}
-$('blurBtn').onclick = () => {
-  blurred = !blurred;
-  $('blurBtn').textContent = blurred ? '显示释义' : '遮住释义';
-  buildList();
-};
-
-/* ---------- flash cards ---------- */
-let deck = DATA.items.slice(), ci = 0, flipped = false, onlyWeak = false;
-function shuffle(a){ for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
-function buildDeck(){
-  deck = DATA.items.filter(it => !onlyWeak || !done[it.w]);
-  if (!deck.length) deck = DATA.items.slice();
-  ci = 0; flipped = false; drawCard();
-}
-function drawCard(){
-  const it = deck[ci % deck.length];
-  $('cardCounter').textContent = (ci % deck.length + 1) + ' / ' + deck.length + (onlyWeak ? ' （仅未熟）' : '');
-  $('theCard').innerHTML = flipped
-    ? '<div class="cw">' + esc(it.w) + '</div><div class="cp">' + esc(it.p) + '</div><div class="cm">' + esc(it.m) + '</div>'
-      + (it.c || []).map(c => '<span class="chip">' + esc(c) + '</span>').join('')
-    : '<div class="cw">' + esc(it.w) + '</div><div class="cp">' + esc(it.p) + '</div><div class="tip">先在心里说出意思，再点击翻面</div>';
-}
-function next(mark){
-  const it = deck[ci % deck.length];
-  if (mark === true) { done[it.w] = true; save(); refresh(); }
-  if (mark === false) { delete done[it.w]; save(); refresh(); }
-  ci++; flipped = false; drawCard();
-}
-$('theCard').onclick = () => { flipped = !flipped; drawCard(); };
-$('theCard').onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flipped = !flipped; drawCard(); } };
-$('btnOk').onclick = () => next(true);
-$('btnNo').onclick = () => next(false);
-$('btnShuffle').onclick = () => { shuffle(deck); ci = 0; flipped = false; drawCard(); };
-$('btnOnlyWeak').onclick = () => { onlyWeak = !onlyWeak; $('btnOnlyWeak').textContent = onlyWeak ? '练全部' : '只练未熟'; buildDeck(); };
-
-/* ---------- quiz ---------- */
-let qs = [], qi = 0, score = 0;
-function buildQuiz(){
-  const pool = shuffle(DATA.items.slice());
-  qs = pool.slice(0, Math.min(10, pool.length));
-  qi = 0; score = 0; drawQuiz();
-}
-function drawQuiz(){
-  if (qi >= qs.length) {
-    $('qProg').textContent = '完成';
-    $('qWord').textContent = score + ' / ' + qs.length + ' 正确';
-    $('qOpts').innerHTML = '';
-    $('qScore').textContent = score === qs.length ? '全对，可以收工了。' : '错的那几个去“卡片自测”再过一遍。';
-    return;
-  }
-  const it = qs[qi];
-  const others = shuffle(DATA.items.filter(x => x.w !== it.w)).slice(0, 3);
-  const opts = shuffle([it].concat(others));
-  $('qProg').textContent = '第 ' + (qi + 1) + ' / ' + qs.length + ' 题';
-  $('qWord').textContent = it.w;
-  $('qOpts').innerHTML = opts.map(o => '<button data-w="' + esc(o.w) + '">' + esc(o.g || o.m) + '</button>').join('');
-  $('qScore').textContent = '当前得分 ' + score;
-  $('qOpts').querySelectorAll('button').forEach(b => b.onclick = () => {
-    const right = b.dataset.w === it.w;
-    if (right) { score++; b.classList.add('right'); done[it.w] = true; }
-    else {
-      b.classList.add('wrong');
-      delete done[it.w];
-      $('qOpts').querySelectorAll('button').forEach(x => { if (x.dataset.w === it.w) x.classList.add('right'); });
-    }
-    save(); refresh();
-    $('qOpts').querySelectorAll('button').forEach(x => x.disabled = true);
-    setTimeout(() => { qi++; drawQuiz(); }, right ? 350 : 1100);
-  });
-}
-$('qRestart').onclick = buildQuiz;
-
-/* ---------- memory aids ---------- */
-function buildAid(){
-  let h = '';
-  if (DATA.roots.length) {
-    h += '<h3>一、同词根成组记（拆开看，一组一组吹）</h3>';
-    h += DATA.roots.map(g => '<div class="box"><div class="head"><em>' + esc(g.root) + '</em> → ' + esc(g.mean)
-      + '</div><div class="ws">' + g.words.map(esc).join(' · ') + '</div></div>').join('');
-  }
-  if (DATA.confuse.length) {
-    h += '<h3>二、形近易混词（考试坐坑大户）</h3><div class="box">'
-      + DATA.confuse.map(p => '<div class="pair"><b>' + esc(p.a) + '</b> <span>' + esc(p.am) + '</span> ↔ <b>'
-        + esc(p.b) + '</b> <span>' + esc(p.bm) + '</span></div>').join('') + '</div>';
-  }
-  if (DATA.suffixes.length) {
-    h += '<h3>三、后缀家族（看尾巴判词性）</h3>';
-    h += DATA.suffixes.map(g => '<div class="box"><div class="head"><em>' + esc(g.suffix) + '</em> → ' + esc(g.mean)
-      + '</div><div class="ws">' + g.words.map(esc).join(' · ') + '</div></div>').join('');
-  }
-  h += '<h3>四、今日回顾</h3><div class="box"><div class="ws">'
-    + (DATA.review.length ? '回顾 Day ' + DATA.review.join('、Day ') + '：只看那些未打 ✓ 的词，每天 10 分钟就够。'
-      : '今天是第一天，不用回顾，把节奏跑起来。') + '</div></div>';
-  $('aid').innerHTML = h;
-}
-
-/* ---------- tabs ---------- */
-document.querySelectorAll('nav button').forEach(b => b.onclick = () => {
-  document.querySelectorAll('nav button').forEach(x => x.setAttribute('aria-selected', String(x === b)));
-  ['list', 'card', 'quiz', 'aid'].forEach(id => $(id).hidden = (id !== b.dataset.t));
-  if (b.dataset.t === 'card') buildDeck();
-  if (b.dataset.t === 'quiz') buildQuiz();
-});
-
-$('expBtn').onclick = () => {
-  const weak = DATA.items.filter(it => !done[it.w]);
-  const txt = weak.map(it => it.w + ' ' + it.p + ' ' + it.m).join('\n');
-  const out = $('expOut');
-  if (navigator.clipboard && txt) {
-    navigator.clipboard.writeText(txt).then(() => { out.textContent = '已复制 ' + weak.length + ' 个未熟词，可粘到错词本。'; },
-      () => { out.textContent = '未熟 ' + weak.length + ' 词（浏览器禁止复制）'; });
-  } else { out.textContent = '未熟 ' + weak.length + ' 词'; }
-};
-$('resetBtn').onclick = () => { done = {}; save(); refresh(); buildList(); $('expOut').textContent = '已清空。'; };
-
-refresh(); buildList(); buildAid();
-</script>
+<script>window.DAY_DATA = [5,745,930,186,[4,3,1],[[745,"obey","oʊˈbeɪ",[["vt.","顺从"],["vi.","服从","听从"]],"顺从"],[746,"hostage","ˈhɑstɪdʒ",[["n.","人质","抵押品"]],"人质"],[747,"crush","krəʃ",[["vt.","压碎","碾碎","镇压拥挤的人群","迷恋","关键时刻","果汁","榨汁","酿酒"],["vt.","压破","征服","挤入","镇压"],["vi.","被压碎","挤"]],"压碎碾碎镇压拥挤的人群迷恋关"],[748,"repay","riˈpeɪ",[["vi.","偿还","报答"]],"&"],[749,"relativity","ˌrɛləˈtɪvəti",[["n.","相关性","相对性"]],"相关性相对性"],[750,"strap","stræp",[["n.","带子","皮带"],["vt.","(用带)捆扎(用带)","打"]],"带子皮带"],[751,"buzz","bəz",[["vi.","(蜂等)嗡嗡叫"]],"(蜂等)嗡嗡叫"],[752,"recession","ˌriˈsɛʃən",[["n.","(经济)衰退","不景气"]],"(经济)衰退"],[753,"proportional","prəˈpɔrʃənəl",[["adj.","(成)比例的","相称的"],["n.","[数]比例","项"]],"(成)比例的相称的"],[754,"teacher","ˈtitʃər",[["n.","教师","老师","先生"]],"教师老师先生"],[755,"startle","ˈstɑrtəl",[["vt.","使大吃一惊"],["n.","吃惊"]],"使大吃一惊"],[756,"skate","skeɪt",[["n.","冰鞋","滑冰"],["vi.","滑冰","溜冰"],["vt.","滑冰"]],"冰鞋滑冰"],[757,"supply","səˈplaɪ",[["n.","补给","供给","供应","贮备"],["vt.","补给","供给","提供","提供","足够","以满足"]],"补给供给供应贮备"],[758,"customer","ˈkəstəmər",[["n.","顾客","主顾","家伙"]],"顾客主顾家伙"],[759,"sausage","ˈsɔsɪdʒ",[["n.","香肠","腊肠"]],"香肠腊肠"],[760,"music","mˈjuzɪk",[["n.","音乐","乐曲","乐谱","伴奏美妙的声音"]],"音乐乐曲乐谱伴奏美妙的声音"],[761,"amount","əˈmaʊnt",[["n.","总数","数量","总额和"],["vi.","总计","等于"]],"总数数量总额和"],[762,"boycott","ˈbɔɪˌkɑt",[["n.","联合","抵制"]],"&"],[763,"bomb","bɔm",[["n.","炸弹","高压","罐","火山口","喷出的熔岩"],["vt.","轰炸","大败","长传"],["vi.","失败"]],"炸弹高压罐火山口喷出的熔岩"],[764,"express","ɪkˈsprɛs",[["vt.","表达","表示","挤压","出","快递"],["n.","快车","快递","专使"],["adj.","急速的","明确的","直接的"],["adv.","用快递","特意地"]],"表达表示挤压出快递"],[765,"worthy","ˈwərði",[["adj.","有价值的","可尊敬的","值得的","配得上的"],["n.","知名人士","杰出人物"]],"有价值的可尊敬的值得的配得上"],[766,"presumably","prɪˈzuməbli",[["adv.","推测","起来","大概"]],"推测起来"],[767,"copper","ˈkɑpər",[["n.","铜","铜币","铜制器","有","紫铜色","翅膀的","小","蝴蝶","警官"],["vt.","镀铜"]],"铜铜币铜制器有紫铜色翅膀的小"],[768,"dive","daɪv",[["vi.","跳水","潜水","俯冲"],["vt.","跳水","俯冲"],["vi.","把...伸入"]],"跳水潜水俯冲"],[769,"spectacular","spɛkˈtækjələr",[["adj.","公开展示的","惊人的"],["n.","展览物"]],"公开展示的"],[770,"definitely","ˈdɛfənətli",[["adv.","一定地","明确地","确切地"]],"一定地明确地确切地"],[771,"condemn","kənˈdɛm",[["vt.","谴责","指责","判刑","官方","宣称(某事物)","有","缺陷或不宜","使用"]],"谴责指责判刑官方宣称(某事物"],[772,"England","ˈɪŋglənd",[["n.","英格兰","英国"]],"英格兰英国"],[773,"skip","skɪp",[["vi.","跳","跳绳","略过"]],"跳"],[774,"street","strit",[["n.","街","街道","行车道"],["adj.","街道的"]],"街街道行车道"],[775,"rouse","raʊz",[["vt.","唤醒","唤起","惊起","鼓舞","激起"],["n.","觉醒","奋起"]],"唤醒唤起惊起鼓舞激起"],[776,"ninth","naɪnθ",[["num.","第九","九分之一"],["adj.","第九的","九分之一的"]],"第九九分之一"],[777,"banana","bəˈnænə",[["n.","香蕉","芭蕉","属","植物"]],"香蕉芭蕉属植物"],[778,"hasten","ˈheɪsən",[["vt.","催促","赶快","急忙"],["vi.","赶紧","赶快","急忙"]],"催促赶快急忙"],[779,"sharpen","ˈʃɑrpən",[["vt.","削尖","使敏锐","使...尖锐","变为","锐利","加剧(苦痛等)"]],"削尖使敏锐使...尖锐变为锐"],[780,"symposium","sɪmˈpoʊziəm",[["n.","酒会","座谈会"]],"酒会"],[781,"drive","draɪv",[["vi.","驾驶","驱","驱使","驾","进力","打入"],["n.","驾车","快车道","推进力","驱使","路","街","驱动器"]],"&"],[782,"original","ərˈɪdʒənəl",[["adj.","最初的","新颖的","原始的","有独创性的","原版的"],["n.","原件","原稿","有独创性的人","怪人"]],"最初的新颖的原始的有独创性的"],[783,"journalist","ˈdʒərnəlɪst",[["n.","记者","新闻","工作者"]],"记者"],[784,"boot","but",[["n.","靴子","长统靴","(英)汽车","行李箱","猛","踢","锁扣"],["vt.","踢穿","靴子","锁车"],["vi.","(计算机)启动","在(通常为非法停放的汽车)车轮","上装","制动","装置","利用","帮助"]],"靴子长统靴(英)汽车行李箱猛"],[785,"republic","riˈpəblɪk",[["n.","共和国","共和政体"]],"共和国共和政体"],[786,"diameter","daɪˈæmətər",[["n.","直径"]],"直径"],[787,"outlook","ˈaʊˌtlʊk",[["n.","观点","看法","展望","前景","景色"]],"观点看法展望前景景色"],[788,"fashion","ˈfæʃən",[["n.","样子","方式","风尚","流行时装"],["vt.","形成","适合"]],"样子方式风尚流行时装"],[789,"product","ˈprɑdəkt",[["n.","产品","产物(乘)","积"]],"产品产物(乘)积"],[790,"shipment","ˈʃɪpmənt",[["n.","装货","装载的","货物"]],"装货"],[791,"intricate","ˈɪntrəkət",[["adj.","复杂的","错综的","缠结的","难懂的"]],"复杂的"],[792,"alongside","əˈlɔŋˈsaɪd",[["prep.","在…旁边"]],"在…旁边"],[793,"sparrow","ˈspɛroʊ",[["n.","麻雀"]],"麻雀"],[794,"suppress","səˈprɛs",[["vt.","镇压","抑制","隐瞒"]],"镇压"],[795,"raise","reɪz",[["vt.","举起","引起","提高","升起","饲养","提出"],["n.","上升","增","高高地"]],"举起引起提高升起饲养提出"],[796,"servant","ˈsərvənt",[["n.","仆人","佣人","雇工"]],"仆人佣人雇工"],[797,"rude","rud",[["adj.","加工粗糙的","粗野的","无礼的"]],"加工粗糙的粗野的无礼的"],[798,"deficiency","dɪˈfɪʃənsi",[["n.","缺乏","不足","之数"]],"缺乏"],[799,"prayer","prɛr",[["n.","祈祷","祈求","祷告","祷文"],["v.","祷告","祷文"]],"祈祷祈求祷告祷文"],[800,"sandwich","ˈsænwɪtʃ",[["n.","三明治"],["vt.","夹入","插入","夹","在中间"]],"三明治"],[801,"immigrant","ˈɪməgrənt",[["n.","移民","侨民"],["adj.","移民的"]],"移民侨民"],[802,"setting","ˈsɛtɪŋ",[["n.","安装","调整","环境","放置","周围","(为诗等谱写的)乐曲"]],"安装调整环境放置周围(为诗等"],[803,"poster","ˈpoʊstər",[["n.","海报","招贴","脚夫"]],"海报"],[804,"manufacture","ˌmænjəˈfæktʃər",[["vt.","制造","加工"],["vi.","参与","制造"],["n.","制造","产品","制造业"]],"制造加工"],[805,"illusion","ˌɪˈluʒən",[["n.","幻想","错觉","假象"]],"幻想"],[806,"rate","reɪt",[["n.","比率","速度","价格","等级"],["vt.","估价","认为","定","等级","责骂"],["vi.","受欢迎","受","推崇","责骂"]],"比率速度价格等级"],[807,"sweat","swɛt",[["n.","汗","汗水","(凝结在物体表面的)水珠","焦急","繁重","工作"],["vi.","出汗","渗出","焦躁","辛苦工作"],["vt.","(使)出汗","使渗出","榨取","逼问","使焦虑"]],"汗汗水(凝结在物体表面的)水"],[808,"shampoo","ʃæmˈpu",[["vt.","用洗发剂","洗洗(头发地毯等)"],["n.","洗头","洗发剂","洗涤剂"]],"用洗发剂洗洗(头发地毯等)"],[809,"lie","laɪ",[["vi.","躺","平放","位于","说谎","欺骗"],["n.","谎言"]],"躺平放位于说谎欺骗"],[810,"textbook","ˈtɛkstˌbʊk",[["n.","课本","教科书"]],"课本教科书"],[811,"onto","ˈɔntu",[["prep.","到...上"]],"到...上"],[812,"shortly","ˈʃɔrtli",[["adv.","立刻","马上","简短地"]],"立刻马上简短地"],[813,"division","dɪˈvɪʒən",[["n.","分","分配","除法","划分","分开","部门","师(军队)"]],"分分配除法划分分开部门师(军"],[814,"continuous","kənˈtɪnjuəs",[["adj.","连续不断的","连续的","继续的","连绵不断的","持续的"]],"连续不断的连续的继续的连绵不"],[815,"anxiety","æŋˈzaɪəti",[["n.","焦虑","忧虑","渴望","担心"]],"焦虑忧虑渴望担心"],[816,"versatile","ˈvərsətəl",[["adj.","多方面的","通用的"]],"多方面的"],[817,"bless","blɛs",[["vt.","为...祝福","赐福","祈佑","称颂","上帝","使神圣","赋予"]],"为...祝福赐福祈佑称颂上帝"],[818,"bankrupt","ˈbæŋkrəpt",[["adj.","破产的"],["vt.","使破产"]],"破产的"],[819,"dignity","ˈdɪgnəti",[["adj.","尊贵","(举止)庄严"]],"尊贵"],[820,"legislation","ˌlɛdʒəsˈleɪʃən",[["n.","立法","法规"]],"立法"],[821,"prototype","ˈproʊtoʊˌtaɪp",[["n.","原型","典型","范例"]],"原型"],[822,"flank","flæŋk",[["n.","肋","肋腹","侧面"]],"肋"],[823,"instantaneous","ˌɪnstənˈtæniəs",[["adj.","瞬间的","即刻的"]],"瞬间的"],[824,"fast","fæst",[["adj.","快速的","偏快的","固定的","关紧的","忠诚的","聪明的","耐久的","野性的"],["adv.","快","很快地","固定地","彻底地","鲁莽的","超前的"],["vi.","绝食","斋戒"],["n.","禁食(期)","系泊","用具"]],"快速的偏快的固定的关紧的忠诚"],[825,"tomorrow","təˈmɑˌroʊ",[["adv.","在明天"],["n.","明天","将来"]],"在明天"],[826,"stair","stɛr",[["n.","楼梯"]],"楼梯"],[827,"tug","təg",[["vi.","用力","拖"],["n.","猛拉","拖"]],"用力拖"],[828,"repetition","ˌrɛpəˈtɪʃən",[["n.","重复","反复"]],"重复反复"],[829,"exhaust","ɪgˈzɔst",[["vt.","使筋疲力尽","用尽","排空"],["vi.","耗尽"],["n.","排气","排气装置"]],"使筋疲力尽用尽排空"],[830,"illegal","ˌɪˈligəl",[["adj.","不合法的","非法的"],["n.","非法","移民"]],"不合法的非法的"],[831,"handsome","ˈhænsəm",[["adj.","英俊的","慷慨大方的","可观的","灵巧的","相当大的"]],"英俊的慷慨大方的可观的灵巧的"],[832,"stiffen","ˈstɪfən",[["vt.","使硬","使僵硬","变为","浓","粘"]],"使硬使僵硬变为浓粘"],[833,"prefer","prɪˈfər",[["vt.","宁可","宁愿较","喜欢"],["vt.","【法】提出(控告)"]],"宁可宁愿较喜欢"],[834,"never","ˈnɛvər",[["adv.","永不","决不不"]],"永不决不不"],[835,"thanksgiving","ˌθæŋksˈgɪvɪŋ",[["n.","感恩节"]],"感恩节"],[836,"late","leɪt",[["adj.","迟的","晚的","已故的"],["adv.","迟","很迟","晚","最近地"]],"迟的晚的已故的"],[837,"exist","ɪgˈzɪst",[["vi.","存在","生存","生活"]],"存在生存生活"],[838,"criticism","ˈkrɪtɪˌsɪzəm",[["n.","批评","批判","评论"]],"批评批判评论"],[839,"shed","ʃɛd",[["vt.","散发","脱落","使...流出","除掉"],["n.","车棚","小屋","贷棚","脱落物"]],"散发脱落使...流出除掉"],[840,"descend","dɪˈsɛnd",[["vi.","降","传","降临","下来","下降下","倾"]],"&"],[841,"unlucky","ənˈləki",[["adj.","不幸的","不吉的","倒霉的"]],"不幸的不吉的倒霉的"],[842,"vegetation","ˌvɛdʒəˈteɪʃən",[["n.","植物","草木"]],"植物"],[843,"offer","ˈɔfər",[["vt.","提供","提出","出价","贡献","奉献"],["vi.","提议","出现","求婚"],["n.","提供","出价"]],"提供提出出价贡献奉献"],[844,"reproach","riˈproʊtʃ",[["n.","责备","耻辱"],["vt.","责备","申斥","指责"]],"责备耻辱"],[845,"cubic","ˈkjubɪk",[["adj.","立方体的","立方的"]],"立方体的立方的"],[846,"for","fər",[["prep.","为给","因为","关于","代表","支持往"],["conj.","因为"]],"为给因为关于代表支持往"],[847,"emerge","ˈimərdʒ",[["vi.","出现","涌现","冒","出(由某种状态)","脱出(事实)","显现出来"]],"出现涌现冒出(由某种状态)脱"],[848,"volume","ˈvɑljum",[["n.","卷册","容积","体积","音量"]],"卷册容积体积音量"],[849,"cheerful","ˈtʃɪrfəl",[["adj.","快乐的","愉快的"]],"快乐的愉快的"],[850,"aircraft","ˈɛrˌkræft",[["n.","飞机","飞行器"]],"飞机飞行器"],[851,"tiger","ˈtaɪgər",[["n.","老虎","凶残","之人"]],"老虎凶残之人"],[852,"electrician","ɪlɛkˈtrɪʃən",[["n.","电工","电气","技师"]],"电工"],[853,"handicap","ˈhændiˌkæp",[["vt.","妨碍","使不利"]],"妨碍"],[854,"stumble","ˈstəmbəl",[["vi.","绊倒","犯错","失策","踌躇","无意中","发现"],["vt.","绊倒","困惑"],["n.","绊倒","失策"]],"绊倒犯错失策踌躇无意中发现"],[855,"village","ˈvɪlɪdʒ",[["n.","乡村","村庄"]],"乡村村庄"],[856,"notable","ˈnoʊtəbəl",[["n.","值得注意的","著名的"]],"值得注意的"],[857,"warrant","ˈwɔrənt",[["n.","正当理由","委任状","许可证"]],"正当理由"],[858,"obstacle","ˈɑbstəkəl",[["n.","障碍","障碍物","妨害","绊脚石"]],"障碍障碍物妨害绊脚石"],[859,"skill","skɪl",[["n.","技能","技巧","熟练"]],"技能技巧熟练"],[860,"weather","ˈwɛðər",[["n.","天气","气候","气象"],["vt.","经受","住","使风化","使日晒雨淋"],["vi.","风化","褪色"],["adj.","上风的"]],"天气气候气象"],[861,"someone","ˈsəmˌwən",[["pron.","某人","有人"]],"某人有人"],[862,"journal","ˈdʒərnəl",[["n.","日报","期刊杂志","日志"]],"日报期刊杂志日志"],[863,"clinic","ˈklɪnɪk",[["n.","诊所","医务室","会诊"]],"诊所"],[864,"example","ɪgˈzæmpəl",[["n.","例子","实例","模范","榜样"],["vt.","把...作为","例子"]],"例子实例模范榜样"],[865,"fixture","ˈfɪkstʃər",[["n.","固定","定期存款"]],"固定"],[866,"realize","ˈriəˌlaɪz",[["vt.","实现","认识","到","了解","意识","到","净得"]],"实现认识到了解意识到净得"],[867,"crash","kræʃ",[["vi.","碰撞","坠落","猛","使...破碎","迫降"],["n.","碰撞","猛撞","轰隆声","崩溃","破产","垮台"]],"碰撞坠落猛使...破碎迫降"],[868,"unify","ˈjunəˌfaɪ",[["vt.","统一","使成","一体"]],"统一"],[869,"depend","dɪˈpɛnd",[["vi.","依靠","依赖","相信","指望"]],"依靠依赖相信指望"],[870,"portrait","ˈpɔrtrət",[["n.","消像","画像"],["adj.","(文件页面)竖的"]],"消像画像"],[871,"moist","mɔɪst",[["adj.","湿润的","潮湿的","多雨的","(果物)多汁的","有分泌物的","湿性的"],["n.","潮湿"]],"湿润的潮湿的多雨的(果物)多"],[872,"swarm","swɔrm",[["n.","一大群","蜂窝"],["vi.","密集","云集","充满"]],"一大群蜂窝"],[873,"childish","ˈtʃaɪldɪʃ",[["adj.","孩子气的","幼稚的","简单的","年老糊涂的"]],"孩子气的幼稚的简单的年老糊涂"],[874,"eliminate","ɪˈlɪməˌneɪt",[["vt.","消灭","消除","排除","除去","剔除","忽略"]],"消灭消除排除除去剔除忽略"],[875,"liquid","ˈlɪkwɪd",[["n.","液体"],["adj.","液体的","液态的"]],"液体"],[876,"look","lʊk",[["vi.","看","显得","注意","朝着","好象"],["vt.","打量","注视","用眼神或脸色","表示","期待"],["n.","看","神色","样子","脸色"]],"看显得注意朝着好象"],[877,"interior","ˌɪnˈtɪriər",[["adj.","内的","内地的","国内的","内部的"],["n.","内部","内在"]],"内的内地的国内的内部的"],[878,"unknown","ənˈnoʊn",[["adj.","不知道的","未知的","不出名的"]],"不知道的未知的不出名的"],[879,"graze","greɪz",[["vi.","喂草","放牧(牲畜)"]],"喂草"],[880,"correspond","ˌkɔrəˈspɑnd",[["vi.","相符合","相当","通信"]],"相符合相当通信"],[881,"degenerate","dɪˈdʒɛnərˌeɪt",[["adj.","堕落的"],["vi. vt.","(使)变质","(使)退化"]],"堕落的"],[882,"global","ˈgloʊbəl",[["adj.","球面的","全球的"]],"球面的"],[883,"bough","baʊ",[["n.","大树枝"]],"大树枝"],[884,"lean","lin",[["vi.","倾斜","屈身","倚靠","依赖"],["vt.","使倾斜"],["n.","瘦肉","倾斜","弯曲"],["adj.","瘦的","贫乏的","歉收的"]],"倾斜屈身倚靠依赖"],[885,"nucleus","ˈnukliəs",[["n.","核","核心(原子)","核","细胞核"]],"核核心(原子)核细胞核"],[886,"pedestrian","pəˈdɛstriən",[["n.","行人","步行者"]],"行人"],[887,"flat","flæt",[["adj.","平的","扁平的","平坦的","单调的"],["adv.","平直地","干脆地"],["n.","一套","房间","单元","住宅","[英]公寓"],["vt.","变平"],["vi.","降调"]],"平的扁平的平坦的单调的"],[888,"differ","ˈdɪfər",[["vi.","不同(意见)","相异","不一致"]],"不同(意见)相异不一致"],[889,"exile","ˈɛkˌsaɪl",[["vt.","流放"],["n.","被流放者"]],"流放"],[890,"guardian","ˈgɑrdiən",[["n.","监护人","保护人"],["adj.","保护的"]],"监护人"],[891,"slave","sleɪv",[["n.","奴隶","苦工","完全","受控制的人","劳工","从动","装置"],["vt.","对另","一种","装置","作出","直接","回应"],["vi.","拼命","工作","贩卖","奴隶"]],"奴隶苦工完全受控制的人劳工从"],[892,"inject","ˌɪnˈdʒɛkt",[["vt.","注射","注满","喷射"]],"注射"],[893,"positive","ˈpɑzətɪv",[["adj.","确定的","积极的","肯定的","绝对的","正面的","正数的","阳性的"]],"确定的积极的肯定的绝对的正面"],[894,"death","dɛθ",[["n.","死","死亡","灭亡","死神"]],"死死亡灭亡死神"],[895,"equal","ˈikwəl",[["adj.","相等的","平等的","胜任的"],["n.","对手","匹敌","同辈"],["vt.","等于","比得上"]],"相等的平等的胜任的"],[896,"accuracy","ˈækjərəsi",[["n.","准确(性)","准确度"]],"准确(性)准确度"],[897,"gun","gən",[["n.","枪炮","手枪"]],"枪炮手枪"],[898,"meadow","ˈmɛˌdoʊ",[["n.","草地","牧草地"]],"草地"],[899,"base","beɪs",[["n.","基础","底层","基地","（支持、收入、力量等的）基础"],["vt.","以...作","基础"],["adj.","卑鄙的","不道德的"]],"基础底层基地（支持、收入、力"],[900,"destined","ˈdɛstɪnd",[["adj.","(由神、命运)预定的","注定的"]],"(由神、命运)预定的"],[901,"magnet","ˈmægnət",[["n.","磁铁","磁石","磁体","有","强大吸引力的人","或物"]],"磁铁磁石磁体有强大吸引力的人"],[902,"swan","swɔn",[["n.","天鹅"],["vi.","闲荡","游荡"]],"天鹅"],[903,"despise","dɪˈspaɪz",[["vt.","鄙视","蔑视"]],"鄙视"],[904,"implicit","ˌɪmˈplɪsət",[["adj.","暗示的","盲从的","绝对的","固有的"]],"暗示的"],[905,"literacy","ˈlɪtərəsi",[["n.","读写能力","识字"]],"读写能力"],[906,"cabin","ˈkæbən",[["n.","小木屋","船舱","机舱"],["vt.","抑制"],["vi.","住","在小屋"]],"小木屋船舱机舱"],[907,"tiny","ˈtaɪni",[["adj.","微小的","极小的"]],"微小的极小的"],[908,"establish","ɪˈstæblɪʃ",[["vt.","建立","设立","确立","创办"]],"建立设立确立创办"],[909,"equip","ɪkˈwɪp",[["vt.","装备","配备","设","穿…"]],"装备配备设穿…"],[910,"momentum","moʊˈmɛntəm",[["n.","动力","要素"]],"动力"],[911,"elevator","ˈɛləˌveɪtər",[["n.","电梯","升降机","飞机","升降舵","斗式","皮带","输送机"]],"电梯升降机飞机升降舵斗式皮带"],[912,"estate","ɛˈsteɪt",[["n.","房地产","财产","产业"]],"房地产"],[913,"buffer","ˈbəfər",[["n.","缓冲","缓冲区"],["vt.","缓冲"]],"缓冲"],[914,"hang","hæŋ",[["vt.","挂","悬吊","死","悬挂","方式"],["vt.","(hangedhanged)悬挂","绞死"],["vi.","(使)低垂","悬浮(在空中)","逗留"]],"挂悬吊死悬挂方式"],[915,"tin","tɪn",[["n.","锡","罐头","听头"],["adj.","锡","制的"],["vt.","镀锡于"]],"锡罐头听头"],[916,"ground","graʊnd",[["n.","土地","战场","场地","根据","背景"],["vt.","放在地上","使...搁浅","打基础","grind的过去式和过去分词"]],"土地战场场地根据背景"],[917,"robbery","ˈrɑbəri",[["n.","抢劫","劫掠","盗取"]],"抢劫劫掠盗取"],[918,"receive","rɪˈsiv",[["vt.","收到得到","接待","接受","迎接","容纳","遭受","相信"],["vi.","接到","获得"]],"收到得到接待接受迎接容纳遭受"],[919,"daughter","ˈdɔtər",[["n.","女儿"],["adj.","与女儿有关的","女性直系后代的"]],"女儿"],[920,"only","ˈoʊnli",[["adv.","只","仅仅","专门地","唯一地","刚才"],["adj.","最好的","唯一的","出众的"],["conj.","除非","但是","然而","毕竟"]],"只仅仅专门地唯一地刚才"],[921,"aluminium","ˌæˈljumɪnəm",[["n.","铝"]],"铝"],[922,"blue","blu",[["adj.","蓝色的","沮丧的","忧郁的(女人)","有学问的"],["n.","蓝色"],["vt.","使...变","蓝"],["vi.","变","蓝"]],"蓝色的沮丧的忧郁的(女人)有"],[923,"soft","sɔft",[["adj.","软的","柔软的","柔和的","温和的","不强烈的","轻的"],["adv.","柔软地","温和地"],["n.","柔软的","东西"]],"软的柔软的柔和的温和的不强烈"],[924,"orange","ˈɔrɪndʒ",[["n.","橙(树)","柑(树)","橙黄色"],["adj.","橙色的"]],"橙(树)柑(树)橙黄色"],[925,"cook","kʊk",[["vt.","烹调","煮","编造","虚构","烧(菜)"],["vi.","烧菜","发生","做好"],["n.","厨师","烧菜"]],"烹调煮编造虚构烧(菜)"],[926,"proposition","ˌprɑpəˈzɪʃən",[["n.","命题","主题","提议"]],"命题"],[927,"obtain","əbˈteɪn",[["vt.","获得得到","买","到"],["vi.","通用","流行","存在"]],"获得得到买到"],[928,"provide","prəˈvaɪd",[["vt.","提供","供给","装备","规定","准备"],["vi.","供给","提供"]],"提供供给装备规定准备"],[929,"forecast","ˈfɔrˌkæst",[["n.","预测","预报"],["vi.","预示","预测"]],"预测预报"],[930,"fellow","ˈfɛloʊ",[["n.","人","家伙","伙伴","朋友","同类","校董","研究生"],["adj.","同类的","同事的","同伴的"]],"人家伙伙伴朋友同类校董研究生"]],{"roots":[{"root":"pos / pon","mean":"放置","words":["correspond","positive","poster","proposition","symposium"]},{"root":"leg / lect","mean":"选、读","words":["electrician","illegal","legislation"]},{"root":"fer","mean":"带来","words":["buffer","differ","prefer"]},{"root":"port","mean":"携带、运","words":["portrait","proportional"]},{"root":"plic / ply","mean":"折叠","words":["implicit","supply"]},{"root":"press","mean":"压","words":["express","suppress"]},{"root":"fac / fect / fic","mean":"做","words":["deficiency","manufacture"]},{"root":"vis / vid","mean":"看","words":["division","provide"]},{"root":"cap / cept / ceiv","mean":"拿、取","words":["handicap","receive"]}],"confuse":[{"a":"crush","am":"压碎碾碎镇压拥挤的人群迷恋关","b":"crash","bm":"碰撞坠落猛使...破碎迫降"},{"a":"dive","am":"跳水潜水俯冲","b":"drive","bm":"&"},{"a":"rate","am":"比率速度价格等级","b":"late","bm":"迟的晚的已故的"},{"a":"look","am":"看显得注意朝着好象","b":"cook","bm":"烹调煮编造虚构烧(菜)"}],"suffixes":[{"suffix":"-tion / -sion","mean":"名词：动作、结果","words":["division","illusion","legislation","proposition","recession","repetition","vegetation"]},{"suffix":"-ly","mean":"副词","words":["definitely","presumably","shortly","supply"]},{"suffix":"-ate","mean":"动词/形容词","words":["degenerate","eliminate","estate","intricate"]},{"suffix":"-ity / -ty","mean":"名词：性质","words":["anxiety","dignity","relativity"]}]}];</script>
+<script src="../assets/app.js"></script>
+<script src="../assets/day.js"></script>
 </body>
 </html>
