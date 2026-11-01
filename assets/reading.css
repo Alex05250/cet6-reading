@@ -17,6 +17,10 @@
   font-size:clamp(31px,4.6vw,50px);line-height:1.1;font-weight:600;letter-spacing:-.038em;
   margin-bottom:18px;text-wrap:balance;animation:softIn .8s var(--ease) .08s both;
 }
+.rhead h1 .dim{
+  display:block;margin-top:8px;font-size:.56em;font-weight:600;letter-spacing:-.02em;
+  color:var(--faint);
+}
 .rhead .rlede{
   font-size:clamp(14px,1.6vw,16px);color:var(--sub);line-height:1.66;letter-spacing:-.005em;
   max-width:56ch;text-wrap:pretty;animation:softIn .8s var(--ease) .16s both;
@@ -94,9 +98,33 @@ body.no-mark mark{background:transparent;padding:0}
 .bchip.off,.chips .chip.off{background:var(--fill);color:var(--faint);border-color:transparent;text-decoration:line-through;text-decoration-thickness:1px}
 .bchip:hover{transform:translateY(-1px)}
 
-/* ───────── 真题页：考期 / 套题 / 文章 ───────── */
+/* ───────── 真题目录页：考期分组 + 套题行 ───────── */
+.sgrp{margin:0 0 clamp(28px,4.4vh,42px)}
+.sgrp:last-child{margin-bottom:0}
+.sgrph{
+  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+  margin:0 0 2px;padding:0 6px 12px;border-bottom:1px solid var(--line);
+  font-size:clamp(17px,2.2vw,21px);font-weight:600;letter-spacing:-.028em;
+  scroll-margin-top:64px;
+}
+.sgrph .sgmeta{
+  margin-left:auto;font-size:11.5px;font-weight:400;color:var(--faint);
+  letter-spacing:0;font-variant-numeric:tabular-nums;
+}
+.sgrph + .rowline{border-top:none}
+/* 目录行：本页没有左侧编号列（套号已在标题里），两列即可（.list 提权，避免被 site.css 的三列覆盖） */
+.list .rowline{grid-template-columns:1fr auto}
+.list .rowline .rgo{justify-self:end}
+.stags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.stags i{
+  font-style:normal;font-size:10.5px;color:var(--sub);letter-spacing:.02em;
+  padding:3px 8px;border-radius:6px;background:var(--fill);white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ───────── 单套试卷页：分节跳转 / 文章卡 / 上一套下一套 ───────── */
 .toc{
-  max-width:760px;margin:0 auto;padding:18px 24px 0;
+  max-width:760px;margin:0 auto;padding:20px 24px 0;
   display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
 }
 .toc a{
@@ -106,36 +134,15 @@ body.no-mark mark{background:transparent;padding:0}
 }
 .toc a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
 
-.year{
-  max-width:760px;margin:clamp(34px,5vh,52px) auto 14px;padding:0 24px;
-  font-size:clamp(19px,2.4vw,24px);font-weight:600;letter-spacing:-.03em;
-  display:flex;align-items:center;gap:14px;
+.papers{max-width:808px;margin:0 auto;padding:clamp(20px,3.4vh,30px) 24px 0}
+.art{
+  max-width:760px;margin:0 auto 14px;padding:clamp(22px,3vw,32px) clamp(18px,3.2vw,28px);
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  scroll-margin-top:112px;
+  transition:box-shadow .4s var(--ease),border-color .3s var(--ease);
 }
-.year::after{content:"";flex:1;height:1px;background:var(--line)}
-
-.sets{max-width:760px;margin:0 auto;padding:0 24px 40px}
-details.setblk{
-  border:1px solid var(--line);border-radius:16px;background:var(--card);
-  margin:10px 0;overflow:hidden;transition:box-shadow .35s var(--ease),border-color .3s var(--ease);
-}
-details.setblk:hover{box-shadow:var(--shadow-sm)}
-details.setblk[open]{box-shadow:var(--shadow-sm);border-color:transparent}
-details.setblk > summary{
-  list-style:none;cursor:pointer;padding:17px 24px;display:flex;align-items:center;gap:12px;
-  font-size:14px;font-weight:500;letter-spacing:-.012em;
-}
-details.setblk > summary::-webkit-details-marker{display:none}
-details.setblk > summary::before{
-  content:"";width:6px;height:6px;flex:0 0 auto;margin-top:-3px;
-  border-right:1.5px solid var(--faint);border-bottom:1.5px solid var(--faint);
-  transform:rotate(-45deg);transition:transform .3s var(--ease);
-}
-details.setblk[open] > summary::before{transform:rotate(45deg);margin-top:2px}
-details.setblk > summary .smeta{margin-left:auto;font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums;font-weight:400}
-details.setblk[open] > summary{position:sticky;top:105px;z-index:5;background:color-mix(in srgb,var(--card) 92%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
-
-.art{padding:clamp(22px,3vw,32px) 24px;border-top:1px solid var(--hair)}
-.art:first-of-type{border-top:none}
+.art:last-child{margin-bottom:0}
+.art:hover{box-shadow:var(--shadow-sm);border-color:transparent}
 .art h3{
   font-size:13px;font-weight:600;letter-spacing:-.005em;color:var(--sub);
   margin:0 0 18px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
@@ -146,6 +153,35 @@ details.setblk[open] > summary{position:sticky;top:105px;z-index:5;background:co
   border-radius:6px;background:var(--fill);color:var(--sub);font-size:11px;font-weight:600;
   margin-right:9px;vertical-align:1px;letter-spacing:.02em;
 }
+/* 隐藏答案：只留点线空位，词与词库都不露底 */
+body.no-fill .fill{
+  color:transparent;background:var(--fill);border-bottom-color:var(--faint);border-radius:3px;
+}
+body.no-fill .bchip.on{background:var(--fill);color:var(--faint);border-color:transparent}
+
+.pager{
+  max-width:760px;margin:0 auto;padding:clamp(26px,4vh,40px) 24px 0;
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.pg{
+  display:flex;align-items:center;gap:11px;min-height:54px;padding:9px 16px;border-radius:14px;
+  border:1px solid var(--line);background:var(--card);text-decoration:none;color:var(--fg);
+  transition:background .26s var(--ease),border-color .26s var(--ease),transform .2s var(--ease);
+}
+.pg:hover{background:var(--fill);border-color:transparent}
+.pg:active{transform:scale(.985)}
+.pg svg{
+  width:14px;height:14px;flex:0 0 auto;color:var(--sub);
+  fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;
+}
+.pg .pgt{min-width:0}
+.pg .pgt em{display:block;font-style:normal;font-size:12.5px;font-weight:600;letter-spacing:-.012em}
+.pg .pgt s{
+  display:block;margin-top:2px;text-decoration:none;font-size:11px;color:var(--faint);
+  font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.pg.next{justify-content:flex-end;text-align:right}
+.pg.off{opacity:.42;pointer-events:none;background:transparent;border-style:dashed}
 
 /* 回到顶部 / 底部导航 */
 #topBtn{
@@ -169,6 +205,8 @@ details.setblk[open] > summary{position:sticky;top:105px;z-index:5;background:co
   transition:background .24s var(--ease),border-color .24s var(--ease),color .24s var(--ease);
 }
 .foot .big:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.foot .flinks{margin-top:14px}
+.foot .flinks a{margin:0 8px}
 
 @media (max-width:640px){
   .ctrls{top:44px;padding:10px 14px}
@@ -177,8 +215,13 @@ details.setblk[open] > summary{position:sticky;top:105px;z-index:5;background:co
   .rhead{padding-top:34px}
   .passage,.bank,.wordbank,.foot{padding-left:16px;padding-right:16px}
   .toc{padding-left:16px;padding-right:16px}
-  .year,.sets{padding-left:14px;padding-right:14px}
-  details.setblk[open] > summary{top:100px}
+  .papers{padding-left:14px;padding-right:14px}
+  .pager{padding-left:14px;padding-right:14px;gap:8px}
+  .pg{min-height:50px;padding:8px 12px;gap:8px}
+  .pg .pgt s{font-size:10.5px}
+  .art{padding:22px 16px;scroll-margin-top:96px}
+  .sgrph{font-size:17px}
+  .sgrph .sgmeta{font-size:11px}
   .zh{font-size:14px}
 }
 @media (prefers-reduced-motion:reduce){
