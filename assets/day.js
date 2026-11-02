@@ -20,6 +20,7 @@
       const bar = g.querySelector('.gbar i');
       if (bar) bar.style.width = (100 * n / part.length).toFixed(0) + '%';
     });
+    syncClear();
   }
 
   /* ── 词表 ── */
@@ -65,6 +66,52 @@
     document.querySelectorAll('.wrow').forEach(r => {
       r.classList.toggle('hide', blurred);
       r.classList.remove('show');
+    });
+  };
+
+  /* ── 清空本页打勾（带回撤销）── */
+  const clearBtn = $('#clearBtn');
+  const toastEl = document.createElement('div');
+  toastEl.className = 'toast';
+  toastEl.setAttribute('role', 'status');
+  toastEl.innerHTML = '<span class="tmsg"></span><button class="tact" type="button"></button>';
+  document.body.appendChild(toastEl);
+  let toastTimer = 0;
+
+  function hideToast() { toastEl.classList.remove('on'); }
+  function toast(msg, actLabel, act) {
+    toastEl.querySelector('.tmsg').textContent = msg;
+    const b = toastEl.querySelector('.tact');
+    b.textContent = actLabel || '';
+    b.hidden = !actLabel;
+    b.onclick = () => { hideToast(); if (act) act(); };
+    toastEl.classList.add('on');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(hideToast, actLabel ? 7000 : 2600);
+  }
+
+  function syncClear() {
+    clearBtn.disabled = !W.countDay(DAY);
+  }
+
+  function paintTicks() {
+    const set = W.daySet(DAY);
+    document.querySelectorAll('#groups .wrow').forEach(r => {
+      r.classList.toggle('done', set.has(r.dataset.w));
+    });
+  }
+
+  clearBtn.onclick = () => {
+    const had = W.clearDay(DAY);
+    if (!had.length) return;
+    paintTicks();
+    flash.reset();
+    refresh(true);
+    toast('已清空本页 ' + had.length + ' 个勾', '撤销', () => {
+      W.addWords(DAY, had);
+      paintTicks();
+      flash.reset();
+      refresh(true);
     });
   };
 

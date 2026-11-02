@@ -54,6 +54,25 @@
 .wrow.hide.show .senses,.wrow.hide.show .aid{filter:none;opacity:1}
 mark{background:color-mix(in srgb,var(--accent) 20%,transparent);color:inherit;border-radius:2px;padding:0 1.5px}
 
+/* 词表工具条 */
+.listbar{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-bottom:10px}
+.listbar .pill{font-size:12.5px;padding:8px 15px;font-variant-numeric:tabular-nums}
+.listbar .pill.danger:hover:not(:disabled){border-color:#e5484d;color:#e5484d}
+
+/* 轻提示（清空打勾后可撤销） */
+.toast{
+  position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom, 0px));z-index:300;
+  display:flex;align-items:center;gap:16px;padding:12px 18px 12px 20px;border-radius:99px;
+  background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow-lg);
+  font-size:13px;color:var(--fg);white-space:nowrap;
+  opacity:0;pointer-events:none;transform:translate(-50%,14px);
+  transition:opacity .22s var(--ease),transform .3s var(--ease);
+}
+.toast.on{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+.toast .tact{font:inherit;font-weight:600;color:var(--accent);background:none;border:0;padding:0;cursor:pointer}
+.toast .tact:hover{text-decoration:underline}
+.toast .tact[hidden]{display:none}
+
 /* 分组折叠 */
 details.group{border-bottom:1px solid var(--hair)}
 details.group>summary{
@@ -94,6 +113,9 @@ details.group[open]>summary .chev{transform:rotate(90deg)}
 .pill.primary{background:var(--accent);border-color:var(--accent);color:#fff}
 .pill.primary:hover{filter:brightness(1.07);color:#fff}
 .pill:active{transform:scale(.96)}
+.pill:disabled{opacity:1;cursor:default;color:var(--faint);border-color:var(--hair);background:transparent}
+.pill:disabled:hover{border-color:var(--hair);color:var(--faint)}
+.pill:disabled:active{transform:none}
 .fmeta{font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums;margin-top:16px;text-align:center}
 .fclose{position:absolute;top:16px;right:20px;font-size:12.5px;color:var(--sub);background:none;border:0;cursor:pointer;z-index:3}
 .fclose:hover{color:var(--fg)}

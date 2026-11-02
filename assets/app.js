@@ -17,8 +17,10 @@
     return doneCache.get(d);
   }
   function saveDay(d) {
+    const s = daySet(d);
+    if (!s.size) { try { localStorage.removeItem(LS(d)); } catch (e) {} return; }
     const o = {};
-    daySet(d).forEach(w => { o[w] = true; });
+    s.forEach(w => { o[w] = true; });
     try { localStorage.setItem(LS(d), JSON.stringify(o)); } catch (e) {}
   }
   function toggle(d, w, on) {
@@ -29,6 +31,20 @@
     return next;
   }
   function countDay(d) { return daySet(d).size; }
+  /* 清空某天全部打勾，返回被清掉的词，供撤销 */
+  function clearDay(d) {
+    const s = daySet(d), had = Array.from(s);
+    s.clear();
+    saveDay(d);
+    return had;
+  }
+  /* 批量补回打勾（撤销用） */
+  function addWords(d, words) {
+    const s = daySet(d);
+    (words || []).forEach(w => s.add(w));
+    saveDay(d);
+    return s.size;
+  }
 
   /* ── 数字滚动 ── */
   function countTo(el, to, dur) {
@@ -103,17 +119,22 @@
     $('#fNo').onclick = () => advance(false);
     $('#fShuffle').onclick = () => { pool.sort(() => Math.random() - .5); ci = 0; flip = false; card.classList.remove('flip'); draw(); };
     if ($('#fClose')) $('#fClose').onclick = () => root.classList.remove('on');
-    if ($('#fWeak')) $('#fWeak').onclick = () => {
-      const weak = !opts.weakActive;
-      opts.weakActive = weak;
-      pool = weak ? deck.filter(r => !daySet(r[0]).has(r[2])) : deck.slice();
+    function reset() {
+      pool = (opts.weakActive ? deck.filter(r => !daySet(r[0]).has(r[2])) : deck.slice()).slice();
       if (!pool.length) pool = deck.slice();
       ci = 0; flip = false; card.classList.remove('flip');
-      $('#fWeak').textContent = weak ? '练全部' : '只练未熟';
       draw();
+    }
+    if ($('#fWeak')) $('#fWeak').onclick = () => {
+      opts.weakActive = !opts.weakActive;
+      $('#fWeak').textContent = opts.weakActive ? '练全部' : '只练未熟';
+      reset();
     };
     draw();
-    return { redraw: draw, open() { ci = 0; flip = false; card.classList.remove('flip'); draw(); } };
+    return {
+      redraw: draw, reset,
+      open() { ci = 0; flip = false; card.classList.remove('flip'); draw(); }
+    };
   }
 
   /* ── 卡片错峰入场 ── */
@@ -137,5 +158,5 @@
     document.body.classList.toggle('scrolled', scrollY > 6);
   }, { passive: true });
 
-  global.W = { LS, esc, reduce, sleep, daySet, saveDay, toggle, countDay, countTo, rowHtml, createFlash, revealCards };
+  global.W = { LS, esc, reduce, sleep, daySet, saveDay, toggle, countDay, clearDay, addWords, countTo, rowHtml, createFlash, revealCards };
 })(window);
