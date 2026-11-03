@@ -130,37 +130,43 @@
   const deck = ITEMS.map(it => [DAY, it[0], it[1], it[2], it[3]]);
   const flash = W.createFlash($('#p-card'), deck, { onChange: () => refresh(true) });
 
-  /* ── 测验 ── */
-  let qs = [], qi = 0, score = 0;
+  /* ── 测验：覆盖当天全部词，一题一个词，随机顺序 ── */
+  let qs = [], qi = 0, score = 0, wrong = [];
   const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]]; } return a; };
-
-  function buildQuiz() {
-    const pool = shuffle(ITEMS.slice()).slice(0, Math.min(10, ITEMS.length));
-    qs = pool.map(it => {
-      const others = shuffle(ITEMS.filter(x => x[1] !== it[1])).slice(0, 3);
-      return { it, opts: shuffle([it].concat(others)) };
-    });
-    qi = 0; score = 0;
-    $('#qAgain').style.display = 'none';
-    drawQuiz();
-  }
 
   const shortDef = it => {
     const s = it[3][0];
     const txt = s.slice(1).slice(0, 2).join('、');
-    return s[0] + ' ' + (txt || '—');
+    return (s[0] ? s[0] + ' ' : '') + (txt || '—');
   };
 
+  const qbar = document.createElement('div');
+  qbar.className = 'qbar';
+  qbar.innerHTML = '<i></i>';
+  $('#qmeta').before(qbar);
+  const qfill = qbar.firstChild;
+
+  let wrongBtn = null;
+  function clearWrongBtn() { if (wrongBtn) { wrongBtn.remove(); wrongBtn = null; } }
+
+  function buildQuiz(subset) {
+    const src = (subset && subset.length) ? subset : ITEMS;
+    qs = shuffle(src.slice()).map(it => {
+      const ans = shortDef(it);
+      let cands = ITEMS.filter(x => x[1] !== it[1] && shortDef(x) !== ans);
+      if (cands.length < 3) cands = ITEMS.filter(x => x[1] !== it[1]);
+      return { it, opts: shuffle([it].concat(shuffle(cands.slice()).slice(0, 3))) };
+    });
+    qi = 0; score = 0; wrong = [];
+    $('#qAgain').style.display = 'none';
+    $('#qAgain').textContent = '重测全部 ' + ITEMS.length + ' 词';
+    clearWrongBtn();
+    drawQuiz();
+  }
+
   function drawQuiz() {
-    if (qi >= qs.length) {
-      $('#qmeta').textContent = '完成';
-      $('#qword').textContent = score + ' / ' + qs.length + ' 正确';
-      $('#qipa').textContent = '';
-      $('#opts').innerHTML = '';
-      $('#score').textContent = score === qs.length ? '全对。可以收工了。' : '错的那几个去「卡片自测」再过一遍。';
-      $('#qAgain').style.display = '';
-      return;
-    }
+    qfill.style.width = (100 * qi / qs.length) + '%';
+    if (qi >= qs.length) { finishQuiz(); return; }
     const { it, opts } = qs[qi];
     $('#qmeta').textContent = `第 ${qi + 1} / ${qs.length} 题　·　得分 ${score}`;
     $('#qword').textContent = it[1];
@@ -174,6 +180,7 @@
         if (right) { score++; btn.classList.add('right'); W.toggle(DAY, it[1], true); }
         else {
           btn.classList.add('wrong');
+          if (!wrong.some(x => x[1] === it[1])) wrong.push(it);
           W.toggle(DAY, it[1], false);
           $('#opts').querySelectorAll('.opt').forEach(x => {
             if (x.dataset.w === it[1]) x.classList.add('right');
@@ -181,11 +188,30 @@
         }
         refresh(true);
         $('#opts').querySelectorAll('.opt').forEach(x => x.disabled = true);
-        setTimeout(() => { qi++; drawQuiz(); }, right ? 320 : 1100);
+        setTimeout(() => { qi++; drawQuiz(); }, right ? 300 : 1000);
       };
     });
   }
-  $('#qAgain').onclick = buildQuiz;
+
+  function finishQuiz() {
+    qfill.style.width = '100%';
+    $('#qmeta').textContent = `全部 ${qs.length} 题完成`;
+    $('#qword').textContent = score + ' / ' + qs.length + ' 正确';
+    $('#qipa').textContent = '';
+    $('#opts').innerHTML = '';
+    if (!wrong.length) {
+      $('#score').textContent = '全部一次答对，这一天可以收工了。';
+    } else {
+      $('#score').innerHTML = `没答对 <b>${wrong.length}</b> 个：<span class="miss">${wrong.slice(0, 14).map(x => W.esc(x[1])).join('、')}</span>${wrong.length > 14 ? ` 等 ${wrong.length} 个` : ''}<br>点「重测错词」再过一遍，或者去「卡片自测」。`;
+      wrongBtn = document.createElement('button');
+      wrongBtn.className = 'pill again';
+      wrongBtn.textContent = '重测错词（' + wrong.length + '）';
+      wrongBtn.onclick = () => buildQuiz(wrong.slice());
+      $('#qAgain').after(wrongBtn);
+    }
+    $('#qAgain').style.display = '';
+  }
+  $('#qAgain').onclick = () => buildQuiz();
 
   /* ── 助记 ── */
   function buildAids() {
