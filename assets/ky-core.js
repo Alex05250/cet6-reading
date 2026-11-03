@@ -1,0 +1,156 @@
+/* 考研大纲词汇站 · 共享运行层（与 CET6 站同一套视觉，进度 key 独立：ky-day-N） */
+(function (global) {
+  'use strict';
+  const PREFIX = global.KY_PREFIX || 'ky';
+  const LS = n => PREFIX + '-day-' + n;
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── 进度存取 ── */
+  const doneCache = new Map();
+  function daySet(d) {
+    if (!doneCache.has(d)) {
+      let o = {};
+      try { o = JSON.parse(localStorage.getItem(LS(d)) || '{}') || {}; } catch (e) { o = {}; }
+      doneCache.set(d, new Set(Object.keys(o).filter(k => o[k])));
+    }
+    return doneCache.get(d);
+  }
+  function saveDay(d) {
+    const s = daySet(d);
+    if (!s.size) { try { localStorage.removeItem(LS(d)); } catch (e) {} return; }
+    const o = {};
+    s.forEach(w => { o[w] = true; });
+    try { localStorage.setItem(LS(d), JSON.stringify(o)); } catch (e) {}
+  }
+  function toggle(d, w, on) {
+    const s = daySet(d);
+    const next = (on === undefined) ? !s.has(w) : !!on;
+    next ? s.add(w) : s.delete(w);
+    saveDay(d);
+    return next;
+  }
+  function countDay(d) { return daySet(d).size; }
+  function clearDay(d) {
+    const s = daySet(d), had = Array.from(s);
+    s.clear();
+    saveDay(d);
+    return had;
+  }
+  function addWords(d, words) {
+    const s = daySet(d);
+    (words || []).forEach(w => s.add(w));
+    saveDay(d);
+    return s.size;
+  }
+
+  /* ── 数字滚动 ── */
+  function countTo(el, to, dur) {
+    dur = dur || 620;
+    const from = parseInt(el.textContent, 10) || 0;
+    if (from === to || reduce) { el.textContent = to; return; }
+    const t0 = performance.now();
+    (function step(t) {
+      const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(from + (to - from) * e);
+      if (p < 1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  /* ── 词条渲染：item = [n, w, ipa, [[pos, ...defs], ...]] ── */
+  function rowHtml(day, item, i, opts) {
+    opts = opts || {};
+    const [n, w, ipa, senses] = item;
+    const on = daySet(day).has(w);
+    const sensesHtml = senses.map(s => {
+      const pos = s[0], defs = s.slice(1);
+      const body = defs.length
+        ? defs.map(esc).join('<span class="sep">·</span>')
+        : '<span style="color:var(--faint)">—</span>';
+      return `<div class="sline"><span class="pos">${esc(pos)}</span><span class="defs">${body}</span></div>`;
+    }).join('');
+    return `<div class="wrow${on ? ' done' : ''}${opts.blur ? ' hide' : ''}" style="--i:${Math.min(i || 0, 26)}" data-w="${esc(w)}">
+      <div>
+        <div class="head"><span class="w">${esc(w)}</span><span class="ipa">${esc(ipa)}</span></div>
+        <div class="senses">${sensesHtml}</div>
+      </div>
+      <button class="mark" data-d="${day}" data-w="${esc(w)}" aria-label="标记已会">✓</button>
+    </div>`;
+  }
+
+  /* ── 闪卡组件 ── */
+  function createFlash(root, deck, opts) {
+    opts = opts || {};
+    let ci = 0, flip = false, pool = deck.slice();
+    const $ = s => root.querySelector(s);
+    const card = $('#fcard');
+    function draw() {
+      if (!pool.length) {
+        $('#fw').textContent = '没有词';
+        $('#fi').textContent = '';
+        $('#bw').textContent = ''; $('#bi').textContent = ''; $('#bm').textContent = '';
+        return;
+      }
+      const r = pool[ci % pool.length];
+      const [d, n, w, ipa, senses] = r;
+      const sub = (ipa || '') + '　·　Day ' + String(d).padStart(2, '0');
+      $('#fw').textContent = w; $('#fi').textContent = sub;
+      $('#bw').textContent = w; $('#bi').textContent = sub;
+      $('#bm').textContent = senses.map(s => s[0] + ' ' + s.slice(1).join('、')).join('\n');
+      $('#fmeta').textContent = (ci % pool.length + 1) + ' / ' + pool.length + (opts.label ? '　' + opts.label() : '');
+    }
+    function advance(known) {
+      const r = pool[ci % pool.length];
+      if (r) {
+        toggle(r[0], r[2], known);
+        if (opts.onChange) opts.onChange(r[0]);
+      }
+      ci++; flip = false; card.classList.remove('flip');
+      setTimeout(draw, 60);
+    }
+    card.onclick = () => { flip = !flip; card.classList.toggle('flip', flip); };
+    card.onkeydown = e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); card.onclick(); } };
+    $('#fYes').onclick = () => advance(true);
+    $('#fNo').onclick = () => advance(false);
+    $('#fShuffle').onclick = () => { pool.sort(() => Math.random() - .5); ci = 0; flip = false; card.classList.remove('flip'); draw(); };
+    if ($('#fClose')) $('#fClose').onclick = () => root.classList.remove('on');
+    function reset() {
+      pool = (opts.weakActive ? deck.filter(r => !daySet(r[0]).has(r[2])) : deck.slice()).slice();
+      if (!pool.length) pool = deck.slice();
+      ci = 0; flip = false; card.classList.remove('flip');
+      draw();
+    }
+    if ($('#fWeak')) $('#fWeak').onclick = () => {
+      opts.weakActive = !opts.weakActive;
+      $('#fWeak').textContent = opts.weakActive ? '练全部' : '只练未熟';
+      reset();
+    };
+    draw();
+    return {
+      redraw: draw, reset,
+      open() { ci = 0; flip = false; card.classList.remove('flip'); draw(); }
+    };
+  }
+
+  /* ── 卡片错峰入场 ── */
+  function revealCards(sel) {
+    const cards = [].slice.call(document.querySelectorAll(sel));
+    setTimeout(() => cards.forEach(c => c.classList.add('in')), 900);
+    if (reduce || !('IntersectionObserver' in window)) { cards.forEach(c => c.classList.add('in')); return; }
+    const io = new IntersectionObserver(es => {
+      es.forEach(en => {
+        if (!en.isIntersecting) return;
+        const i = cards.indexOf(en.target);
+        setTimeout(() => en.target.classList.add('in'), Math.min(i, 22) * 34);
+        io.unobserve(en.target);
+      });
+    }, { rootMargin: '0px 0px -40px 0px' });
+    cards.forEach(c => io.observe(c));
+  }
+
+  document.addEventListener('scroll', () => {
+    document.body.classList.toggle('scrolled', scrollY > 6);
+  }, { passive: true });
+
+  global.K = { LS, esc, reduce, daySet, saveDay, toggle, countDay, clearDay, addWords, countTo, rowHtml, createFlash, revealCards };
+})(window);

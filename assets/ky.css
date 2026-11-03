@@ -1,0 +1,50 @@
+/* 考研大纲词汇站 · 覆盖层（复用 base.css + app.css，这里只补考研特有的部分） */
+
+/* 词性列要容纳 adj./adv. 这种合写，34px 不够 */
+.wrow .sline{grid-template-columns:56px 1fr}
+.wrow .pos{white-space:nowrap}
+
+/* 60 天的索引网格：卡片略窄，一屏能多看几行 */
+.grid{grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:12px}
+.card{padding:17px 17px 15px;border-radius:16px}
+.card .top{margin-bottom:14px}
+.card .num b{font-size:24px}
+.card .go{margin-top:13px;height:30px;padding:0 13px;font-size:12.5px}
+
+/* 回顾页 */
+#p-review{padding:6px 24px 140px;max-width:920px;margin:0 auto}
+.revhead{font-size:12.5px;color:var(--sub);margin:10px 2px 18px;line-height:1.7}
+.revgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.rcard{
+  display:flex;flex-direction:column;gap:10px;padding:16px 17px 15px;border-radius:16px;
+  border:1px solid var(--line);background:var(--card);text-decoration:none;color:inherit;
+  transition:border-color .3s var(--ease),box-shadow .35s var(--ease),transform .25s var(--ease);
+}
+.rcard:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line));box-shadow:var(--shadow-sm);transform:translateY(-1px)}
+.rcard .rtop{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.rcard .rd{font-size:14px;font-weight:600;letter-spacing:-.01em}
+.rcard .rgap{font-size:11px;color:var(--faint)}
+.rcard .rnum{display:flex;align-items:baseline;gap:4px}
+.rcard .rnum b{font-size:23px;font-weight:600;letter-spacing:-.035em;font-variant-numeric:tabular-nums;line-height:1}
+.rcard .rnum s{text-decoration:none;font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
+.rcard .rbar{height:2.5px;border-radius:99px;background:color-mix(in srgb,var(--fg) 12%,transparent);overflow:hidden}
+.rcard .rbar i{display:block;height:100%;width:0;background:var(--ok);border-radius:99px;transition:width .7s var(--ease)}
+.rcard.full .rnum b{color:var(--ok)}
+.rcard .rgo{
+  margin-top:4px;align-self:flex-start;display:inline-flex;align-items:center;gap:5px;
+  font-size:12px;font-weight:600;color:var(--accent);
+}
+.rcard .rgo .arw{transition:transform .3s var(--ease)}
+.rcard:hover .rgo .arw{transform:translateX(3px)}
+
+/* 索引页的考研进度条与 CET6 一致，这里只放宽搜索命中行的词性列 */
+.list .wrow .sline{grid-template-columns:56px 1fr}
+
+@media (max-width:520px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .card{padding:14px 13px 13px;border-radius:14px}
+  .card .num b{font-size:21px}
+  .card .go{height:28px;padding:0 11px;font-size:12px}
+  .wrow .sline{grid-template-columns:48px 1fr}
+  #p-review{padding:6px 16px 120px}
+}
