@@ -148,9 +148,17 @@
     cards.forEach(c => io.observe(c));
   }
 
-  document.addEventListener('scroll', () => {
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  function onScroll() {
     document.body.classList.toggle('scrolled', scrollY > 6);
-  }, { passive: true });
+    document.body.classList.toggle('deep', scrollY > 480);
+  }
+
+  /* 回到顶部：吸顶导航右上角的 ↑ */
+  const toTop = document.getElementById('toTop');
+  if (toTop) toTop.addEventListener('click', () => scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }));
 
   global.K = { LS, esc, reduce, daySet, saveDay, toggle, countDay, clearDay, addWords, countTo, rowHtml, createFlash, revealCards };
 })(window);
