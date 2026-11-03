@@ -53,7 +53,6 @@ body.portal{
   font-size:11.5px;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
   color:var(--accent);margin-bottom:18px;
 }
-.half--ky .kick{color:color-mix(in srgb,var(--fg) 62%,var(--sub))}
 .half h1{
   font-size:clamp(38px,4.4vw,72px);font-weight:600;letter-spacing:-.045em;line-height:1.02;
   margin-bottom:18px;
@@ -61,27 +60,25 @@ body.portal{
 .half h1 span{color:var(--faint)}
 .half .sub{font-size:13.5px;color:var(--sub);letter-spacing:.01em;margin-bottom:26px}
 .half .go{
-  display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 20px;
-  border-radius:99px;border:1px solid color-mix(in srgb,var(--fg) 18%,transparent);
-  background:color-mix(in srgb,var(--bg) 55%,transparent);
-  -webkit-backdrop-filter:blur(10px) saturate(150%);backdrop-filter:blur(10px) saturate(150%);
-  font-size:13.5px;font-weight:600;color:var(--fg);
+  display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 22px;
+  border-radius:99px;border:1px solid var(--fg);
+  background:var(--fg);
+  font-size:14px;font-weight:600;color:var(--bg);
   transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease),transform .2s var(--ease);
 }
-.half--ky .go{border-color:color-mix(in srgb,var(--fg) 22%,transparent)}
-.half:hover .go{background:var(--fg);border-color:var(--fg);color:var(--bg)}
+.half:hover .go{background:var(--accent);border-color:var(--accent);color:#fff}
 .half:hover .go .arw{transform:translateX(3px)}
 .half .go .arw{transition:transform .3s var(--ease)}
 
-/* 巨型幽灵数字 */
+/* 巨型幽灵数字：贴右下角，被面板裁切 */
 .ghost{
-  position:absolute;right:clamp(6px,1.4vw,26px);top:clamp(16px,5vh,54px);
-  font-size:clamp(96px,13vw,214px);font-weight:700;letter-spacing:-.06em;line-height:.8;
-  color:color-mix(in srgb,var(--fg) 4.5%,transparent);
+  position:absolute;right:-.03em;bottom:-.12em;
+  font-size:clamp(120px,16vw,260px);font-weight:700;letter-spacing:-.06em;line-height:.78;
+  color:color-mix(in srgb,var(--fg) 5.5%,transparent);
   pointer-events:none;user-select:none;z-index:1;
   transition:color .6s var(--ease),transform .9s cubic-bezier(.32,.72,0,1);
 }
-.half:hover .ghost{color:color-mix(in srgb,var(--fg) 7%,transparent);transform:translateY(-4px)}
+.half:hover .ghost{color:color-mix(in srgb,var(--fg) 8%,transparent);transform:translateY(-6px)}
 
 /* 底部一句说明，平衡下半屏的空 */
 .portalfoot{
@@ -101,7 +98,7 @@ body.portal{
   .half{flex:none;min-height:54dvh;justify-content:center;padding:64px clamp(22px,6vw,40px)}
   .half::after{top:auto;bottom:0;left:0;right:0;width:auto;height:1px}
   .split:hover .half,.split:hover .half:hover{flex:none;opacity:1;filter:none}
-  .ghost{font-size:clamp(88px,26vw,150px);right:6px;top:10px;opacity:.85}
+  .ghost{font-size:clamp(88px,26vw,150px);right:4px;bottom:-.1em;top:auto;opacity:.85}
   .brandbar{position:absolute}
   .portalfoot{position:static;padding:16px 0 max(16px,env(safe-area-inset-bottom));background:var(--bg)}
 }
