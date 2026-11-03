@@ -48,3 +48,68 @@
   .wrow .sline{grid-template-columns:48px 1fr}
   #p-review{padding:6px 16px 120px}
 }
+
+/* ── 考研落地页：进度概览 ── */
+.kyprog{max-width:1120px;margin:0 auto;padding:0 24px 6px}
+.pcard{
+  border:1px solid var(--line);border-radius:22px;background:var(--card);
+  padding:clamp(22px,3.4vw,32px) clamp(22px,3.6vw,34px);
+  box-shadow:var(--shadow-sm);
+}
+.pcard .ptop{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.pcard .plabel{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.pcard .pnum{display:flex;align-items:baseline;gap:9px}
+.pcard .pnum b{font-size:clamp(34px,5vw,48px);font-weight:600;letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums}
+.pcard .pnum s{text-decoration:none;font-size:12.5px;color:var(--faint);letter-spacing:.01em}
+.pgo{
+  display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 18px;
+  border-radius:99px;background:var(--accent);color:#fff;text-decoration:none;
+  font-size:13.5px;font-weight:600;white-space:nowrap;
+  transition:transform .2s var(--ease),box-shadow .3s var(--ease),opacity .2s var(--ease);
+  box-shadow:0 8px 22px color-mix(in srgb,var(--accent) 28%,transparent);
+}
+.pgo:hover{transform:translateY(-1px);box-shadow:0 12px 28px color-mix(in srgb,var(--accent) 34%,transparent)}
+.pgo:active{transform:scale(.97)}
+.ptrack{height:5px;border-radius:99px;background:color-mix(in srgb,var(--fg) 14%,transparent);overflow:hidden;margin:22px 0 14px}
+.ptrack i{display:block;height:100%;width:0;border-radius:99px;background:var(--ok);transition:width .8s var(--ease)}
+.pmeta{display:flex;gap:clamp(16px,3vw,34px);flex-wrap:wrap;font-size:12.5px;color:var(--sub)}
+.pmeta b{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
+
+/* 落地页 tile 区与进度卡的衔接 */
+.home .tiles{padding-top:clamp(8px,1.6vw,18px)}
+
+/* 接下来（筹备中）紧凑清单 */
+.soonblock{max-width:1120px;margin:0 auto;padding:10px 24px 30px}
+.soonhead{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin:0 0 6px 2px}
+.soonrow{
+  display:grid;grid-template-columns:120px 1fr auto;gap:16px;align-items:baseline;
+  padding:18px 2px;border-bottom:1px solid var(--hair);
+}
+.soonrow:first-of-type{border-top:1px solid var(--hair)}
+.soonrow .st{font-size:14.5px;font-weight:600;color:var(--sub)}
+.soonrow .sd{font-size:12.5px;color:var(--faint)}
+.soonrow .stag{
+  font-size:11px;color:var(--faint);border:1px dashed color-mix(in srgb,var(--fg) 20%,transparent);
+  border-radius:99px;padding:3px 10px;white-space:nowrap;
+}
+@media (max-width:720px){
+  .soonblock{padding:6px 16px 40px}
+  .soonrow{grid-template-columns:1fr auto;row-gap:4px}
+  .soonrow .sd{grid-column:1 / -1}
+}
+
+/* 筹备中的板块：保留排版但明确不可点 */
+.tile.tile--soon,.tile.tile--soon.in{cursor:default;opacity:.52}
+.tile--soon:hover .go{background:transparent}
+.tile--soon .tile-num b{color:var(--faint)}
+.soonTag{
+  display:inline-flex;align-items:center;height:32px;margin-top:16px;padding:0 14px;
+  border-radius:99px;border:1px dashed color-mix(in srgb,var(--fg) 22%,transparent);
+  font-size:12.5px;font-weight:600;color:var(--faint);letter-spacing:.02em;
+}
+@media (max-width:720px){
+  .kyprog{padding:0 16px 4px}
+  .pcard .pnum b{font-size:32px}
+  .pgo{height:36px;padding:0 15px;font-size:13px}
+  .pmeta{gap:14px}
+}
