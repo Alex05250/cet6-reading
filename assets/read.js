@@ -16,6 +16,7 @@
   function onScroll() {
     var y = window.scrollY || document.documentElement.scrollTop || 0;
     body.classList.toggle('scrolled', y > 6);
+    body.classList.toggle('deep', y > 480);
     var bar = document.querySelector('.rdbar i');
     if (bar) {
       var h = document.documentElement.scrollHeight - innerHeight;
@@ -61,8 +62,14 @@
   }
   loadPrefs();
 
-  /* 按钮：data-act = zh | fill | mark | open | close | top */
+  /* 按钮：data-act = zh | fill | mark | open | close | top；吸顶导航的 .topbtn 也回顶 */
   document.addEventListener('click', function (e) {
+    var tb = e.target.closest ? e.target.closest('.topbtn') : null;
+    if (tb) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      return;
+    }
     var b = e.target.closest('[data-act]');
     if (!b) return;
     var act = b.getAttribute('data-act');

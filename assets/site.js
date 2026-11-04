@@ -3,12 +3,22 @@
   'use strict';
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* 导航描边 */
+  /* 导航描边 + 吸顶「回到顶部」显隐 */
   function onScroll() {
-    document.body.classList.toggle('scrolled', (window.scrollY || 0) > 6);
+    var y = window.scrollY || 0;
+    document.body.classList.toggle('scrolled', y > 6);
+    document.body.classList.toggle('deep', y > 480);
   }
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  /* 吸顶导航右上角的 ↑ */
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest ? e.target.closest('.topbtn') : null;
+    if (!t) return;
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
 
   /* 错峰入场 */
   function reveal(sel) {
