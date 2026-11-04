@@ -151,21 +151,3 @@ body.no-fill .qexp{display:none}
   .transitem{padding:10px 12px}
 }
 
-/* ── 吸顶导航右上角「回到顶部」（与 app.css 的 .nav .topbtn 同款，
-      这两类页面只引 base/reading/kyexam，故在此补一份） ── */
-.nav .topbtn{
-  flex:none;display:inline-flex;align-items:center;justify-content:center;
-  width:32px;height:32px;padding:0;border-radius:50%;
-  border:1px solid var(--line);background:var(--card);color:var(--sub);cursor:pointer;
-  opacity:0;visibility:hidden;transform:translateY(-4px);
-  transition:opacity .3s var(--ease),transform .3s var(--ease),color .2s var(--ease),
-             border-color .2s var(--ease),background .2s var(--ease);
-}
-body.deep .nav .topbtn{opacity:1;visibility:visible;transform:none}
-.nav .topbtn:hover{
-  color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,var(--line));
-  background:color-mix(in srgb,var(--accent) 7%,var(--card));
-}
-.nav .topbtn:active{transform:scale(.94)}
-.nav .topbtn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-@media (max-width:560px){.nav .topbtn{width:30px;height:30px}}
