@@ -1,0 +1,152 @@
+/* 考研英语一真题精读层（kaoyan-exams）：完形选项、题目卡、排序链、划线翻译、写作
+   依赖 base.css 变量 + reading.css 的 .art/.sent/.toc/.pager 骨架。 */
+
+/* ── 完形填空 ── */
+.arttitle{
+  margin:-4px 0 20px;font-size:13px;line-height:1.6;color:var(--faint);font-style:italic;
+  padding-bottom:12px;border-bottom:1px solid var(--hair);
+}
+.cpara{margin:0 0 16px;font-size:clamp(15.5px,1.6vw,17px);line-height:1.86;text-indent:2em}
+.cpara:last-of-type{margin-bottom:0}
+.cb{
+  display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:19px;padding:0 6px;
+  margin:0 3px;border-radius:6px;background:color-mix(in srgb,var(--accent) 11%,transparent);
+  color:var(--accent);font-size:11.5px;font-weight:600;font-variant-numeric:tabular-nums;
+  vertical-align:1px;letter-spacing:.02em;
+}
+.clist{margin-top:22px;border-top:1px solid var(--hair)}
+.crow{
+  display:grid;grid-template-columns:30px 1fr auto;align-items:center;gap:10px;
+  padding:11px 2px;border-bottom:1px solid var(--hair);font-size:13.5px;
+}
+.crow .cn{font-weight:600;color:var(--faint);font-variant-numeric:tabular-nums;font-size:12px}
+.crow .copt{display:flex;flex-wrap:wrap;gap:4px 12px;min-width:0}
+.crow .copt span{color:var(--sub);white-space:nowrap}
+.crow .copt span i{
+  font-style:normal;font-size:10.5px;color:var(--faint);margin-right:3px;font-weight:600;
+}
+.crow .copt span.ok{color:var(--fg);font-weight:600}
+.crow .copt span.ok i{color:var(--ok)}
+.crow .cmark{
+  font-size:11px;font-weight:600;color:var(--ok);font-variant-numeric:tabular-nums;white-space:nowrap;
+  padding:3px 9px;border-radius:99px;background:color-mix(in srgb,var(--ok) 11%,transparent);
+}
+.crow .ctyp{font-size:10.5px;color:var(--faint);margin-left:8px;font-weight:400}
+.ccheck{font-size:12px;color:var(--faint)}
+.ccheck summary{cursor:pointer;list-style:none;padding:6px 0;color:var(--faint)}
+.ccheck summary::-webkit-details-marker{display:none}
+.ccheck summary:hover{color:var(--accent)}
+.ccheck .cclue{margin:6px 0 8px;font-size:12.5px;line-height:1.7;color:var(--sub)}
+.ccheck .cclue b{color:var(--fg);font-weight:600}
+.ccheck ul{margin:0 0 10px;padding-left:16px}
+.ccheck li{font-size:12.5px;line-height:1.7;color:var(--sub);margin-bottom:4px}
+.ccheck li b{color:var(--fg);font-weight:600}
+body.no-fill .crow .copt span.ok{color:var(--sub);font-weight:400}
+body.no-fill .crow .copt span.ok i{color:var(--faint)}
+body.no-fill .crow .cmark{color:transparent;background:var(--fill);position:relative}
+body.no-fill .crow .cmark::after{content:"?";position:absolute;inset:0;color:var(--faint);text-align:center}
+
+/* ── 阅读题目卡 ── */
+.qblock{margin-top:26px;border-top:1px solid var(--line);padding-top:6px}
+.qblock .qhead{
+  font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+  padding:14px 0 4px;
+}
+.q{padding:16px 0;border-bottom:1px solid var(--hair)}
+.q:last-child{border-bottom:none;padding-bottom:2px}
+.qstem{margin:0;font-size:15px;line-height:1.62;font-weight:600;letter-spacing:-.008em}
+.qstem b{color:var(--accent);font-variant-numeric:tabular-nums;margin-right:7px;font-size:13px}
+.qzh{margin:6px 0 0;font-size:13px;color:var(--sub);line-height:1.66}
+.qopts{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:5px 18px}
+.qopts li{display:flex;gap:8px;font-size:13.5px;line-height:1.55;color:var(--sub);min-width:0;padding:2px 0}
+.qopts li i{
+  font-style:normal;font-weight:600;font-size:11px;color:var(--faint);flex:0 0 13px;
+  padding-top:2px;
+}
+.qopts li .ot{flex:1;min-width:0}
+.qopts li .ozh{display:block;font-size:11.5px;color:var(--faint);margin-top:2px}
+.qopts li.ok{color:var(--fg)}
+.qopts li.ok i{color:var(--ok)}
+.qopts li.ok .ot{font-weight:600}
+.qans{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0 0;
+  font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums;
+}
+.qans .tag{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.qans b{
+  display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:7px;
+  background:color-mix(in srgb,var(--ok) 13%,transparent);color:var(--ok);font-size:12.5px;
+}
+.qans .qt{padding:3px 9px;border-radius:6px;background:var(--fill)}
+.qans .qp{padding:3px 9px;border-radius:6px;background:var(--fill);color:var(--accent)}
+.qexp{margin-top:10px}
+.qexp p{margin:0 0 6px;font-size:12.5px;line-height:1.72;color:var(--sub)}
+.qexp p.lk b{color:var(--fg);font-weight:600}
+.qexp .note{border-left:2px solid color-mix(in srgb,var(--ok) 45%,transparent);padding-left:10px}
+.qexp .vf{display:inline-flex;gap:6px;flex-wrap:wrap;margin-top:2px}
+.qexp .vf s{text-decoration:none;font-size:11px;padding:2px 8px;border-radius:6px;background:var(--fill);color:var(--faint)}
+.qexp .vf s b{color:var(--fg);font-weight:600}
+body.no-fill .qopts li.ok{color:var(--sub)}
+body.no-fill .qopts li.ok .ot{font-weight:400}
+body.no-fill .qopts li.ok i{color:var(--faint)}
+body.no-fill .qans b{color:transparent;background:var(--fill);position:relative}
+body.no-fill .qans b::after{content:"?";position:absolute;inset:0;display:grid;place-items:center;color:var(--faint)}
+body.no-fill .qexp{display:none}
+
+/* ── 新题型 ── */
+.ntp{margin:0 0 16px;padding-left:34px;position:relative;font-size:15.5px;line-height:1.78}
+.ntp .nl{
+  position:absolute;left:0;top:3px;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;
+  background:var(--fill);color:var(--sub);font-size:11.5px;font-weight:600;
+
+}
+.ntp .dg{display:block;margin-top:6px;font-size:12px;color:var(--faint);line-height:1.65}
+.chain{
+  margin:18px 0 0;padding:14px 16px;border-radius:12px;background:var(--fill);
+  font-size:13.5px;font-variant-numeric:tabular-nums;display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+}
+.chain .cn2{color:var(--faint);font-size:12px;margin-right:4px}
+.chain s{text-decoration:none;color:var(--faint)}
+.chain em{font-style:normal;font-weight:600;color:var(--accent)}
+.chain .pre{color:var(--faint);font-size:12px}
+.seams{margin-top:14px;display:grid;gap:8px}
+.seam{font-size:13px;line-height:1.7;color:var(--sub);padding-left:34px;position:relative}
+.seam b{color:var(--fg);font-weight:600}
+.seam .st{
+  position:absolute;left:0;top:0;font-size:11px;color:var(--accent);font-weight:600;
+  font-variant-numeric:tabular-nums;
+}
+.choices{margin-top:18px;border-top:1px solid var(--hair);padding-top:12px;display:grid;gap:10px}
+.choices .ch{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.choices p{margin:0;padding-left:28px;position:relative;font-size:14.5px;line-height:1.7;color:var(--sub)}
+.choices p b{position:absolute;left:0;color:var(--fg);font-weight:600;font-size:12px}
+
+/* ── 翻译 ── */
+.us{
+  background:linear-gradient(transparent 58%,color-mix(in srgb,var(--warn) 26%,transparent) 58%);
+  border-bottom:1px solid color-mix(in srgb,var(--warn) 45%,transparent);
+  padding-bottom:1px;
+}
+.transitem{margin-top:8px;padding:12px 14px;border-radius:12px;background:var(--fill)}
+.transitem .tn{font-size:11.5px;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
+.transitem .te{margin:5px 0 4px;font-size:13.5px;line-height:1.65}
+.transitem .tz{margin:0;font-size:13px;line-height:1.7;color:var(--sub)}
+
+/* ── 写作 ── */
+.dir{
+  padding:16px 18px;border-radius:12px;background:var(--fill);font-size:14px;line-height:1.8;
+  white-space:pre-wrap;color:var(--fg);
+}
+.essay{margin-top:18px;padding-top:14px;border-top:1px solid var(--hair)}
+.essay .eh{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.essay p{margin:0 0 11px;font-size:14.5px;line-height:1.78}
+.essay .ezh p{font-size:13px;color:var(--sub);line-height:1.75}
+.essay .ezh{margin-top:10px;padding-left:13px;border-left:1.5px solid var(--hair)}
+
+@media (max-width:640px){
+  .qopts{grid-template-columns:1fr;gap:2px}
+  .crow{grid-template-columns:24px 1fr;row-gap:4px}
+  .crow .cmark{grid-column:2;justify-self:start}
+  .ntp{font-size:15px;padding-left:30px}
+  .transitem{padding:10px 12px}
+}
