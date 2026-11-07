@@ -134,7 +134,7 @@
   const flash = K.createFlash($('#p-card'), deck, { onChange: () => refresh(true) });
 
   /* ── 测验：覆盖当天全部词，一题一个词，随机顺序 ── */
-  let qs = [], qi = 0, score = 0, wrong = [];
+  let qs = [], qi = 0, navTimer = 0;
   const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]]; } return a; };
 
   const shortDef = it => {
@@ -149,6 +149,35 @@
   $('#qmeta').before(qbar);
   const qfill = qbar.firstChild;
 
+  /* 上一题 / 下一题：手动翻页会取消自动跳转 */
+  const qnav = document.createElement('div');
+  qnav.className = 'qnav';
+  qnav.innerHTML = '<button class="qbtn" type="button" id="qPrev" aria-label="上一题">‹ 上一题</button>'
+    + '<span class="qpos" id="qpos" aria-live="polite"></span>'
+    + '<button class="qbtn" type="button" id="qNext" aria-label="下一题">下一题 ›</button>';
+  $('#opts').after(qnav);
+  const qPrev = qnav.querySelector('#qPrev'), qNext = qnav.querySelector('#qNext'), qPos = qnav.querySelector('#qpos');
+  qPrev.onclick = () => jump(-1);
+  qNext.onclick = () => jump(1);
+
+  function jump(delta) {
+    clearTimeout(navTimer);
+    if (!qs.length) return;
+    if (delta > 0 && qi >= qs.length - 1) { qi = qs.length; drawQuiz(); return; }
+    qi = Math.max(0, qi + delta);
+    drawQuiz();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (!$('#p-quiz').classList.contains('on')) return;
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const t = e.target;
+    if (t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    e.preventDefault();
+    jump(e.key === 'ArrowRight' ? 1 : -1);
+  });
+
   let wrongBtn = null;
   function clearWrongBtn() { if (wrongBtn) { wrongBtn.remove(); wrongBtn = null; } }
 
@@ -158,58 +187,87 @@
       const ans = shortDef(it);
       let cands = ITEMS.filter(x => x[1] !== it[1] && shortDef(x) !== ans);
       if (cands.length < 3) cands = ITEMS.filter(x => x[1] !== it[1]);
-      return { it, opts: shuffle([it].concat(shuffle(cands.slice()).slice(0, 3))) };
+      return { it, opts: shuffle([it].concat(shuffle(cands.slice()).slice(0, 3))), picked: null, ok: false };
     });
-    qi = 0; score = 0; wrong = [];
+    qi = 0;
+    clearTimeout(navTimer);
     $('#qAgain').style.display = 'none';
     $('#qAgain').textContent = '重测全部 ' + ITEMS.length + ' 词';
     clearWrongBtn();
     drawQuiz();
   }
 
-  function drawQuiz() {
-    qfill.style.width = (100 * qi / qs.length) + '%';
-    if (qi >= qs.length) { finishQuiz(); return; }
-    const { it, opts } = qs[qi];
-    $('#qmeta').textContent = `第 ${qi + 1} / ${qs.length} 题　·　得分 ${score}`;
-    $('#qword').textContent = it[1];
-    $('#qipa').textContent = it[2];
-    $('#opts').innerHTML = opts.map(o =>
-      `<button class="opt" data-w="${K.esc(o[1])}">${K.esc(shortDef(o))}</button>`).join('');
-    $('#score').textContent = '';
-    $('#opts').querySelectorAll('.opt').forEach(btn => {
-      btn.onclick = () => {
-        const right = btn.dataset.w === it[1];
-        if (right) { score++; btn.classList.add('right'); K.toggle(DAY, it[1], true); }
-        else {
-          btn.classList.add('wrong');
-          if (!wrong.some(x => x[1] === it[1])) wrong.push(it);
-          K.toggle(DAY, it[1], false);
-          $('#opts').querySelectorAll('.opt').forEach(x => {
-            if (x.dataset.w === it[1]) x.classList.add('right');
-          });
-        }
-        refresh(true);
-        $('#opts').querySelectorAll('.opt').forEach(x => x.disabled = true);
-        setTimeout(() => { qi++; drawQuiz(); }, right ? 300 : 1000);
-      };
+  const hits = () => qs.filter(q => q.ok).length;
+
+  function paintAnswer(q) {
+    $('#opts').querySelectorAll('.opt').forEach(b => {
+      if (b.dataset.w === q.it[1]) b.classList.add('right');
+      else if (b.dataset.w === q.picked) b.classList.add('wrong');
     });
   }
 
+  function answer(q, btn) {
+    if (q.picked) return;
+    const right = btn.dataset.w === q.it[1];
+    q.picked = btn.dataset.w; q.ok = right;
+    K.toggle(DAY, q.it[1], right);
+    refresh(true);
+    paintAnswer(q);
+    $('#opts').querySelectorAll('.opt').forEach(x => x.disabled = true);
+    $('#qmeta').textContent = `第 ${qi + 1} / ${qs.length} 题　·　得分 ${hits()}`;
+    clearTimeout(navTimer);
+    navTimer = setTimeout(() => jump(1), right ? 300 : 1000);
+  }
+
+  function drawQuiz() {
+    if (!qs.length) return;
+    qfill.style.width = (100 * Math.min(qi + 1, qs.length) / qs.length) + '%';
+    if (qi >= qs.length) { finishQuiz(); return; }
+    const { it, opts, picked } = qs[qi];
+    $('#qmeta').textContent = `第 ${qi + 1} / ${qs.length} 题　·　得分 ${hits()}`;
+    $('#qword').textContent = it[1];
+    $('#qipa').textContent = it[2];
+    $('#opts').innerHTML = opts.map(o =>
+      `<button class="opt" data-w="${K.esc(o[1])}"${picked ? ' disabled' : ''}>${K.esc(shortDef(o))}</button>`).join('');
+    $('#score').textContent = '';
+    $('#opts').querySelectorAll('.opt').forEach(btn => {
+      btn.onclick = () => answer(qs[qi], btn);
+    });
+    if (picked) paintAnswer(qs[qi]);
+    qPrev.disabled = qi === 0;
+    qNext.disabled = false;
+    qNext.textContent = qi === qs.length - 1 ? '看结果 ›' : '下一题 ›';
+    qPos.textContent = (qi + 1) + ' / ' + qs.length;
+  }
+
   function finishQuiz() {
+    clearTimeout(navTimer);
+    clearWrongBtn();
     qfill.style.width = '100%';
+    const ok = hits();
+    const bad = qs.filter(q => q.picked && !q.ok).map(q => q.it);
+    const missed = qs.filter(q => !q.picked).map(q => q.it);
+    const todo = bad.concat(missed);
     $('#qmeta').textContent = `全部 ${qs.length} 题完成`;
-    $('#qword').textContent = score + ' / ' + qs.length + ' 正确';
+    $('#qword').textContent = ok + ' / ' + qs.length + ' 正确';
     $('#qipa').textContent = '';
     $('#opts').innerHTML = '';
-    if (!wrong.length) {
+    qPrev.disabled = false;
+    qNext.disabled = true;
+    qNext.textContent = '已到结果';
+    qPos.textContent = '结果';
+    if (!todo.length) {
       $('#score').textContent = '全部一次答对，这一天可以收工了。';
     } else {
-      $('#score').innerHTML = `没答对 <b>${wrong.length}</b> 个：<span class="miss">${wrong.slice(0, 14).map(x => K.esc(x[1])).join('、')}</span>${wrong.length > 14 ? ` 等 ${wrong.length} 个` : ''}<br>点「重测错词」再过一遍，或者去「卡片自测」。`;
+      let h = `答对 <b>${ok}</b>，答错 <b>${bad.length}</b>`;
+      if (missed.length) h += `，未答 <b>${missed.length}</b>`;
+      h += `。<br>待巩固：<span class="miss">${todo.slice(0, 14).map(x => K.esc(x[1])).join('、')}</span>${todo.length > 14 ? ` 等 ${todo.length} 个` : ''}`;
+      h += '<br>点「重测错词与未答」再过一遍，或者去「卡片自测」。';
+      $('#score').innerHTML = h;
       wrongBtn = document.createElement('button');
       wrongBtn.className = 'pill again';
-      wrongBtn.textContent = '重测错词（' + wrong.length + '）';
-      wrongBtn.onclick = () => buildQuiz(wrong.slice());
+      wrongBtn.textContent = '重测错词与未答（' + todo.length + '）';
+      wrongBtn.onclick = () => buildQuiz(todo);
       $('#qAgain').after(wrongBtn);
     }
     $('#qAgain').style.display = '';

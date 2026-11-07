@@ -347,3 +347,34 @@ body.deep .nav .topbtn{opacity:1;visibility:visible;transform:none}
 .nav .topbtn:active{transform:scale(.94)}
 .nav .topbtn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 @media (max-width:560px){.nav .topbtn{width:30px;height:30px}}
+
+/* ── 闪卡翻页条 ── */
+.fstage{touch-action:pan-y}
+.fnav{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:16px;flex-wrap:wrap}
+.fnav .fmeta{margin:0;min-width:88px;text-align:center}
+.fnbtn{font-family:inherit;font-size:12.5px;padding:8px 15px;border-radius:99px;border:1px solid var(--line);
+  background:var(--card);color:var(--sub);cursor:pointer;white-space:nowrap;
+  transition:color .2s var(--ease),border-color .2s var(--ease),transform .16s var(--ease)}
+.fnbtn:hover:not(:disabled){color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.fnbtn:active:not(:disabled){transform:scale(.95)}
+.fnbtn:disabled{opacity:.35;cursor:default}
+.fcard.fswap{animation:fswap .22s var(--ease)}
+@keyframes fswap{from{opacity:.2}to{opacity:1}}
+
+/* ── 测验翻页条 ── */
+.qnav{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:22px;flex-wrap:wrap}
+.qbtn{font-family:inherit;font-size:12.5px;padding:8px 15px;border-radius:99px;border:1px solid var(--line);
+  background:var(--card);color:var(--sub);cursor:pointer;white-space:nowrap;
+  transition:color .2s var(--ease),border-color .2s var(--ease),transform .16s var(--ease)}
+.qbtn:hover:not(:disabled){color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.qbtn:active:not(:disabled){transform:scale(.95)}
+.qbtn:disabled{opacity:.35;cursor:default}
+.qpos{font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums;min-width:62px;text-align:center}
+.qpos b{color:var(--sub);font-weight:600}
+@media (max-width:560px){
+  .fnbtn,.qbtn{padding:9px 12px;font-size:12px}
+  .fnav,.qnav{gap:7px;margin-top:14px}
+  .fnav .fmeta{min-width:74px}
+  .qpos{min-width:54px}
+}
+

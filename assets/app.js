@@ -84,16 +84,50 @@
   /* ── 闪卡组件 ── */
   function createFlash(root, deck, opts) {
     opts = opts || {};
-    let ci = 0, flip = false, pool = deck.slice();
+    let ci = 0, flip = false, pool = deck.slice(), drawTimer = 0;
+    let tx = 0, ty = 0, tt = 0, tapLock = 0;
     const $ = s => root.querySelector(s);
     const card = $('#fcard');
+    const stage = $('.fstage') || card;
+
+    /* 翻页导航：‹ 上一张 | 3 / 186 | 下一张 ›（按钮 / ←→ / 左右滑动三通道） */
+    const nav = document.createElement('div');
+    nav.className = 'fnav';
+    nav.innerHTML = '<button class="fnbtn" type="button" data-d="-1" aria-label="上一张">‹ 上一张</button>'
+      + '<button class="fnbtn" type="button" data-d="1" aria-label="下一张">下一张 ›</button>';
+    const prevB = nav.querySelector('[data-d="-1"]'), nextB = nav.querySelector('[data-d="1"]');
+    const meta = $('#fmeta');
+    if (meta && meta.parentNode) {
+      meta.parentNode.insertBefore(nav, meta);
+      meta.setAttribute('aria-live', 'polite');
+      nav.insertBefore(meta, nextB);
+    }
+
+    function sync() {
+      const n = pool.length;
+      prevB.disabled = nextB.disabled = n < 2;
+      nav.style.display = n ? '' : 'none';
+    }
+
+    function go(delta) {
+      if (pool.length < 2) return;
+      clearTimeout(drawTimer);
+      ci = ((ci % pool.length) + delta + pool.length) % pool.length;
+      flip = false; card.classList.remove('flip');
+      draw();
+      if (!reduce) { card.classList.remove('fswap'); void card.offsetWidth; card.classList.add('fswap'); }
+    }
+    prevB.onclick = () => go(-1);
+    nextB.onclick = () => go(1);
     function draw() {
       if (!pool.length) {
         $('#fw').textContent = '没有词';
+        $('#fmeta').textContent = '';
         $('#fi').textContent = '';
         $('#bw').textContent = '';
         $('#bi').textContent = '';
         $('#bm').textContent = '';
+        sync();
         return;
       }
       const r = pool[ci % pool.length];
@@ -103,6 +137,7 @@
       $('#bw').textContent = w; $('#bi').textContent = sub;
       $('#bm').textContent = senses.map(s => s[0] + ' ' + s.slice(1).join('、')).join('\n');
       $('#fmeta').textContent = (ci % pool.length + 1) + ' / ' + pool.length + (opts.label ? '　' + opts.label() : '');
+      sync();
     }
     function advance(known) {
       const r = pool[ci % pool.length];
@@ -111,13 +146,41 @@
         if (opts.onChange) opts.onChange(r[0]);
       }
       ci++; flip = false; card.classList.remove('flip');
-      setTimeout(draw, 60);
+      clearTimeout(drawTimer); drawTimer = setTimeout(draw, 60);
     }
-    card.onclick = () => { flip = !flip; card.classList.toggle('flip', flip); };
+    card.onclick = () => { if (Date.now() < tapLock) return; flip = !flip; card.classList.toggle('flip', flip); };
     card.onkeydown = e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); card.onclick(); } };
     $('#fYes').onclick = () => advance(true);
     $('#fNo').onclick = () => advance(false);
     $('#fShuffle').onclick = () => { pool.sort(() => Math.random() - .5); ci = 0; flip = false; card.classList.remove('flip'); draw(); };
+
+    /* 键盘 ←→（仅在当前闪卡面板可见时生效） */
+    function onKey(e) {
+      if (!root.classList.contains('on')) return;
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      const t = e.target;
+      if (t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      go(e.key === 'ArrowRight' ? 1 : -1);
+    }
+    document.addEventListener('keydown', onKey);
+
+    /* 左右滑动：横向位移 ≥46px、明显大于纵向、900ms 内 */
+    stage.addEventListener('touchstart', e => {
+      if (e.touches.length !== 1) { tx = ty = 0; return; }
+      tx = e.touches[0].clientX; ty = e.touches[0].clientY; tt = Date.now();
+    }, { passive: true });
+    stage.addEventListener('touchcancel', () => { tx = ty = 0; }, { passive: true });
+    stage.addEventListener('touchend', e => {
+      const t = e.changedTouches && e.changedTouches[0];
+      if (!t || (!tx && !ty)) { tx = ty = 0; return; }
+      const dx = t.clientX - tx, dy = t.clientY - ty, dt = Date.now() - tt;
+      tx = ty = 0;
+      if (dt > 900 || Math.abs(dx) < 46 || Math.abs(dx) < Math.abs(dy) * 1.3) return;
+      tapLock = Date.now() + 420;
+      go(dx < 0 ? 1 : -1);
+    }, { passive: true });
     if ($('#fClose')) $('#fClose').onclick = () => root.classList.remove('on');
     function reset() {
       pool = (opts.weakActive ? deck.filter(r => !daySet(r[0]).has(r[2])) : deck.slice()).slice();
