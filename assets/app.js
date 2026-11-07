@@ -85,6 +85,7 @@
   function createFlash(root, deck, opts) {
     opts = opts || {};
     let ci = 0, flip = false, pool = deck.slice(), drawTimer = 0;
+    const roundWeak = new Set();          // 本轮标过「不熟」的词，供「重测」用
     let tx = 0, ty = 0, tt = 0, tapLock = 0;
     const $ = s => root.querySelector(s);
     const card = $('#fcard');
@@ -144,6 +145,8 @@
       if (r) {
         toggle(r[0], r[2], known);
         if (opts.onChange) opts.onChange(r[0]);
+        if (known) roundWeak.delete(r[2]); else roundWeak.add(r[2]);
+        syncRetest();
       }
       ci++; flip = false; card.classList.remove('flip');
       clearTimeout(drawTimer); drawTimer = setTimeout(draw, 60);
@@ -152,7 +155,31 @@
     card.onkeydown = e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); card.onclick(); } };
     $('#fYes').onclick = () => advance(true);
     $('#fNo').onclick = () => advance(false);
-    $('#fShuffle').onclick = () => { pool.sort(() => Math.random() - .5); ci = 0; flip = false; card.classList.remove('flip'); draw(); };
+    $('#fShuffle').onclick = () => { pool.sort(() => Math.random() - .5); roundWeak.clear(); syncRetest(); ci = 0; flip = false; card.classList.remove('flip'); draw(); };
+
+    /* 重测：本轮标过「不熟」的词重刷一遍；本轮没有不熟就从第 1 张整轮重来 */
+    const retest = document.createElement('button');
+    retest.type = 'button';
+    retest.className = 'pill';
+    retest.id = 'fRetest';
+    retest.setAttribute('aria-label', '重测');
+    $('#fShuffle').after(retest);
+    retest.onclick = () => {
+      if (roundWeak.size) pool = deck.filter(r => roundWeak.has(r[2])).slice();
+      else pool = deck.slice();
+      if (!pool.length) pool = deck.slice();
+      roundWeak.clear();
+      if (opts.weakActive) { opts.weakActive = false; if ($('#fWeak')) $('#fWeak').textContent = '只练未熟'; }
+      ci = 0; flip = false; card.classList.remove('flip');
+      syncRetest(); draw();
+    };
+    function syncRetest() {
+      retest.textContent = roundWeak.size ? '重测（' + roundWeak.size + '）' : '重测';
+      retest.title = roundWeak.size
+        ? '重测本轮标过「不熟」的 ' + roundWeak.size + ' 个词'
+        : '本轮没有标「不熟」的词，点一下从第 1 张重来';
+    }
+    syncRetest();
 
     /* 键盘 ←→（仅在当前闪卡面板可见时生效） */
     function onKey(e) {
@@ -185,6 +212,7 @@
     function reset() {
       pool = (opts.weakActive ? deck.filter(r => !daySet(r[0]).has(r[2])) : deck.slice()).slice();
       if (!pool.length) pool = deck.slice();
+      roundWeak.clear(); syncRetest();
       ci = 0; flip = false; card.classList.remove('flip');
       draw();
     }
